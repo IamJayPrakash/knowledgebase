@@ -74,7 +74,10 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 | **Vector Search (HNSW)** | Hierarchical Navigable Small World, Cosine similarity | [`12-ai-and-genai/02_vector_search_embeddings_and_hnsw.md`](./12-ai-and-genai/02_vector_search_embeddings_and_hnsw.md) |
 | **LangGraph Multi-Agent** | Cyclic state machines, ReAct loops, tool calling | [`12-ai-and-genai/03_agentic_workflows_langgraph_and_tool_calling.md`](./12-ai-and-genai/03_agentic_workflows_langgraph_and_tool_calling.md) |
 | **LLM LoRA & Quantization**| Low-Rank Adaptation, QLoRA, GGUF, AWQ, 4-bit weights | [`12-ai-and-genai/04_llm_fine_tuning_lora_and_quantization.md`](./12-ai-and-genai/04_llm_fine_tuning_lora_and_quantization.md) |
-| **vLLM Serving** | PagedAttention, KV Cache fragmentation, continuous batching | [`12-ai-and-genai/05_production_llm_serving_vllm_and_guardrails.md`](./12-ai-and-genai/05_production_llm_serving_vllm_and_guardrails.md) |
+| **50 System Design Concepts** | Complete 50 concepts catalog (Scalability, Consensus, Caching, Resilience) | [`13-system-design/00_master_50_system_design_concepts.md`](./13-system-design/00_master_50_system_design_concepts.md) |
+| **Consistent Hashing** | Virtual nodes, hash ring distribution, rehashing minimization | [`13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md`](./13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md) |
+| **Resilience Patterns** | Circuit Breaker, Bulkhead, Jittered Backoff, XFetch Cache Stampede | [`13-system-design/08_resilience_and_stability_patterns.md`](./13-system-design/08_resilience_and_stability_patterns.md) |
+| **Twitter Snowflake** | 64-bit distributed time-sortable unique ID generator | [`13-system-design/interview-questions/top_system_design_interview_questions_catalog.md`](./13-system-design/interview-questions/top_system_design_interview_questions_catalog.md) |
 | **HLD Netflix Streaming** | Transcoding pipeline, HLS/DASH 2s chunks, Open Connect CDN | [`13-system-design/03_hld_netflix_video_streaming.md`](./13-system-design/03_hld_netflix_video_streaming.md) |
 | **HLD Uber Ride Matching** | Uber H3 hexagonal spatial indexing, real-time dispatch | [`13-system-design/04_hld_uber_ride_matching_spatial_indexing.md`](./13-system-design/04_hld_uber_ride_matching_spatial_indexing.md) |
 | **LLD Parking Lot** | Multi-floor OOP design, Factory & Strategy fee patterns | [`13-system-design/05_lld_parking_lot_system.md`](./13-system-design/05_lld_parking_lot_system.md) |
@@ -169,15 +172,23 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * [`interview-questions/coding_simple_rag_pipeline_python.md`](./12-ai-and-genai/interview-questions/coding_simple_rag_pipeline_python.md) — Pure Python Vector Store & RAG pipeline from scratch.
 
 ### 13. 🏗️ System Design (HLD & LLD) ([`13-system-design/`](./13-system-design/))
+* **Core Foundations & 50 Concepts Playbook:**
+  * [`00_master_50_system_design_concepts.md`](./13-system-design/00_master_50_system_design_concepts.md) — Complete 50 concepts encyclopedia across Scalability, Consensus, Caching, Protocols, and Resilience.
+  * [`07_distributed_systems_primitives_consensus_cap_sharding.md`](./13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md) — CAP Theorem, Raft Consensus (Leader Election & Log Replication), Consistent Hashing with Virtual Nodes.
+  * [`08_resilience_and_stability_patterns.md`](./13-system-design/08_resilience_and_stability_patterns.md) — Circuit Breaker state machine, Bulkhead isolation, Exponential Backoff + Jitter, XFetch Cache Stampede avoidance.
+  * [`09_communication_protocols_rest_graphql_grpc_webrtc_websockets.md`](./13-system-design/09_communication_protocols_rest_graphql_grpc_webrtc_websockets.md) — REST vs GraphQL vs gRPC (HTTP/2) vs WebSockets vs WebRTC.
+  * [`10_event_driven_streaming_batch_mapreduce.md`](./13-system-design/10_event_driven_streaming_batch_mapreduce.md) — Message Queues vs Event Streams, At-least-once / Exactly-once idempotency, Lambda vs Kappa architecture.
+  * [`11_observability_deployments_bluegreen_canary.md`](./13-system-design/11_observability_deployments_bluegreen_canary.md) — Distributed Tracing, Correlation IDs, Structured Logging, Blue-Green & Canary Zero-Downtime deployments.
 * **High-Level Design (HLD):**
   * [`01_hld_url_shortener_tinyurl.md`](./13-system-design/01_hld_url_shortener_tinyurl.md) — Base62 encoding, Key Generation Service (KGS).
   * [`02_hld_whatsapp_realtime_chat.md`](./13-system-design/02_hld_whatsapp_realtime_chat.md) — WebSockets, Kafka, Presence servers, Cassandra.
   * [`03_hld_netflix_video_streaming.md`](./13-system-design/03_hld_netflix_video_streaming.md) — Transcoding pipeline, HLS/DASH chunks, Open Connect CDN.
   * [`04_hld_uber_ride_matching_spatial_indexing.md`](./13-system-design/04_hld_uber_ride_matching_spatial_indexing.md) — Uber H3 hexagonal spatial indexing, real-time dispatch.
-* **Low-Level Design (LLD):**
+* **Low-Level Design (LLD) & Interview Question Walkthroughs:**
   * [`05_lld_parking_lot_system.md`](./13-system-design/05_lld_parking_lot_system.md) — Multi-floor OOP design, Factory & Strategy patterns.
   * [`06_lld_distributed_rate_limiter.md`](./13-system-design/06_lld_distributed_rate_limiter.md) — Token Bucket and Sliding Window algorithms in Python.
   * [`interview-questions/system_design_interview_framework.md`](./13-system-design/interview-questions/system_design_interview_framework.md) — The 4-step structural interview framework.
+  * [`interview-questions/top_system_design_interview_questions_catalog.md`](./13-system-design/interview-questions/top_system_design_interview_questions_catalog.md) — Step-by-step interview designs: Twitter Snowflake Unique ID Generator, Distributed Key-Value Store (Dynamo), High-Scale Push Notification System, Distributed Web Crawler.
 
 ### 14. 🧮 Complete Blind 75 LeetCode Problem Set ([`14-leetcode-blind-75/`](./14-leetcode-blind-75/))
 * **All 75 curated Blind 75 problems** complete across 18 pattern subdirectories.

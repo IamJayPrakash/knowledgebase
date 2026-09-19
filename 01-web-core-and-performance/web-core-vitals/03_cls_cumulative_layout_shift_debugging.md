@@ -43,3 +43,35 @@ CLS score target: **< 0.1**.
   <span style="color: #9ca3af;">Advertisement</span>
 </div>
 ```
+---
+
+## 4. 📊 Visual Architecture Diagram
+
+```text
+Cumulative Layout Shift (CLS) Geometry:
+
+   Viewport (1000px high)
+   ┌─────────────────────────────────────────┐
+   │ [ Nav Bar ]                             │
+   │                                         │
+   │ [ Ad Banner Injected Late! (200px) ]    │ <── Unstable element pushes content down!
+   │                                         │
+   │ [ Article Heading ] (Shifted by 200px!) │ <── Shift Distance: 200px / 1000px = 0.20
+   │                                         │     Impact Area: 70% of screen = 0.70
+   └─────────────────────────────────────────┘     CLS Score = 0.70 * 0.20 = 0.14 (POOR!)
+```
+
+---
+
+## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+> **Interviewer:** "How is Cumulative Layout Shift calculated, and what are the most common causes in production?"
+>
+> **You:** "Cumulative Layout Shift measures visual stability by multiplying the Impact Fraction—the percentage of the viewport affected by shifting elements—by the Distance Fraction—the greatest distance those elements moved relative to the viewport height. A good CLS score is 0.1 or below. The most common production causes are images and videos without explicit width/height dimensions, dynamic advertisements injected without reserved bounding boxes, Flash of Unstyled Text from un-calibrated fallback fonts, and CSS animations targeting geometric properties like `top` or `height` rather than GPU-accelerated `transform`."
+
+---
+
+## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
+* **Situation:** A cryptocurrency exchange trading dashboard suffered a CLS score of 0.38 because live ticker prices and dynamic order book columns constantly resized table headers as numbers fluctuated.
+* **Task / Challenge:** Achieve visual stability with a target CLS under 0.05 without hiding dynamic price data.
+* **Action Taken:** Fixed numeric font shifting by applying CSS `font-variant-numeric: tabular-nums` (giving all digits uniform monospaced widths), reserved fixed column widths on the order book grid using CSS Grid `grid-template-columns: repeat(4, minmax(120px, 1fr))`, and encapsulated dynamic banner slots with `min-height`.
+* **Result & Business Impact:** Dropped CLS from 0.38 to 0.002, moving the application into the top 5% of web performance benchmarks and eliminating accidental click trade executions.

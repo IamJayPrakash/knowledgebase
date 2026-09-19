@@ -49,3 +49,35 @@ def sync_blocking_endpoint():
 # async def dangerous_endpoint():
 #     time.sleep(5) # NEVER DO THIS! Freezes all concurrent users for 5s!
 ```
+---
+
+## 4. 📊 Visual Architecture Diagram
+
+```text
+ASGI vs WSGI Architecture:
+
+   WSGI (Flask / Django):
+   [ Web Server (Gunicorn) ] ──> [ 1 Worker Thread = 1 Synchronous HTTP Request ] (Blocks on I/O!)
+
+   ASGI (FastAPI / Starlette / Uvicorn):
+   [ Master Process ]
+           │
+           ├── Worker 1 (Uvicorn with uvloop): [ Single Thread runs Asyncio Event Loop ]
+           │       ├── Handles 5,000 concurrent connections via epoll/kqueue non-blocking I/O!
+           │       └── Supports WebSockets, Server-Sent Events (SSE), and HTTP/2 Streaming!
+```
+
+---
+
+## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+> **Interviewer:** "What is the difference between WSGI and ASGI, and why is Uvicorn paired with Gunicorn in production?"
+>
+> **You:** "WSGI is a synchronous interface standard where one worker thread handles one request at a time, making it ill-suited for WebSockets, long polling, or high-concurrency async I/O. ASGI (Asynchronous Server Gateway Interface) extends this to support asynchronous Python coroutines, WebSockets, and HTTP/2 multiplexing. In production, we run Uvicorn workers managed by Gunicorn (`gunicorn -w 4 -k uvicorn.workers.UvicornWorker`). Gunicorn acts as the robust Unix process manager—handling worker lifecycles, health checks, and graceful zero-downtime restarts—while Uvicorn provides the ultra-fast C-based `uvloop` and `httptools` event loop engine."
+
+---
+
+## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
+* **Situation:** A live sports notification service running on standard WSGI crashed under 5,000 concurrent open connections during the World Cup finals due to thread exhaustion.
+* **Task / Challenge:** Migrate the notification service to handle 50,000 concurrent long-polling connections with sub-second message dispatch.
+* **Action Taken:** Migrated the backend to FastAPI running on ASGI with Uvicorn and `uvloop`. Replaced synchronous database polling with async Redis Pub/Sub channels connected to WebSocket routes.
+* **Result & Business Impact:** Handled 65,000 concurrent active WebSocket connections on a single 4-core node with memory usage under 400MB and zero dropped connections.

@@ -55,3 +55,35 @@ def get_profile(
 ):
     return {"user": current_user, "db_status": db}
 ```
+---
+
+## 4. 📊 Visual Architecture Diagram
+
+```text
+FastAPI Dependency Injection DAG Resolution:
+
+              [ Endpoint: get_user_profile ]
+                            │
+              Depends(get_current_active_user)
+                            │
+              Depends(get_current_user)
+              ┌─────────────┴─────────────┐
+              │                           │
+     Depends(get_db_session)      Depends(oauth2_scheme)
+     (Yields DB conn via with)   (Extracts Bearer Token)
+```
+
+---
+
+## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+> **Interviewer:** "How does Dependency Injection work in FastAPI, and what are yield dependencies?"
+>
+> **You:** "FastAPI features a hierarchical Dependency Injection system built on top of `Depends()`. At startup and request time, FastAPI analyzes the dependency graph into a Directed Acyclic Graph (DAG), resolving sub-dependencies in parallel or sequence. Yield dependencies (`def get_db(): try: yield db finally: db.close()`) represent a clean context manager pattern: code prior to `yield` executes before the route handler, and code after `yield` is guaranteed to execute during response finalization, ensuring database connections or transaction locks are cleanly released even if route exceptions occur."
+
+---
+
+## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
+* **Situation:** A multi-tenant SaaS application had intermittent database connection leaks that exhausted PostgreSQL connection pools during traffic spikes, crashing the API.
+* **Task / Challenge:** Ensure deterministic database session teardown across 120 endpoints.
+* **Action Taken:** Centralized database session lifecycle management into a FastAPI `yield` dependency with explicit `try...finally` block. Configured session rollback on uncaught exceptions and ensured auto-closing of the session.
+* **Result & Business Impact:** Completely eliminated PostgreSQL connection pool exhaustion, sustaining 100% API availability under 15,000 concurrent tenant connections.

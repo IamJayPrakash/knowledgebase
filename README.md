@@ -1,6 +1,15 @@
 # 🧠 The Universal Tech & Senior Interview Knowledge Base
 
+<p align="center">
+  <a href="https://iamjayprakash.github.io/knowledgebase/"><img src="https://img.shields.io/badge/🌐_Web_Portal-GitHub_Pages-blue?style=for-the-badge&logo=githubpages" alt="Web Portal" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License: MIT" /></a>
+  <img src="https://img.shields.io/badge/Questions-1%2C289%2B-purple?style=for-the-badge" alt="Questions: 1,289+" />
+  <img src="https://img.shields.io/badge/Documents-337_Docs-orange?style=for-the-badge" alt="Docs: 337" />
+  <a href="./CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome" /></a>
+</p>
+
 > A production-grade, zero-to-advanced engineering reference and technical interview preparation repository for **Software Engineers, Senior Technical Leads, Full-Stack Developers (MERN/MEAN), Java/Spring Boot Engineers, AI/LLM Specialists, and System Architects (0 to 8+ Years Experience)**.
+
 
 ---
 
@@ -351,3 +360,33 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * **Databases & Cache:** PostgreSQL 16 (MVCC, Partitioning), Redis 7 (Sorted Sets, Redlock), MongoDB 7 (Aggregation, Sharding).
 * **AI / GenAI:** Vector Search (HNSW, FAISS), RAG Pipelines, LangGraph Multi-Agent Workflows, LoRA Fine-Tuning, vLLM Inference.
 * **DevOps & Testing:** Docker Multi-Stage, Kubernetes (Helm, Ingress, HPA), GitHub Actions CI/CD, Playwright, Jest.
+
+---
+
+## 🌐 Live Web Documentation Portal
+
+You can read, search, and navigate all 337 documents and 1,289+ questions online without cloning or browsing raw GitHub files:
+👉 **[Open Live Web Portal](https://iamjayprakash.github.io/knowledgebase/)**
+
+* ⚡ **Instant Client-Side Search:** Press `/` or `Ctrl + K` to search any question or concept.
+* 🌗 **Dark & Light Mode:** Tailored developer reading aesthetics.
+* 🔗 **In-App Single Page Navigation:** All 605 cross-links render seamlessly without page reloads.
+* 📐 **LaTeX & Mermaid Enabled:** Math formulas and architecture diagrams rendered live.
+
+---
+
+## 🤝 Open Source Contributions
+
+We warmly welcome contributions from developers worldwide! Whether fixing a typo, proposing an edge case, or authoring a new interview question:
+
+1. Read our [**Contributing Guide (CONTRIBUTING.md)**](./CONTRIBUTING.md) to understand our 6-pillar standard.
+2. Review our [**Code of Conduct (CODE_OF_CONDUCT.md)**](./CODE_OF_CONDUCT.md).
+3. Check out [**Open Issues with `good first issue`**](https://github.com/IamJayPrakash/knowledgebase/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+4. Review our [**Labels Specification (.github/labels.yml)**](./.github/labels.yml).
+
+---
+
+## 📄 License
+
+This repository is licensed under the [MIT License](./LICENSE). Feel free to use, share, and learn!
+

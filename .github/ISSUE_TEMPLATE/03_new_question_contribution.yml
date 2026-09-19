@@ -1,0 +1,61 @@
+name: 📝 Submit a New Interview Question
+description: Submit a new senior/lead technical interview question draft using the mandatory 6-pillar format.
+title: "[QUESTION]: "
+labels: ["documentation", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please draft your question following the **6-Pillar standard**. Our maintainers will review and help integrate it!
+  - type: dropdown
+    id: target-track
+    attributes:
+      label: Target Track
+      options:
+        - 01-web-core-and-performance
+        - 02-javascript
+        - 03-typescript
+        - 04-react
+        - 05-angular-21
+        - 06-nextjs
+        - 07-backend-node
+        - 08-backend-python-fastapi
+        - 09-backend-java-springboot
+        - 10-backend-ruby-and-stacks
+        - 11-databases-and-caching
+        - 12-ai-and-genai
+        - 13-system-design
+        - 15-testing-and-devops
+    validations:
+      required: true
+  - type: dropdown
+    id: difficulty-level
+    attributes:
+      label: Target Experience Level
+      options:
+        - Beginner / Newbie (0-2 Years)
+        - Intermediate (2-5 Years)
+        - Senior / Lead / Staff (5-8+ Years)
+    validations:
+      required: true
+  - type: textarea
+    id: question-content
+    attributes:
+      label: Question Content (in 6-Pillar Format)
+      description: Include Layman's Analogy, Core Mechanics, Visual Diagram, Code Snippet with line comments, Interview Pitch, and STAR Production Story.
+      placeholder: |
+        ### Q: What is ... ?
+        #### 1. Layman's Analogy (Hinglish + Real-World)
+        ...
+        #### 2. Core Mechanics & Key Points
+        ...
+        #### 3. Visual Architecture Diagram
+        ...
+        #### 4. Practical Implementation & Code Snippet
+        ...
+        #### 5. Senior Interview Answering Pitch
+        ...
+        #### 6. Real-World Project Challenge (STAR Story)
+        ...
+    validations:
+      required: true

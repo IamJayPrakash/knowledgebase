@@ -1,0 +1,49 @@
+name: 🐛 Bug / Error Report
+description: Report a broken link, code typo, or technical inaccuracy in the knowledge base.
+title: "[BUG]: "
+labels: ["bug", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue and keep the knowledge base accurate!
+  - type: input
+    id: file-path
+    attributes:
+      label: File Path or URL
+      description: Where is the bug located? (e.g. `04-react/01_fiber_reconciler_and_concurrent_mode.md` or page link)
+      placeholder: "e.g. 02-javascript/interview-questions/04_js_async_event_loop_and_promises_qna.md"
+    validations:
+      required: true
+  - type: dropdown
+    id: bug-category
+    attributes:
+      label: Bug Category
+      options:
+        - Broken Link / 404
+        - Code Compilation / Syntax Error
+        - Technical Concept Inaccuracy
+        - Typo / Formatting Issue
+        - Web Portal (index.html) Rendering Bug
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Problem
+      description: Explain what is currently incorrect and what it should be.
+      placeholder: "In line 45, the explanation of process.nextTick says..."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-fix
+    attributes:
+      label: Proposed Fix (Optional)
+      description: If you have a suggested correction or code snippet, paste it here.
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Contributor Checklist
+      options:
+        - label: I would like to submit a Pull Request to fix this issue myself!
+          required: false

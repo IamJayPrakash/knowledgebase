@@ -1,0 +1,47 @@
+name: 💡 Feature / Concept Request
+description: Propose a new topic, technical guide, architecture breakdown, or interview question track.
+title: "[PROPOSAL]: "
+labels: ["enhancement", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for a topic or high-scale system design architecture we should add? Let's discuss it!
+  - type: dropdown
+    id: target-track
+    attributes:
+      label: Target Track / Domain
+      options:
+        - 01. Web Performance & Core Web Vitals
+        - 02. JavaScript Core Engine
+        - 03. TypeScript Engineering
+        - 04. React & Concurrency
+        - 05. Modern Angular 21
+        - 06. Next.js 15 Fullstack
+        - 07. Backend Node.js
+        - 08. Python Core & FastAPI
+        - 09. Core Java 21 & Spring Boot 3
+        - 10. Ruby on Rails & Stacks
+        - 11. Databases & Caching
+        - 12. AI & GenAI Systems
+        - 13. System Design (HLD & LLD)
+        - 14. LeetCode Blind 75
+        - 15. Testing & DevOps
+        - 16. MNC & Startup Guides
+        - New Track Proposal
+    validations:
+      required: true
+  - type: input
+    id: topic-title
+    attributes:
+      label: Proposed Concept or Question Title
+      placeholder: "e.g. Distributed Saga Orchestration with Temporal or React 19 Server Components"
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Why is this concept valuable for senior engineering interviews?
+      description: Explain the real-world utility, frequency in senior interviews, or production relevance.
+    validations:
+      required: true

@@ -1,0 +1,110 @@
+# GitHub Repository Labels Specification
+# Automatically synchronized via GitHub Actions
+
+# --- Core Community Labels ---
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers and first-time open source contributors"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed; community contributions warmly welcomed"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation, guides, or questions"
+
+- name: "bug"
+  color: "d73a4a"
+  description: "Something isn't working, broken link, or technical inaccuracy"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New concept, architecture diagram, or code optimization"
+
+# --- Domain / Track Specific Labels ---
+- name: "track: web-perf"
+  color: "ff9900"
+  description: "Web Performance, Core Web Vitals (LCP, INP, CLS), Browser internals"
+
+- name: "track: javascript"
+  color: "f1e05a"
+  description: "JavaScript Core Engine, V8, Event Loop, Closures, Prototypes"
+
+- name: "track: typescript"
+  color: "3178c6"
+  description: "TypeScript Engineering, Generics, infer, Mapped Types, Compiler"
+
+- name: "track: react"
+  color: "61dafb"
+  description: "React 19, Virtual DOM, Fiber Reconciler, Hooks, Server Components"
+
+- name: "track: angular"
+  color: "dd0031"
+  description: "Modern Angular 21, Signals, Zoneless, @defer, RxJS interop"
+
+- name: "track: nextjs"
+  color: "000000"
+  description: "Next.js 15 App Router, RSC, Server Actions, 4-tier Caching, PPR"
+
+- name: "track: nodejs"
+  color: "339933"
+  description: "Node.js, Libuv Event Loop, Streams, Worker Threads, Express"
+
+- name: "track: python-fastapi"
+  color: "3572a5"
+  description: "Python Core, CPython, GIL, Asyncio, FastAPI, Pydantic V2"
+
+- name: "track: java-springboot"
+  color: "b07219"
+  description: "Core Java 21, Virtual Threads (Loom), ZGC, Spring Boot 3"
+
+- name: "track: databases-cache"
+  color: "336791"
+  description: "PostgreSQL MVCC, Redis Caching & Redlock, MongoDB Aggregation"
+
+- name: "track: ai-genai"
+  color: "8a2be2"
+  description: "Transformers, Attention, Vector DB, RAG, LangChain, LangGraph, vLLM"
+
+- name: "track: system-design"
+  color: "e11d48"
+  description: "High-Level (HLD) & Low-Level (LLD) Distributed System Architectures"
+
+- name: "track: dsa-blind75"
+  color: "10b981"
+  description: "Data Structures & Algorithms, Blind 75, LeetCode, Patterns"
+
+- name: "track: devops-testing"
+  color: "2563eb"
+  description: "Playwright E2E, Jest, Docker Multi-stage, Kubernetes, GitHub Actions"
+
+- name: "track: mnc-startup-guides"
+  color: "f59e0b"
+  description: "MNC & Startup Interview Guides (TCS, Infosys, Nagarro, JLL, Lead)"
+
+# --- Experience Level Labels ---
+- name: "level: newbie"
+  color: "c2e0c6"
+  description: "Foundational and beginner friendly concepts (0-2 years)"
+
+- name: "level: intermediate"
+  color: "fef2c0"
+  description: "Mid-level software engineering concepts (2-5 years)"
+
+- name: "level: staff-lead"
+  color: "d4c5f9"
+  description: "Senior, Staff, Principal, and Architect-level challenges (5-8+ years)"
+
+# --- Status & Review Workflow Labels ---
+- name: "status: in-review"
+  color: "fbca04"
+  description: "PR or issue is actively being reviewed by maintainers"
+
+- name: "status: needs-revision"
+  color: "e99695"
+  description: "Requires additional comments, 6-pillar formatting, or link checks"
+
+- name: "status: ready-to-merge"
+  color: "0e8a16"
+  description: "Passed all automated checks and quality review; ready to merge"

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Custom Hook ek **Modular Power-Tool Attachment** ki tarah hai: Jaise ek drill machine (React Component) mein aap chahe toh lakdi ka bit laga lo (`useDebounce`), lohe ka bit laga lo (`useLocalStorage`), ya concrete ka bit laga lo (`useMediaQuery`). Drill machine ka motor wahi rehta hai, lekin attachment change karke aap naye superpower extract kar lete ho without touching UI presentation.
 
 ---
@@ -106,6 +107,7 @@ export function useLocalStorage<T>(
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Custom hooks are the fundamental abstraction primitive in modern React for encapsulating and sharing stateful logic across components without mutating component hierarchies or relying on Higher-Order Components. They allow composing primitive hooks into domain-specific workflows—such as debouncing values, synchronizing local storage, or orchestrating data fetches with automatic abort controllers. To design robust custom hooks, we maintain strict dependency arrays, return objects for extensible APIs, and guarantee proper teardown cleanup upon unmount."
 
 ---

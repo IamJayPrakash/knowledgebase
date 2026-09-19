@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Sliding Window (Fixed & Dynamic Subarrays)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Sliding Window (Fixed & Dynamic Subarrays)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Sliding Window (Fixed & Dynamic Subarrays)] ---> Validate
 Sliding Window maintains a running contiguous range [left...right], expanding the right boundary and contracting the left boundary based on state conditions.
 
 ### ❓ When to Apply?
-- Whenever finding the longest, shortest, or target contiguous subarray/substring matching specific criteria.
+
+* Whenever finding the longest, shortest, or target contiguous subarray/substring matching specific criteria.
 
 ### 🚫 When NOT to Apply?
-- When the problem asks for non-contiguous subsequences or when elements are negative in sum-based problems (use Prefix Sum + Map instead).
+
+* When the problem asks for non-contiguous subsequences or when elements are negative in sum-based problems (use Prefix Sum + Map instead).
 
 ---
 
@@ -67,7 +71,8 @@ Sliding Window maintains a running contiguous range [left...right], expanding th
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner generates every possible substring/subarray in O(N^3) or O(N^2) time.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate engineer uses a window but recalculates window state from scratch on every step.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Sliding Window (Fixed & Dynamic Subarrays))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer dynamically updates window state incrementally in O(1) per step, guaranteeing an overall O(N) time complexity.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 3 (Longest Substring Without Repeating Characters), LeetCode 76 (Minimum Window Substring), LeetCode 424 (Longest Repeating Character Replacement).**
+
+* **LeetCode 3 (Longest Substring Without Repeating Characters), LeetCode 76 (Minimum Window Substring), LeetCode 424 (Longest Repeating Character Replacement).**

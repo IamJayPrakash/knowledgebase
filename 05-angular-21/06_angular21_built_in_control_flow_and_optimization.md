@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are writing a letter to a friend:
+
 - **Old Angular (`*ngIf`, `*ngFor`)**: Aapko har sentence ke aage ek **heavy government rubber stamp (`*ngFor="let item of items; trackBy: trackById"`)** lagana padta tha. Template compiler ko har directive ke liye alag se internal micro-classes aur embedded view containers create karne padte the. Agar aap `trackBy` bhool gaye, toh poori list har baar delete hokar scratch se create hoti thi (Massive CPU Waste!).
 - **Angular 21 Built-in Control Flow (`@if`, `@for`, `@switch`)**: Yeh programming language ke **native `if-else` aur `for` loop** jaisa ban gaya hai!
   - `@if (isLoggedIn()) { ... } @else { ... }`
@@ -14,7 +16,8 @@ Imagine you are writing a letter to a friend:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **No Directives Required**: Unlike legacy `*ngIf` and `*ngFor` which required importing `CommonModule` or `NgIf`/`NgFor`, the `@` control flow syntax is built directly into the Angular template compiler. It works in standalone components automatically with zero imports.
 2. **Mandatory Tracking in `@for`**:
    - In legacy `*ngFor`, the `trackBy` function was optional. Omitting it caused Angular to re-create the entire DOM list on any data mutation.
@@ -22,18 +25,20 @@ Imagine you are writing a letter to a friend:
 3. **The Built-in `@empty` Block**:
    - Directly solves empty-state rendering without messy nested `<ng-container *ngIf="items.length === 0">` blocks.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **Compiler Code Generation**:
    - Legacy structural directives created nested `ViewContainerRef` instances and detached comment anchor nodes in the DOM.
    - Built-in control flow compiles into efficient runtime conditional branching opcodes, cutting template bundle sizes by up to 20% and speeding up initial rendering by up to 90%.
-5. **Type Narrowing inside `@if`**:
+2. **Type Narrowing inside `@if`**:
    - Angular's template type-checker automatically narrows types inside `@if` branches:
      `@if (user(); as u) { <p>{{ u.email }}</p> }` — within the block, `u` is guaranteed to be non-null.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 6. **Reactivity Integration with Signals**:
    - Built-in control flow tracks Signal dependencies automatically. When a Signal inside `@if (auth.isAdmin())` updates, only that specific block is marked for refresh.
-7. **Migrating Legacy Codebases**:
+2. **Migrating Legacy Codebases**:
    - Automated schematic migration is supported out-of-the-box: `ng g @angular/core:control-flow`. It rewrites legacy `*ngIf` and `*ngFor` across thousands of components in seconds.
 
 ---
@@ -173,18 +178,21 @@ export class ProductCatalogComponent {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Angular's Modern Built-in Control Flow (`@if`, `@for`, `@switch`) represents the most significant template modernization in the framework's history. It deprecates structural directives like `*ngIf` and `*ngFor` in favor of declarative, compiler-native syntax. 
-> Syntactically, it eliminates the need to import `CommonModule` or `NgIf`, cuts template verbosity, and introduces the `@empty` block for declarative empty-state handling. 
-> Under the hood, legacy directives generated heavy `ViewContainerRef` instances and auxiliary DOM comment nodes for every repeated element. Built-in control flow compiles directly into optimized JavaScript conditional branching opcodes, cutting template bundle footprints by up to 20% and accelerating rendering throughput by up to 90%. 
+>
+> *"Angular's Modern Built-in Control Flow (`@if`, `@for`, `@switch`) represents the most significant template modernization in the framework's history. It deprecates structural directives like `*ngIf` and `*ngFor` in favor of declarative, compiler-native syntax.
+> Syntactically, it eliminates the need to import `CommonModule` or `NgIf`, cuts template verbosity, and introduces the `@empty` block for declarative empty-state handling.
+> Under the hood, legacy directives generated heavy `ViewContainerRef` instances and auxiliary DOM comment nodes for every repeated element. Built-in control flow compiles directly into optimized JavaScript conditional branching opcodes, cutting template bundle footprints by up to 20% and accelerating rendering throughput by up to 90%.
 > Most importantly, `@for` enforces a syntactically mandatory `track` expression (e.g. `track item.id`), preventing accidental performance bugs where un-tracked collections triggered complete DOM tear-downs on every state change."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Real-Time Crypto & Stock Trading Exchange Web App.  
 **Incident**: During high-volatility market events with 50 WebSocket price ticks per second, the order book component froze the browser UI, causing Chrome to consume 100% CPU and dropping frames to 4 FPS. Traders missed critical limit orders, leading to severe escalations.  
 **Root Cause**: The order book rendered 500 rows using legacy `*ngFor="let order of orders"` without a `trackBy` function. Every single WebSocket array emission caused Angular to destroy all 500 DOM elements and recreate them from scratch 50 times a second, triggering massive layout thrashing and garbage collection spikes.  
 **Resolution**:
+
 1. Migrated the component to **Angular Built-in Control Flow**: `@for (order of orders(); track order.id)`.
 2. Converted orders list to an **Angular Signal**.
 3. With mandatory ID tracking, Angular ceased recreating DOM nodes and performed micro-updates strictly on the price cell `textContent`.  

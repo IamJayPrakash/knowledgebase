@@ -4,11 +4,13 @@
 
 ## 1. Design a Distributed Unique ID Generator (Twitter Snowflake)
 
-### Requirements & Constraints:
+### Requirements & Constraints
+
 - 64-bit numeric IDs.
 - Globally unique, roughly time-sorted, capable of generating 10,000+ IDs per second per node.
 
-### Snowflake 64-Bit Structure:
+### Snowflake 64-Bit Structure
+
 ```
   [ 1 Bit: Sign (0) ] 
   [ 41 Bits: Timestamp in Milliseconds (Epoch offset provides ~69 years) ] 
@@ -16,7 +18,8 @@
   [ 12 Bits: Per-Node Sequence Counter (Supports 4096 IDs per ms per node) ]
 ```
 
-### Python Implementation:
+### Python Implementation
+
 ```python
 import time
 
@@ -58,6 +61,7 @@ print("Generated Snowflake ID:", generator.generate_id())
 ---
 
 ## 2. Design a Distributed Key-Value Store (Dynamo Style)
+
 - **Data Partitioning**: Consistent Hashing with virtual nodes.
 - **Replication**: Sloppy Quorum and Hinted Handoff ($N=3, R=2, W=2$).
 - **Conflict Resolution**: Vector Clocks and Read Repair.
@@ -66,6 +70,7 @@ print("Generated Snowflake ID:", generator.generate_id())
 ---
 
 ## 3. Design a Scalable Notification System
+
 - **Scale**: 100 Million notifications per day.
 - **Components**:
   - API Gateway -> Rate Limiter -> Notification Ingestion Service -> Kafka Message Topic (Priority: Critical vs Bulk) -> Notification Worker Pool -> Third-Party Providers (APNs for iOS, FCM for Android, Twilio for SMS, SendGrid for Email).
@@ -74,6 +79,7 @@ print("Generated Snowflake ID:", generator.generate_id())
 ---
 
 ## 4. Design a Distributed Web Crawler
+
 - **Scale**: 1 Billion web pages per month.
 - **Components**:
   - URL Frontier (Priority Queue + Politeness Queue with Hostname hashing).

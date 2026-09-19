@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **1D Dynamic Programming (Memoization & Tabulation)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [1D Dynamic Programming (Memoization & Tabulation)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [1D Dynamic Programming (Memoization & Tabulation)] ---> V
 Breaking a problem into overlapping subproblems with optimal substructure. Solved by storing subproblem answers to avoid recalculation.
 
 ### ❓ When to Apply?
-- Whenever finding optimal values (min, max, count) where decisions at state i depend on previous states (i-1, i-2, etc.).
+
+* Whenever finding optimal values (min, max, count) where decisions at state i depend on previous states (i-1, i-2, etc.).
 
 ### 🚫 When NOT to Apply?
-- When subproblems do not overlap (use Divide and Conquer instead).
+
+* When subproblems do not overlap (use Divide and Conquer instead).
 
 ---
 
@@ -67,7 +71,8 @@ Breaking a problem into overlapping subproblems with optimal substructure. Solve
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner writes naive recursion, recalculating the same states and resulting in O(2^N) exponential explosion.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer uses an O(N) DP array when only the last two states are needed.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (1D Dynamic Programming (Memoization & Tabulation))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer identifies the state transition equation (e.g., `dp[i] = dp[i-1] + dp[i-2]`) and optimizes space to O(1) rolling variables.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 70 (Climbing Stairs), LeetCode 198 (House Robber), LeetCode 322 (Coin Change), LeetCode 300 (Longest Increasing Subsequence).**
+
+* **LeetCode 70 (Climbing Stairs), LeetCode 198 (House Robber), LeetCode 322 (Coin Change), LeetCode 300 (Longest Increasing Subsequence).**

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Purana metric (FID) ek **Restaurant Ke Reception Counter** jaisa tha: Customer ne entry gate par pucha "Table khali hai kya?", receptionist ne 10ms mein bol diya "Haan khali hai" (FID pass!). Lekin table par baithne ke baad jab customer ne menu manga ya paani manga, toh waiter 5 second tak gayab raha (**Bad INP**)!
 **INP (Interaction to Next Paint)** restaurant ke **Pure Dinner Experience (Every Click, Tap, Keystroke)** ko monitor karta hai: User ne button dabaya, uske baad screen par visual confirmation (spinner, highlight, dropdown) aane mein kitni der lagi.
 Target: **< 200ms**.
@@ -58,6 +59,7 @@ async function filterLargeDatasetWithYielding(items, predicate) {
   return results;
 }
 ```
+
 ---
 
 ## 4. 📊 Visual Architecture Diagram
@@ -80,6 +82,7 @@ INP 3-Phase Interaction Timeline:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is Interaction to Next Paint (INP), and how does it differ from the old First Input Delay (FID) metric?"
 >
 > **You:** "First Input Delay (FID) only measured the input delay of the very first user interaction during page load, completely ignoring the event handler execution duration and subsequent interactions. In March 2024, Google replaced FID with Interaction to Next Paint (INP). INP measures the complete end-to-end latency—input delay plus processing duration plus presentation delay—across every single click, tap, and keypress throughout the user's entire session, reporting the worst-case 75th percentile. We optimize INP by breaking long tasks over 50ms using `scheduler.yield()`, keeping event listeners lean, and offloading heavy compute to Web Workers."
@@ -87,7 +90,8 @@ INP 3-Phase Interaction Timeline:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A real-time document editor reported poor INP scores exceeding 600ms whenever users pasted large markdown snippets, causing the typing cursor to freeze visibly.
-* **Task / Challenge:** Reduce paste and render latency under 150ms.
-* **Action Taken:** Profiling showed the markdown syntax highlighter and AST tokenizer ran synchronously inside the `input` event listener on the main thread. Decoupled the syntax tokenization into a background Web Worker via `Comlink` and used `scheduler.yield()` to chunk DOM node updates into 16ms animation frame slices.
-* **Result & Business Impact:** Reduced typing and paste INP from 600ms to 32ms, completely eliminating typing freezes for 250,000 daily active writers.
+
+- **Situation:** A real-time document editor reported poor INP scores exceeding 600ms whenever users pasted large markdown snippets, causing the typing cursor to freeze visibly.
+- **Task / Challenge:** Reduce paste and render latency under 150ms.
+- **Action Taken:** Profiling showed the markdown syntax highlighter and AST tokenizer ran synchronously inside the `input` event listener on the main thread. Decoupled the syntax tokenization into a background Web Worker via `Comlink` and used `scheduler.yield()` to chunk DOM node updates into 16ms animation frame slices.
+- **Result & Business Impact:** Reduced typing and paste INP from 600ms to 32ms, completely eliminating typing freezes for 250,000 daily active writers.

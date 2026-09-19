@@ -17,10 +17,12 @@ Capgemini's technical assessment for Senior / Lead grades (Consultant, Senior Co
 ## 🎯 2. High-Frequency Technical Concepts & Spoken Answer Scripts
 
 ### Question 1: How do you design and enforce Idempotency in Enterprise REST APIs?
+>
 > **The Problem**: A client makes a payment request (`POST /api/v1/payments`). The request succeeds on the backend, but a network blip prevents the response from reaching the mobile client. The client's retry logic fires a second request, potentially charging the customer twice.
 
 **The Spoken Pitch (Say Exactly This):**
 > *"In enterprise microservices, we enforce idempotency on state-modifying requests (POST/PATCH) using the **Idempotency-Key Pattern**:
+>
 > 1. The client generates a unique UUID `Idempotency-Key` and attaches it as an HTTP header: `Idempotency-Key: 7b9e1e24-4f2a-...`.
 > 2. When the API Gateway receives the request, it executes an atomic `SET key status:IN_PROGRESS NX EX 120` in Redis.
 > 3. If Redis returns `0` (key already exists), the gateway knows a duplicate request is underway. It immediately returns `HTTP 409 Conflict` or waits for the cached response.
@@ -30,6 +32,7 @@ Capgemini's technical assessment for Senior / Lead grades (Consultant, Senior Co
 ---
 
 ### Question 2: Explain SOLID Principles with Concrete Enterprise Architecture Examples
+>
 > **Interviewer:** *"Walk me through the SOLID principles and how you enforce them in code reviews."*
 
 - **S - Single Responsibility Principle (SRP)**:
@@ -50,6 +53,7 @@ Capgemini's technical assessment for Senior / Lead grades (Consultant, Senior Co
 ---
 
 ### Question 3: How does JVM Memory Management differ between G1 GC and Generational ZGC?
+
 - **G1 GC (Garbage-First)**:
   - Divides heap into 2,048 equal-sized regions.
   - Targets user-configured pause times (e.g., `-XX:MaxGCPauseMillis=200`).
@@ -63,6 +67,7 @@ Capgemini's technical assessment for Senior / Lead grades (Consultant, Senior Co
 ---
 
 ### Question 4: How do you design an Event-Driven Architecture with Apache Kafka to guarantee Exactly-Once Processing?
+
 1. **Producer Side**:
    - Enable `enable.idempotence=true`. The Kafka broker assigns a Producer ID (PID) and tracks sequence numbers per partition, transparently de-duplicating retry network packets.
    - Use Kafka Transactions (`beginTransaction()`, `commitTransaction()`) for atomic multi-partition writes.

@@ -1,6 +1,7 @@
 # Security Policy
 
 ## Supported Versions
+
 Security updates and vulnerability patches are applied to the latest revision of the `main` branch.
 
 | Branch | Supported |
@@ -9,6 +10,7 @@ Security updates and vulnerability patches are applied to the latest revision of
 | Old Releases / Tags | :x: |
 
 ## Reporting a Vulnerability
+
 If you discover a potential security vulnerability (e.g. exposed credentials, sensitive scripts, or XSS vectors in the web documentation portal):
 
 1. **Do NOT open a public GitHub issue.**

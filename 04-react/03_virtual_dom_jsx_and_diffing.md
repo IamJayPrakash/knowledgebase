@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Socho aapko apne ghar ka interior renovate karna hai.
 Real DOM ek **Asli Eent-Patthar ka Ghar** hai: Agar aap seedhe wall girane lagoge, toh bohot dhool udegi, kharcha hoga, aur padosi pareshan honge (Browser Layout reflow and Repaint is very expensive!).
 Virtual DOM ek **Architect ka 3D Blue-Print Model** hai jo laptop ki memory mein rehta hai. Architect purane blueprint aur naye blueprint ko compare karta hai (**Diffing Algorithm**). Wo dekhta hai ki sirf hall ka parda badalna hai, kitchen ko chhedne ki zaroorat nahi. Fir wo carpenter ko bolta hai: "Jaakar sirf parda badal do" (**Batched Minimal Real DOM update**).
@@ -106,6 +107,7 @@ export function BuggyTodoList() {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "The Virtual DOM is a lightweight, in-memory representation of the real DOM tree composed of plain JavaScript objects. When state updates occur, React generates a new Virtual DOM tree and executes reconciliation using a heuristic $O(N)$ diffing algorithm. If element types differ, React destroys and recreates the subtree. If types match, it updates only the changed attributes. Keys are critical because they give sibling elements persistent identities across renders. Using array indices as keys creates severe UI bugs when arrays are mutated, as React erroneously maps state to the index position rather than the specific entity."
 
 ---

@@ -3,6 +3,7 @@
 ---
 
 ## Challenge 1: `DeepPartial<T>`
+
 Recursively transforms all properties of an object (including nested objects and arrays) to optional.
 
 ```typescript
@@ -42,6 +43,7 @@ const partialData: DeepPartial<ComplexUser> = {
 ---
 
 ## Challenge 2: `FlattenObjectKeys<T>` (Dot Notation Path Extractor)
+
 Transforms a nested object type into dot-notated string literal paths (`"profile.preferences.theme"`).
 
 ```typescript
@@ -58,6 +60,7 @@ type AppPaths = FlattenObjectKeys<ComplexUser>;
 ---
 
 ## Challenge 3: `RequireAtLeastOne<T, Keys>`
+
 Enforces that at least one of the specified properties must be present.
 
 ```typescript

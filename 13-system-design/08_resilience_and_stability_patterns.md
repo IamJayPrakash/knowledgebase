@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Bulkhead Pattern** Titanic ship ke **Alag-Alag Compartments** jaisa hai: Agar ship ke aage wale room mein paani bhar jaye, toh darwaze band ho jate hain taaki baaki ship na dube (**Compartmentalized Thread Pools**).
 **Retry with Jitter**: Agar ek darwaza band hai aur 10,000 log ek hi second mein dobara dhakka marenge, toh darwaza toot jayega (**Thundering Herd**). Jitter har bande ko bolta hai: "Koi 1 second baad aao, koi 1.8 second baad, koi 2.5 second baad" (Randomized Backoff).
 **Cache Stampede (XFetch)**: Restaurant ka soup khatam hone se 5 minute pehle hi chef naya soup banana shuru kar deta hai taaki customer ko kabhi "Khana khatam ho gaya" na sunna pade!
@@ -65,4 +66,5 @@ def xfetch_should_refresh(last_compute_time_sec: float, expiry_timestamp: float,
 ---
 
 ## 🎯 4. The "Interview Pitch"
+>
 > "Building highly available distributed systems requires designing for failure as a first-class citizen. Standard retries without randomized jitter create devastating retry storms on recovering databases. We implement Exponential Backoff with Full Jitter to decouple retrying clients. Furthermore, we deploy the Bulkhead pattern using isolated thread pools per microservice dependency, preventing a slow third-party API from exhausting the global worker thread pool and stalling healthy endpoints. Finally, to eliminate Cache Stampedes where millions of concurrent requests hit the database upon cache key expiration, we employ probabilistic early expiration using the XFetch algorithm."

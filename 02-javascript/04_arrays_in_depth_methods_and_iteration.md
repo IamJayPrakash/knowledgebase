@@ -1,6 +1,7 @@
 # JavaScript Arrays Masterclass: Mutating vs Non-Mutating Methods & Hand-Coded Polyfills
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Array ek dabbe ki tarah hai jisme saman rakha hai. Mutating method (jaise `splice`, `push`) original dabbe ke saman ko tod-marod deta hai. Non-mutating method (jaise `map`, `filter`, `slice`) pehle saman ki Xerox copy banata hai aur naye dabbe mein de deta hai, jisse original safe rehta hai.
 >
 > **Real-World Analogy:** Editing an original master painting directly with a brush (Mutating - you can never restore the original) vs taking a high-res photo, editing the photo in Photoshop, and saving a new file (Non-mutating / Immutable).
@@ -9,7 +10,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Mutating Methods (Modifies Original Array)**:
   - `push()` / `pop()`: Adds / removes from the end ($O(1)$).
   - `unshift()` / `shift()`: Adds / removes from the beginning ($O(N)$ because all indices must re-shift).
@@ -24,8 +26,9 @@
   - `reduce(fn, initialValue)`: Accumulates elements into a single value (object, number, array).
   - Modern ES2023 Non-mutating equivalents: `toSorted()`, `toReversed()`, `toSpliced()`.
 
-### 🧓 What an Experienced Candidate Knows:
-- **V8 Array Internals**: Under the hood, V8 optimizes arrays into either **Fast Elements** (contiguous C++ memory vector: SMI for small integers, DOUBLE for floats) or **Dictionary Elements** (hash table for sparse arrays like `arr[10000] = 1`). Sparse arrays degrade performance by $10	imes$.
+### 🧓 What an Experienced Candidate Knows
+
+- **V8 Array Internals**: Under the hood, V8 optimizes arrays into either **Fast Elements** (contiguous C++ memory vector: SMI for small integers, DOUBLE for floats) or **Dictionary Elements** (hash table for sparse arrays like `arr[10000] = 1`). Sparse arrays degrade performance by $10 imes$.
 - **The Initial Value Trap in `reduce`**: Calling `reduce` on an empty array without an `initialValue` throws a runtime `TypeError: Reduce of empty array with no initial value`.
 - **Reference vs Value in Shallow Copies**: `map`, `filter`, and `slice` produce shallow copies. If array elements are objects, modifying object properties in the new array mutates the original object!
 
@@ -139,6 +142,7 @@ console.log('Grouped Products:', groupedByCategory);
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Why is immutability important when manipulating arrays in modern frontend frameworks?"
 >
 > **You:** "In modern reactive frameworks like React and Angular 21, change detection relies on referential equality checks (`prevProps.items !== nextProps.items`). When you use mutating methods like `push` or `splice`, the memory address of the array stays identical, causing the UI reconciler to skip re-rendering and leading to phantom UI bugs. Non-mutating methods like `map`, `filter`, or ES2023 `toSorted` allocate a fresh array reference, guaranteeing deterministic, bug-free reactivity and pure functional state transitions."
@@ -146,7 +150,8 @@ console.log('Grouped Products:', groupedByCategory);
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A real-time cryptocurrency dashboard rendered stale prices because state updates used `state.prices.sort()` directly inside Redux reducers.
-* **Task / Challenge:** The UI failed to update top-gainer tokens on the screen even though backend WebSocket streams pushed fresh price ticks every 500ms.
-* **Action Taken:** Diagnosed the issue using Chrome DevTools memory allocation timeline; discovered `sort()` was mutating state in-place, causing shallow comparison `prev === next` to return `true`. Replaced the sorting logic with `[...prices].sort()` and integrated ESLint rule `no-mutating-methods`.
-* **Result & Business Impact:** Fixed the real-time UI freeze across 350,000 active traders with zero performance degradation.
+
+- **Situation:** A real-time cryptocurrency dashboard rendered stale prices because state updates used `state.prices.sort()` directly inside Redux reducers.
+- **Task / Challenge:** The UI failed to update top-gainer tokens on the screen even though backend WebSocket streams pushed fresh price ticks every 500ms.
+- **Action Taken:** Diagnosed the issue using Chrome DevTools memory allocation timeline; discovered `sort()` was mutating state in-place, causing shallow comparison `prev === next` to return `true`. Replaced the sorting logic with `[...prices].sort()` and integrated ESLint rule `no-mutating-methods`.
+- **Result & Business Impact:** Fixed the real-time UI freeze across 350,000 active traders with zero performance degradation.

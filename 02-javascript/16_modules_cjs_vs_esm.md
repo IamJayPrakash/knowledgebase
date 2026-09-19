@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 CommonJS (CJS) ek **Restaurant Delivery** ki tarah hai: Jab tak customer order ka phone nahi karta (runtime `require()`), tab tak kitchen mein koi khana pack nahi hota. Sab kuch step-by-step sync chalta hai, aur aap run-time par decide kar sakte ho ki 2 burger bhejne hain ya 3.
 ECMAScript Modules (ESM) ek **Train Time-Table / Rail Network** ki tarah hai: Train chalne se pehle (parsing/compilation phase), station master ko pura route, track, aur stops pehle se pata hone chahiye (`import/export` static analysis). Agar track mein koi gadbad hui, toh train station chhod hi nahi sakti!
 ESM allows bundlers like Vite and Rollup to do **Tree Shaking** because exports are statically known before code executes.
@@ -121,6 +122,7 @@ console.log({ __filename, __dirname });
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "CommonJS and ESM differ fundamentally in module resolution, execution timing, and memory bindings. CommonJS is synchronous, dynamically evaluated at runtime, and exports values by copy, meaning primitive exports do not reflect later mutations. It injects wrappers providing `__dirname` and `require`. In contrast, ESM is asynchronous, statically parsed at compile time, and exports live read-only references to memory locations. This static nature allows modern bundlers like Rollup, Webpack, and Vite to construct an exact AST dependency graph and perform dead-code elimination (Tree Shaking). ESM also natively supports top-level await and runs across both browser and Node.js runtimes."
 
 ---

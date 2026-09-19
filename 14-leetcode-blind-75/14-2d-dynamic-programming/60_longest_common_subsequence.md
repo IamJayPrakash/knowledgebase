@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **2D Dynamic Programming (Grid & String Matching DP)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [2D Dynamic Programming (Grid & String Matching DP)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [2D Dynamic Programming (Grid & String Matching DP)] ---> 
 State depends on two dimensions (e.g., row and column, or indices i and j of two strings).
 
 ### ❓ When to Apply?
-- Grid path navigation, Longest Common Subsequence, Edit Distance, and 0/1 Knapsack problems.
+
+* Grid path navigation, Longest Common Subsequence, Edit Distance, and 0/1 Knapsack problems.
 
 ### 🚫 When NOT to Apply?
-- When the problem can be reduced to 1D DP or greedy choice.
+
+* When the problem can be reduced to 1D DP or greedy choice.
 
 ---
 
@@ -67,7 +71,8 @@ State depends on two dimensions (e.g., row and column, or indices i and j of two
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner uses recursive tree search that repeats millions of grid paths.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer allocates full M x N matrices when only the previous row is needed.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (2D Dynamic Programming (Grid & String Matching DP))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer formulates 2D recurrence relations and compresses space complexity to a single 1D rolling array of size O(N).*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 62 (Unique Paths), LeetCode 1143 (Longest Common Subsequence), LeetCode 72 (Edit Distance).**
+
+* **LeetCode 62 (Unique Paths), LeetCode 1143 (Longest Common Subsequence), LeetCode 72 (Edit Distance).**

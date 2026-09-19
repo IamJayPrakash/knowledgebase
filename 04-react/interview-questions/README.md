@@ -25,6 +25,7 @@
 ## 🎯 Master Question Index (1 - 100)
 
 ### Part 1: Foundations, JSX, Virtual DOM & Component Architecture (Q1 - Q20)
+
 * [`01_react_foundations_vdom_and_jsx_qna.md`](./01_react_foundations_vdom_and_jsx_qna.md)
   1. JSX compilation under the hood (`_jsx` runtime vs `React.createElement`).
   2. Virtual DOM purpose and performance architecture.
@@ -48,6 +49,7 @@
   20. Modern default props in functional components.
 
 ### Part 2: Hooks Internals, State Batching & Lifecycle Synchronization (Q21 - Q40)
+
 * [`02_react_hooks_internals_and_state_qna.md`](./02_react_hooks_internals_and_state_qna.md)
   21. Rules of Hooks and Fiber hook singly linked list.
   22. Automatic Batching in React 18 across async boundaries.
@@ -71,6 +73,7 @@
   40. `useMemo` computation caching and runtime memory cost.
 
 ### Part 3: Fiber Architecture, Reconciliation & Concurrent Mode (Q41 - Q60)
+
 * [`03_react_fiber_reconciliation_and_concurrency_qna.md`](./03_react_fiber_reconciliation_and_concurrency_qna.md)
   41. React 15 Stack Reconciler limitations and call stack blocking.
   42. Fiber Node structure (`child`, `sibling`, `return`, `alternate`, `lanes`).
@@ -94,6 +97,7 @@
   60. React's Bailout optimization mechanism.
 
 ### Part 4: Performance Optimization, Memoization & State Management (Q61 - Q80)
+
 * [`04_react_performance_memoization_and_patterns_qna.md`](./04_react_performance_memoization_and_patterns_qna.md)
   61. Complete list of triggers that cause React components to re-render.
   62. `React.memo` and writing custom `arePropsEqual` functions.
@@ -117,6 +121,7 @@
   80. Stable callback references with `useCallback`.
 
 ### Part 5: React 19, Server Components (RSC) & Fullstack Architecture (Q81 - Q100)
+
 * [`05_react_server_components_and_react19_qna.md`](./05_react_server_components_and_react19_qna.md)
   81. React Server Components (RSC) vs Traditional SSR.
   82. RSC streaming wire protocol and zero-bundle-size components.
@@ -142,5 +147,6 @@
 ---
 
 ## 💻 Machine Coding Challenges
+
 * [`machine_coding_autocomplete_search.md`](./machine_coding_autocomplete_search.md) — Production Autocomplete with debounce, LRU cache, and keyboard navigation.
 * [`machine_coding_virtualized_list.md`](./machine_coding_virtualized_list.md) — Custom Virtual Windowing list from scratch.

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 TypeScript ke built-in utility types (`Partial`, `Pick`, `Omit`, `Readonly`) jaise toolbox ke ready-made tools hote hain. Lekin ek master carpenter (Senior Developer) ko ye pata hona chahiye ki ye tools lohe aur lakdi se bante kaise hain. Jab standard tool fail hota hai (jaise deep nested objects ko readonly banana), tab aapko scratch se apna custom tool banana aana chahiye.
 
 ---
@@ -119,6 +120,7 @@ const frozenState: DeepReadonly<ServerState> = {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Demonstrating how to implement TypeScript's utility types from scratch showcases an understanding of mapped types, indexed access types, and distributive conditional types. For instance, `Partial<T>` uses `[K in keyof T]?: T[K]`, while `Omit<T, K>` combines `Pick<T, Exclude<keyof T, K>>`. Furthermore, standard utility types like `Readonly` are shallow; in real-world production architectures handling immutable state stores like Redux or NgRx, implementing a recursive `DeepReadonly<T>` using conditional type checks for functions, arrays, and objects is essential to guarantee state immutability at all nesting levels."
 
 ---

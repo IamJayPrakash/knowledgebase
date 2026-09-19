@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Table Partitioning ek **Mega Office File Cabinet** ki tarah hai:
 Agar saare 10 saal ke bill ek hi vishal bori mein fek doge, toh 2026 ka bill dhoondne mein ghanton lag jayenge. Partitioning mein aap har saal ka alag drawer bana dete ho: `orders_2024`, `orders_2025`, `orders_2026`. Jab query aati hai `WHERE year = 2026`, toh Postgres baki 9 drawers ko chhoota bhi nahi hai (**Partition Pruning**)!
 Streaming Replication **Photocopy Machine Sync** jaisa hai: Main office (Primary) par jo bhi entry hoti hai, photocopy telegraph se branch office (Replica) par turant chhap jati hai (**WAL Streaming**).

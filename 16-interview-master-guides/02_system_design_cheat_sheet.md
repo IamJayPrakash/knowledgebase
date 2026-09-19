@@ -16,9 +16,9 @@
 | **Compress 1KB with Zstandard** | $2,000 \text{ ns}$ ($2 \text{ µs}$) | 1 hour |
 | **Read 1MB Sequentially from Memory** | $3,000 \text{ ns}$ ($3 \text{ µs}$) | 1.5 hours |
 | **Round Trip inside Same Datacenter** | $500,000 \text{ ns}$ ($0.5 \text{ ms}$) | 6 days |
-| **Read 1MB Sequentially from NVMe SSD**| $1,000,000 \text{ ns}$ ($1 \text{ ms}$) | 12 days |
-| **Read 1MB Sequentially from Magnetic Disk**| $20,000,000 \text{ ns}$ ($20 \text{ ms}$) | 8 months |
-| **Internet Packet: California to Netherlands**| $150,000,000 \text{ ns}$ ($150 \text{ ms}$) | 5 years |
+| **Read 1MB Sequentially from NVMe SSD** | $1,000,000 \text{ ns}$ ($1 \text{ ms}$) | 12 days |
+| **Read 1MB Sequentially from Magnetic Disk** | $20,000,000 \text{ ns}$ ($20 \text{ ms}$) | 8 months |
+| **Internet Packet: California to Netherlands** | $150,000,000 \text{ ns}$ ($150 \text{ ms}$) | 5 years |
 | **OS TCP Retransmit Timeout** | $1,000,000,000 \text{ ns}$ ($1 \text{ s}$) | 32 years |
 
 > **Key Senior Architectural Takeaway**: Memory is $1,000\times$ faster than NVMe SSD, and NVMe SSD is $20\times$ faster than spinning disk. Network crossing oceans takes centuries compared to CPU cycles. **Always design around caching and sequential memory access!**
@@ -27,21 +27,25 @@
 
 ## 🔢 2. Back-of-the-Envelope Capacity Estimation Formulas
 
-### Rule of Thumb Conversions:
+### Rule of Thumb Conversions
+
 - $1 \text{ Day} \approx 86,400 \text{ seconds} \approx 10^5 \text{ seconds}$ (simplifies mental math).
 - $1 \text{ Million Requests/Day} \approx \frac{10^6}{86,400} \approx \mathbf{12 \text{ QPS}}$ (Queries Per Second).
 - $10 \text{ Million Requests/Day} \approx \mathbf{120 \text{ QPS}}$.
 - $100 \text{ Million Requests/Day} \approx \mathbf{1,200 \text{ QPS}}$.
 - $1 \text{ Billion Requests/Day} \approx \mathbf{12,000 \text{ QPS}}$.
 
-### Peak Traffic Multiplier:
+### Peak Traffic Multiplier
+
 - $\text{Peak QPS} = \text{Average QPS} \times 2 \text{ to } 5$ (typically assume $2.5\times$ for consumer apps).
 
-### Storage Sizing Formula:
+### Storage Sizing Formula
+
 $$\text{Storage per Day} = \text{Daily Writes} \times \text{Average Payload Size}$$
 $$\text{Storage (5 Years)} = \text{Storage per Day} \times 365 \times 5 \times (\text{Replication Factor: } 3)$$
 
-### Memory Cache Sizing (The 80/20 Pareto Principle):
+### Memory Cache Sizing (The 80/20 Pareto Principle)
+
 - $20\%$ of daily read requests generate $80\%$ of total read volume.
 - $\text{RAM Cache Required} = \text{Daily Active Read Volume} \times 20\%$.
 
@@ -50,13 +54,17 @@ $$\text{Storage (5 Years)} = \text{Storage per Day} \times 365 \times 5 \times (
 ## ⚖️ 3. Fundamental Distributed Theorems & Laws
 
 ### 1. CAP Theorem (Brewer)
+
 In any asynchronous network experiencing a Network Partition ($P$):
+
 - **CP (Consistency + Partition Tolerance)**: Reject writes if replicas cannot reach quorum (e.g., HBase, Spanner, ZooKeeper, etcd).
 - **AP (Availability + Partition Tolerance)**: Accept writes on any available node; reconcile later via eventual consistency (e.g., Cassandra, DynamoDB, CouchDB).
 - *Note: "CA" systems do not exist in distributed cloud networks because network partitions are physically inevitable.*
 
 ### 2. PACELC Theorem (Abadi)
+
 Extends CAP for normal non-partition operating states:
+
 - **If Partition ($P$)**: Choose Availability ($A$) or Consistency ($C$).
 - **Else ($E$)**: Choose Latency ($L$) or Consistency ($C$).
 - *Examples*:
@@ -65,7 +73,9 @@ Extends CAP for normal non-partition operating states:
   - **MongoDB**: $PC / EC$ (Default) or $PA / EL$ (with read preference `nearest`).
 
 ### 3. Little's Law
+
 $$L = \lambda \times W$$
+
 - $L$ = Average number of concurrent requests in the system.
 - $\lambda$ = Arrival rate (Requests Per Second - RPS).
 - $W$ = Average latency / processing time per request (seconds).
@@ -80,7 +90,7 @@ $$L = \lambda \times W$$
 | **Relational (RDBMS)** | PostgreSQL, MySQL | Financial ledgers, ACID transactions, complex joins | Vertical scale-up, read replicas, declarative sharding | Complex distributed joins across shards |
 | **Document NoSQL** | MongoDB, Couchbase | Catalogs, polymorphic user profiles, JSON schemas | Horizontal auto-sharding via shard key | No multi-document cross-collection ACID locks (pre-v4) |
 | **Wide-Column NoSQL** | Apache Cassandra, ScyllaDB | High-write time-series, IoT telemetry, chat histories | Consistent hashing masterless ring ($O(1)$ writes) | Query patterns must strictly match partition key |
-| **Key-Value In-Memory**| Redis, Dragonfly, KeyDB | Session store, rate limiting, leaderboards, hot caches | In-memory RAM, Redis Cluster hash slots | RAM cost, data loss if persistence not tuned |
+| **Key-Value In-Memory** | Redis, Dragonfly, KeyDB | Session store, rate limiting, leaderboards, hot caches | In-memory RAM, Redis Cluster hash slots | RAM cost, data loss if persistence not tuned |
 | **Search Engine** | Elasticsearch, OpenSearch | Full-text search, log aggregation, fuzzy matching | Inverted indexes, distributed shards | High RAM overhead for heap & fielddata |
 | **Vector Database** | Qdrant, Pinecone, Milvus | AI embeddings, semantic search, RAG retrieval | HNSW graphs, IVF-PQ quantization | High memory consumption for raw graph traversal |
 | **Graph Database** | Neo4j, Amazon Neptune | Social networks, fraud detection rings, knowledge graphs | Index-free adjacency pointer chasing | Difficult to partition across multi-node clusters |

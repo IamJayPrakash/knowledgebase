@@ -3,8 +3,10 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you enter a 5-star restaurant and ask the waiter:
 *"Bhaiya, wo jo garmiyon mein thandi meethi cheez milti hai jisme fal hote hain, wo lao!"*
+
 - **Naive Search**: Waiter seedha kitchen mein jaakar fridge ke labels padhega: *"garmiyon mein thandi meethi cheez..."* Kuch nahi milega!
 - **Query Transformation (HyDE - Hypothetical Document Embedding)**:
   - Pehle ek expert chef (LLM) aapke sawaal se ek **Hypothetical Dish Description** likhta hai: *"Customer is likely referring to Mango Custard with fresh seasonal fruits."*
@@ -21,24 +23,27 @@ Imagine you enter a 5-star restaurant and ask the waiter:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The Query-Document Asymmetry Problem**:
    - User queries are typically short, vague, and phrased as questions (*"Why is my bill high?"*).
    - Knowledge base documents are long, formal, and phrased as answers (*"Billing overages occur when data egress exceeds 500GB..."*).
    - This asymmetry creates vector distance in embedding space even when documents are directly relevant.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 2. **HyDE (Hypothetical Document Embeddings)**:
    - Step 1: Pass user query $q$ to an instruction LLM with prompt: *"Generate a hypothetical passage that answers this question."*
    - Step 2: The model generates a synthetic answer $\tilde{d}$ (which may contain hallucinated details, but uses the exact domain vocabulary).
    - Step 3: Embed $\tilde{d}$ and use its vector to query the Vector DB. Because $\tilde{d}$ is shaped like a document, its vector is substantially closer to the true document vector $d$ than $q$ was!
-3. **Sub-Query Decomposition**:
+2. **Sub-Query Decomposition**:
    - For multi-hop or comparative questions, an LLM decomposes the prompt into independent atomic queries.
    - Executes parallel retrieval across vector collections and aggregates results before final synthesis.
-4. **Step-Back Prompting**:
+3. **Step-Back Prompting**:
    - Generates a higher-level, broader question first (*"What are the foundational principles of distributed consensus?"*) to retrieve background theory before answering the specific edge case (*"Why did Raft heartbeat timeout fail in cluster B?"*).
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **Multimodal RAG (ColPali & Vision Embeddings)**:
    - Traditional OCR discards visual layouts, table column alignments, and infographic arrows.
    - **ColPali (Vision-Language Retrieval)**: Passes raw high-resolution PDF page images directly through a Vision-Language Model (PaliGemma) using late-interaction multi-vector representations.
@@ -179,18 +184,21 @@ for idx, q in enumerate(atomic_queries, start=1):
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Standard RAG architectures suffer from semantic mismatch because user queries are concise and interrogative, whereas source documents are exhaustive and declarative. We eliminate this query-document asymmetry using Query Transformation techniques. 
-> With HyDE (Hypothetical Document Embeddings), we prompt an instruction LLM to generate a zero-shot hypothetical answer to the user's question. Even if this synthetic document contains factual inaccuracies, its linguistic style, terminology, and semantic structure closely mirror the target documentation, allowing the vector search to execute a document-to-document match with vastly higher cosine similarity. 
-> For complex reasoning, we employ Sub-Query Decomposition, where a planner LLM splits multi-faceted or comparative prompts into independent atomic queries, retrieves documents for each in parallel, and merges the context. 
+>
+> *"Standard RAG architectures suffer from semantic mismatch because user queries are concise and interrogative, whereas source documents are exhaustive and declarative. We eliminate this query-document asymmetry using Query Transformation techniques.
+> With HyDE (Hypothetical Document Embeddings), we prompt an instruction LLM to generate a zero-shot hypothetical answer to the user's question. Even if this synthetic document contains factual inaccuracies, its linguistic style, terminology, and semantic structure closely mirror the target documentation, allowing the vector search to execute a document-to-document match with vastly higher cosine similarity.
+> For complex reasoning, we employ Sub-Query Decomposition, where a planner LLM splits multi-faceted or comparative prompts into independent atomic queries, retrieves documents for each in parallel, and merges the context.
 > Finally, for documents containing rich visual tables, schematics, and charts, we transition from lossy OCR to Multimodal RAG with ColPali, which indexes raw PDF page images and performs patch-level late interaction retrieval."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Semiconductor manufacturing operations portal.  
 **Incident**: Factory technicians asked the internal AI: *"Why did thermal trip 404 trigger on furnace B?"* The naive vector RAG retrieved general thermal safety rules from Chapter 1, but completely missed the specific diagnostic flowchart on Page 112 because the user's query didn't share enough keywords with the engineer's technical troubleshooting matrix.  
 **Root Cause**: Severe query-document semantic gap. Technicians speak in operational slang (*"thermal trip 404"*), while the engineering manual listed it under *"High-temperature cutoff error code 0x194 - Over-temperature Sensor Calibration Failure"*.  
 **Resolution**:
+
 1. Introduced **HyDE**: When a technician enters an error, the model first generates a hypothetical diagnostic log containing technical synonyms (*"Over-temperature", "Sensor Calibration", "0x194"*).
 2. Deployed **Multimodal Vision RAG (ColPali)** to directly ingest the wiring schematics and flowchart diagrams from the PDF without OCR text mangling.  
 **Result**: Mean Diagnostic Retrieval Accuracy rose from **42% to 94.1%**, and equipment downtime on semiconductor fab lines was reduced by an average of 38 minutes per incident.

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Interface ek **Open Legal Stamp Paper** ki tarah hai: Agar aapne stamp paper pe ek company policy likhi hai (`interface User { name: string }`), toh dusra partner aake usi stamp paper ke neeche ek aur line add kar sakta hai (`interface User { role: string }`). Dono lines aapas mein merge ho jayengi (**Declaration Merging**).
 Type Alias ek **Permanent Car Number Plate** ki tarah hai: Ek baar jo number plate ban gayi (`type User = { name: string }`), usme aap nayi digit weld nahi kar sakte. Agar aap wahi naam dobara declare karne ki koshish karoge, toh RTO police (TypeScript Compiler) turant chalan kaat degi (`Duplicate identifier error`).
 
@@ -113,6 +114,7 @@ const myCar: Tesla = {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "I recommend using **interfaces** for object shapes, public API contracts, and domain models, especially when building libraries where consumers need to augment types via declaration merging (such as extending Express `Request` or browser `Window`). Interfaces also compile faster in TypeScript's type-checker due to flat caching. Conversely, I use **type aliases** whenever I need unions, primitives, tuples, mapped types, or complex conditional type transformations where an interface simply cannot express the type grammar."
 
 ---

@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Stack (Last-In, First-Out LIFO)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Stack (Last-In, First-Out LIFO)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Stack (Last-In, First-Out LIFO)] ---> Validated Optimal R
 A Stack stores elements in LIFO order, allowing O(1) push and pop operations to handle nested syntax, matching pairs, and monotonic sequences.
 
 ### ❓ When to Apply?
-- Whenever matching parentheses, parsing expressions, evaluating reverse polish notation, or finding next greater elements.
+
+* Whenever matching parentheses, parsing expressions, evaluating reverse polish notation, or finding next greater elements.
 
 ### 🚫 When NOT to Apply?
-- When elements must be processed in order of arrival (use a Queue FIFO instead).
+
+* When elements must be processed in order of arrival (use a Queue FIFO instead).
 
 ---
 
@@ -67,7 +71,8 @@ A Stack stores elements in LIFO order, allowing O(1) push and pop operations to 
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner uses string replacement loops or multi-pass arrays, incurring heavy allocation penalties.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate engineer uses a stack with complex nested conditional branches.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Stack (Last-In, First-Out LIFO))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer pairs the stack with clean lookup tables or monotonic invariants, ensuring clean O(N) processing.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 20 (Valid Parentheses), LeetCode 71 (Simplify Path), LeetCode 739 (Daily Temperatures), LeetCode 84 (Largest Rectangle in Histogram).**
+
+* **LeetCode 20 (Valid Parentheses), LeetCode 71 (Simplify Path), LeetCode 739 (Daily Temperatures), LeetCode 84 (Largest Rectangle in Histogram).**

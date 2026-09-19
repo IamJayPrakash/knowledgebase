@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Node.js default mein ek **Single Chef (Single Main Thread)** ki tarah hai. Agar chef ko ek heavy kaam mil jaye (jaise 10,000 page ka password hash calculate karna), toh restaurant ke baki 500 customers ko paani bhi nahi milega (Event Loop freeze!).
 **Cluster Module** restaurant ki **4 Nayi Branches (Separate Processes)** kholne jaisa hai: Har branch ka apna alag kitchen hai, apna alag chef hai, aur koi aapas mein memory share nahi karta. Round-robin port sharing hoti hai.
 **Worker Threads** ek hi kitchen ke andar **4 Assistant Chefs (Separate Threads)** hire karne jaisa hai: Sab ek hi room mein hain aur ek hi fridge se saman le sakte hain (**SharedArrayBuffer / Shared Memory**).
@@ -90,6 +91,7 @@ if (isMainThread) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "While Node.js is celebrated for high-concurrency I/O via its non-blocking event loop, CPU-bound operations freeze the single execution thread. To scale across multi-core systems, Node offers two complementary architectures. The `cluster` module forks independent OS processes that share a server port via Libuv round-robin IPC, ideal for horizontal web server scaling. Conversely, `worker_threads` provisions separate V8 isolates within the same process that share memory via `SharedArrayBuffer` and `MessagePort`, ideal for compute-heavy tasks like image processing or cryptography without process creation overhead."
 
 ---

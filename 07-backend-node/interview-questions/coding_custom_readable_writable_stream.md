@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Transform stream ek **Pencil Sharpener** ki tarah hai: Ek taraf se aap lakdi ki raw pencil daalte ho (Input CSV chunks), sharpener andar gol ghoomta hai (Transform buffer parsing), aur dusri taraf se sharp sharpened pencil bahar aati hai (Formatted JSON objects stream).
 
 ---
@@ -27,7 +28,8 @@ export class CsvToJsonStream extends Transform {
   _transform(chunk, encoding, callback) {
     // Line 17: Combine previous residual text with new chunk text
     const fullText = this.residualBuffer + chunk.toString("utf-8");
-    const lines = fullText.split(/?
+    const lines = fullText.split(/
+?
 /);
 
     // Line 21: The last element may be an incomplete line; store in residual buffer

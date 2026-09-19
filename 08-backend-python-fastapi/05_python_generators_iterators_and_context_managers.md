@@ -1,7 +1,9 @@
 # Python Generators, Iterators & Context Managers Masterclass
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Regular List: Ek saath 100 samosa mangwa kar table par rakh dena (Bahut saari jagah/memory gher lega, chahe aap 1 hi khao!).
 > - Generator (`yield`): Ek chef jo counter par khada hai—aap bolte ho "Next!", toh wo ek garam samosa nikaal kar deta hai aur wait karta hai (Memory bachti hai kyunki ek time par ek hi item banta hai).
 > - Context Manager (`with`): Ek automated automatic door jisme ghuste hi light on hoti hai (`__enter__`) aur bahar nikalte hi light off ho jati hai (`__exit__`), chahe andar kitna bhi hungama (exception) kyun na hua ho!
@@ -12,7 +14,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Iterable vs Iterator**:
   - **Iterable**: Any object that implements `__iter__()` or `__getitem__()` (e.g., list, tuple, string).
   - **Iterator**: An object representing a stream of data that implements `__next__()` and `__iter__()`. Calling `next(it)` returns the next item until it raises `StopIteration`.
@@ -24,7 +27,8 @@
   - Automates resource allocation and deallocation (closing files, releasing locks, closing database connections).
   - Implements `__enter__()` (sets up resource) and `__exit__(exc_type, exc_val, exc_tb)` (tears down resource even if an unhandled exception occurred).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Memory Consumption Benchmarking**: Generating 10,000,000 integers with a list comprehension consumes ~800MB of RAM. Generating the same 10,000,000 integers with a generator expression `(x for x in range(10_000_000))` consumes **112 bytes**!
 - **Generator Advanced Methods**:
   - `gen.send(value)`: Passes data into the generator, resuming it and setting the result of the `yield` expression.
@@ -134,6 +138,7 @@ with execution_timer("Heavy Calculation"):
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How do generators optimize memory, and how do context managers guarantee resource safety?"
 >
 > **You:** "Generators turn functions into stateful iterators using the `yield` keyword. Instead of allocating a multi-gigabyte collection in heap memory all at once, a generator produces one element at a time on-demand, consuming an $O(1)$ constant memory footprint regardless of dataset size. Context managers complement this by implementing the `__enter__` and `__exit__` dunder methods within the `with` statement. The runtime guarantees that `__exit__` is executed regardless of whether the block completes normally, hits a `return`, or throws an unhandled exception, completely eliminating file descriptor and connection pool leaks."
@@ -141,7 +146,8 @@ with execution_timer("Heavy Calculation"):
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An ETL data pipeline parsed 15GB daily CSV audit logs into memory using `csv.DictReader(open(file))`, calling `.read().splitlines()`. Whenever two files were processed concurrently, the Kubernetes worker pod ran out of memory and was killed with exit code 137 (`OOMKilled`).
-* **Task / Challenge:** Process multi-gigabyte log files on constrained 512MB RAM worker containers without dropping events.
-* **Action Taken:** Refactored the log ingestion to use a Python generator that yielded line-by-line using a streaming context manager `with open(filepath) as f: for line in f: yield parse(line)`.
-* **Result & Business Impact:** Slashed container memory consumption from 15GB to 42MB (a 99.7% reduction), enabling 10 concurrent ingestion workers to run on a single low-cost node.
+
+- **Situation:** An ETL data pipeline parsed 15GB daily CSV audit logs into memory using `csv.DictReader(open(file))`, calling `.read().splitlines()`. Whenever two files were processed concurrently, the Kubernetes worker pod ran out of memory and was killed with exit code 137 (`OOMKilled`).
+- **Task / Challenge:** Process multi-gigabyte log files on constrained 512MB RAM worker containers without dropping events.
+- **Action Taken:** Refactored the log ingestion to use a Python generator that yielded line-by-line using a streaming context manager `with open(filepath) as f: for line in f: yield parse(line)`.
+- **Result & Business Impact:** Slashed container memory consumption from 15GB to 42MB (a 99.7% reduction), enabling 10 concurrent ingestion workers to run on a single low-cost node.

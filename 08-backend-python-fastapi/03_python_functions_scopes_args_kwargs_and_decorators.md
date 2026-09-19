@@ -1,7 +1,9 @@
 # Python Functions, Scopes, *args, **kwargs & Decorators Masterclass
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - First-class functions: Python mein function ko ek aam variable ki tarah treat kiya ja sakta hai (Kisi variable mein store karo, doosre function mein pass karo, ya return karo).
 > - Decorator: Ek gift box ya gift wrapping paper ki tarah hai. Original gift (function) wahi rehta hai, lekin decorator uske upar nayi khubsurti ya security features (jaise logging, authentication, timing) add kar deta hai bina original gift ko chhue!
 >
@@ -11,7 +13,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **`*args`**: Captures variable number of positional arguments into a **tuple**.
 - **`**kwargs`**: Captures variable number of keyword arguments into a **dictionary**.
 - **LEGB Scope Rule**: Python resolves variable names in this strict order:
@@ -23,7 +26,8 @@
   - `global x`: Binds local assignment to the module-level variable.
   - `nonlocal x`: Binds assignment to the nearest enclosing non-global scope (essential for closures).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Closures Mechanics**: A closure occurs when a nested function retains access to variables from its enclosing lexical scope even after the outer function has finished executing and returned. Python stores these free variables in `func.__closure__` as `cell` objects.
 - **Why `@functools.wraps` is Mandatory**: When you wrap a function with a decorator, the wrapper replaces the original function. Without `@functools.wraps(fn)`, the function loses its original `__name__`, `__doc__`, and signature metadata, breaking introspection, debugging, and tools like Sphinx or FastAPI OpenAPI generation!
 - **Decorator Factory with Arguments**: When a decorator accepts parameters (e.g. `@rate_limit(max_per_sec=5)`), it requires **3 levels of nested functions**: outer factory -> decorator -> wrapper.
@@ -141,6 +145,7 @@ print(limiter())  # (False, 'Rate limit exceeded! Try again later.')
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How do closures work in Python, and why is `@functools.wraps` critical when writing decorators?"
 >
 > **You:** "A closure occurs when an inner function references variables from its enclosing scope. When the outer function returns, Python packages those variables into `__closure__` cell objects so they outlive the outer function's execution frame. When building decorators, we wrap the target function inside a wrapper. If we omit `@functools.wraps(func)`, the decorated function's name becomes `wrapper` and its docstring is erased. In production systems, this breaks logging, tracing tools, and web frameworks like FastAPI that inspect function signatures to generate Swagger/OpenAPI documentation."
@@ -148,7 +153,8 @@ print(limiter())  # (False, 'Rate limit exceeded! Try again later.')
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An enterprise microservice used a custom `@audit_log` decorator on all REST endpoints. Following a production upgrade, automated OpenTelemetry distributed tracing and endpoint monitoring stopped categorizing metrics by route name—all metrics collapsed under the name `wrapper`.
-* **Task / Challenge:** Restore granular per-endpoint tracing without modifying hundreds of individual service methods.
-* **Action Taken:** Inspected the `@audit_log` decorator implementation and found the developer had forgotten `@functools.wraps(func)`. Added `@functools.wraps(func)` to the decorator wrapper.
-* **Result & Business Impact:** Restored individual endpoint metric reporting across 45 microservices within minutes, saving over 30 engineer-hours of debugging.
+
+- **Situation:** An enterprise microservice used a custom `@audit_log` decorator on all REST endpoints. Following a production upgrade, automated OpenTelemetry distributed tracing and endpoint monitoring stopped categorizing metrics by route name—all metrics collapsed under the name `wrapper`.
+- **Task / Challenge:** Restore granular per-endpoint tracing without modifying hundreds of individual service methods.
+- **Action Taken:** Inspected the `@audit_log` decorator implementation and found the developer had forgotten `@functools.wraps(func)`. Added `@functools.wraps(func)` to the decorator wrapper.
+- **Result & Business Impact:** Restored individual endpoint metric reporting across 45 microservices within minutes, saving over 30 engineer-hours of debugging.

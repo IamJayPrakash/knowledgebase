@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Advanced Graph Topological Sort & Lexicographical Ordering** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Advanced Graph Topological Sort & Lexicographical Ordering] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Advanced Graph Topological Sort & Lexicographical Orderin
 Directed Acyclic Graphs (DAG) where nodes have precedence constraints. Solved using Topological Sort to establish valid linear orderings.
 
 ### ❓ When to Apply?
-- Compiler build task pipelines, package dependency managers (npm/pip), and recovering alien language alphabets.
+
+* Compiler build task pipelines, package dependency managers (npm/pip), and recovering alien language alphabets.
 
 ### 🚫 When NOT to Apply?
-- When the graph has cycles (topological sort is mathematically impossible on cyclic graphs).
+
+* When the graph has cycles (topological sort is mathematically impossible on cyclic graphs).
 
 ---
 
@@ -67,7 +71,8 @@ Directed Acyclic Graphs (DAG) where nodes have precedence constraints. Solved us
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner tries to brute force all character orders.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer constructs the graph but misses edge case prefixes (e.g. 'abc' coming before 'ab' is invalid).*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Advanced Graph Topological Sort & Lexicographical Ordering)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer extracts adjacent character precedence rules, validates cycle-freedom, and produces topological sort outputs in linear time.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 269 (Alien Dictionary), LeetCode 210 (Course Schedule II).**
+
+* **LeetCode 269 (Alien Dictionary), LeetCode 210 (Course Schedule II).**

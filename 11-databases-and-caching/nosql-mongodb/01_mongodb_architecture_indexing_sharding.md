@@ -1,6 +1,7 @@
 # MongoDB Architecture: WiredTiger Engine, Compound Indexing & Sharding
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** MongoDB ek NoSQL Document Database hai jo data ko BSON (Binary JSON) format me store karta hai. Iska WiredTiger engine document-level concurrency aur compression deta hai. Heavy reads ke liye Compound Indexes aur heavy writes ke liye Sharding use karte hain.
 >
 > **Real-World Analogy:** A digital filing cabinet where every folder (document) can hold customized papers with different fields without needing to remodel the entire office building whenever a new document type arrives.
@@ -8,6 +9,7 @@
 ---
 
 ## 2. 📌 Core Mechanics & Key Points
+
 - WiredTiger Storage Engine: Provides document-level locking, Snappy/Zlib data compression, and write-ahead journaling (WAL).
 - BSON Data Format: Extends JSON with support for binary data, dates, and 64-bit integers with fast traversal headers.
 - Indexing Strategies: Single field, Compound indexes (following the Equality, Sort, Range - ESR rule), and Multikey indexes for array fields.
@@ -66,6 +68,7 @@ db.orders.aggregate([
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Can you explain MongoDB Architecture and your production experience with it?"
 >
 > **You:** "MongoDB is a document-oriented database designed for high horizontal scalability and flexible schema evolution. Powered by the WiredTiger engine, it supports ACID transactions at the multi-document level. By adhering to the ESR (Equality, Sort, Range) indexing rule and carefully choosing high-cardinality shard keys, MongoDB can effortlessly scale to billions of documents with sub-10ms response times."
@@ -73,10 +76,11 @@ db.orders.aggregate([
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** Multi-tenant analytics platform storing 100M+ event logs suffered severe database write locking and slow query execution times exceeding 6 seconds.
-* **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
-* **Action Taken:** Analyzed query performance using `explain('executionStats')`, replaced COLLSCAN queries with targeted Compound ESR indexes, and enabled hashed sharding on `{ tenantId: 'hashed' }`.
-* **Result & Business Impact:** Average query latency decreased from 6,200ms to 12ms (99.8% reduction); cluster write throughput scaled from 800 ops/sec to 18,000 ops/sec.
+
+- **Situation:** Multi-tenant analytics platform storing 100M+ event logs suffered severe database write locking and slow query execution times exceeding 6 seconds.
+- **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
+- **Action Taken:** Analyzed query performance using `explain('executionStats')`, replaced COLLSCAN queries with targeted Compound ESR indexes, and enabled hashed sharding on `{ tenantId: 'hashed' }`.
+- **Result & Business Impact:** Average query latency decreased from 6,200ms to 12ms (99.8% reduction); cluster write throughput scaled from 800 ops/sec to 18,000 ops/sec.
 
 🗣️ **Script to Tell Interviewer:**
 *"In one of my core projects, multi-tenant analytics platform storing 100m+ event logs suffered severe database write locking and slow query execution times exceeding 6 seconds. I spearheaded the solution by analyzed query performance using `explain('executionstats')`, replaced collscan queries with targeted compound esr indexes, and enabled hashed sharding on `{ tenantid: 'hashed' }`., successfully achieving average query latency decreased from 6,200ms to 12ms (99.8% reduction); cluster write throughput scaled from 800 ops/sec to 18,000 ops/sec.."*

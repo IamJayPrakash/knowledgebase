@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Greedy Algorithms (Locally Optimal Choice)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Greedy Algorithms (Locally Optimal Choice)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Greedy Algorithms (Locally Optimal Choice)] ---> Validate
 Making the locally optimal choice at each stage with the hope of finding a global optimum, without backtracking or re-evaluating.
 
 ### ❓ When to Apply?
-- Interval scheduling, Kadane's maximum subarray, fractional knapsack, and jump game reachability.
+
+* Interval scheduling, Kadane's maximum subarray, fractional knapsack, and jump game reachability.
 
 ### 🚫 When NOT to Apply?
-- When a local optimal choice leads to a dead end (Dynamic Programming is required instead).
+
+* When a local optimal choice leads to a dead end (Dynamic Programming is required instead).
 
 ---
 
@@ -67,7 +71,8 @@ Making the locally optimal choice at each stage with the hope of finding a globa
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner uses brute force checking all combinations because they don't recognize the greedy choice property.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer uses greedy when DP is required (e.g., Coin Change with arbitrary denominations).*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Greedy Algorithms (Locally Optimal Choice))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer mathematically proves the greedy choice property (exchange argument) and implements O(N) single-pass solutions.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 53 (Maximum Subarray / Kadane's), LeetCode 55 (Jump Game), LeetCode 45 (Jump Game II).**
+
+* **LeetCode 53 (Maximum Subarray / Kadane's), LeetCode 55 (Jump Game), LeetCode 45 (Jump Game II).**

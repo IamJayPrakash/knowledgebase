@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are manufacturing a **Smart Smartphone**:
+
 - **No Testing**: Factory se seedha box pack karke customer ko bech diya. Ghar pahunch kar pata chala volume button dabane par camera band ho raha hai (Customer churn & production disasters!).
 - **Unit Testing (Jest)**: Phone ke har chote component ko alag lab bench par test karna:
   - Battery check: *"Kya battery 3.7V output de rahi hai?"* (Testing a single pure utility function in isolation).
@@ -16,7 +18,8 @@ Imagine you are manufacturing a **Smart Smartphone**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The Testing Trophy Hierarchy**:
    - Static Analysis (TypeScript/ESLint) $\to$ Unit Tests $\to$ Integration Tests (Dominant focus!) $\to$ End-to-End (Playwright).
 2. **Query Priority in React Testing Library**:
@@ -30,19 +33,21 @@ Imagine you are manufacturing a **Smart Smartphone**:
    - `queryBy...`: Synchronous. Returns `null` if not found. Use for asserting absence (`expect(screen.queryByText(/error/i)).not.toBeInTheDocument()`).
    - `findBy...`: Asynchronous (returns a Promise). Waits up to 1,000ms for element to appear in DOM. Use for elements that render after API calls.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **`userEvent` vs `fireEvent`**:
    - `fireEvent.click(button)`: Dispatches a raw, synthetic DOM click event without triggering intermediate events.
    - `await userEvent.click(button)`: Simulates real browser physics (hover $\to$ pointerdown $\to$ focus $\to$ mousedown $\to$ pointerup $\to$ click $\to$ change). Always prefer `@testing-library/user-event` v14+.
-5. **MSW (Mock Service Worker) over `jest.mock('fetch')`**:
+2. **MSW (Mock Service Worker) over `jest.mock('fetch')`**:
    - Mocking `global.fetch` manually is brittle and pollutes tests.
    - MSW intercepts requests at the network level (Service Worker / Node http module), allowing components to execute real `fetch()` calls against declarative HTTP mock handlers.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 6. **Act Warnings (`not wrapped in act(...)`)**:
    - Occurs when an asynchronous state update finishes after the test has already completed its assertions.
    - **Fix**: Never wrap everything in `act()` manually! Await asynchronous promises using `findByRole` or `await waitFor(() => ...)`.
-7. **Mock Reset Isolation**:
+2. **Mock Reset Isolation**:
    - Always configure `jest.clearAllMocks()` in `afterEach` or set `restoreMocks: true` in `jest.config.js` to prevent spy history from leaking across test suites.
 
 ---
@@ -232,19 +237,22 @@ describe('UserProfileEditor Integration Tests', () => {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"In modern frontend engineering, we adhere to the Testing Trophy philosophy: focusing heavily on Integration Tests over isolated implementation-detail unit tests. 
-> Using React Testing Library and `@testing-library/user-event`, we test components strictly from the perspective of an end-user or assistive technology. We query DOM nodes primarily by accessible ARIA roles (`getByRole`, `findByRole`) and labels (`getByLabelText`) rather than brittle CSS classes or internal state hooks. 
-> To distinguish between queries: `getBy` verifies synchronous presence, `queryBy` confirms absence without throwing errors, and `findBy` handles asynchronous rendering post-API calls by wrapping assertions in internal retry loops. 
-> Rather than using fragile synthetic `fireEvent` clicks, we use `userEvent` to simulate complete real-world browser event sequences. 
+>
+> *"In modern frontend engineering, we adhere to the Testing Trophy philosophy: focusing heavily on Integration Tests over isolated implementation-detail unit tests.
+> Using React Testing Library and `@testing-library/user-event`, we test components strictly from the perspective of an end-user or assistive technology. We query DOM nodes primarily by accessible ARIA roles (`getByRole`, `findByRole`) and labels (`getByLabelText`) rather than brittle CSS classes or internal state hooks.
+> To distinguish between queries: `getBy` verifies synchronous presence, `queryBy` confirms absence without throwing errors, and `findBy` handles asynchronous rendering post-API calls by wrapping assertions in internal retry loops.
+> Rather than using fragile synthetic `fireEvent` clicks, we use `userEvent` to simulate complete real-world browser event sequences.
 > Finally, for API mocking, we prefer Mock Service Worker (MSW) or clean network boundaries over mocking React internals, guaranteeing that refactoring internal component state never breaks valid tests."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global FinTech Banking Portal with 4M active users.  
 **Incident**: A frontend refactoring PR migrated a wire-transfer form from legacy Redux to Zustand. Although 100% of unit tests passed in CI, the production deployment broke the "Submit Transfer" button for all users, freezing funds transfer for 4 hours and resulting in critical regulatory compliance inquiries.  
 **Root Cause**: The legacy test suite had 98% code coverage, but it tested only internal Redux state actions (`expect(store.getState().transferAmount).toBe(500)`) and mocked the DOM button. When the state management was replaced, the tests still passed against old mock objects, but the real DOM event handler had an un-imported callback that crashed in the browser.  
 **Resolution**:
+
 1. Rewrote the test suite using **React Testing Library & userEvent**, deleting all internal state inspection assertions.
 2. Formulated tests that interact strictly with real DOM elements: typing into `getByLabelText(/account/i)` and clicking `getByRole('button', { name: /confirm transfer/i })`.
 3. Added strict CI pre-merge checks requiring integration tests to assert against screen-rendered accessibility trees.  

@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Hash Table / Hash Map & In-Memory Indexing** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Hash Table / Hash Map & In-Memory Indexing] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Hash Table / Hash Map & In-Memory Indexing] ---> Validate
 Hash Tables convert keys into integer array indices via a hash function, delivering average O(1) insertions, deletions, and lookups.
 
 ### ❓ When to Apply?
-- Whenever you need instantaneous O(1) membership checks, frequency counting, or complement lookup (A + B = Target).
+
+* Whenever you need instantaneous O(1) membership checks, frequency counting, or complement lookup (A + B = Target).
 
 ### 🚫 When NOT to Apply?
-- When auxiliary heap memory is constrained or when the data must remain sorted (use Two Pointers or Trees instead).
+
+* When auxiliary heap memory is constrained or when the data must remain sorted (use Two Pointers or Trees instead).
 
 ---
 
@@ -67,7 +71,8 @@ Hash Tables convert keys into integer array indices via a hash function, deliver
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A novice resorts to quadratic O(N^2) nested loops or repeated linear scans because they haven't learned to trade space for time.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer sorts the array in O(N log N) time or makes multiple passes over a hash map.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Hash Table / Hash Map & In-Memory Indexing)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer solves the problem in a single O(N) pass, maintaining clean space complexity, boundary edge cases, and zero redundant lookups.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 1 (Two Sum), LeetCode 49 (Group Anagrams), LeetCode 128 (Longest Consecutive Sequence), LeetCode 560 (Subarray Sum Equals K).**
+
+* **LeetCode 1 (Two Sum), LeetCode 49 (Group Anagrams), LeetCode 128 (Longest Consecutive Sequence), LeetCode 560 (Subarray Sum Equals K).**

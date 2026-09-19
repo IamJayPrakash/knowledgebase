@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Next.js Middleware ek **Airport Security Gate (Edge Border Guard)** ki tarah hai. Passenger (HTTP Request) plane mein baithne (Server Components/Page render) se pehle security gate par rukta hai. Guard uska passport (JWT Cookie) check karta hai. Agar passport invalid hai, toh guard use gate se hi bahar nikal deta hai (`NextResponse.redirect('/login')`). Agar destination change ho gaya hai, toh guard chupke se route badal deta hai (`NextResponse.rewrite()`).
 
 ---
@@ -85,6 +86,7 @@ export const config = {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Next.js Middleware operates at the Edge before a request is processed by the route cache or server renderers. Because it runs on the lightweight Edge runtime, it lacks full Node.js module support, necessitating pure JavaScript libraries like `jose` for JWT verification. In production, middleware is primarily utilized for session authentication guards, geo-location redirects, A/B testing rewrites, and multi-tenant subdomain routing. Configuring an accurate regex `matcher` is critical to prevent middleware execution on static assets and API routes."
 
 ---

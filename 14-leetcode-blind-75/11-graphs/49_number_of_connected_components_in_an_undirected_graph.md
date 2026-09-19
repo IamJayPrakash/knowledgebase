@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Graph Traversal (BFS, DFS & Topological Sort)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Graph Traversal (BFS, DFS & Topological Sort)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Graph Traversal (BFS, DFS & Topological Sort)] ---> Valid
 Non-linear data structures consisting of vertices and edges. Traversed using Queue-based BFS (shortest path in unweighted graphs) or Stack-based DFS (cycle detection, connected components).
 
 ### ❓ When to Apply?
-- Network routing, dependency resolution (Topological Sort), cycle detection, and social network relationship traversals.
+
+* Network routing, dependency resolution (Topological Sort), cycle detection, and social network relationship traversals.
 
 ### 🚫 When NOT to Apply?
-- When data can be simplified into a tree or linear array.
+
+* When data can be simplified into a tree or linear array.
 
 ---
 
@@ -67,7 +71,8 @@ Non-linear data structures consisting of vertices and edges. Traversed using Que
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner forgets the `visited` set and falls into infinite recursion cycles.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer builds an adjacency matrix when a sparse adjacency list is far more memory efficient.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Graph Traversal (BFS, DFS & Topological Sort))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer applies Kahn's algorithm (indegree queue) for topological ordering and uses Disjoint Set Union (Union-Find) with rank and path compression.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 200 (Number of Islands), LeetCode 133 (Clone Graph), LeetCode 207 (Course Schedule), LeetCode 261 (Graph Valid Tree).**
+
+* **LeetCode 200 (Number of Islands), LeetCode 133 (Clone Graph), LeetCode 207 (Course Schedule), LeetCode 261 (Graph Valid Tree).**

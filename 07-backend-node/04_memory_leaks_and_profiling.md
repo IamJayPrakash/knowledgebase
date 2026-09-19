@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Node.js memory leak ek **Dhire-Dhire Bharte Huye Ship Compartment** jaisa hai: Bahar se dekhne par ship chal rahi hai, lekin andar paani jama ho raha hai. Agar aapne bilge pump (Garbage Collector) nahi chalaya ya leak band nahi kiya, toh ship achanak dub jayegi (`Process out of memory: Crash`).
 Heap Profiling ek **Underwater Submarine Camera** hai jo batata hai ki ship ke kis hole se paani ghus raha hai.
 
@@ -86,6 +87,7 @@ export function initializeMemoryMonitor(thresholdPercentage = 85) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "When diagnosing Node.js memory leaks in production, I combine real-time APM telemetry with deterministic heap snapshot diffing. First, I monitor `process.memoryUsage().heapUsed` and RSS to establish whether memory growth is linear and fails to recover post-GC. Second, I configure automated snapshots via `v8.writeHeapSnapshot()` triggered when heap utilization exceeds 85%. Loading these snapshots into Chrome DevTools Memory Inspector, I sort by **Retained Size** to locate objects that anchor large trees—frequently unevicted Maps, un-removed event listeners on singleton streams, or closures capturing request scopes."
 
 ---

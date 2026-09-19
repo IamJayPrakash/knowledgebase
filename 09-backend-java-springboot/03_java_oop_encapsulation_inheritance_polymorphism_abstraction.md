@@ -1,7 +1,9 @@
 # Java OOP Foundations: Encapsulation, Inheritance, Polymorphism & Abstraction
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Encapsulation (Capsule): ATM machine ke andar ka cash box locked hai (Private data). Aap sirf buttons (Public methods) se paise nikaal sakte ho, direct cash box mein haath nahi daal sakte.
 > - Inheritance: Beta apne pitaji se car aur zameen inherit karta hai (`extends`), bina wapas shuru se mehnat kiye.
 > - Polymorphism (Bahu-roopi): Ek hi shakhs office mein Manager hai, ghar mein Pitaji hai, aur dukan pe Customer hai (Same method call `pay()`, different behavior depending on who executes it!).
@@ -13,7 +15,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Encapsulation**: Hide data using access modifiers (`private`, `default`, `protected`, `public`) and expose controlled access via getters and setters with validation.
 - **Inheritance (`extends`, `implements`)**:
   - Java supports **Single Inheritance of Classes** (A class can extend only one class) to avoid the Diamond Problem.
@@ -25,7 +28,8 @@
   - **Abstract Class**: Can have state (instance variables), constructors, abstract methods, and concrete methods. Used when classes share core identity and code.
   - **Interface**: A pure contract. Since Java 8, interfaces can have `default` and `static` methods. Since Java 9, interfaces can have `private` helper methods.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Dynamic Method Dispatch & Virtual Method Table (vtable)**:
   - When you invoke `parentRef.execute()`, the JVM does NOT resolve this via compile-time pointer arithmetic.
   - Every class loaded into Metaspace has a **vtable** containing pointers to its virtual methods. At runtime, the JVM looks up the vtable of the **actual heap instance**, enabling dynamic dispatch in constant $O(1)$ time.
@@ -139,6 +143,7 @@ public class OopPrinciplesDemo {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the difference between method overloading and overriding, and how does Java achieve runtime polymorphism?"
 >
 > **You:** "Method overloading represents compile-time static polymorphism, where multiple methods share the same name with different parameter counts or types; the compiler resolves the target method based on static reference types at compile time. In contrast, method overriding represents runtime dynamic polymorphism, where a subclass provides its own implementation of an inherited method with an identical signature. At runtime, the JVM uses dynamic method dispatch: it inspects the actual object instance on the heap and consults the class's Virtual Method Table (vtable) in Metaspace to invoke the overridden method. This is the foundation of clean, extensible Object-Oriented Architecture."
@@ -146,7 +151,8 @@ public class OopPrinciplesDemo {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A multi-tenant SaaS application handled payments via hardcoded `if-else` blocks (`if (provider.equals("STRIPE")) ... else if (provider.equals("PAYPAL"))`). Every time a new payment provider was added, developers had to modify 8 different service files, resulting in frequent regression bugs and broken checkout flows.
-* **Task / Challenge:** Redesign the payment architecture to adhere to the Open/Closed Principle (open for extension, closed for modification) and prevent regressions.
-* **Action Taken:** Replaced the conditional branching with a polymorphic Factory and Strategy Pattern. Defined a common `PaymentGateway` interface and implemented tenant-specific gateway classes. Spring's Dependency Injection was configured to auto-register all gateway implementations into a `Map<String, PaymentGateway>` at startup.
-* **Result & Business Impact:** Reduced the code footprint by 60%, eliminated payment regression defects entirely, and reduced the onboarding time for new payment partners from 3 weeks to 2 days.
+
+- **Situation:** A multi-tenant SaaS application handled payments via hardcoded `if-else` blocks (`if (provider.equals("STRIPE")) ... else if (provider.equals("PAYPAL"))`). Every time a new payment provider was added, developers had to modify 8 different service files, resulting in frequent regression bugs and broken checkout flows.
+- **Task / Challenge:** Redesign the payment architecture to adhere to the Open/Closed Principle (open for extension, closed for modification) and prevent regressions.
+- **Action Taken:** Replaced the conditional branching with a polymorphic Factory and Strategy Pattern. Defined a common `PaymentGateway` interface and implemented tenant-specific gateway classes. Spring's Dependency Injection was configured to auto-register all gateway implementations into a `Map<String, PaymentGateway>` at startup.
+- **Result & Business Impact:** Reduced the code footprint by 60%, eliminated payment regression defects entirely, and reduced the onboarding time for new payment partners from 3 weeks to 2 days.

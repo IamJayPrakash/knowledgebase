@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Structural Typing (Duck Typing)**: Agar koi pakshi batakh jaisa dikhta hai, batakh jaisa tairta hai aur batakh jaisa bolta hai, toh TypeScript use batakh hi manega. Chahe uska naam Cow ho, agar uske paas do pankh aur choonch hai, TS bolega: "All good!"
 **Nominal Typing**: India aur USA dono mein 100 ka note hota hai. Dono pe "100" likha hai (Structure same hai). Lekin kya aap Indian shopkeeper ko 100 US Dollar dekar chai pi sakte ho? Nahi! Shopkeeper bolega currency ka "Brand" (Nominal origin) alag hai.
 TypeScript is structurally typed, but we use **Branding (Type Flavoring)** to simulate nominal typing for safety.
@@ -92,6 +93,7 @@ transferFundsStrict(secureInr); // Compiles perfectly!
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "TypeScript's type system is fundamentally structural, meaning compatibility is governed solely by an entity's shape and members rather than its explicit declaration. While this provides tremendous flexibility in JavaScript ecosystems, it creates dangerous failure modes when distinct domain primitives—like sanitized HTML versus raw HTML, or UserIDs versus OrderIDs—are represented by plain strings. We solve this using **Type Branding**, which intersects the primitive type with a nominal tag such as `{ readonly [brand]: unique symbol }`. This enforces compile-time nominal discrimination with zero runtime memory overhead."
 
 ---

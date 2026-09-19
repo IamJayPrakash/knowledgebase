@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine building a complex mobile app:
+
 - **Single Agent System**: Ek akela freelance developer hire kiya jo khud design banata hai, khud React Native code likhta hai, khud database manage karta hai, aur khud marketing karta hai. Wo jaldi confuse ho jaata hai aur context window overflow ho jaata hai!
 - **Multi-Agent System (Supervisor Pattern)**:
   - **The Supervisor (Engineering Manager)**: Sits at the top. Wo user se requirement leta hai aur decide karta hai ki agla kaam kis specialist ko assign karna hai.
@@ -16,7 +18,8 @@ Imagine building a complex mobile app:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Why Multi-Agent Systems?**:
    - Complex workflows require diverse skill sets, extensive tool catalogues, and massive context.
    - A single monolithic agent with 30 tools suffers from tool hallucination and context saturation.
@@ -26,22 +29,24 @@ Imagine building a complex mobile app:
    - **Network / Peer-to-Peer (Decentralized)**: Agents hand off tasks directly to other agents via dynamic routing tokens (`HandoffToNextAgent`).
    - **Hierarchical Teams**: Sub-supervisors manage specialized pods of sub-agents (e.g. Research Pod, Engineering Pod).
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **State Management: Shared Blackboard vs Isolated Scratchpads**:
    - **Shared Blackboard State**: All agents read from and write to a single global state object. High visibility, but risk of agents stepping on each other's keys.
    - **Isolated Agent Scratchpads**: Sub-agents maintain their own private message scratchpads during tool execution. When finished, they emit only their clean final summary back to the supervisor's global state, preventing token explosion.
-4. **The Supervisor Router Schema**:
+2. **The Supervisor Router Schema**:
    - The supervisor uses constrained output decoding to emit a strictly structured decision:
      `{"next_worker": "ResearcherAgent" | "CoderAgent" | "FINISH"}`.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **Agent-to-Agent Infinite Ping-Pong**:
    - In decentralized networks, Agent A might say *"I need clarification from Agent B"*, and Agent B replies *"I need confirmation from Agent A"*, creating an infinite bill-draining loop.
    - Mitigate via:
      1. Centralized supervisor routing.
      2. Global recursion limit ceiling (`recursion_limit=25`).
      3. Ephemeral turn counters decremented per handoff.
-6. **Error Escalation & Fallback Routing**:
+2. **Error Escalation & Fallback Routing**:
    - If a specialist sub-agent fails to complete its task after 2 attempts, the supervisor must recognize the failure, update the plan, and either route to an alternative fallback agent or escalate to a human reviewer.
 
 ---
@@ -214,18 +219,21 @@ print(f"QA Audit Status   : {final_result['qa_review_status']}")
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"As autonomous systems scale in complexity, single-agent architectures collapse under context window saturation and tool hallucination. We transition to Multi-Agent Systems, predominantly employing the Hierarchical Supervisor pattern. 
-> A centralized Supervisor Agent acts as an orchestrator, armed with a routing schema that evaluates the mission state and dynamically delegates tasks to specialized sub-agents—such as Researchers, Coders, and QA Auditors. 
-> To protect token budgets, we isolate sub-agent scratchpads: individual agents consume private sub-contexts and tool outputs, returning only high-density, distilled artifacts to the shared team state. 
+>
+> *"As autonomous systems scale in complexity, single-agent architectures collapse under context window saturation and tool hallucination. We transition to Multi-Agent Systems, predominantly employing the Hierarchical Supervisor pattern.
+> A centralized Supervisor Agent acts as an orchestrator, armed with a routing schema that evaluates the mission state and dynamically delegates tasks to specialized sub-agents—such as Researchers, Coders, and QA Auditors.
+> To protect token budgets, we isolate sub-agent scratchpads: individual agents consume private sub-contexts and tool outputs, returning only high-density, distilled artifacts to the shared team state.
 > Crucially, to prevent infinite conversational ping-pong loops common in decentralized peer-to-peer setups, all transitions must flow through the supervisor, backed by hard recursion limits and explicit termination criteria (`FINISH`). This architecture mirrors human engineering organizations, delivering verifiable, modular, and fault-tolerant agent execution."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Cyber Security Incident Response SaaS.  
 **Incident**: An autonomous incident responder bot was tasked with mitigating a zero-day DDoS attack. The bot had 24 tools bound to a single prompt (Firewall rules, DNS management, Log analysis, Slack alerts, PagerDuty). During the attack, the model became confused by the massive tool catalog, called the DNS deletion API instead of the Firewall IP block API, and inadvertently knocked the company's primary corporate website offline.  
 **Root Cause**: Monolithic single-agent cognitive overload. Supplying 24 disparate tools to a single LLM context created acute attention degradation and tool hallucination under high-stress ambiguous prompts.  
 **Resolution**:
+
 1. Re-architected into a **Hierarchical Multi-Agent System**.
 2. **Supervisor Agent**: Held zero infrastructure tools, only the power to delegate.
 3. **Telemetry Agent**: Restricted strictly to read-only log analysis tools.

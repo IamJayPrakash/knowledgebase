@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Socho aapko 10,000 litre paani ek tanki se dusri tanki mein daalna hai.
 `fs.readFile` ek **Bohot Bada 10,000 Litre Ka Drum** ek sath uthane jaisa hai: Agar aapke paas itni muscle (RAM memory) nahi hai, toh drum girega aur aapki kamar toot jayegi (Out of Memory Error!).
 Node.js Streams ek **Patli Paani Ki Pipe (Garden Hose)** ki tarah hai: Paani thoda-thoda karke 64KB ke chote chote packets (Chunks/Buffers) mein behta rehta hai. RAM mein sirf wahi 64KB rehta hai jo us second pipe mein hai.
@@ -86,6 +87,7 @@ async function compressLargeLogFile(sourcePath, destinationPath) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Node.js Streams are the primary mechanism for handling unbounded or massive data transfers with $O(1)$ constant memory overhead. By breaking data into sequential `Buffer` chunks allocated in C++ memory outside the V8 heap, streams prevent process crashes from heap exhaustion. Backpressure occurs when the producer emits data faster than the consumer can write it. When the internal `highWaterMark` buffer is breached, `write()` returns `false`, signaling the readable stream to pause until the writable stream emits the `drain` event. In production, we avoid raw `.pipe()` due to unhandled error leak vulnerabilities and exclusively deploy `stream.pipeline` or `stream/promises`."
 
 ---

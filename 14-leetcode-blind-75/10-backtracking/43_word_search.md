@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Backtracking & Decision State Space Trees** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Backtracking & Decision State Space Trees] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Backtracking & Decision State Space Trees] ---> Validated
 Backtracking builds solution candidates incrementally, abandoning a candidate ('backtracking') as soon as it determines the candidate cannot lead to a valid solution.
 
 ### ❓ When to Apply?
-- When generating combinations, permutations, subsets, puzzle solvers (N-Queens, Sudoku), and graph paths.
+
+* When generating combinations, permutations, subsets, puzzle solvers (N-Queens, Sudoku), and graph paths.
 
 ### 🚫 When NOT to Apply?
-- When the problem asks for the minimum or count of optimal solutions without needing the actual paths (use Dynamic Programming instead).
+
+* When the problem asks for the minimum or count of optimal solutions without needing the actual paths (use Dynamic Programming instead).
 
 ---
 
@@ -67,7 +71,8 @@ Backtracking builds solution candidates incrementally, abandoning a candidate ('
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner generates all permutations without pruning, resulting in factorial O(N!) explosion.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer writes recursive backtracking but clones state arrays deeply at each step, consuming high memory.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Backtracking & Decision State Space Trees)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer prunes invalid branches early and modifies state in-place with push/pop backtrack patterns.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 39 (Combination Sum), LeetCode 79 (Word Search), LeetCode 46 (Permutations), LeetCode 51 (N-Queens).**
+
+* **LeetCode 39 (Combination Sum), LeetCode 79 (Word Search), LeetCode 46 (Permutations), LeetCode 51 (N-Queens).**

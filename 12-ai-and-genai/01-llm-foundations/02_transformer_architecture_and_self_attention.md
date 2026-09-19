@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are at a **massive office conference table with 100 people** talking at once:
+
 - **Query ($Q$)**: Aapka sawaal: *"Mujhe budget report kisne bheji thi?"* (What you are actively looking for).
 - **Key ($K$)**: Har employee ka ID badge ya table tag: *"Main HR hoon"*, *"Main Finance Budget Head hoon"*, *"Main Legal Advisor hoon"*.
 - **Value ($V$)**: Wo actual jaankari ya file jo wo employee hold karta hai.
@@ -17,7 +19,8 @@ Yahi mechanism Transformers ko har word ka context samajhne ki supernatural abil
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Decoder-Only Dominance**: While original Transformers (2017 "Attention Is All You Need") used Encoder-Decoder (like BERT/T5), modern LLMs (GPT-4, Llama 3, Claude, Gemini) are predominantly **Decoder-Only Autoregressive Transformers**.
 2. **The Self-Attention Formula**:
    $$\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right) V$$
@@ -26,20 +29,22 @@ Yahi mechanism Transformers ko har word ka context samajhne ki supernatural abil
    - $\sqrt{d_k}$ (Scaling Factor): Prevents dot products from growing excessively large for high dimensions ($d_k$), avoiding vanishing gradients in Softmax.
    - $V$ (Value): The actual contextual representation extracted.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **Multi-Head Attention (MHA)**:
    - Instead of a single attention calculation, $Q, K, V$ are projected into $h$ independent subspaces ($h$ heads).
    - One head focuses on grammatical syntax (verbs-to-nouns), another on co-reference ("it" refers to "robot"), another on sentiment.
-4. **Causal Masking**: In decoder-only models, future tokens are masked with $-\infty$ before softmax. Token $t$ can only attend to tokens $\le t$, preventing future leakage during training and generation.
-5. **Positional Encoding & RoPE**:
+2. **Causal Masking**: In decoder-only models, future tokens are masked with $-\infty$ before softmax. Token $t$ can only attend to tokens $\le t$, preventing future leakage during training and generation.
+3. **Positional Encoding & RoPE**:
    - Transformers have no inherent awareness of token order (unlike RNNs).
    - **RoPE (Rotary Position Embedding)**: Rotates $Q$ and $K$ vectors in 2D complex planes by an angle proportional to token position $m$. RoPE preserves relative distances and enables seamless context window extrapolation (e.g., from 4K to 128K tokens).
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 6. **Key-Value (KV) Cache**:
    - During autoregressive generation, computing $K$ and $V$ for all past tokens on every new token is an $O(N^2)$ catastrophe.
    - The KV-Cache saves past $K$ and $V$ matrices in GPU VRAM, turning token generation from $O(N^2)$ to $O(N)$ forward-pass time per token.
-7. **Grouped-Query Attention (GQA)**:
+2. **Grouped-Query Attention (GQA)**:
    - Standard MHA allocates one $K$ and $V$ head per $Q$ head, which blows up GPU VRAM during serving.
    - GQA (used in Llama 3, Mistral) groups multiple $Q$ heads to share a single $K/V$ head (e.g., 8 $Q$ heads per 1 $K/V$ head), reducing KV-cache VRAM consumption by up to 75% with zero quality loss.
 
@@ -200,17 +205,20 @@ if __name__ == "__main__":
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"The self-attention mechanism is the fundamental mathematical backbone of modern LLMs. It models semantic dependencies regardless of distance across the context window. It projects each token embedding into Query, Key, and Value vectors. 
-> Queries represent what a token searches for, Keys identify what each token offers, and their scaled dot product—divided by $\sqrt{d_k}$ to prevent softmax saturation—yields pairwise relevance weights. In decoder-only models, we apply a causal upper-triangular mask so generation remains strictly autoregressive. 
+>
+> *"The self-attention mechanism is the fundamental mathematical backbone of modern LLMs. It models semantic dependencies regardless of distance across the context window. It projects each token embedding into Query, Key, and Value vectors.
+> Queries represent what a token searches for, Keys identify what each token offers, and their scaled dot product—divided by $\sqrt{d_k}$ to prevent softmax saturation—yields pairwise relevance weights. In decoder-only models, we apply a causal upper-triangular mask so generation remains strictly autoregressive.
 > For positional awareness, state-of-the-art architectures replace absolute sinusoidal embeddings with Rotary Position Embeddings (RoPE), which encode relative token distances via vector rotation in complex planes. In production serving, we leverage Grouped-Query Attention (GQA) and KV-Caching to avoid re-evaluating historical Keys and Values, drastically cutting GPU memory bandwidth bottlenecks."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Real-time legal discovery & document search enterprise engine.  
 **Incident**: When upgrading an open-source 70B model to a 32,000-token context window for contract analysis, inference latency skyrocketed from 80ms/token to over 2.4s/token. GPU nodes ran out of memory (OOM) with only 3 concurrent requests per A100 (80GB).  
 **Root Cause**: The model used standard Multi-Head Attention (MHA) without GQA or FlashAttention. At 32K tokens, uncompressed KV-Cache allocated 52GB of VRAM per request, leaving zero space for activation tensors and triggering paging thrashing.  
 **Resolution**:
+
 1. Swapped the architecture to a model checkpoint featuring **Grouped-Query Attention (GQA)** (8:1 query-to-KV ratio), immediately slashing KV-cache memory consumption by 75%.
 2. Enabled **FlashAttention-2**, which optimizes the self-attention loop directly into GPU SRAM tiles, avoiding intermediate $S \times S$ memory round-trips to HBM.  
 **Result**: Inference throughput increased by **6.8x**, VRAM footprint dropped from 52GB to 11GB per stream, and concurrency per GPU jumped from 3 to 18 active users.

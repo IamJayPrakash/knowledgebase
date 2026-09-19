@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Shallow clone photo copy machine ki tarah hai: agar paper par kisi dusre document ka reference link likha hai, toh copy mein bhi wahi link aayega. Agar link wala original page phat gaya, toh copy bhi bekar.
 Deep clone 3D printer ki tarah hai: wo object ke har child, nested structure, date, regex aur circular loop ko bilkul naye fresh memory address pe recreate karta hai.
 
@@ -119,4 +120,5 @@ console.log(copy.map.get("key1") !== original.map.get("key1")); // true (deeply 
 ---
 
 ## 🎯 3. The "Interview Pitch"
+>
 > "While `structuredClone()` is the modern native browser and Node.js standard for deep cloning, it has key limitations: it cannot clone functions or DOM nodes. In senior technical interviews, writing a custom `deepClone` demonstrates mastery of memory models. The essential technical requirements are: checking for null and primitives first, handling constructors like `Date` and `RegExp`, maintaining a `WeakMap` memo cache to prevent infinite stack overflows from circular references, cloning `Map` and `Set` collections, and extracting all keys via `Object.getOwnPropertyNames` and `Object.getOwnPropertySymbols` while preserving descriptor attributes with `Object.defineProperty`."

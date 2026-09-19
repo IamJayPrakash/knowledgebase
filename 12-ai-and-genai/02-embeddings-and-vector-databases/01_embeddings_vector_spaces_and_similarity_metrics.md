@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine a massive **3D GPS Map of Human Thought**:
+
 - Har concept ya word ka ek GPS coordinate hota hai (latitude, longitude, altitude).
 - Agar aap *"Apple"* (fruit) aur *"Mango"* (fruit) ko iss GPS space mein map karoge, toh unke coordinates bilkul paas honge kyunki dono meethe phal hain.
 - Lekin *"Apple"* (iPhone company) aur *"Microsoft"* ke coordinates doosre business corner mein paas honge.
@@ -16,7 +18,8 @@ Imagine a massive **3D GPS Map of Human Thought**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Dense Vector Definition**: Unlike traditional sparse vectors (e.g. TF-IDF or One-Hot encoding with thousands of zeroes), dense embeddings pack semantic meaning into a continuous, lower-dimensional vector (e.g., 384, 768, 1536, or 3072 floating-point values).
 2. **Key Similarity Metrics**:
    - **Cosine Similarity**: Measures the cosine of the angle between two vectors:
@@ -29,15 +32,17 @@ Imagine a massive **3D GPS Map of Human Thought**:
      $$d(A, B) = \sqrt{\sum_{i=1}^n (A_i - B_i)^2}$$
      Measures absolute geometric distance. Sensitive to document length.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **Bi-Encoders vs Cross-Encoders**:
    - **Bi-Encoder** (e.g., `text-embedding-3-small`, `bge-large-en`): Computes vector representations for Query ($q$) and Document ($d$) completely independently. Allows pre-computing and indexing billions of documents into Vector DBs for sub-millisecond retrieval via MIPS (Maximum Inner Product Search).
    - **Cross-Encoder** (e.g., `bge-reranker-large`, Cohere Rerank): Passes Query and Document jointly into the transformer ($[CLS] + Query + [SEP] + Document$). Full cross-attention between every query token and document token makes it vastly more accurate, but computationally too slow for first-stage search.
-4. **Embedding Normalization**: Always $L_2$-normalize vectors prior to storage so you can replace expensive square roots in cosine distance with simple dot products during search.
+2. **Embedding Normalization**: Always $L_2$-normalize vectors prior to storage so you can replace expensive square roots in cosine distance with simple dot products during search.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **The Curse of Dimensionality**: In high-dimensional spaces (e.g. 1536-D), distance between the nearest neighbor and farthest neighbor tends to converge ($d_{\max} - d_{\min} \to 0$), making random noise problematic. Dimensionality reduction (PCA, Matryoshka Embeddings) or approximate nearest neighbor indexing is mandatory.
-6. **Matryoshka Representation Learning (MRL)**: Modern embedding models (like OpenAI `text-embedding-3`) allow truncating vector dimensions (e.g. from 1536 down to 512 or 256) with negligible drop in retrieval accuracy, cutting vector database storage and RAM costs by up to 66%.
+2. **Matryoshka Representation Learning (MRL)**: Modern embedding models (like OpenAI `text-embedding-3`) allow truncating vector dimensions (e.g. from 1536 down to 512 or 256) with negligible drop in retrieval accuracy, cutting vector database storage and RAM costs by up to 66%.
 
 ---
 
@@ -166,17 +171,20 @@ print("Semantic alignment preserved even after 50% dimension reduction!")
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Dense vector embeddings translate discrete textual tokens into continuous vector spaces where semantic proximity translates directly into geometric distance. 
-> When selecting distance metrics, Cosine Similarity is the industry standard for text because it normalizes vector magnitude, ensuring that a 10-page document doesn't appear artificially distant from a 1-sentence summary of the same topic. In production vector search engines, we $L_2$-normalize all vectors upon ingestion; this allows us to replace expensive square root cosine computations with pure hardware-accelerated Dot Product operations (MIPS). 
+>
+> *"Dense vector embeddings translate discrete textual tokens into continuous vector spaces where semantic proximity translates directly into geometric distance.
+> When selecting distance metrics, Cosine Similarity is the industry standard for text because it normalizes vector magnitude, ensuring that a 10-page document doesn't appear artificially distant from a 1-sentence summary of the same topic. In production vector search engines, we $L_2$-normalize all vectors upon ingestion; this allows us to replace expensive square root cosine computations with pure hardware-accelerated Dot Product operations (MIPS).
 > For system architecture, we must distinguish between Bi-Encoders and Cross-Encoders. Bi-encoders independently project queries and documents into embedding space, enabling sub-millisecond retrieval over millions of chunks in vector databases. Cross-encoders, on the other hand, evaluate query and document pairs jointly through full self-attention. While cross-encoders are too slow for initial candidate retrieval, they are indispensable as a second-stage reranker for top-K candidates."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Enterprise SaaS with 15 million internal documentation articles.  
 **Incident**: The company deployed an internal support search using a Cross-Encoder directly on the entire document database. Search queries regularly experienced **8 to 15-second latency timeouts** under a modest load of 50 concurrent internal queries, crashing the backend pods.  
 **Root Cause**: Cross-encoders require a complete forward pass through the transformer for *every candidate document*. Running cross-attention across 15 million documents for a single query required billions of FLOPs, completely bottlenecking GPU compute.  
 **Resolution**:
+
 1. Re-architected search into a **Two-Stage Retrieval Pipeline**.
 2. **Stage 1**: Encoded all 15M articles offline using a high-throughput **Bi-Encoder** (`bge-base-en-v1.5`), indexed into a Qdrant cluster using HNSW. First-stage search retrieved top-50 candidate documents in **12 milliseconds**.
 3. **Stage 2**: Passed only the top-50 candidates into a lightweight **Cross-Encoder Re-ranker** (`bge-reranker-base`), which re-ordered the top-5 candidates in **45 milliseconds**.  

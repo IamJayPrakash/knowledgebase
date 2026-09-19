@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Function utility types ek **Automatic Resume Parser** ki tarah hain. Job applicant (function) se poochne ki zaroorat nahi hai ki uski qualifications kya hain; software function signature ko scan karke khud hi decide kar leta hai:
+
 - Usse kitne arguments chahiye? (`Parameters<T>`)
 - Wo kya result wapas karega? (`ReturnType<T>`)
 - Usko initialize karne ke liye `new` ke sath kya dena padega? (`ConstructorParameters<T>`)
@@ -100,6 +102,7 @@ async function loggedPayment(
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "TypeScript's function utility types—`Parameters<T>`, `ReturnType<T>`, `ConstructorParameters<T>`, and `InstanceType<T>`—rely on conditional type pattern matching with `infer`. They are essential when wrapping third-party libraries or legacy code that doesn't explicitly export its internal argument or return types. By using `typeof functionRef` combined with `Parameters` and `ReturnType`, we can derive exact types without manual copy-pasting, ensuring wrapper functions stay perfectly in sync when upstream libraries update their signatures."
 
 ---

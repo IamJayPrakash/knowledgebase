@@ -1,11 +1,14 @@
 # JavaScript Master Interview Bank: Part 1 (Q1 - Q20)
+
 ## Foundations, Types, Coercion & Operators
 
 ---
 
 ### Q1: What are the primitive data types in JavaScript, and how are they stored in memory?
+
 **Answer:**
 JavaScript has **7 primitive data types**:
+
 1. `number` (IEEE 754 64-bit float)
 2. `string` (immutable sequence of UTF-16 code units)
 3. `boolean` (`true` or `false`)
@@ -15,6 +18,7 @@ JavaScript has **7 primitive data types**:
 7. `bigint` (arbitrary-precision integer)
 
 **Memory Layout:**
+
 - Primitives are **immutable** and passed by **value**.
 - Small primitive values (like numbers, booleans, small strings) are stored directly on the **Call Stack** (or in V8 Smi / small integer representations).
 - Objects, Functions, and Arrays are **reference types** stored in the **V8 Heap**, with their memory addresses stored on the Call Stack.
@@ -34,7 +38,9 @@ console.log(obj1.name); // "Bob" (mutated via shared reference)
 ---
 
 ### Q2: Explain `typeof null === 'object'` and `typeof NaN === 'number'`. Why do these quirks exist?
+
 **Answer:**
+
 1. **`typeof null === 'object'`**:
    - In the first implementation of JavaScript (1995), values were stored with a type tag in the bottom 3 bits of their memory representation.
    - The type tag for an object was `000`.
@@ -48,7 +54,9 @@ console.log(obj1.name); // "Bob" (mutated via shared reference)
 ---
 
 ### Q3: What is the difference between `==` (Abstract Equality) and `===` (Strict Equality)?
+
 **Answer:**
+
 - **`===` (Strict Equality):** Evaluates equality **without** type coercion. If types differ, it returns `false` immediately.
 - **`==` (Abstract Equality):** Follows the ECMAScript `Abstract Equality Comparison Algorithm` (ToNumber coercion):
   1. If comparing `number` and `string`, converts string to number: `1 == "1"` $\to$ `1 == 1` (`true`).
@@ -66,8 +74,10 @@ console.log(null === undefined); // false
 ---
 
 ### Q4: How does `Object.is()` differ from `===`?
+
 **Answer:**
 `Object.is(val1, val2)` implements the SameValue algorithm and differs from `===` in exactly two special edge cases:
+
 1. **`NaN` comparison:**
    - `NaN === NaN` is `false` (by IEEE 754 rules).
    - `Object.is(NaN, NaN)` is `true`.
@@ -88,7 +98,9 @@ console.log(1 / -0);                // -Infinity
 ---
 
 ### Q5: What is the Temporal Dead Zone (TDZ) and why was it introduced for `let` and `const`?
+
 **Answer:**
+
 - When JavaScript enters a scope, all variables (`var`, `let`, `const`, `function`) are **hoisted** (registered during the creation phase of the Execution Context).
 - `var` is initialized immediately to `undefined`.
 - `let` and `const` are hoisted into uninitialized memory. The time interval between entering the block scope and reaching the variable's declaration line is called the **Temporal Dead Zone (TDZ)**.
@@ -107,7 +119,9 @@ console.log(1 / -0);                // -Infinity
 ---
 
 ### Q6: What is the difference between `null`, `undefined`, and `undeclared`?
+
 **Answer:**
+
 - **`undefined`**: A variable has been declared using `var`, `let`, or `const`, but has not yet been assigned a value. Also default return value of functions without an explicit `return`.
 - **`null`**: An intentional primitive assignment representing the deliberate absence of an object value or empty reference.
 - **`undeclared`**: An identifier that was never declared in any enclosing scope. Accessing it directly throws `ReferenceError: x is not defined`.
@@ -122,8 +136,10 @@ console.log(typeof notDeclared); // "undefined" (typeof guard), but notDeclared 
 
 ---
 
-### Q7: Explain Nullish Coalescing (`??`) vs Logical OR (`||`).
+### Q7: Explain Nullish Coalescing (`??`) vs Logical OR (`||`)
+
 **Answer:**
+
 - **Logical OR (`||`):** Returns the right-hand operand if the left-hand operand is **any falsy value** (`false`, `0`, `""`, `NaN`, `null`, `undefined`).
 - **Nullish Coalescing (`??`):** Returns the right-hand operand **only if** the left-hand operand is **nullish** (`null` or `undefined`).
 
@@ -140,7 +156,9 @@ console.log(text ?? "Default"); // ""
 ---
 
 ### Q8: How does Optional Chaining (`?.`) work under the hood?
+
 **Answer:**
+
 - `?.` evaluates the expression on its left. If the left-hand value is `null` or `undefined`, execution **short-circuits** and immediately returns `undefined` without attempting property access or method invocation.
 - It prevents `TypeError: Cannot read properties of undefined (reading 'xyz')`.
 - Works with properties (`obj?.a`), arrays (`arr?.[0]`), and function calls (`fn?.()`).
@@ -154,7 +172,9 @@ console.log(user.getSettings?.());       // undefined (does not crash)
 ---
 
 ### Q9: How do `for...in` and `for...of` differ?
+
 **Answer:**
+
 - **`for...in`:** Iterates over all **enumerable property keys** of an object, including properties inherited across its prototype chain. Iteration order is not guaranteed.
 - **`for...of`:** Iterates over the **values** of an **iterable object** (objects implementing the `[Symbol.iterator]` protocol: `Array`, `Map`, `Set`, `String`, `TypedArray`, generator objects). Cannot be used on plain objects without `Object.keys()`/`Object.values()`.
 
@@ -174,7 +194,9 @@ for (let value of arr) {
 ---
 
 ### Q10: What is variable shadowing and how can it lead to bugs?
+
 **Answer:**
+
 - Variable shadowing occurs when a variable declared within an inner scope has the same identifier name as a variable in an outer scope.
 - Within the inner scope, the inner identifier shadows (masks) the outer one, making the outer variable inaccessible by name.
 - **Bug Vector:** Accidental re-declaration inside loops or nested closures leading to updates targeting the local copy instead of the intended parent state.
@@ -193,8 +215,10 @@ console.log(total); // 100 (outer total untouched)
 
 ---
 
-### Q11: Explain implicit type coercion in arithmetic operations (`+`, `-`, `*`, `/`).
+### Q11: Explain implicit type coercion in arithmetic operations (`+`, `-`, `*`, `/`)
+
 **Answer:**
+
 - The binary `+` operator performs **string concatenation** if *either* operand is a string. Otherwise, it converts operands to numbers.
 - The operators `-`, `*`, `/`, `%` **always** coerce both operands to numeric primitives via `Number()`.
 
@@ -211,7 +235,9 @@ console.log([] + {});    // "[object Object]" ([] -> "", {} -> "[object Object]"
 ---
 
 ### Q12: What is the difference between `freeze()`, `seal()`, and `preventExtensions()` on objects?
+
 **Answer:**
+
 | Method | Can Add Properties? | Can Delete Properties? | Can Modify Existing Values? | Changes Configurable? |
 | :--- | :--- | :--- | :--- | :--- |
 | `Object.preventExtensions(obj)` | ❌ No | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -223,7 +249,9 @@ console.log([] + {});    // "[object Object]" ([] -> "", {} -> "[object Object]"
 ---
 
 ### Q13: What is the difference between shallow copy and deep copy?
+
 **Answer:**
+
 - **Shallow Copy:** Copies top-level primitive values by value, but copies references for nested objects and arrays. Changes to nested properties in the clone mutate the original.
   - *Examples:* `Object.assign({}, obj)`, spread `{ ...obj }`, `slice()`.
 - **Deep Copy:** Recursively duplicates all objects and arrays at all nesting depths, allocating completely independent heap memory.
@@ -233,7 +261,9 @@ console.log([] + {});    // "[object Object]" ([] -> "", {} -> "[object Object]"
 ---
 
 ### Q14: How does `structuredClone()` work and what are its limitations?
+
 **Answer:**
+
 - `structuredClone()` is the modern browser/Node.js standard implementing the HTML Structured Clone Algorithm.
 - **Capabilities:** Deep clones nested objects, arrays, `Map`, `Set`, `Date`, `RegExp`, `ArrayBuffer`, and safely preserves **circular references**.
 - **Limitations:** Cannot clone functions, DOM nodes, Property Descriptors (`getters`/`setters`), or Prototype chains (reconstructed objects always inherit from `Object.prototype`).
@@ -253,7 +283,9 @@ console.log(copy.set !== original.set); // true (independent instance)
 ---
 
 ### Q15: What are Symbols in JavaScript and what are their primary use cases?
+
 **Answer:**
+
 - `Symbol()` produces a unique, immutable primitive identifier. Even if two symbols are created with the same description, `Symbol("foo") === Symbol("foo")` is `false`.
 - **Primary Use Cases:**
   1. **Hidden Object Properties:** Properties keyed by Symbols are non-enumerable in standard `for...in` loops and `Object.keys()`, preventing naming collisions in libraries.
@@ -273,7 +305,9 @@ console.log(user[ID]);           // "SECRET_123"
 ---
 
 ### Q16: What is the difference between `Map` and a Plain Object?
+
 **Answer:**
+
 | Feature | `Map` | Plain Object (`{}`) |
 | :--- | :--- | :--- |
 | **Key Types** | Any type (objects, functions, primitives). | Strings and Symbols only. |
@@ -285,7 +319,9 @@ console.log(user[ID]);           // "SECRET_123"
 ---
 
 ### Q17: What is `WeakMap` and why does it not prevent Garbage Collection?
+
 **Answer:**
+
 - `WeakMap` is a collection of key-value pairs where **keys must be objects** (or non-registered symbols) and are held as **weak references**.
 - Because the reference is weak, if there are no other strong references to a key object elsewhere in memory, the V8 garbage collector reclaims the object and silently deletes the key-value entry.
 - **Characteristics:** Non-enumerable (no `.size`, `.keys()`, or iteration) because GC timing is non-deterministic.
@@ -306,7 +342,9 @@ element = null;
 ---
 
 ### Q18: What is `WeakSet` and how is it used?
+
 **Answer:**
+
 - `WeakSet` stores unique objects weakly without preventing garbage collection.
 - Only supports `.add()`, `.has()`, `.delete()`.
 - **Use Case:** Tagging objects with a boolean state without modifying the object or causing memory leaks (e.g., tracking which objects have already been processed or validated).
@@ -325,8 +363,10 @@ function processTask(task) {
 
 ---
 
-### Q19: Explain the difference between `Array.prototype.slice()` and `Array.prototype.splice()`.
+### Q19: Explain the difference between `Array.prototype.slice()` and `Array.prototype.splice()`
+
 **Answer:**
+
 - **`slice(start, end)`**:
   - **Pure/Non-mutating:** Does not alter the original array.
   - Returns a shallow copy of a sub-array from index `start` up to (but not including) `end`.
@@ -350,7 +390,9 @@ console.log(list);    // [1, 99, 4, 5] (original modified!)
 ---
 
 ### Q20: What are Tagged Template Literals and how are they used in modern libraries?
+
 **Answer:**
+
 - Tagged Template Literals allow parsing template literals with a function.
 - The tag function receives an array of static string chunks as its first parameter, followed by the evaluated interpolation expressions as subsequent arguments.
 - **Used by:** `styled-components` (CSS parsing), SQL query sanitizers (escaping SQL injection parameters), and GraphQL AST parsers (`gql` tags).

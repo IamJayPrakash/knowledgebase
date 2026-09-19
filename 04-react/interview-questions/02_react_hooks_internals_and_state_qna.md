@@ -1,10 +1,13 @@
 # React Master Interview Bank: Part 2 (Q21 - Q40)
+
 ## Hooks Internals, State Batching & Lifecycle Synchronization
 
 ---
 
 ### Q21: Why must React Hooks only be called at the top level? How are Hooks stored internally in Fiber?
+
 **Answer:**
+
 - **The Rule:** Don't call Hooks inside loops, conditions, or nested functions.
 - **Under the Hood:**
   - React does **not** identify hooks by names or string keys.
@@ -23,7 +26,9 @@ FiberNode.memoizedState
 ---
 
 ### Q22: What is Automatic Batching in React 18, and how does it differ from React 17?
+
 **Answer:**
+
 - **Batching:** Grouping multiple state updates into a single re-render to prevent unnecessary intermediate paints.
 - **In React 17:**
   - Updates were batched **only inside native React event handlers** (`onClick`, `onChange`).
@@ -45,14 +50,19 @@ fetch("/api/user").then(() => {
 ---
 
 ### Q23: What is the difference between passing a direct value vs a functional update to `setState`?
+
 **Answer:**
+
 - **Direct Value (`setCount(count + 1)`):** Reads `count` from the current render's closure. If called multiple times within the same event loop tick, each call references the same snapshot:
+
   ```javascript
   setCount(count + 1); // count = 0 -> sets to 1
   setCount(count + 1); // count = 0 -> sets to 1
   setCount(count + 1); // count = 0 -> sets to 1 (Result: 1, not 3!)
   ```
+
 - **Functional Update (`setCount(prev => prev + 1)`):** React queues update functions into an internal update queue (`fiber.updateQueue`). During reconciliation, React passes the latest pending state from the previous update to the next, guaranteeing correct incremental updates:
+
   ```javascript
   setCount(prev => prev + 1); // prev = 0 -> 1
   setCount(prev => prev + 1); // prev = 1 -> 2
@@ -62,7 +72,9 @@ fetch("/api/user").then(() => {
 ---
 
 ### Q24: What is Lazy State Initialization in `useState`?
+
 **Answer:**
+
 - If you pass an expression directly to `useState`: `useState(computeExpensiveValue())`, the expensive function executes on **every single re-render**, even though React only uses the initial value on mount.
 - **Lazy Initialization:** Pass a function definition: `useState(() => computeExpensiveValue())`. React will execute this callback **strictly once during the initial mount phase** and ignore it on all subsequent re-renders.
 
@@ -77,7 +89,9 @@ const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
 ---
 
 ### Q25: What are the differences between `useEffect`, `useLayoutEffect`, and `useInsertionEffect`?
+
 **Answer:**
+
 ```
                      RENDER PHASE
                           │
@@ -107,7 +121,9 @@ const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
 ---
 
 ### Q26: How does `useRef` work and why does mutating `.current` not trigger a re-render?
+
 **Answer:**
+
 - `useRef(initialValue)` returns a mutable plain JavaScript object: `{ current: initialValue }`.
 - React persists this exact same object instance across every render of the component on the Fiber node's hook list.
 - **Why no re-render:** Unlike `useState`, mutating `ref.current = newValue` is a simple property assignment in memory. It does **not** call React's scheduling engine (`scheduleUpdateOnFiber`), so React has no awareness that an update occurred and does not trigger reconciliation.
@@ -116,6 +132,7 @@ const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
 ---
 
 ### Q27: How do you store the previous state or props using `useRef`?
+
 **Answer:**
 Because `useEffect` runs **after** render and paint, we can capture the current state inside an effect so it becomes the "previous" state on the subsequent render:
 
@@ -136,7 +153,9 @@ function usePrevious(value) {
 ---
 
 ### Q28: What is a Stale Closure in React hooks, and how do you fix it?
+
 **Answer:**
+
 - **Stale Closure:** Occurs when a closure (inside `useEffect`, `useCallback`, or a timer) captures variables from a specific render snapshot and does not update when those variables change in future renders.
 - **Common Cause:** Omitting variables from the dependency array (`[]`).
 - **Fixes:**
@@ -165,8 +184,10 @@ useEffect(() => {
 ---
 
 ### Q29: When should you prefer `useReducer` over `useState`?
+
 **Answer:**
 Use `useReducer` when:
+
 1. **Complex State Logic:** The state object has multiple sub-values (e.g. multi-step wizard, form with 15 fields).
 2. **Co-dependent State Updates:** Updating one piece of state depends on the values of other pieces of state.
 3. **Predictable State Transitions:** Wanting to enforce state transitions via explicit action types (`FETCH_INIT`, `FETCH_SUCCESS`, `FETCH_ERROR`).
@@ -175,7 +196,9 @@ Use `useReducer` when:
 ---
 
 ### Q30: What is `useImperativeHandle` and why should it be used sparingly?
+
 **Answer:**
+
 - `useImperativeHandle(ref, createHandle, [deps])` customizes the instance value that is exposed to parent components when using `ref` with `forwardRef`.
 - **Purpose:** Restricts what parents can do with a DOM node, exposing a clean, limited API (e.g. exposing only `.focus()` or `.scrollIntoView()` instead of the entire raw DOM node).
 - **Why use sparingly:** Violates declarative principles; forces imperative child manipulation from parents.
@@ -198,7 +221,9 @@ const CustomInput = forwardRef((props, ref) => {
 ---
 
 ### Q31: What is `useId` and what problem does it solve in SSR and Accessibility?
+
 **Answer:**
+
 - `const id = useId()` generates a unique, stable identifier across both client and server renders.
 - **Problem Solved:** Prior to `useId`, using `Math.random()` or global counters created **Hydration Mismatch Errors** because the client and server generated different IDs for the same element.
 - **Accessibility:** Generates stable IDs for linking `<label htmlFor={id}>` and `<input id={id} />` or `aria-describedby`.
@@ -206,14 +231,18 @@ const CustomInput = forwardRef((props, ref) => {
 ---
 
 ### Q32: Why should you avoid updating state inside the body of a component render?
+
 **Answer:**
+
 - Updating state inside the component render body (outside of an effect or event handler) schedules an immediate re-render.
 - If done unconditionally, it causes an **infinite render loop**, throwing `Error: Too many re-renders. React limits the number of renders to prevent an infinite loop`.
 
 ---
 
 ### Q33: How does React detect when to run the cleanup function in `useEffect`?
+
 **Answer:**
+
 - The cleanup function returned by `useEffect` executes in two scenarios:
   1. **Before the effect runs again:** If dependencies change between renders, React runs the **previous render's cleanup function** first, and then executes the new effect.
   2. **When the component unmounts:** React executes the final cleanup function before removing the Fiber node from the tree.
@@ -221,11 +250,13 @@ const CustomInput = forwardRef((props, ref) => {
 ---
 
 ### Q34: Can `useEffect` callback be declared as `async`? Why or why not?
+
 **Answer:**
 **No.** The callback passed to `useEffect` must return either **nothing (`undefined`) or a cleanup function**.
 If you declare it as `async`:
 `useEffect(async () => { ... })`
 An `async` function automatically returns a **Promise**. A Promise cannot be invoked as a cleanup function by React (`promise() is not a function`), throwing a runtime error.
+
 - **Solution:** Declare an internal async function and invoke it immediately:
 
 ```javascript
@@ -245,21 +276,27 @@ useEffect(() => {
 ---
 
 ### Q35: What is `useDebugValue` and when should custom hook authors use it?
+
 **Answer:**
+
 - `useDebugValue(value, formatFn)` displays a custom label for custom hooks inside the **React DevTools** component tree.
 - It helps library authors (e.g. React Query, Zustand) display internal hook status (e.g. "Online", "Cached", "Pending") for easier developer debugging.
 
 ---
 
 ### Q36: What happens if an error occurs inside an effect cleanup function?
+
 **Answer:**
+
 - An error thrown inside a cleanup function is treated as a fatal unhandled error in the component lifecycle.
 - It will bubble up to the nearest **Error Boundary**. If no Error Boundary catches it, the entire React component tree will unmount.
 
 ---
 
 ### Q37: How do you implement a custom `useDebounce` hook?
+
 **Answer:**
+
 ```javascript
 import { useState, useEffect } from "react";
 
@@ -282,7 +319,9 @@ function useDebounce(value, delay) {
 ---
 
 ### Q38: How do you implement a custom `useLocalStorage` hook with cross-tab synchronization?
+
 **Answer:**
+
 ```javascript
 import { useState, useEffect } from "react";
 
@@ -324,7 +363,9 @@ function useLocalStorage(key, initialValue) {
 ---
 
 ### Q39: What is the purpose of `useCallback` and when is it completely useless?
+
 **Answer:**
+
 - **Purpose:** Memoizes a callback function definition between renders, returning the same function memory reference as long as dependencies have not changed.
 - **When Useful:**
   1. Passing callbacks to child components wrapped in `React.memo` (preserves shallow `prevProps === nextProps`).
@@ -336,7 +377,9 @@ function useLocalStorage(key, initialValue) {
 ---
 
 ### Q40: What is the purpose of `useMemo` and what is its cost?
+
 **Answer:**
+
 - **Purpose:** Caches the **result** of an expensive computation between renders: `const memoized = useMemo(() => compute(a), [a]);`.
 - **Cost:**
   `useMemo` is not free. It consumes memory to store the cached value and dependency array, and spends CPU cycles comparing dependencies on every render.

@@ -1,7 +1,9 @@
 # Java Collections Framework (JCF) Deep Dive: List, Set, Queue & HashMap Architecture
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - `ArrayList`: Cinema hall ki seat row jisme sab saath baithe hain ($O(1)$ direct index access, par beech mein naya aadmi ghusana ho toh sabko shift hona padta hai).
 > - `LinkedList`: Train ke dibbe jo ek doosre se hook se jude hain (Naya dibba jodna aasan hai, par 50th dibbe tak pahunchne ke liye 1st dibbe se chalke jana padega).
 > - `HashSet`: Ek club jisme security guard check karta hai ki aapka fingerprint pehle se registered hai ya nahi (Unique items, no duplicates, $O(1)$ instant check).
@@ -13,9 +15,10 @@
 
 ## 2. 📌 Core Mechanics & Time Complexities (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **`List` Interface (Ordered, Allows Duplicates)**:
-  - `ArrayList`: Backed by a dynamic resizable array. Default initial capacity is 10. When full, it grows by **50%** ($1.5	imes$ growth: `newCapacity = oldCapacity + (oldCapacity >> 1)`). $O(1)$ get/set; $O(N)$ insertion/removal in the middle.
+  - `ArrayList`: Backed by a dynamic resizable array. Default initial capacity is 10. When full, it grows by **50%** ($1.5 imes$ growth: `newCapacity = oldCapacity + (oldCapacity >> 1)`). $O(1)$ get/set; $O(N)$ insertion/removal in the middle.
   - `LinkedList`: Doubly linked list of `Node` objects (`item`, `prev`, `next`). $O(1)$ add/remove at ends; $O(N)$ traversal. Consumes significantly more memory due to node pointer overhead.
 - **`Set` Interface (Unique Elements Only)**:
   - `HashSet`: Backed internally by a `HashMap` where the element is the Key, and a dummy `Object` is the Value. $O(1)$ add/remove/contains. Unordered.
@@ -25,7 +28,8 @@
   - `ArrayDeque`: Resizing circular array. Faster than `LinkedList` for stacks and queues; does not permit `null`.
   - `PriorityQueue`: Backed by a binary min-heap. Elements ordered by natural ordering or custom `Comparator`. $O(\log N)$ enqueue/dequeue.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **`HashMap` Internal Architecture (Java 8+)**:
   1. Internal storage is an array of `Node<K,V>[] table`.
   2. Hashing algorithm mixes high and low bits to minimize collisions: `hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16)`.
@@ -129,6 +133,7 @@ public class CollectionsDeepDiveDemo {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How does `HashMap` handle hash collisions, and what changed in Java 8?"
 >
 > **You:** "In Java, `HashMap` uses an array of buckets to store key-value pairs, computing the bucket index via `(n - 1) & hash`. When multiple keys map to the same bucket index, a hash collision occurs. Prior to Java 8, collisions were resolved strictly using singly linked lists, which caused lookup time to degrade to $O(N)$ in worst-case collision scenarios. In Java 8, Oracle introduced bucket treeification: when a bucket accumulates 8 or more colliding entries and the total map capacity is at least 64, the linked list converts into a self-balancing Red-Black Tree. This guarantees a worst-case search time of $O(\log N)$ instead of $O(N)$, mitigating Denial-of-Service collision vulnerabilities."
@@ -136,7 +141,8 @@ public class CollectionsDeepDiveDemo {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An e-commerce inventory sync service experienced intermittent 100% CPU lockups during high-traffic flash sale events. Thread dumps revealed multiple worker threads were stuck in an infinite loop inside `HashMap.get()` during concurrent rehashing.
-* **Task / Challenge:** Eliminate the high-CPU thread hang without sacrificing read and write throughput.
-* **Action Taken:** Diagnosed that a standard, non-thread-safe `HashMap` was being shared across multiple worker threads. When concurrent writes triggered `resize()`, the circular linked list pointer corruption caused infinite loops. Replaced the `HashMap` with `ConcurrentHashMap`, which uses lock-free CAS (Compare-And-Swap) for empty buckets and fine-grained per-bucket node locking.
-* **Result & Business Impact:** Completely eradicated CPU lockup crashes, allowing the inventory service to process 65,000 concurrent inventory updates per second with zero thread contention.
+
+- **Situation:** An e-commerce inventory sync service experienced intermittent 100% CPU lockups during high-traffic flash sale events. Thread dumps revealed multiple worker threads were stuck in an infinite loop inside `HashMap.get()` during concurrent rehashing.
+- **Task / Challenge:** Eliminate the high-CPU thread hang without sacrificing read and write throughput.
+- **Action Taken:** Diagnosed that a standard, non-thread-safe `HashMap` was being shared across multiple worker threads. When concurrent writes triggered `resize()`, the circular linked list pointer corruption caused infinite loops. Replaced the `HashMap` with `ConcurrentHashMap`, which uses lock-free CAS (Compare-And-Swap) for empty buckets and fine-grained per-bucket node locking.
+- **Result & Business Impact:** Completely eradicated CPU lockup crashes, allowing the inventory service to process 65,000 concurrent inventory updates per second with zero thread contention.

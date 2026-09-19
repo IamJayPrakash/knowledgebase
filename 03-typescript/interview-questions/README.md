@@ -5,6 +5,7 @@
 ---
 
 ## 📌 How to Use This Directory
+
 - Add individual markdown files for specific TypeScript interview questions in this folder (e.g., `01_type_narrowing_challenges.md`, `02_custom_deep_readonly.md`).
 - Use this `README.md` as your index and checklist.
 
@@ -20,8 +21,8 @@
 ---
 
 ## 📌 Utility Implementations & Architectural Challenges
+
 - [x] [Custom Utility Types Implementations](./coding_custom_utility_types.md)
 - [x] [Top TypeScript Senior Questions](./top_typescript_interview_questions.md)
 - [x] Recursive Route Parameter Parsing & Deep Readonly (`02_typescript_advanced_types_infer_and_compiler_qna.md`)
 - [x] Monorepo Project References (`composite: true`) & CI Performance (`02_typescript_advanced_types_infer_and_compiler_qna.md`)
-

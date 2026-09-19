@@ -7,6 +7,7 @@ This repository is an open-source, community-driven master reference for Softwar
 ---
 
 ## 📜 Table of Contents
+
 1. [Code of Conduct](#code-of-conduct)
 2. [What Can I Contribute?](#what-can-i-contribute)
 3. [The Mandatory 6-Pillar Format](#the-mandatory-6-pillar-format)
@@ -18,11 +19,13 @@ This repository is an open-source, community-driven master reference for Softwar
 ---
 
 ## 1. Code of Conduct
+
 By participating in this project, you agree to abide by our [Code of Conduct](./CODE_OF_CONDUCT.md). Please be welcoming, respectful, and constructive.
 
 ---
 
 ## 2. What Can I Contribute?
+
 - **New Interview Questions:** Adding high-yield technical interview questions for any of our 16 tracks.
 - **Code Refinements & Bug Fixes:** Improving optimal solutions, fixing typos, or updating outdated syntax (e.g. Next.js 15, Angular 21, React 19).
 - **Edge Cases & Visuals:** Adding ASCII/Mermaid architecture diagrams and tricky production edge cases.
@@ -32,6 +35,7 @@ By participating in this project, you agree to abide by our [Code of Conduct](./
 ---
 
 ## 3. The Mandatory 6-Pillar Format
+
 Every single concept or interview question in this repository **must** strictly adhere to our 6-Pillar standard:
 
 ```markdown
@@ -60,6 +64,7 @@ Every single concept or interview question in this repository **must** strictly 
 ## 4. Contribution Workflow
 
 ### Step 1: Fork & Clone
+
 ```bash
 # 1. Fork repository on GitHub: https://github.com/IamJayPrakash/knowledgebase/fork
 # 2. Clone your fork locally:
@@ -68,7 +73,9 @@ cd knowledgebase
 ```
 
 ### Step 2: Create a Feature Branch
+
 Use a clear, descriptive branch naming convention:
+
 ```bash
 # For a new feature or question bank:
 git checkout -b feat/add-react19-compiler-qna
@@ -78,7 +85,9 @@ git checkout -b fix/correct-v8-gc-diagram
 ```
 
 ### Step 3: Make Changes & Test
+
 Edit or create markdown files following the directory conventions:
+
 - Place concept guides in `<track-name>/`
 - Place interview questions in `<track-name>/interview-questions/`
 - Update the relevant `<track-name>/README.md` and `<track-name>/interview-questions/README.md` to link your new file.
@@ -88,7 +97,9 @@ Edit or create markdown files following the directory conventions:
 ## 5. Local Development & Link Validation
 
 ### Previewing the Documentation Portal Locally
+
 You can preview the interactive Single-Page Application locally without installing any heavy build tools:
+
 ```bash
 # Run a simple Python static server:
 python -m http.server 8000
@@ -96,7 +107,9 @@ python -m http.server 8000
 ```
 
 ### Validating Links
+
 Before submitting a PR, verify that zero broken links exist:
+
 ```bash
 python -c "
 import re, sys
@@ -139,7 +152,9 @@ else:
 ---
 
 ## 6. Issue Labels & Finding Tasks
+
 Check out our [Issues tab](https://github.com/IamJayPrakash/knowledgebase/issues) to find tasks to work on:
+
 - `good first issue` — Perfect starting points for newcomers.
 - `help wanted` — High-priority community requests.
 - `track: <name>` — Domain-specific topics (e.g. `track: ai-genai`, `track: react`).
@@ -148,14 +163,19 @@ Check out our [Issues tab](https://github.com/IamJayPrakash/knowledgebase/issues
 ---
 
 ## 7. Submitting a Pull Request
+
 1. Commit your changes with clear, conventional messages:
+
    ```bash
    git commit -m "feat(react): add Q21-Q30 covering Server Actions and useOptimistic"
    ```
+
 2. Push to your fork:
+
    ```bash
    git push origin feat/add-react19-compiler-qna
    ```
+
 3. Open a Pull Request against the `main` branch of `IamJayPrakash/knowledgebase`.
 4. Fill out the automated PR template completely.
 5. Our automated GitHub Actions workflows will verify link integrity and trigger a preview deployment!

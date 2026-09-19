@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine a busy **Restaurant Kitchen serving 100 diners simultaneously**:
+
 - **Naive Request Batching**: Chef tab tak naya order nahi banayega jab tak table 1 par baitha slow diner apni poori 5-course meal khatam na kar le. Saare doosre diners bhookhe baithe wait kar rahe hain (GPU sits idle waiting for the longest generation to finish!).
 - **Continuous Batching (Iteration-Level Batching)**: Chef har minute ek roti (1 token) sekta hai. Jaise hi kisi diner ka ek bite khatam hota hai, agle token par naya diner table par add ho jaata hai!
 - **KV-Cache Fragmentation Problem**: Puraani systems memory pre-allocate karti thi: *"Har diner ke liye 10-foot lambi table book karke rakho, chahe wo sirf 1 samosa khaye."* 60–80% GPU memory waste ho jaati thi!
@@ -13,7 +15,8 @@ Imagine a busy **Restaurant Kitchen serving 100 diners simultaneously**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The KV-Cache Bottleneck**:
    - In autoregressive decoding, past Keys ($K$) and Values ($V$) must be stored in GPU High-Bandwidth Memory (HBM) to avoid $O(N^2)$ recomputation.
    - For a 13B model with 2048 context length, each concurrent request requires ~1GB of VRAM solely for KV-cache.
@@ -22,20 +25,22 @@ Imagine a busy **Restaurant Kitchen serving 100 diners simultaneously**:
    - **ITL (Inter-Token Latency)**: Time elapsed between subsequent tokens (dominated by memory bandwidth decoding).
    - **Throughput**: Aggregate tokens generated per second across all concurrent GPU streams.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **PagedAttention (vLLM)**:
    - Traditional servers pre-allocate contiguous VRAM for the maximum possible sequence length ($L_{\max}$), causing up to **80% internal and external memory fragmentation**.
    - PagedAttention divides the KV-cache into discrete **Physical Blocks** (e.g. 16 tokens per block). A **Block Table** maps logical token sequences to non-contiguous physical GPU pages, virtually eliminating memory fragmentation (< 4% waste).
-4. **Continuous (Dynamic / Iteration-Level) Batching**:
+2. **Continuous (Dynamic / Iteration-Level) Batching**:
    - Naive batching locks all requests together until the longest sequence completes.
    - Continuous batching operates at the single-iteration level: as soon as a request emits an `<|eos|>` token, it is evicted immediately from the batch, and a pending request from the queue is slotted in on the very next forward pass.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **Model Quantization Formats**:
    - **GPTQ**: Second-order gradient-based post-training quantization (4-bit). Excellent for GPU weight compression.
    - **AWQ (Activation-aware Weight Quantization)**: Protects the top 1% salient weight channels that contain the highest activation magnitude, preserving perplexity better than GPTQ under low bit-widths.
    - **GGUF (llama.cpp)**: Fast quantized format optimized for CPU, Apple Silicon Metal, and consumer edge devices.
-6. **Speculative Decoding**:
+2. **Speculative Decoding**:
    - Uses a tiny, lightning-fast "Draft Model" (e.g. Llama-3-1B) to speculate 5 tokens ahead in parallel.
    - The large "Target Model" (Llama-3-70B) verifies all 5 tokens in a *single forward pass*. If 4 are accepted, generation throughput accelerates by 2.5x with zero loss in output quality.
 
@@ -162,19 +167,22 @@ print(f"\nAll {len(engine.completed_requests)} requests served with zero idle sl
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Production LLM serving differs drastically from conventional web server architectures because it is severely memory-bandwidth bound rather than compute bound. 
-> The central villain in standard serving engines is KV-Cache memory fragmentation, where reserving contiguous blocks for maximum potential sequence lengths wastes up to 80% of GPU VRAM. 
-> We solve this using vLLM's PagedAttention, which applies operating system virtual memory paging principles to the KV-cache. Memory is allocated in non-contiguous physical blocks managed by a page block table, reducing VRAM fragmentation to under 4% and boosting serving concurrency by 3x to 5x. 
-> In tandem, we implement Continuous (Iteration-Level) Batching: instead of waiting for an entire batch to finish, requests that hit EOS are evicted at the single-token step, allowing new requests from the queue to enter the active batch dynamically. 
+>
+> *"Production LLM serving differs drastically from conventional web server architectures because it is severely memory-bandwidth bound rather than compute bound.
+> The central villain in standard serving engines is KV-Cache memory fragmentation, where reserving contiguous blocks for maximum potential sequence lengths wastes up to 80% of GPU VRAM.
+> We solve this using vLLM's PagedAttention, which applies operating system virtual memory paging principles to the KV-cache. Memory is allocated in non-contiguous physical blocks managed by a page block table, reducing VRAM fragmentation to under 4% and boosting serving concurrency by 3x to 5x.
+> In tandem, we implement Continuous (Iteration-Level) Batching: instead of waiting for an entire batch to finish, requests that hit EOS are evicted at the single-token step, allowing new requests from the queue to enter the active batch dynamically.
 > For extreme throughput, we pair this with 4-bit Activation-aware Weight Quantization (AWQ) or speculative decoding to minimize memory transfer bottlenecks."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global AI Code Completion Copilot serving 250,000 active developers.  
 **Incident**: During morning peak hours, user-perceived autocomplete latency surged to **1,800ms**, and GPU clusters in AWS autoscaled to 48x A100 instances, burning \$90,000/month while still dropping 12% of requests with 504 timeouts.  
 **Root Cause**: The team deployed standard HuggingFace Text Generation Inference (TGI) with static request batching. A developer requesting a 1,500-token function refactor would lock an entire GPU batch slot, forcing 20-token autocompletions to stall in the queue for seconds.  
 **Resolution**:
+
 1. Migrated the serving fleet to **vLLM with PagedAttention and Continuous Batching**.
 2. Quantized the code completion base model using **AWQ 4-bit**, fitting a 33B model onto a single 40GB A100 GPU without accuracy loss.
 3. Enabled KV-cache chunk sharing for identical system prompt prefixes across users.  

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Generic ek **Mould / Sancha** ki tarah hai. Agar aapke paas ek cake mould hai, toh aap usme chocolate batter daalo toh chocolate cake banega, vanilla batter daalo toh vanilla cake banega. Aapko har cake ke liye alag mould banane ki zaroorat nahi hai.
 Generic Constraint (`T extends HasId`) ek **VIP Entry Gate** ki tarah hai: Koi bhi guest andar aa sakta hai (T is generic), LEKIN uske paas ID card zaroor hona chahiye (`extends { id: string }`). Agar kisi ke paas ID card nahi hai, toh compiler gatekeeper use block kar dega!
 
@@ -96,6 +97,7 @@ const fCount = getProperty(userAccount, "followers");
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Generics allow developers to author reusable, type-safe functions, classes, and data structures while avoiding the unsafe loss of type information caused by `any`. With generic constraints via the `extends` keyword, we enforce minimal structural preconditions on type parameters without erasing additional properties. Combining generics with the `keyof` operator creates bulletproof APIs where property names and return types are strictly bound together, preventing runtime `undefined` property access bugs."
 
 ---

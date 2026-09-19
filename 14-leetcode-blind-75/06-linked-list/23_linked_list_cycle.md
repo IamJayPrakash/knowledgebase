@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Linked List Pointer Manipulation & Dummy Nodes** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Linked List Pointer Manipulation & Dummy Nodes] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Linked List Pointer Manipulation & Dummy Nodes] ---> Vali
 Linked Lists store elements in dynamically allocated nodes containing value and next pointer references, allowing O(1) insertions/deletions once located.
 
 ### ❓ When to Apply?
-- When frequent insertions and deletions at head/arbitrary points are required without shifting contiguous memory arrays.
+
+* When frequent insertions and deletions at head/arbitrary points are required without shifting contiguous memory arrays.
 
 ### 🚫 When NOT to Apply?
-- When fast O(1) random index access is needed (arrays are superior).
+
+* When fast O(1) random index access is needed (arrays are superior).
 
 ---
 
@@ -67,7 +71,8 @@ Linked Lists store elements in dynamically allocated nodes containing value and 
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner copies node values into an array, manipulates the array, and rebuilds the linked list, wasting O(N) memory.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer manipulates pointers directly but frequently crashes on edge cases like null heads or single nodes.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Linked List Pointer Manipulation & Dummy Nodes)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer utilizes Dummy Head nodes to eliminate edge cases and applies multi-pointer techniques (e.g., Floyd's Tortoise and Hare).*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 206 (Reverse Linked List), LeetCode 21 (Merge Two Sorted Lists), LeetCode 141 (Linked List Cycle), LeetCode 143 (Reorder List).**
+
+* **LeetCode 206 (Reverse Linked List), LeetCode 21 (Merge Two Sorted Lists), LeetCode 141 (Linked List Cycle), LeetCode 143 (Reorder List).**

@@ -1,0 +1,4 @@
+node_modules/
+.git/
+.system_generated/
+assets/

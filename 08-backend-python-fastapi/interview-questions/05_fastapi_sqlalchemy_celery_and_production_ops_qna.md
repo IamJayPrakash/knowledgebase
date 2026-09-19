@@ -1,10 +1,13 @@
 # Python & FastAPI Master Interview Bank: Part 5 (Q81 - Q100)
+
 ## SQLAlchemy 2.0 Async, Celery, WebSockets & Production Scaling
 
 ---
 
 ### Q81: How do you configure SQLAlchemy 2.0 with Async Engine and Session Management in FastAPI?
+
 **Answer:**
+
 ```python
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from fastapi import Depends
@@ -40,7 +43,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 ---
 
 ### Q82: What does `expire_on_commit=False` do in SQLAlchemy async sessions?
+
 **Answer:**
+
 - By default in synchronous SQLAlchemy, committing a session expires all entity attributes so the next access re-fetches fresh data from the database.
 - In **asynchronous SQLAlchemy**, accessing an expired attribute triggers a synchronous lazy-load on the event loop, which fails immediately with `MissingGreenlet: greenlet_spawn has not been called`.
 - Setting **`expire_on_commit=False`** keeps attribute data in memory after commit, preventing lazy-load crashes.
@@ -48,8 +53,10 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 ---
 
 ### Q83: How do you prevent the N+1 Query Problem in SQLAlchemy 2.0?
+
 **Answer:**
 Use eager loading options in `select()` queries:
+
 - **`selectinload(User.orders)`:** Executes exactly 2 queries: one to fetch users, and a second query `SELECT ... WHERE user_id IN (...)` to fetch orders. (Optimal for 1-to-many relationships).
 - **`joinedload(User.profile)`:** Uses a single SQL `LEFT OUTER JOIN` to fetch parent and child records together. (Optimal for 1-to-1 or many-to-1 relationships).
 
@@ -65,7 +72,9 @@ users = result.all()
 ---
 
 ### Q84: What is the difference between FastAPI `BackgroundTasks` and Celery?
+
 **Answer:**
+
 | Feature | FastAPI `BackgroundTasks` | Distributed Task Queue (Celery / ARQ) |
 | :--- | :--- | :--- |
 | **Execution** | Runs in-process inside the same ASGI web container. | Runs out-of-process on dedicated background worker servers. |
@@ -76,7 +85,9 @@ users = result.all()
 ---
 
 ### Q85: How do you implement a Real-Time WebSocket Connection Manager in FastAPI?
+
 **Answer:**
+
 ```python
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
@@ -114,8 +125,10 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
 ---
 
 ### Q86: How do you stream Server-Sent Events (SSE) in FastAPI?
+
 **Answer:**
 Use `StreamingResponse` with `media_type="text/event-stream"`:
+
 ```python
 from fastapi.responses import StreamingResponse
 import asyncio
@@ -133,7 +146,9 @@ async def stream_events():
 ---
 
 ### Q87: How do you implement OAuth2 Password Flow with JWT in FastAPI?
+
 **Answer:**
+
 1. Use `OAuth2PasswordBearer(tokenUrl="/token")`.
 2. Extract token from `Authorization: Bearer <token>` header.
 3. Decode and verify JWT signature and expiration (`exp`) using `pyjwt` or `python-jose`:
@@ -159,7 +174,9 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 ---
 
 ### Q88: How do you deploy FastAPI for Maximum Throughput in Production?
+
 **Answer:**
+
 - **The Golden Production Architecture:** **Gunicorn as Process Manager + Uvicorn as ASGI Worker**.
 - FastAPI runs inside single-threaded Python processes. To utilize all available CPU cores on a multi-core VM, run Gunicorn managing multiple Uvicorn worker instances:
 
@@ -174,12 +191,15 @@ gunicorn main:app \
   --access-logfile - \
   --error-logfile -
 ```
+
 - In **Kubernetes**, prefer **1 or 2 workers per pod** and scale horizontally via Horizontal Pod Autoscaler (HPA).
 
 ---
 
 ### Q89: How do you implement Distributed Rate Limiting in FastAPI using SlowAPI?
+
 **Answer:**
+
 ```python
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -200,7 +220,9 @@ async def sensitive_endpoint(request: Request):
 ---
 
 ### Q90: How does Alembic manage Database Migrations with SQLAlchemy in FastAPI?
+
 **Answer:**
+
 1. Initialize Alembic: `alembic init alembic`.
 2. Configure `alembic/env.py` to import SQLAlchemy `Base.metadata`.
 3. Auto-generate migration script:
@@ -211,7 +233,9 @@ async def sensitive_endpoint(request: Request):
 ---
 
 ### Q91: What is the difference between `HTTPException` from FastAPI vs Starlette?
+
 **Answer:**
+
 - **`fastapi.HTTPException`**: Inherits from Starlette's exception, but allows passing any JSON-serializable Python data structure (dict, list, string) to the `detail` parameter.
 - **`starlette.exceptions.HTTPException`**: Only accepts a string for `detail`.
 - *Rule:* Always import `from fastapi import HTTPException`.
@@ -219,8 +243,10 @@ async def sensitive_endpoint(request: Request):
 ---
 
 ### Q92: How do you handle Database Transactions with Unit of Work pattern in FastAPI?
+
 **Answer:**
 Implement a Unit of Work class managing transaction commits and rollbacks across multiple repositories:
+
 ```python
 class UnitOfWork:
     def __init__(self, session_factory):
@@ -243,8 +269,10 @@ class UnitOfWork:
 ---
 
 ### Q93: How do you instrument FastAPI with OpenTelemetry and Prometheus?
+
 **Answer:**
 Use `opentelemetry-instrumentation-fastapi`:
+
 ```python
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from prometheus_fastapi_instrumentator import Instrumentator
@@ -261,7 +289,9 @@ Instrumentator().instrument(app).expose(app)
 ---
 
 ### Q94: What is ARQ and why is it preferred over Celery in Asyncio applications?
+
 **Answer:**
+
 - **Celery:** Synchronous by design (requires eventlet or gevent hacks to run async coroutines).
 - **ARQ:** Built natively from the ground up on top of Python `asyncio` and Redis.
 - Jobs are native `async def` coroutines, resulting in lower memory footprint and zero thread synchronization overhead.
@@ -269,9 +299,12 @@ Instrumentator().instrument(app).expose(app)
 ---
 
 ### Q95: How do you prevent Connection Leaks in FastAPI with `httpx.AsyncClient`?
+
 **Answer:**
+
 - **Anti-Pattern:** Instantiating `httpx.AsyncClient()` inside individual route handlers creates a brand-new TCP/TLS socket on every HTTP request.
 - **Best Practice:** Maintain a single shared client instance using the `lifespan` handler:
+
   ```python
   @asynccontextmanager
   async def lifespan(app: FastAPI):
@@ -283,15 +316,19 @@ Instrumentator().instrument(app).expose(app)
 ---
 
 ### Q96: What is the difference between `model.model_dump()` and `model.model_dump_json()`?
+
 **Answer:**
+
 - `model.model_dump()`: Returns a native Python dictionary (`dict`).
 - `model.model_dump_json()`: Serializes directly into a raw UTF-8 JSON string via Rust `pydantic-core`, skipping intermediate dictionary allocations and running up to 10x faster.
 
 ---
 
 ### Q97: How do you mock database sessions in FastAPI unit tests?
+
 **Answer:**
 Use `app.dependency_overrides`:
+
 ```python
 from fastapi.testclient import TestClient
 from unittest.mock import AsyncMock
@@ -311,21 +348,27 @@ def test_endpoint():
 ---
 
 ### Q98: How do you handle Graceful Shutdown in FastAPI / Uvicorn?
+
 **Answer:**
+
 - Uvicorn listens for `SIGINT` and `SIGTERM`.
 - When signaled, Uvicorn stops accepting new connections and gives active requests time to complete up to `--timeout-graceful-shutdown` seconds before executing the `lifespan` shutdown block.
 
 ---
 
 ### Q99: What is the difference between Pydantic `BaseModel` and `RootModel` in V2?
+
 **Answer:**
+
 - `BaseModel`: Defines an object model with named fields (`{"name": "Alice", "age": 30}`).
 - `RootModel[List[str]]`: Defines a model for root data types that are not JSON objects (e.g. validating a top-level JSON array `["item1", "item2"]` or top-level primitive).
 
 ---
 
 ### Q100: How do you structure a Production Multi-Tenant FastAPI Application?
+
 **Answer:**
+
 1. **Tenant Identification:** Extract tenant ID from subdomain (`tenant.myapp.com`) or header (`X-Tenant-ID`) via FastAPI dependency.
 2. **Schema Separation:** Use PostgreSQL schemas per tenant (`search_path = tenant_id`).
 3. **Connection Pooling:** Dynamic connection pool routing or schema switching per request inside a `yield` dependency.

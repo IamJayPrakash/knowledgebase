@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are searching for an **exact vintage spare part in a massive warehouse**:
+
 - Part ka exact serial number hai: `"X-902-B4"`.
 - **Pure Semantic Vector Search**: Yeh part number ko ek abstract concept ki tarah dekhega: *"Shayad yeh kisi mechanical nut ya bolt jaisi cheez hai"* aur aapko generic wrenches dikha dega, lekin exact serial number dhoondne mein fail ho jayega!
 - **Pure Keyword Search (BM25)**: Yeh exact word-to-word match karega (`"X-902-B4"`), lekin agar customer pooch le *"engine cooling device"* toh wo fail ho jayega kyunki keyword match nahi hua.
@@ -16,7 +18,8 @@ Imagine you are searching for an **exact vintage spare part in a massive warehou
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Why Pure Vector Search Fails in Production**:
    - Vector embeddings are great at conceptual similarity, but notorious at:
      - Exact SKU / Serial numbers (`ERR_404_SOCKET_TIMEOUT`).
@@ -25,22 +28,24 @@ Imagine you are searching for an **exact vintage spare part in a massive warehou
 2. **The Hybrid Solution**:
    $$\text{Hybrid Search} = \text{Sparse Lexical Search (BM25 / TF-IDF)} + \text{Dense Vector Search (HNSW Embeddings)}$$
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **BM25 (Best Matching 25)**:
    - Probabilistic term-frequency / inverse-document-frequency ranking algorithm.
    - Computes query-document score based on exact keyword occurrences, penalized by document length saturation.
-4. **Reciprocal Rank Fusion (RRF)**:
+2. **Reciprocal Rank Fusion (RRF)**:
    - Merges disparate ranking lists without needing score normalization (since BM25 scores and Cosine distances operate on entirely different scales).
    - RRF Formula:
      $$RRF\_Score(d) = \sum_{m \in M} \frac{1}{k + r_m(d)}$$
      Where $r_m(d)$ is the rank of document $d$ in search system $m$, and $k$ is a smoothing constant (typically $k=60$).
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **Cross-Encoder Re-ranking (Stage 2)**:
    - Bi-encoders compress documents into fixed-length vectors, discarding fine-grained token-level cross-interactions.
    - A Cross-Encoder passes query and document together through full transformer attention, computing a precise relevance probability score in $[0, 1]$.
    - Applying a Cross-Encoder to the top-25 merged RRF candidates improves Precision@K and NDCG by **15–30%** in real-world benchmarks.
-6. **Query Latency Budgeting**:
+2. **Query Latency Budgeting**:
    - Running BM25 + Vector search in parallel via `asyncio.gather` takes $\max(T_{\text{bm25}}, T_{\text{vector}}) \approx 15\text{ms}$.
    - Cross-encoder reranking 25 chunks on an Nvidia T4 takes $\approx 35\text{ms}$. Total retrieval latency remains strictly within enterprise sub-100ms budgets.
 
@@ -199,18 +204,21 @@ for rank, (doc_id, score) in enumerate(final_top_3, start=1):
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Pure vector search is fundamentally inadequate for enterprise search workloads because dense embeddings frequently fail on out-of-vocabulary terms, specific product SKUs, exact error codes, and negation queries. 
-> To achieve production-grade retrieval precision, we design a two-stage Hybrid Search pipeline. Stage 1 executes parallel retrieval: a sparse lexical BM25 index handles exact term frequencies and specialized identifiers, while a dense HNSW vector index captures semantic intent. 
-> We unify these distinct result distributions using Reciprocal Rank Fusion (RRF), which normalizes ranks rather than raw uncalibrated scores using the formula $1 / (k + \text{rank})$. 
+>
+> *"Pure vector search is fundamentally inadequate for enterprise search workloads because dense embeddings frequently fail on out-of-vocabulary terms, specific product SKUs, exact error codes, and negation queries.
+> To achieve production-grade retrieval precision, we design a two-stage Hybrid Search pipeline. Stage 1 executes parallel retrieval: a sparse lexical BM25 index handles exact term frequencies and specialized identifiers, while a dense HNSW vector index captures semantic intent.
+> We unify these distinct result distributions using Reciprocal Rank Fusion (RRF), which normalizes ranks rather than raw uncalibrated scores using the formula $1 / (k + \text{rank})$.
 > Stage 2 feeds the top-25 fused candidates into a Cross-Encoder Re-ranker (such as Cohere Rerank or BGE-Reranker). Unlike bi-encoders, the cross-encoder computes full cross-attention between every query token and document token, reordering the candidates to ensure only the highest-precision, fact-dense chunks enter the LLM's context window."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global enterprise ERP & Supply Chain system with 40M inventory parts.  
 **Incident**: Warehouse technicians complained that the new AI assistant was useless: searching for part `"SKU-9941-X Bolt"` returned results for general *"aluminum screws and washers"*, but failed to surface the exact schematic for `"SKU-9941-X"`. This caused technicians to order incorrect replacement assemblies, costing \$450,000 in return logistics.  
 **Root Cause**: The engineering team used pure OpenAI `text-embedding-ada-002` vector search. The tokenizer fragmented `"SKU-9941-X"` into arbitrary subword tokens `["SK", "U", "-", "99", "41", "-", "X"]`, blurring the unique serial identity into generic hardware semantic space.  
 **Resolution**:
+
 1. Implemented **Tantivy-based BM25** keyword search in parallel with the Qdrant vector database.
 2. Fused results via **RRF ($k=60$)**, guaranteeing exact SKU matches always scored in the top-5.
 3. Added a lightweight **BGE-Reranker** model hosted on a local GPU worker to evaluate top-20 merged candidates.  

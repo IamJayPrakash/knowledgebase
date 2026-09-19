@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Jab hospital mein light chali jaye ya emergency aaye, doctor turant bhag nahi jata (**Ungraceful Crash**). Pehle ventilator backup generator pe switch hota hai, ongoing operations safely complete hote hain, naye patients ko doosre hospital divert kiya jata hai, aur fir safely equipment shut down kiya jata hai (**Graceful Shutdown with SIGTERM**).
 
 ---

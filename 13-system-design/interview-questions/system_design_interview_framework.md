@@ -35,6 +35,7 @@ In modern senior and staff software engineering interviews (FAANG, Tier-1 MNCs, 
 ## 📐 Phase 1: Requirements Clarification & Capacity Estimation
 
 ### 1. Requirements Checklist
+
 - **Functional Requirements (FR):** Narrow down to 3 core user journeys.
   - *Example (Twitter/X):* 1. Post a tweet, 2. View user timeline, 3. View home timeline (fanout).
 - **Non-Functional Requirements (NFR):**
@@ -43,6 +44,7 @@ In modern senior and staff software engineering interviews (FAANG, Tier-1 MNCs, 
   - **Scale:** Global distribution, multi-region failover.
 
 ### 2. Back-of-the-Envelope Calculation Blueprint
+
 ```
 Key Numbers to Memorize:
   - 1 Day = 86,400 seconds ≈ 100,000 seconds (for quick estimation)
@@ -53,6 +55,7 @@ Key Numbers to Memorize:
 ```
 
 #### Formula Matrix
+
 - **Write QPS:** $\frac{\text{Daily Active Users (DAU)} \times \text{Writes per User per Day}}{86,400}$
 - **Read QPS:** $\text{Write QPS} \times \text{Read-to-Write Ratio}$ (e.g., 100:1 for social feeds)
 - **Storage per Year:** $\text{Write QPS} \times \text{Payload Size (Bytes)} \times 86,400 \times 365$
@@ -64,6 +67,7 @@ Key Numbers to Memorize:
 ## 🔌 Phase 2: API Design & Data Modeling
 
 ### 1. API Contract Blueprint (RESTful & Idempotent)
+
 Always declare exact HTTP methods, path params, headers, and idempotency keys:
 
 ```http
@@ -87,6 +91,7 @@ Response: HTTP 202 Accepted
 ```
 
 ### 2. Database Selection Decision Tree
+
 ```
 Do you require ACID multi-row transactions & fixed relational structure?
   ├── YES ──► Relational Database (PostgreSQL / MySQL / CockroachDB / Google Cloud Spanner)
@@ -137,6 +142,7 @@ graph TD
 ## 🔬 Phase 4: Core Deep-Dive Heuristics & Bottlenecks
 
 ### 1. Data Sharding & Partitioning Strategies
+
 - **Range-Based Partitioning:** (e.g., `A-C`, `D-F` or by date). *Risk:* Massive hot partitions on trending letters or recent dates.
 - **Hash-Based Partitioning:** `Shard = Hash(partition_key) % N`. Uniform distribution, but adding shards requires re-hashing all records.
 - **Consistent Hashing (Ring with Virtual Nodes):**
@@ -144,12 +150,14 @@ graph TD
   - Virtual nodes prevent hot spots on unequal hardware allocations.
 
 ### 2. Cache Invalidation & Stampede Mitigation
+
 - **Cache Invalidation:** Write-Through vs Write-Back vs Cache-Aside (Lazy Loading).
 - **Cache Stampede (Thundering Herd):** Multiple concurrent requests miss the cache simultaneously, overwhelming the DB.
   - *Fix 1: Distributed Mutex (`SETNX` in Redis):* Only one thread queries DB; others wait.
   - *Fix 2: Probabilistic Early Invalidation (XFetch Algorithm):* Recompute key before expiration based on read frequency and computation time.
 
 ### 3. Concurrency & Race Conditions
+
 - **Optimistic Locking:** Version column (`WHERE version = 5`). High throughput for low-contention reads.
 - **Pessimistic Locking:** `SELECT FOR UPDATE`. Guarantees consistency at the expense of database connection starvation.
 - **Distributed Locks:** Redis Redlock or ZooKeeper/etcd leases for multi-instance coordination.

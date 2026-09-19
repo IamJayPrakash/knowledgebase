@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you order food at a **Multi-Course Restaurant**:
+
 - **Legacy SSR (All-or-Nothing)**: Chef tab tak table par ek paani ka glass bhi nahi rakhega jab tak soup, main course, biryani, aur dessert chaaron ek saath cook na ho jayein! Agar biryani pakne mein 10 minute lagte hain, toh aap 10 minute tak bhookhe baithe blank table ko ghoorte rahoge (High TTFB / Blank White Screen!).
 - **Streaming SSR with Suspense**:
   - Step 1: Waiter 50 millisecond mein table par plate, paani aur bread roll rakh deta hai (Instant Static Shell).
@@ -15,25 +17,28 @@ Imagine you order food at a **Multi-Course Restaurant**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The TTFB Problem in Legacy SSR**:
    - In traditional Server-Side Rendering, `getServerSideProps` had to wait for the slowest database or microservice call before emitting the very first byte of HTML (`<!DOCTYPE html>`).
 2. **Streaming with React Suspense**:
    - Next.js App Router utilizes Node.js and Web Streams (`Transfer-Encoding: chunked`).
    - The browser receives the static HTML shell immediately. Content wrapped in `<Suspense fallback={<Skeleton />}>` renders placeholder UI until the server-side Promise resolves, streaming the remaining HTML and client hydration scripts incrementally.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **Partial Prerendering (PPR)**:
    - Next.js 14/15 combines static generation (SSG) with dynamic streaming in a single HTTP request.
    - At build time, Next.js generates a static pre-rendered HTML shell containing the Suspense fallback holes.
    - At request time, the static shell is served instantly from edge cache (0ms server compute), and the server streams the dynamic holes into the open HTTP stream.
-4. **`loading.tsx` Convention**:
+2. **`loading.tsx` Convention**:
    - Placing `loading.tsx` in a route folder automatically wraps the `page.tsx` contents inside an internal React Suspense boundary.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **SEO & Web Crawlers with Streaming**:
    - Googlebot and major search engine crawlers wait for the stream to resolve before indexing content. However, ensure critical semantic content (headings, product names, meta tags) is outside dynamic Suspense boundaries to guarantee instant crawlability.
-6. **Next.js 15 Async Request APIs**:
+2. **Next.js 15 Async Request APIs**:
    - In Next.js 15, runtime request properties—`cookies()`, `headers()`, `params`, and `searchParams`—are asynchronous (`await cookies()`).
    - Accessing dynamic request headers opts that specific Suspense boundary out of static pre-rendering dynamically.
 
@@ -161,18 +166,21 @@ export default function DashboardPage() {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"In Next.js 15, Streaming Server-Side Rendering and Partial Prerendering (PPR) solve the fundamental compromise between static generation speed and dynamic server-rendered personalization. 
-> In traditional SSR, the browser experiences blank white screen latency because the server blocks until the slowest data fetch resolves before emitting the first HTML byte. 
-> With Streaming SSR, we wrap slow components inside React `<Suspense>` boundaries. Next.js emits the static HTML shell immediately over a chunked HTTP stream. Once background data promises resolve on the server, the resulting HTML markup and inline replacement scripts are streamed down the same connection, progressively hydrating the DOM. 
+>
+> *"In Next.js 15, Streaming Server-Side Rendering and Partial Prerendering (PPR) solve the fundamental compromise between static generation speed and dynamic server-rendered personalization.
+> In traditional SSR, the browser experiences blank white screen latency because the server blocks until the slowest data fetch resolves before emitting the first HTML byte.
+> With Streaming SSR, we wrap slow components inside React `<Suspense>` boundaries. Next.js emits the static HTML shell immediately over a chunked HTTP stream. Once background data promises resolve on the server, the resulting HTML markup and inline replacement scripts are streamed down the same connection, progressively hydrating the DOM.
 > Partial Prerendering elevates this by pre-rendering the static shell and fallback skeletons at build-time onto global edge CDNs. The user receives instant sub-20ms Time-To-First-Byte (TTFB) globally, while dynamic personalized holes stream in seamlessly without separate client-side `fetch()` waterfalls."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global E-Commerce Luxury Apparel Brand.  
 **Incident**: During Black Friday promotions, product detail pages (PDPs) suffered an atrocious P95 TTFB of **2,400ms**. The page loaded personal inventory reserves, shipping rate estimates, and dynamic recommendations synchronously on the server before emitting HTML. High TTFB tanked Google Core Web Vitals (LCP) and conversion rates dropped by 18%.  
 **Root Cause**: A third-party dynamic shipping calculation API had high P99 latency (1.8s), blocking the entire Next.js SSR response pipeline.  
 **Resolution**:
+
 1. Converted product detail pages to **Next.js Partial Prerendering (PPR)**.
 2. Inlined product images, title, description, and price directly into the static shell (served from Cloudflare Edge in 18ms).
 3. Wrapped shipping calculator and recommendation carousels inside **`<Suspense fallback={<ShippingSkeleton />}>`**.  

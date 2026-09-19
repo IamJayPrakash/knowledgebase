@@ -1,7 +1,9 @@
 # Resource Hints, Speculation Rules API & Advanced HTTP Caching Strategies
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - `dns-prefetch` & `preconnect`: Kisi restaurant mein table book karne se pehle hi cab book kar lena taaki raste ka time bach jaye (DNS + TCP + TLS handshake pehle hi ho jata hai).
 > - Speculation Rules API: Restaurant waiter ko pehle se pata hona ki agla customer coffee mangega, toh wo customer ke bolne se pehle hi kitchen mein coffee bana kar ready rakhta hai (Instant 0ms page transitions!).
 > - `Cache-Control: immutable`: Ek baar library se aisi kitaba lana jisme seal lagi hai ki "Ye book agle 1 saal tak bilkul nahi badlegi, dubara internet par check karne ki zaroorat nahi hai!"
@@ -12,7 +14,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Resource Hints Hierarchy**:
   - `dns-prefetch`: Resolves the domain IP in the background (`<link rel="dns-prefetch" href="//api.example.com">`).
   - `preconnect`: Resolves DNS + performs TCP handshake + TLS negotiation. Crucial for third-party CDNs (Fonts, Payment gateways, Image CDN).
@@ -22,7 +25,8 @@
   - Static Hashed Assets (`bundle.a1b2c3.js`): `Cache-Control: public, max-age=31536000, immutable`. (Browser caches for 1 year and NEVER sends conditional HTTP requests).
   - Dynamic HTML (`index.html`): `Cache-Control: no-cache` with `ETag`. (Browser revalidates with server via `If-None-Match`; returns 304 Not Modified if unchanged).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **The Speculation Rules API (Chrome 108+)**:
   - Replaces legacy `<link rel="prerender">`.
   - Configured via JSON `<script type="speculationrules">`.
@@ -126,6 +130,7 @@ location = /index.html {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the difference between `preconnect`, `prefetch`, and `preload`, and how do you configure production caching?"
 >
 > **You:** "The differences center on timing and priority. `preload` is a high-priority, mandatory directive for critical assets needed on the current page, like hero fonts or LCP images. `prefetch` is a low-priority background download for assets likely needed on subsequent navigations. `preconnect` executes the DNS, TCP, and TLS handshakes in advance for external origins without downloading files yet. For production caching, all content-hashed assets (JS, CSS, images) should have `Cache-Control: public, max-age=31536000, immutable` so browsers never send conditional requests. Conversely, the HTML file must be served with `no-cache` and an `ETag` to ensure users instantly receive updated bundles upon deployment."
@@ -133,7 +138,8 @@ location = /index.html {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** Following a critical production hotfix deployment, 30% of active enterprise customers reported broken dashboard layouts and JavaScript syntax errors because their browsers held stale cached bundles.
-* **Task / Challenge:** Guarantee instant deployment propagation without sacrificing 1-year asset caching benefits.
-* **Action Taken:** Diagnosed that `index.html` was incorrectly configured with `max-age=86400` (24-hour cache), preventing the browser from requesting new script hashes. Reconfigured the CDN edge: `index.html` was set to `Cache-Control: no-cache` with Cloudflare automated cache purge upon CI/CD deployment, while Vite bundle assets retained `immutable`. Integrated the Speculation Rules API for anticipated checkout pages.
-* **Result & Business Impact:** Completely eliminated stale deployment caching incidents across 500,000 active users, while average page transition time dropped from 420ms to 8ms (instantaneous).
+
+- **Situation:** Following a critical production hotfix deployment, 30% of active enterprise customers reported broken dashboard layouts and JavaScript syntax errors because their browsers held stale cached bundles.
+- **Task / Challenge:** Guarantee instant deployment propagation without sacrificing 1-year asset caching benefits.
+- **Action Taken:** Diagnosed that `index.html` was incorrectly configured with `max-age=86400` (24-hour cache), preventing the browser from requesting new script hashes. Reconfigured the CDN edge: `index.html` was set to `Cache-Control: no-cache` with Cloudflare automated cache purge upon CI/CD deployment, while Vite bundle assets retained `immutable`. Integrated the Speculation Rules API for anticipated checkout pages.
+- **Result & Business Impact:** Completely eliminated stale deployment caching incidents across 500,000 active users, while average page transition time dropped from 420ms to 8ms (instantaneous).

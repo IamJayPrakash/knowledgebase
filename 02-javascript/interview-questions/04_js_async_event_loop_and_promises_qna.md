@@ -1,9 +1,11 @@
 # JavaScript Master Interview Bank: Part 4 (Q61 - Q80)
+
 ## Async Architecture, Event Loop, Promises & Concurrency
 
 ---
 
-### Q61: Diagram and explain the JavaScript Event Loop execution priority.
+### Q61: Diagram and explain the JavaScript Event Loop execution priority
+
 **Answer:**
 
 ```
@@ -34,6 +36,7 @@
 ```
 
 **Execution Order Rules:**
+
 1. Execute all synchronous tasks on the Call Stack.
 2. Flush the **Microtask Queue** completely (including microtasks queued by running microtasks).
 3. Check if UI rendering/paint is required (typically at 60Hz / 16.6ms intervals).
@@ -42,7 +45,8 @@
 
 ---
 
-### Q62: What will be the output of this code snippet? Explain step-by-step.
+### Q62: What will be the output of this code snippet? Explain step-by-step
+
 ```javascript
 console.log("1");
 
@@ -57,7 +61,9 @@ Promise.resolve().then(() => {
 
 console.log("6");
 ```
+
 **Output:**
+
 ```
 1
 6
@@ -66,7 +72,9 @@ console.log("6");
 5
 2
 ```
+
 **Detailed Step-by-Step Tracing:**
+
 1. `console.log("1")` runs synchronously $\to$ Prints **`1`**.
 2. `setTimeout` registers callback in Macrotask queue with 0ms delay.
 3. `Promise.resolve().then(...)` registers outer microtask in Microtask queue.
@@ -82,7 +90,9 @@ console.log("6");
 ---
 
 ### Q63: What happens if a microtask recursively enqueues another microtask?
+
 **Answer:**
+
 - **Microtask Queue Starvation:** Because the event loop **must exhaust all microtasks** before yielding to rendering or macrotasks, recursively enqueuing microtasks (via `queueMicrotask()` or chained resolved promises) traps the engine in an infinite loop.
 - **Impact:** The UI freezes completely, user clicks and keystrokes are ignored, animations stop, and macrotasks (like `setTimeout`) never run.
 
@@ -97,8 +107,10 @@ starve();
 ---
 
 ### Q64: What are the 3 states of a Promise, and why is state transition irreversible?
+
 **Answer:**
 A Promise is a state machine with 3 mutually exclusive states:
+
 1. **`pending`**: Initial state, neither fulfilled nor rejected.
 2. **`fulfilled`**: Operation completed successfully with a resultant `value`.
 3. **`rejected`**: Operation failed with a `reason` (error).
@@ -107,8 +119,10 @@ A Promise is a state machine with 3 mutually exclusive states:
 
 ---
 
-### Q65: Implement `Promise.all` polyfill from scratch with edge cases.
+### Q65: Implement `Promise.all` polyfill from scratch with edge cases
+
 **Answer:**
+
 ```javascript
 function promiseAll(promises) {
   return new Promise((resolve, reject) => {
@@ -146,7 +160,9 @@ function promiseAll(promises) {
 ---
 
 ### Q66: What are the differences between `Promise.all`, `Promise.allSettled`, `Promise.race`, and `Promise.any`?
+
 **Answer:**
+
 | Method | Resolves When... | Rejects When... | Ideal Use Case |
 | :--- | :--- | :--- | :--- |
 | **`Promise.all`** | **All** promises fulfill. | **Any single** promise rejects (Fail-Fast). | Co-dependent parallel queries where all results are strictly mandatory. |
@@ -157,7 +173,9 @@ function promiseAll(promises) {
 ---
 
 ### Q67: How does `async/await` work under the hood?
+
 **Answer:**
+
 - `async/await` is syntactic sugar over **Generators (`function*`) + Promises + recursive task runner**.
 - An `async` function always returns a Promise.
 - Inside the engine:
@@ -169,7 +187,9 @@ function promiseAll(promises) {
 ---
 
 ### Q68: What is the difference between `return await promise` and `return promise`?
+
 **Answer:**
+
 ```javascript
 // Case A:
 async function caseA() {
@@ -181,6 +201,7 @@ async function caseB() {
   return await promise;
 }
 ```
+
 1. **Outside `try...catch`:**
    - Both behave virtually identically, returning a promise resolving to the final value.
    - `return await` introduces one extra microtask tick before resolving.
@@ -201,6 +222,7 @@ async function safeCall() {
 ---
 
 ### Q69: How do you cancel an ongoing `fetch` request in modern JavaScript?
+
 **Answer:**
 Use the **`AbortController` API**:
 
@@ -231,6 +253,7 @@ setTimeout(() => controller.abort(), 2000);
 ---
 
 ### Q70: How does `AbortSignal.timeout()` simplify request timeouts?
+
 **Answer:**
 Introduced in recent ECMAScript/Web standards, `AbortSignal.timeout(ms)` creates an abort signal that automatically triggers after `ms` milliseconds without manually managing `setTimeout`:
 
@@ -249,7 +272,9 @@ try {
 ---
 
 ### Q71: How do JavaScript Generator functions work (`function*` and `yield`)?
+
 **Answer:**
+
 - A Generator is a function that can **pause execution** (`yield`) and resume later (`.next()`).
 - Calling a generator does NOT run its body; it returns a **Generator Object** implementing the Iterable and Iterator protocols.
 - Calling `gen.next(val)` resumes execution until the next `yield` expression, returning `{ value: any, done: boolean }`.
@@ -271,7 +296,9 @@ console.log(gen.next().value); // 2
 ---
 
 ### Q72: What is an Async Generator (`for await...of`) and when is it used?
+
 **Answer:**
+
 - An Async Generator (`async function*`) combines async functions and generators, yielding Promises: `yield await item`.
 - Consumed via **`for await (const item of asyncGen)`**.
 - **Ideal Use Cases:** Streaming chunked HTTP payloads, reading massive log files line-by-line from disk, paginated API fetching.
@@ -295,7 +322,9 @@ for await (const items of fetchPages("/api/records")) {
 ---
 
 ### Q73: What is the difference between `requestAnimationFrame` and `setTimeout`?
+
 **Answer:**
+
 - **`setTimeout(fn, 16)`**: Macrotask scheduled on timer tick. Timing is inaccurate; can drift due to queue lag. Fires regardless of monitor refresh rate or tab visibility.
 - **`requestAnimationFrame(fn)` (rAF)**:
   - Synchronized directly with the display refresh rate (e.g. 60Hz = ~16.6ms, 120Hz = ~8.3ms).
@@ -305,7 +334,9 @@ for await (const items of fetchPages("/api/records")) {
 ---
 
 ### Q74: What is `queueMicrotask()` and when should you use it over `Promise.resolve().then()`?
+
 **Answer:**
+
 - `queueMicrotask(callback)` directly schedules a callback onto the microtask queue without the overhead of creating, allocating, and resolving a dummy `Promise` object.
 - **Use Case:** Executing code asynchronously after current synchronous logic completes, but strictly before rendering, DOM paints, or macrotasks run.
 
@@ -321,8 +352,10 @@ function logAnalytics(event) {
 ---
 
 ### Q75: How do you implement sequential execution of an array of asynchronous tasks?
+
 **Answer:**
 **Option 1: Using `for...of` loop (Cleanest)**
+
 ```javascript
 async function executeSequentially(tasks) {
   const results = [];
@@ -334,6 +367,7 @@ async function executeSequentially(tasks) {
 ```
 
 **Option 2: Using `Array.prototype.reduce`**
+
 ```javascript
 function executeSequentiallyReduce(tasks) {
   return tasks.reduce((promiseChain, currentTask) => {
@@ -347,7 +381,9 @@ function executeSequentiallyReduce(tasks) {
 ---
 
 ### Q76: What is a Promise unhandled rejection and how do you monitor it?
+
 **Answer:**
+
 - When a Promise rejects and no `.catch()` handler or `try...catch` block handles the rejection, it becomes an **Unhandled Rejection**.
 - In modern Node.js, unhandled rejections terminate the process with a non-zero exit code.
 - **Global Handlers:**
@@ -357,14 +393,18 @@ function executeSequentiallyReduce(tasks) {
 ---
 
 ### Q77: What is the difference between Parallelism and Concurrency in JavaScript?
+
 **Answer:**
+
 - **Concurrency:** Dealing with lots of things at once (Interleaved execution). JavaScript achieves concurrency on a **single thread** via non-blocking asynchronous event loop scheduling.
 - **Parallelism:** Doing lots of things at once (Simultaneous execution on multiple CPU cores). In JavaScript, true parallelism is achieved only via **Web Workers** (browsers) or **Worker Threads** / child processes (Node.js).
 
 ---
 
 ### Q78: What is `Promise.resolve(val)` vs `new Promise(resolve => resolve(val))`?
+
 **Answer:**
+
 - If `val` is already a Promise:
   - `Promise.resolve(val)` **returns the same Promise instance directly** ($O(1)$ unwrapping, no allocation).
   - `new Promise(resolve => resolve(val))` allocates a brand new Promise wrapper, resulting in additional execution steps and microtask delays.
@@ -372,7 +412,9 @@ function executeSequentiallyReduce(tasks) {
 ---
 
 ### Q79: How do you build a concurrency-limiting Promise queue (Promise Pool)?
+
 **Answer:**
+
 ```javascript
 async function promisePool(tasks, limit) {
   const results = [];
@@ -398,6 +440,8 @@ async function promisePool(tasks, limit) {
 ---
 
 ### Q80: What is the difference between Microtasks and Macrotasks in terms of Error Handling?
+
 **Answer:**
+
 - If an unhandled error is thrown inside a synchronous function or a microtask, it does not stop macrotasks from running in subsequent iterations of the event loop.
 - Synchronous `try...catch` cannot catch errors thrown inside asynchronous macrotask callbacks (e.g. `try { setTimeout(() => { throw new Error(); }, 0); } catch(e) {}` will NOT catch the error).

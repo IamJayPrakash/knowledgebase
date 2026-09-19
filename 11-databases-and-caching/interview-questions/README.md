@@ -19,6 +19,7 @@
 ## 🎯 Master Question Index (1 - 60)
 
 ### Part 1: PostgreSQL Internals, MVCC, Indexing & Query Tuning (Q1 - Q20)
+
 * [`01_sql_postgresql_internals_and_optimization_qna.md`](./01_sql_postgresql_internals_and_optimization_qna.md)
   1. Multi-Version Concurrency Control (MVCC) and `xmin` / `xmax` system columns.
   2. Dead tuples, Table Bloat, and standard `VACUUM` vs `VACUUM FULL`.
@@ -42,6 +43,7 @@
   20. Identifying slow queries using `pg_stat_statements`.
 
 ### Part 2: Redis Architecture, In-Memory Internals, Clustering & Redlock (Q21 - Q40)
+
 * [`02_redis_caching_and_distributed_systems_qna.md`](./02_redis_caching_and_distributed_systems_qna.md)
   21. Why single-threaded Redis achieves 100,000+ QPS (I/O multiplexing, epoll).
   22. The 6 core Redis Data Structures and their underlying C implementations.
@@ -65,6 +67,7 @@
   40. Bitmaps and Bitfields for low-memory DAU tracking.
 
 ### Part 3: MongoDB Internals, Aggregation, Sharding & Distributed NoSQL (Q41 - Q60)
+
 * [`03_nosql_mongodb_and_distributed_storage_qna.md`](./03_nosql_mongodb_and_distributed_storage_qna.md)
   41. WiredTiger Storage Engine: B-Trees, Snappy compression, document-level locks.
   42. The ESR (Equality, Sort, Range) compound indexing rule.
@@ -90,4 +93,5 @@
 ---
 
 ## ⚡ Quick Refresher
+
 * [`database_indexing_and_caching_questions.md`](./database_indexing_and_caching_questions.md) — Quick Indexing & Caching Refresher.

@@ -1,7 +1,9 @@
 # Python Object-Oriented Programming: Classes, Dunder Methods & MRO (C3 Linearization)
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Class ek ghar ka **blueprint** hai, aur object us blueprint se bana **asli ghar**.
 > - Dunder methods (`__init__`, `__str__`, `__len__`) Python ke secret magic switches hain: jab aap `len(my_obj)` likhte ho, Python parde ke peeche `my_obj.__len__()` ko call karta hai!
 > - Multiple Inheritance & MRO: Jab ek bacha do mata-pita se ek jaisi aadat inherit karta hai, toh rulebook (C3 Linearization) tay karti hai ki pehle kiska tareeqa chalega!
@@ -12,7 +14,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **`__init__` vs `__new__`**:
   - `__new__`: The actual constructor that allocates the new object instance in memory (rarely overridden except in singletons or immutable subclasses).
   - `__init__`: The initializer that populates instance attributes on `self`.
@@ -22,7 +25,8 @@
   - **Static Method (`@staticmethod`)**: Takes neither `self` nor `cls`, isolated utility function living in class namespace.
 - **`@property`**: Allows calling a method using attribute access syntax (`user.full_name` instead of `user.full_name()`), enabling encapsulation and validation.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Dunder / Magic Methods**:
   - Representation: `__repr__` (unambiguous representation for developers/debugging) vs `__str__` (readable representation for end users).
   - Protocol support: `__len__`, `__getitem__` (makes class indexable like a list), `__iter__` (makes class iterable), `__call__` (makes class instance callable like a function).
@@ -156,6 +160,7 @@ server.boot()
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How does Python solve the diamond inheritance problem, and what does `super()` actually do?"
 >
 > **You:** "Python resolves multiple inheritance using the C3 Linearization algorithm to compute a deterministic Method Resolution Order (MRO), accessible via `ClassName.mro()`. C3 ensures three things: children always precede parents, original parent declaration order is respected, and no class is visited twice. Crucially, `super()` does not call the direct base class; it calls the next class in the computed MRO chain. When all classes in an inheritance hierarchy use `super()` cooperatively, every class in the diamond is visited exactly once in clean linear order."
@@ -163,7 +168,8 @@ server.boot()
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** In an asynchronous distributed worker framework, task classes inherited from both `LoggingMixin` and `RetryMixin`. During a major outage, retry attempts triggered unhandled infinite recursion exceptions, crashing worker pods.
-* **Task / Challenge:** Diagnose why retrying tasks resulted in `RecursionError: maximum recursion depth exceeded`.
-* **Action Taken:** Inspected the inheritance hierarchy using `TaskClass.mro()`. Found that `RetryMixin` called `super().__init__()` with explicit hardcoded arguments while `LoggingMixin` did not call `super()` at all, breaking the cooperative chain. Refactored both mixins to take `*args, **kwargs` and pass them to `super().__init__(*args, **kwargs)`.
-* **Result & Business Impact:** Restored clean cooperative multiple inheritance across 60 worker nodes, preventing task queue deadlocks.
+
+- **Situation:** In an asynchronous distributed worker framework, task classes inherited from both `LoggingMixin` and `RetryMixin`. During a major outage, retry attempts triggered unhandled infinite recursion exceptions, crashing worker pods.
+- **Task / Challenge:** Diagnose why retrying tasks resulted in `RecursionError: maximum recursion depth exceeded`.
+- **Action Taken:** Inspected the inheritance hierarchy using `TaskClass.mro()`. Found that `RetryMixin` called `super().__init__()` with explicit hardcoded arguments while `LoggingMixin` did not call `super()` at all, breaking the cooperative chain. Refactored both mixins to take `*args, **kwargs` and pass them to `super().__init__(*args, **kwargs)`.
+- **Result & Business Impact:** Restored clean cooperative multiple inheritance across 60 worker nodes, preventing task queue deadlocks.

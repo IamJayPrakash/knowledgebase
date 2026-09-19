@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **CAP Theorem**: Socho do dost hain (Server A aur Server B). Beech ka telephone taar toot gaya (**Network Partition**). Ab agar ek customer Server A par aakar balance update karta hai, toh ya toh Server A update accept karega lekin Server B ko nahi pata hoga (**Availability jeeti, Consistency haari - AP**), ya fir Server A customer ko mana kar dega: "Phone line kharab hai, transaction cancelled!" (**Consistency jeeti, Availability haari - CP**)!
 **Consistent Hashing**: Ek **Gol Ring (Round Dining Table)** ki tarah hai. Jab naya dost khane par aata hai, toh sabko apni kursi chhod kar nayi jagah nahi baithna padta; sirf ek padosi ki plate se thoda sa khana share hota hai!
 
@@ -19,7 +20,8 @@
 3. **Consensus Algorithms (Raft)**:
    - Three roles: Leader, Follower, Candidate.
    - Leader handles all client writes, appends log entries, and broadcasts `AppendEntries` RPCs.
-   - Quorum rule: Requires majority $\lfloor N/2 floor + 1$ acknowledgments to commit.
+   - Quorum rule: Requires majority $\lfloor N/2
+floor + 1$ acknowledgments to commit.
 4. **Consistent Hashing**:
    - Maps both servers and keys onto a $2^{32} - 1$ hash ring.
    - Adding or removing a server node only relocates $K/N$ keys on average.
@@ -112,4 +114,5 @@ print("Routing user_102:", ring.get_node("user_102"))
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "In distributed data systems, Consistent Hashing is the cornerstone of horizontal data partitioning and caching tiers. Unlike traditional modular hashing (`hash(key) % N`) where adding a single server invalidates $100\%$ of mapped keys and causes a devastating cache stampede, consistent hashing places both nodes and keys on a circular hash space. Adding or removing a node relocates only $K/N$ keys. We assign virtual nodes to each physical server to eliminate hot-spotting and ensure uniform key distribution across asymmetric hardware."

@@ -1,7 +1,9 @@
 # Java Generics, Wildcards & Type Erasure: The PECS Principle
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Generics bina: Ek aisi delivery van jisme kisi bhi tarah ka saman (Fruits, Chemical, Electronics) bina label ke fenk diya jata hai. Jab driver delivery karta hai, toh usko guess karna padta hai aur galat saman nikalne par blast (ClassCastException) ho jata hai!
 > - Generics ke saath: Har dabbe par strict label laga hai: `List<Apple>`. Isme koi galti se `Orange` nahi daal sakta (Compile-time par hi error pakda jayega).
 > - Type Erasure: Java ka compiler bahut chalak hai. Wo code check karte waqt strict checking karta hai, lekin compiled `.class` bytecode banate waqt saare labels mita kar purana `Object` bana deta hai taaki purane Java version ke saath compatibility bani rahe!
@@ -12,7 +14,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Why Generics?**:
   1. Strong compile-time type checking (Catches bugs during compilation rather than crashing in production with `ClassCastException`).
   2. Elimination of manual type casting: writing `String s = (String) list.get(0)` is no longer necessary.
@@ -22,7 +25,8 @@
   - Generic Methods: `public <E> void printArray(E[] elements)`
   - Common naming conventions: `T` (Type), `E` (Element), `K` (Key), `V` (Value), `N` (Number).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **The PECS Principle: Producer Extends, Consumer Super**:
   - **`? extends T` (Upper Bounded Wildcard)**: Used when the collection is a **Producer** (You are reading data *from* the collection). You can read `T`, but you **CANNOT add** elements into it (except `null`) because the compiler doesn't know the exact subtype!
   - **`? super T` (Lower Bounded Wildcard)**: Used when the collection is a **Consumer** (You are writing data *into* the collection). You can safely add `T` and its subclasses, but reading from it only yields `Object`.
@@ -129,6 +133,7 @@ public class GenericsPecsDemo {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the PECS rule in Java Generics, and how does Type Erasure impact runtime execution?"
 >
 > **You:** "PECS stands for 'Producer Extends, Consumer Super'. We use `? extends T` when a collection acts as a producer and we only read elements from it, because any element is guaranteed to be a subtype of `T`. Conversely, we use `? super T` when a collection acts as a consumer and we write elements into it, because the collection is guaranteed to accept `T` and its subtypes. Type erasure is how Java enforces backward compatibility: the compiler verifies all generic types at compile time, but then erases them from bytecode, replacing them with raw `Object` or their upper bound and inserting casts. This is why generic type arguments cannot be instantiated with `new T()` or inspected via `instanceof` at runtime."
@@ -136,7 +141,8 @@ public class GenericsPecsDemo {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An open-source event-bus library had a method `public void registerListeners(List<EventListener> listeners)`. Client services attempted to pass `List<AuditLogListener>` (which implemented `EventListener`), but Java compilation failed with type mismatch errors.
-* **Task / Challenge:** Enable the event-bus to accept lists of any subclass of `EventListener` while preventing compile-time type errors across 200 microservices.
-* **Action Taken:** Identified that Java generics are invariant by default (`List<Sub>` is NOT a subtype of `List<Super>`). Refactored the method signature to apply the Producer Extends rule: `public void registerListeners(List<? extends EventListener> listeners)`.
-* **Result & Business Impact:** Resolved the API rigidity, allowing all client services to pass subtype collections natively without ugly, unsafe manual type casting.
+
+- **Situation:** An open-source event-bus library had a method `public void registerListeners(List<EventListener> listeners)`. Client services attempted to pass `List<AuditLogListener>` (which implemented `EventListener`), but Java compilation failed with type mismatch errors.
+- **Task / Challenge:** Enable the event-bus to accept lists of any subclass of `EventListener` while preventing compile-time type errors across 200 microservices.
+- **Action Taken:** Identified that Java generics are invariant by default (`List<Sub>` is NOT a subtype of `List<Super>`). Refactored the method signature to apply the Producer Extends rule: `public void registerListeners(List<? extends EventListener> listeners)`.
+- **Result & Business Impact:** Resolved the API rigidity, allowing all client services to pass subtype collections natively without ugly, unsafe manual type casting.

@@ -1,6 +1,7 @@
 # Cumulative Layout Shift (CLS): Font Metrics, Dynamic Slots & CSS Aspect-Ratio
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Aap phone par koi zaroori article padh rahe ho ya flight ticket book kar rahe ho. Achanak screen par upar se ek advertisement ya image tapak padti hai, pura content 2 inch neeche chala jata hai, aur aap "Book Ticket" ke bajaye "Cancel Ticket" par click kar dete ho! Is annoying jhatke (visual instability) ko Google kehta hai CLS (Cumulative Layout Shift).
 >
 > **Real-World Analogy:** Reading a physical newspaper while an over-eager waiter keeps sliding new coffee mugs onto the table, constantly pushing the paper out of your hands while you are trying to read line 5.
@@ -9,19 +10,21 @@
 
 ## 2. 📌 Core Mechanics & Calculation (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **What is CLS?**: Cumulative Layout Shift measures the total sum of all unexpected layout shift scores for every visual element that changes its start position between frames.
 - **Target Thresholds**:
   - 🟢 **Good**: $\le 0.1$
   - 🟡 **Needs Improvement**: $0.1 - 0.25$
   - 🔴 **Poor**: $> 0.25$
 - **Mathematical Formula**:
-  $$	ext{Layout Shift Score} = 	ext{Impact Fraction} 	imes 	ext{Distance Fraction}$$
+  $$ ext{Layout Shift Score} =  ext{Impact Fraction}  imes  ext{Distance Fraction}$$
   - **Impact Fraction**: Percentage of the viewport that was affected by unstable elements (e.g. element occupies 50% of screen = 0.5).
   - **Distance Fraction**: The greatest distance the unstable elements moved, divided by the viewport height (e.g. moved 20% down = 0.2).
-  - Score $= 0.5 	imes 0.2 = 0.10$.
+  - Score $= 0.5  imes 0.2 = 0.10$.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Web Font Shifts (FOIT vs FOUT)**:
   - **FOIT (Flash of Invisible Text)**: Text is hidden until web font downloads (`font-display: block`). Bad for LCP!
   - **FOUT (Flash of Unstyled Text)**: Text displays immediately in system fallback font (`font-display: swap`), but when the custom web font loads, differing character widths and x-heights cause lines to reflow, triggering massive CLS!
@@ -126,6 +129,7 @@ h1, .hero-title {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How do you systematically prevent Cumulative Layout Shift (CLS) in a modern web application?"
 >
 > **You:** "CLS occurs when visible elements shift unexpectedly, shifting the user's reading position. I prevent CLS across three primary vectors: First, for media and responsive containers, I always declare explicit width and height attributes or CSS `aspect-ratio` so the browser's layout engine reserves exact dimensional boxes before network downloads finish. Second, for third-party dynamic components like ad slots, cookie consent bars, and banners, I reserve the largest expected height using `min-height`. Third, for web fonts, I eliminate Flash of Unstyled Text layout reflows by implementing CSS font metric overrides—using `size-adjust`, `ascent-override`, and `descent-override` on fallback fonts like Arial or Roboto—ensuring zero text reflow when the custom web font finishes loading."
@@ -133,7 +137,8 @@ h1, .hero-title {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A major news publishing website had a mobile CLS score of 0.42 (failing the 0.1 threshold), causing users to accidentally tap programmatic ads instead of news articles, triggering high bounce rates and ad network penalties.
-* **Task / Challenge:** Reduce site-wide mobile CLS from 0.42 to under 0.05 without removing programmatic ad slots.
-* **Action Taken:** Diagnosed layout shifts using Chrome DevTools Performance panel layout shift regions (blue highlights). Identified two root causes: dynamic programmatic ad banners injected without pre-allocated heights, and font swapping between system fallback and the custom serif font causing headlines to jump from 2 lines to 3 lines. Styled all ad slots with fixed `min-height: 250px; aspect-ratio: 300/250`, and calibrated the fallback serif font metrics with `size-adjust: 102%` and `ascent-override: 92%`.
-* **Result & Business Impact:** Dropped CLS from 0.42 to 0.015 across 20 million monthly pageviews, moving the site into Google's green 'Good' CWV category and increasing average session duration by 19%.
+
+- **Situation:** A major news publishing website had a mobile CLS score of 0.42 (failing the 0.1 threshold), causing users to accidentally tap programmatic ads instead of news articles, triggering high bounce rates and ad network penalties.
+- **Task / Challenge:** Reduce site-wide mobile CLS from 0.42 to under 0.05 without removing programmatic ad slots.
+- **Action Taken:** Diagnosed layout shifts using Chrome DevTools Performance panel layout shift regions (blue highlights). Identified two root causes: dynamic programmatic ad banners injected without pre-allocated heights, and font swapping between system fallback and the custom serif font causing headlines to jump from 2 lines to 3 lines. Styled all ad slots with fixed `min-height: 250px; aspect-ratio: 300/250`, and calibrated the fallback serif font metrics with `size-adjust: 102%` and `ascent-override: 92%`.
+- **Result & Business Impact:** Dropped CLS from 0.42 to 0.015 across 20 million monthly pageviews, moving the site into Google's green 'Good' CWV category and increasing average session duration by 19%.

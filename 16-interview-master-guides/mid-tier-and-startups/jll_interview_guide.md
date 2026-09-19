@@ -1,6 +1,7 @@
 # JLL & Product Startup Technical Interview Guide: Real-World Scenario Rounds
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** JLL, Nagarro, aur high-growth startups me theoretical definitions se zyada practical problem-solving aur real-world project challenges pooche jaate hain: 'Agar server pe 100% CPU spike ho gaya toh kaise debug karoge?', 'React me unwanted re-renders kaise rokoge?'
 >
 > **Real-World Analogy:** A flight simulator test: instead of asking what an airplane rudder is, they put you in bad weather and see how you land the plane safely.
@@ -8,6 +9,7 @@
 ---
 
 ## 2. 📌 Core Mechanics & Key Points
+
 - Debugging Production Issues: How to analyze Node.js memory leaks with Heap Snapshots and CPU profiling.
 - React Optimization: Preventing re-renders using `React.memo`, `useMemo`, `useCallback`, and window virtualization for large tables.
 - API Design & Security: Handling JWT expiration, Refresh token rotation in HTTP-only cookies, Rate limiting, and CORS.
@@ -72,6 +74,7 @@ app.post('/api/auth/refresh', async (req, res) => {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Can you explain JLL & Product Startup Technical Interview Guide and your production experience with it?"
 >
 > **You:** "In JLL and mid-tier product interviews, interviewers assess hands-on debugging, security architecture, and system scalability. Highlighting security patterns like Refresh Token Rotation and telemetry-driven root cause analysis demonstrates maturity beyond code syntax to production ownership."
@@ -79,10 +82,11 @@ app.post('/api/auth/refresh', async (req, res) => {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** Resolving customer session hijacking vulnerability on a real-estate management enterprise portal.
-* **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
-* **Action Taken:** Designed and deployed a stateful Refresh Token Rotation protocol using Redis key-value storage and secure SameSite cookies.
-* **Result & Business Impact:** Eliminated replay attack risks across 250,000 corporate user logins with zero authentication downtime.
+
+- **Situation:** Resolving customer session hijacking vulnerability on a real-estate management enterprise portal.
+- **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
+- **Action Taken:** Designed and deployed a stateful Refresh Token Rotation protocol using Redis key-value storage and secure SameSite cookies.
+- **Result & Business Impact:** Eliminated replay attack risks across 250,000 corporate user logins with zero authentication downtime.
 
 🗣️ **Script to Tell Interviewer:**
 *"In one of my core projects, resolving customer session hijacking vulnerability on a real-estate management enterprise portal. I spearheaded the solution by designed and deployed a stateful refresh token rotation protocol using redis key-value storage and secure samesite cookies., successfully achieving eliminated replay attack risks across 250,000 corporate user logins with zero authentication downtime.."*

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Agar aapko apne aas-paas 2 kilometer ke andar khadi taxis dhoondni hain, toh database mein 10 lakh drivers ka latitude/longitude scan karna system ko crash kar dega.
 **Spatial Indexing (Uber H3 / Google S2)** poori prithvi ko **Chote Chote Hexagons (Madhumakkhi Ke Chhatte)** mein baant deta hai. Har hexagon ka ek unique numeric ID hota hai. Jab rider ride mangta hai, system sirf rider ke hexagon aur uske padosi 6 hexagons ke drivers ko check karta hai (**$O(1)$ Hash Map Lookup**)!
 

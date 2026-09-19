@@ -1,6 +1,7 @@
 # Python Fundamentals: Syntax, Dynamic Typing, Variables & Mutability
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** C++ ya Java mein variable ek **dabba (box)** hota hai jisme data band rehta hai. Lekin Python mein variable dabba nahi, balki ek **luggage tag (sticky label)** hota hai jo memory mein rakhe kisi object par chipka diya jata hai! Agar do label ek hi bag par lage hain, toh bag mein saman badalne par dono label wahi badla hua bag dikhayenge.
 >
 > **Real-World Analogy:** A luggage tag at an airport. The suitcase on the conveyor belt is the object in heap memory. The name tag you tie to the handle is the Python variable. You can tie multiple tags (`a = b`) to the same physical suitcase.
@@ -9,7 +10,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Dynamic Typing**: You don't declare types (`int x = 5`). Python infers types at runtime. Type is a property of the **object**, not the variable name!
 - **Everything is an Object**: In Python, functions, modules, classes, and integers are all first-class objects in heap memory.
 - **Mutability vs Immutability**:
@@ -19,7 +21,8 @@
   - `==` checks **value equality** (do these objects contain the same data?).
   - `is` checks **object identity** (do these variables point to the exact same address in memory?).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **CPython Small Integer Caching**: CPython pre-allocates an internal array of integer objects for all numbers in the range **`[-5, 256]`** during interpreter startup. Therefore, `a = 250; b = 250; a is b` evaluates to `True`, but `a = 257; b = 257; a is b` may evaluate to `False`!
 - **String Interning**: CPython automatically interns compile-time string constants that look like valid Python identifiers to optimize dictionary lookup speeds.
 - **The Mutable Default Argument Bug**: Writing `def append_to(item, target=[])` causes all calls sharing the default parameter to mutate the exact same list, because default arguments are evaluated **once at function definition time**, not at call time!
@@ -120,6 +123,7 @@ print("Call 2:", safe_append("second"))  # ['second'] (Bug avoided!)
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How does Python handle variable assignment and parameter passing under the hood?"
 >
 > **You:** "In Python, variables are not memory containers; they are name tags bound to objects on the heap. Parameter passing is strictly 'Call by Object Reference' (or 'Call by Sharing'). If you pass an immutable object like an `int` or `str`, any modification inside the function rebinds a local reference to a newly allocated object without affecting the caller. If you pass a mutable object like a `list` or `dict`, modifying it in-place mutates the caller's object directly. This distinction between object identity (`is`) and value equality (`==`) is foundational to writing bug-free Python code."
@@ -127,7 +131,8 @@ print("Call 2:", safe_append("second"))  # ['second'] (Bug avoided!)
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A machine learning batch feature service had a utility function `def extract_features(data, features=[])`. During production inference, the response payload size kept growing steadily until the server ran out of memory (OOM).
-* **Task / Challenge:** Identify why memory usage swelled by 8GB over 4 hours under steady request load.
-* **Action Taken:** Profiling with `tracemalloc` revealed that the default `features=[]` list was never garbage collected and retained all extracted feature arrays across millions of incoming requests. Replaced default parameter with `features=None` and initialized `features = []` inside the function body.
-* **Result & Business Impact:** Completely resolved the memory leak, stabilizing inference container RAM at 250MB with zero downtime.
+
+- **Situation:** A machine learning batch feature service had a utility function `def extract_features(data, features=[])`. During production inference, the response payload size kept growing steadily until the server ran out of memory (OOM).
+- **Task / Challenge:** Identify why memory usage swelled by 8GB over 4 hours under steady request load.
+- **Action Taken:** Profiling with `tracemalloc` revealed that the default `features=[]` list was never garbage collected and retained all extracted feature arrays across millions of incoming requests. Replaced default parameter with `features=None` and initialized `features = []` inside the function body.
+- **Result & Business Impact:** Completely resolved the memory leak, stabilizing inference container RAM at 250MB with zero downtime.

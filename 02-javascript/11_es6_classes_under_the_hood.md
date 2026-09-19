@@ -3,8 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
-Socho ek purani traditional sweet shop hai jahan mithai banane ki recipe ek purane kagaz (Prototype) pe likhi hoti thi. Beta us kagaz ko dekh kar seekhta tha. 
-Jab ES6 aya, unhone dukan ke bahar ek chamchamata neon sign board laga diya: **"Modern Sweet Factory Pvt Ltd" (Class syntax)**. 
+
+Socho ek purani traditional sweet shop hai jahan mithai banane ki recipe ek purane kagaz (Prototype) pe likhi hoti thi. Beta us kagaz ko dekh kar seekhta tha.
+Jab ES6 aya, unhone dukan ke bahar ek chamchamata neon sign board laga diya: **"Modern Sweet Factory Pvt Ltd" (Class syntax)**.
 Lekin factory ke kitchen ke andar koi robotic machine nahi aayi; kitchen ke andar wahi purana chef purani recipe wali diary (`[[Prototype]]` link) dekh kar hi laddoo bana raha hai!
 In JavaScript, **Classes are just syntactical sugar over prototypal inheritance**. There are no real classes in JS engine memory—only functions, prototype objects, and `__proto__` pointer chains.
 
@@ -137,6 +138,7 @@ console.log(Object.getPrototypeOf(conn) === DatabaseConnection.prototype); // tr
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "In JavaScript, classes introduced in ES6 do not introduce an object-oriented class-based inheritance model like Java or C++. Under the hood, they are syntactic sugar desugared into constructor functions and prototype chains. When you define a class, V8 creates a constructor function and attaches your methods to its `.prototype` object with `enumerable: false`. Inheritance via `extends` sets up two prototype links: `Child.prototype.__proto__ = Parent.prototype` for instance methods, and `Child.__proto__ = Parent` for static methods. Furthermore, classes enforce strict mode, prevent calling without `new`, remain unhoisted in TDZ, and provide true encapsulation via hash private fields (`#field`)."
 
 ---

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Purane zamane mein frontend se backend database update karne ke liye aapko pehle ek REST API endpoint banana padta tha (`POST /api/update-user`), controller likhna padta tha, client side par `fetch()` likhna padta tha aur URL sync rakhna padta tha.
 Server Action ek **Direct Teleportation Tube** ki tarah hai: Aap frontend component ke andar seedhe likhte ho `"use server"`, aur wo function bina kisi manual API endpoint banaye seedhe server ke Node.js environment mein securely execute hota hai!
 
@@ -94,6 +95,7 @@ export async function createPostAction(prevState: any, formData: FormData) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Next.js Server Actions provide a type-safe RPC mutation model directly embedded into React Server Components. By annotating an async function with `'use server'`, Next.js automatically provisions an internal encrypted POST endpoint. Crucially, Server Actions eliminate API routing boilerplate and integrate directly with Next.js's caching layer via `revalidatePath` and `revalidateTag`. Because Server Actions are public endpoints, production security demands strict authorization checks and schema validation via Zod inside every action."
 
 ---

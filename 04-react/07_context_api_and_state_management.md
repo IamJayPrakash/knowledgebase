@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Prop Drilling** ek bucket brigade ki tarah hai: Aag bujhane ke liye 10 log khade hain, paani 1st se 2nd, 2nd se 3rd hota hua 10th bande tak jata hai. Beech ke 8 logo ko paani se koi matlab nahi hai.
 **Context API** ek **Society Notice Board** hai: Notice board par kuch bhi change hota hai, toh society ke sabhi 500 flat ke log notice board dekhne daudte hain (All consumers re-render even if they only needed 1 sentence).
 **Zustand / Redux Toolkit** ek **Personalized SMS Alert Service** hai: Sirf us flat ke resident ka phone bajega jisse us transaction se matlab hai (**Atomic Selectors & Fine-Grained Subscriptions**).
@@ -115,6 +116,7 @@ function ThemeSwitcher() {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "React Context is a dependency injection mechanism designed for low-frequency global data such as themes, localization, or authenticated user profiles. It is fundamentally unsuitable as a high-frequency state management engine because any change to the provider's value triggers an unconditional re-render of every consumer down the tree, bypassing `React.memo`. For high-frequency, complex, or relational state, we use external store solutions like Zustand or Redux Toolkit. These libraries maintain state outside the React fiber tree and use selector subscriptions to trigger re-renders strictly on the specific components consuming the mutated state slice."
 
 ---

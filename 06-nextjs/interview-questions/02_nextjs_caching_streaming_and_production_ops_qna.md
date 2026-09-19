@@ -4,8 +4,10 @@
 
 ---
 
-### Q26: Explain the 4 Caching Mechanisms in the Next.js App Router and where each lives.
+### Q26: Explain the 4 Caching Mechanisms in the Next.js App Router and where each lives
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Next.js me caching koi ek cheez nahi hai, ye 4 alag-alag layers ka combination hai:
   1. Ek hi render pass me duplicate fetch rokna (Request Memoization).
   2. Server par database/API response ko save karna (Data Cache).
@@ -14,6 +16,7 @@
 - **Real-World Analogy:** A multi-tier retail supply chain: you have items in your immediate hand pocket (client router cache), in the local store shelf (full route cache), in the regional warehouse (data cache), and manufacturer batch grouping (request memoization).
 
 #### 2. Core Mechanics & Key Points
+
 | Cache Tier | Where It Lives | What It Caches | Lifecycle / Invalidation |
 | :--- | :--- | :--- | :--- |
 | **1. Request Memoization** | Server (Memory) | Return values of `fetch` with same URL & options within a single render tree | Lifespan of a single server render pass |
@@ -22,6 +25,7 @@
 | **4. Router Cache** | Client (Browser Memory) | Prefetched and visited RSC payloads in browser session | Session-based; clears on hard refresh or route revalidation |
 
 #### 3. Visual Architecture Diagram
+
 ```
   [ User Navigates to Route ]
                |
@@ -38,20 +42,25 @@
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "Next.js App Router deploys four distinct caching layers: in-memory Request Memoization deduplicates identical `fetch` calls within a single render cycle. The persistent server Data Cache caches cross-request data. The Full Route Cache serves static HTML/RSC payloads for static segments. Finally, the client-side Router Cache retains visited and prefetched RSC payloads in browser memory for instantaneous soft navigations."
 
 ---
 
 ### Q27: What are the breaking caching changes in Next.js 15 regarding `fetch` and async request APIs?
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Next.js 14 me `fetch()` by default sab kuch aggressively cache kar leta tha, jisse developers confuse ho jate the ki dynamic data kyu nahi aa raha. Next.js 15 me defaults ko flip kar diya gaya hai: `fetch()` ab by default **uncached (`no-store`)** hota hai! Aur `params`, `cookies()` ab synchronous nahi balki `await` karke lene padte hain.
 - **Real-World Analogy:** Changing the default door setting from "automatically locks behind you forever" to "unlocked unless you explicitly turn the bolt key".
 
 #### 2. Core Mechanics & Key Points
+
 - **Uncached Fetch by Default:** In Next.js 15, `fetch()` requests default to `cache: 'no-store'` instead of `force-cache`. To cache data, you must explicitly pass `{ cache: 'force-cache' }` or `{ next: { revalidate: seconds } }`.
 - **Asynchronous Request APIs:** Dynamic APIs like `cookies()`, `headers()`, `params`, and `searchParams` are now asynchronous Promises that must be awaited (`const cookies = await cookies()`), preparing the runtime for React 19's concurrent server features.
 
 #### 3. Practical Implementation & Code Snippet
+
 ```typescript
 // app/users/[id]/page.tsx (Next.js 15 Pattern)
 import { cookies } from 'next/headers';
@@ -81,16 +90,20 @@ export default async function UserPage({ params }: PageProps) {
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "Next.js 15 aligned defaults with developer expectations: `fetch()` requests are now un-cached by default unless explicitly configured with `force-cache` or `next.revalidate`. Furthermore, request-time dynamic contexts (`cookies`, `headers`, `params`) have transitioned from synchronous properties to Promises to support React 19's concurrent server execution model."
 
 ---
 
 ### Q28: How do you trigger On-Demand Cache Invalidation using `revalidatePath` and `revalidateTag`?
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Time-based revalidation (TTL) me 60 second tak user ko purana data dikhta hai. On-demand revalidation me jaise hi koi author admin panel me "Publish" button dabata hai, Server Action turant `revalidateTag('posts')` call karta hai aur server par purana cache instantly destroy ho jata hai!
 - **Real-World Analogy:** Instead of waiting for a 24-hour newspaper reprint cycle, the news desk immediately issues a "Special Flash Edition" the exact moment breaking news occurs.
 
 #### 2. Practical Implementation & Code Snippet
+
 ```typescript
 // 1. Tagging a fetch request in Server Component
 async function getInventory() {
@@ -116,16 +129,20 @@ export async function restockItem(itemId: string) {
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "`revalidateTag` provides fine-grained semantic cache invalidation across the entire application without coupling to route URLs. In contrast, `revalidatePath` purges both the Data Cache and the Full Route Cache for a specific URL segment. In production architectures, tag-based invalidation is preferred for microservice updates and CMS webhooks."
 
 ---
 
 ### Q29: What is Partial Prerendering (PPR) in Next.js and how does it combine Static and Dynamic rendering?
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Pehle aapko decide karna padta tha ki pura page Static hoga ya pura page Dynamic hoga. Agar ek kone me user profile ka naam tha, toh pura page slow dynamic banana padta tha. PPR me Next.js page ke 90% hisse (navbar, images, layout) ko ultra-fast CDN static HTML bana deta hai, aur dynamic hisse me `<Suspense>` ka "hole" chhod deta hai jo server se stream hokar fill ho jata hai!
 - **Real-World Analogy:** A printed monthly magazine with a cut-out window for a live digital mini-screen: the printed cover arrives instantly, while the digital box displays live real-time stock ticks.
 
 #### 2. Visual Architecture Diagram
+
 ```
   [ Static Edge Shell - Instant Response ~20ms ]
   <html>
@@ -141,6 +158,7 @@ export async function restockItem(itemId: string) {
 ```
 
 #### 4. Practical Implementation & Code Snippet
+
 ```typescript
 // next.config.ts
 import type { NextConfig } from 'next';
@@ -177,21 +195,26 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "Partial Prerendering (PPR) resolves the historic dichotomy between static generation and dynamic rendering. At build time, Next.js prerenders the static shell of a route to serve from the Edge at ultra-low TTFB, while preserving dynamic Suspense holes that are streamed from server runtimes in the same initial HTTP connection."
 
 ---
 
 ### Q30: How do you build and deploy Next.js using Docker with Standalone Output Mode (`output: 'standalone'`)?
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Normally pure `node_modules` ka size 1GB se bada hota hai. Docker container me itna bada bundle dalne se deployment boht slow hoti hai. Next.js ka `standalone` mode AST analysis karke sirf wahi files copy karta hai jo actually run karne ke liye zaroori hain, jisse Docker image ka size 1.2GB se ghulkar sirf 80MB reh jata hai!
 - **Real-World Analogy:** Packing for a 3-day flight: instead of shipping your entire wardrobe and furniture across the country, you pack only the exact three shirts and toiletries you will wear.
 
 #### 2. Core Mechanics & Key Points
+
 - In `next.config.js`, configure `output: 'standalone'`.
 - The build produces a minimal `.next/standalone` folder that includes a custom `server.js` and only the production `node_modules` dependencies determined by static trace analysis.
 - The Docker image does not require running `npm install` or maintaining dev dependencies in the production runtime stage.
 
 #### 3. Practical Implementation & Code Snippet
+
 ```dockerfile
 # Multi-stage Dockerfile for Next.js Standalone
 # Stage 1: Dependencies
@@ -228,16 +251,20 @@ CMD ["node", "server.js"]
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "`output: 'standalone'` uses static file tracing to generate a self-contained Node.js server bundle inside `.next/standalone`. Coupled with a multi-stage Docker build, this removes unnecessary devDependencies and raw source files, shrinking container image sizes from over 1GB to under 100MB and accelerating container startup and Kubernetes scale-out events."
 
 ---
 
 ### Q31: How do you handle Database Connection Pool Exhaustion in Serverless Next.js deployments?
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Serverless functions me jab 1,000 visitors ek sath aate hain, toh AWS/Vercel 1,000 alag-alag lambdas spin kar deta hai. Agar har lambda database se 5 connections kholega, toh Postgres database par 5,000 connections ka load padega aur database crash ho jayega (`Too many connections`). Solution ye hai ki beech me ek Connection Pooler (PgBouncer ya Prisma Accelerate) lagaya jaye.
 - **Real-World Analogy:** 1,000 customers calling customer service: instead of 1,000 operators all barging into the manager's private office, an automated call queue dispatcher distributes questions through 10 designated lines.
 
 #### 2. Architectural Solution
+
 ```
   [ 1,000 Concurrent Vercel / Lambda Instances ]
                          |
@@ -249,6 +276,7 @@ CMD ["node", "server.js"]
 ```
 
 #### 4. Practical Implementation & Code Snippet
+
 ```typescript
 // lib/prisma.ts (Global Singleton Connection Cache for Node Serverless)
 import { PrismaClient } from '@prisma/client';
@@ -271,16 +299,20 @@ if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 ```
 
 #### 5. Senior Interview Answering Pitch
+>
 > "Serverless execution models cause connection pool exhaustion because autoscaling lambda instances open independent database TCP connections. The enterprise solution requires routing queries through a proxy connection pooler like PgBouncer, AWS RDS Proxy, or Neon/Prisma Accelerate, alongside caching the ORM client instance on `globalThis` to reuse existing connections across warm invocations."
 
 ---
 
-### Q32: Production War Story: Diagnosing and Fixing an Infinite Cache Invalidation Storm during Black Friday.
+### Q32: Production War Story: Diagnosing and Fixing an Infinite Cache Invalidation Storm during Black Friday
+
 #### 1. Layman's Analogy (Hinglish + Real-World)
+
 - **Hinglish Intuition:** Black Friday sale par har order aane par ek developer ne `revalidatePath('/', 'layout')` call kar diya. Isse hua ye ki har second 500 orders aane par pure website ka CDN aur data cache har second 500 bar destroy hone laga! Database crash ho gaya. Humne broad path revalidation ko band kiya aur narrow item tags lagaye.
 - **Real-World Analogy:** Pulling the entire school fire alarm whenever a single pencil breaks in a classroom, evacuating the entire building 50 times an hour.
 
 #### 2. STAR Incident Breakdown
+
 - **Situation:** During a flash sale with 40,000 active users, the e-commerce store's backend PostgreSQL database hit 100% CPU utilization and began throwing 504 Gateway Timeouts.
 - **Task:** Identify the cause of the database overload, restore normal response times (p99 < 300ms), and maintain accurate stock levels.
 - **Action:**

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Jab Netflix par koi 4K movie upload hoti hai, toh wo ek single video file nahi rehti.
 **Transcoding Pipeline** us movie ko 1000 alag-alag version mein todta hai: 1080p, 720p, 480p, 360p, aur har resolution ko **2-second ke chote chote tukdo (Chunks)** mein kaat deta hai (**HLS / DASH**).
 Jab user local metro mein chalta hai aur network kamzor hota hai, video player apne aap 1080p chunk se 480p chunk par switch kar leta hai (**Adaptive Bitrate Streaming**) taaki video buffering na kare! Aur ye chunks user ke sabse paas wale Internet Provider (ISP) ke **Open Connect CDN Cache** se aate hain!

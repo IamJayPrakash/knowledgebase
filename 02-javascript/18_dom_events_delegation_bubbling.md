@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Socho ek multi-floor corporate office building hai. Jab 5th floor par ek employee table par emergency button dabata hai:
+
 1. **Capturing Phase (Trickling Down)**: Alarm ka signal sabse pehle building ke ground floor security gate (`window` -> `document` -> `body`) se seedhe 5th floor tak neeche aata hai.
 2. **Target Phase**: Signal button tak pahunchta hai (`e.target`).
 3. **Bubbling Phase (Floating Up)**: Fir button se alert upar ki taraf sabhi managers aur directors ke cabins se hote hue wapas ground floor security desk tak goonjta hai.
@@ -124,6 +126,7 @@ alertBtn.addEventListener("click", () => {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "DOM event dispatching operates in three sequential phases: Capturing (propagating down from `window` to the target), Target (executing listeners on the target element), and Bubbling (propagating back up to `window`). By default, `addEventListener` listens in the bubbling phase unless the capture flag is set to true. Event delegation is a critical performance pattern where instead of attaching thousands of event listeners to individual child elements, we attach a single listener to a common ancestor. Inside the handler, we inspect `event.target` using `element.matches()` or `element.closest()` to identify the initiator. This drastically minimizes heap memory consumption and automatically handles dynamically inserted DOM nodes without re-binding listeners."
 
 ---

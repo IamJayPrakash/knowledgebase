@@ -3,6 +3,7 @@
 ---
 
 ## 🌟 1. The STAR Framework Structure
+
 - **S - Situation**: Set the business context, system scale, and high stakes in 2-3 sentences.
 - **T - Task**: What was your specific, personal responsibility? (Avoid saying "We did", say "My direct objective was...").
 - **A - Action**: Deep technical steps, architectural tradeoffs considered, and how you led team alignment.
@@ -13,6 +14,7 @@
 ## 💼 2. Top Senior Behavioral Questions & Tailored STAR Answers
 
 ### Question 1: "Tell me about a time you handled a severe production outage under high pressure."
+
 - **Situation**: During a Black Friday flash sale with 120,000 concurrent active users, our primary payment processing service latency spiked to 15 seconds, and checkout failure rate hit 42%.
 - **Task**: As the on-call Technical Lead, my task was to isolate the failure, restore payment processing within 15 minutes, and protect our database from cascading crash.
 - **Action**: I opened an incident war room. I analyzed Datadog APM traces and noticed connection pool exhaustion in PostgreSQL caused by a third-party fraud-check webhook hanging for 10 seconds. I immediately engaged a feature flag to bypass synchronous fraud checks for low-value carts (< $50) and activated a Resilience4j circuit breaker with a 1.5s timeout.
@@ -21,6 +23,7 @@
 ---
 
 ### Question 2: "Tell me about a technical disagreement you had with another senior engineer and how you resolved it."
+
 - **Situation**: When architecting our real-time messaging pipeline, the lead architect advocated for polling an existing PostgreSQL database every 2 seconds, while I proposed adopting WebSockets backed by Redis Pub/Sub.
 - **Task**: Align the architecture on a scalable solution without alienating team members or delaying the sprint milestone.
 - **Action**: Instead of debating opinion, I built a fast benchmark test running both approaches with 10,000 simulated client connections. The benchmark proved that DB polling saturated CPU at 98% and caused 3.8s message delivery latency, while Redis WebSockets used 8% CPU and delivered sub-30ms latency. I presented the empirical telemetry objectively and praised my colleague's concern regarding Redis operational maintenance, proposing a fully managed AWS ElastiCache cluster to mitigate maintenance worries.

@@ -6,7 +6,6 @@
 
 ## 🗺️ Master Problem Index (All 75 Solved)
 
-
 ### 📁 01 Arrays And Hashing
 
 | # | LC | Problem Title | Difficulty | Link to Solution & War Story |

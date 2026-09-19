@@ -16,22 +16,25 @@ Cognizant evaluates experienced engineering talent across **Technical Depth, Sys
 
 ## 🎯 2. High-Yield Technical Concepts & Spoken Answer Scripts
 
-### Question 1: How do you handle Distributed Transactions across Microservices? Compare the Saga Pattern with Two-Phase Commit (2PC).
+### Question 1: How do you handle Distributed Transactions across Microservices? Compare the Saga Pattern with Two-Phase Commit (2PC)
+>
 > **The Problem**: In a distributed microservices architecture, a single business transaction (e.g., placing an e-commerce order) spans multiple independent services: `OrderService`, `PaymentService`, and `InventoryService`. Each service has its own private database. How do you maintain data consistency without centralized locking?
 
 **The Spoken Pitch (Say Exactly This):**
 > *"In modern distributed systems, Two-Phase Commit (2PC) is considered an anti-pattern for high-scale microservices. 2PC uses a centralized coordinator to execute `Prepare` and `Commit` phases across databases; this locks resources across the network, creates severe latency bottlenecks, and introduces a single point of failure (if the coordinator crashes mid-commit, databases hang in locked limbo).
-> 
-> Instead, we implement the **Saga Pattern**, which breaks a distributed transaction into a series of localized ACID transactions. Each local transaction updates its own database and emits an event or message to trigger the next step. 
+>
+> Instead, we implement the **Saga Pattern**, which breaks a distributed transaction into a series of localized ACID transactions. Each local transaction updates its own database and emits an event or message to trigger the next step.
 > Crucially, every step must have an accompanying **Compensating Transaction** that semantically rolls back changes if a subsequent step fails.
-> 
+>
 > We choose between two coordination styles:
+>
 > 1. **Choreography**: Decentralized. Services listen to Kafka events directly (`OrderCreated` $\to$ Payment listens $\to$ emits `PaymentApproved` $\to$ Inventory listens). Best for simple 2–3 step workflows with few services.
 > 2. **Orchestration**: Centralized coordinator (e.g. Temporal, AWS Step Functions, or a dedicated Saga orchestrator). A single orchestrator sends commands to services and tracks state. Best for complex enterprise workflows with branching logic and clear audit requirements."*
 
 ---
 
 ### Question 2: Explain the OAuth 2.0 Authorization Code Grant with PKCE Flow
+>
 > **Interviewer:** *"How do you secure modern Single Page Applications (React/Angular) and mobile apps communicating with backend REST APIs?"*
 
 - **Why Implicit Grant is Deprecated**: The legacy Implicit Flow returned access tokens directly in the URL fragment hash, exposing tokens to browser history leakage and malicious browser extensions.
@@ -48,6 +51,7 @@ Cognizant evaluates experienced engineering talent across **Technical Depth, Sys
 ---
 
 ### Question 3: What is the difference between an Index Seek and an Index Scan in SQL?
+
 - **Index Seek**:
   - The database engine traverses the B-Tree index from root to leaf node using binary search based on search predicates (`WHERE user_id = 4921`).
   - Extremely fast ($O(\log N)$ page accesses). Retrieves only the exact matching data pages.
@@ -62,6 +66,7 @@ Cognizant evaluates experienced engineering talent across **Technical Depth, Sys
 ---
 
 ### Question 4: How do you design Microservices for Fault Tolerance using Resilience4j / Polly?
+
 - **Circuit Breaker**: Trips open when downstream failure rate exceeds a threshold (e.g. 50%), returning a cached fallback immediately to prevent thread exhaustion.
 - **Bulkhead Pattern**: Isolates connection pools and thread executors by client or service so that slow responses from Service A cannot starve threads needed to serve Service B.
 - **Rate Limiting**: Enforces Token Bucket algorithm to protect backend services from denial-of-service traffic spikes.

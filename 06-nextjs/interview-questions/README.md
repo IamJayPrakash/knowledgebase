@@ -14,6 +14,7 @@
 ---
 
 ## 📌 Additional Architecture Reference Guides
+
 - 🌟 [Top Next.js Senior Interview Questions](./nextjs_top_interview_questions.md)
 - 🚀 [App Router & React Server Components Deep Dive](../01_app_router_and_react_server_components.md)
 - ⚡ [Server Actions & Mutation Workflows](../02_server_actions_and_mutations.md)

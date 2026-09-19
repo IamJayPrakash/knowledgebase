@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are building a **High-Security VIP Club Door**:
+
 - **Legacy Angular (Class-Based Guards & Interceptors)**:
   - Ek chota sa check karne ke liye aapko **poora 40-line ka class contract** likhna padta tha: `@Injectable()`, `implements CanActivate`, `constructor(private router: Router)`, `canActivate(route, state)`.
   - Har HTTP request ke liye alag se `HttpInterceptor` class banani padti thi aur use `AppModule` ke `HTTP_INTERCEPTORS` multi-provider array mein register karna padta tha (Excessive boilerplate!).
@@ -17,7 +19,8 @@ Imagine you are building a **High-Security VIP Club Door**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Death of Class-Based Guards**:
    - Class-based guards (`implements CanActivate`, `CanDeactivate`, `Resolve`) are officially deprecated in favor of **Functional Route Guards** (`CanActivateFn`, `CanDeactivateFn`).
 2. **`inject()` in Routing**:
@@ -25,19 +28,21 @@ Imagine you are building a **High-Security VIP Club Door**:
 3. **`withComponentInputBinding()`**:
    - Enables route path parameters (`/users/:id`), query params (`?tab=profile`), and route resolved data to be injected directly as **Signal Inputs (`input()`)** inside the destination component!
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **Functional HTTP Interceptors (`HttpInterceptorFn`)**:
    - Configured via `provideHttpClient(withInterceptors([authInterceptor, loggingInterceptor]))`.
    - Replaces the legacy `HTTP_INTERCEPTORS` multi-provider token.
    - Executes as an onion-style functional pipeline wrapping `HttpRequest` and `HttpHandlerFn`.
-5. **Route Preloading Strategies**:
+2. **Route Preloading Strategies**:
    - `provideRouter(routes, withPreloading(PreloadAllModules))` dynamically preloads lazy standalone component chunks in the background after initial render.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 6. **Redirect Command Pattern**:
    - Instead of manually calling `router.navigate(['/login'])` and returning `false` from a guard (which triggers cancelled route warnings), modern guards return a `RedirectCommand` or `UrlTree`:
      `return auth.isLoggedIn() ? true : new RedirectCommand(router.parseUrl('/login'));`
-7. **Environment Providers & Isolations**:
+2. **Environment Providers & Isolations**:
    - Routes can define route-level isolated dependency injection scopes via the `providers: [...]` array on route definitions, ensuring services are instantiated only when the route is active and destroyed when navigated away.
 
 ---
@@ -213,18 +218,21 @@ export const appConfig = {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Angular 21 has completely transitioned to a functional, standalone-first architecture for routing and network infrastructure. Class-based guards implementing `CanActivate` and class-based `HttpInterceptor` multi-providers are replaced by `CanActivateFn` and `HttpInterceptorFn`. 
-> Functional guards execute within an injection context, allowing direct calls to `inject()` without constructor boilerplate. Instead of returning `false` or manually calling `router.navigate()`, guards return `RedirectCommand(urlTree)`, eliminating route cancellation side-effects. 
-> Furthermore, with `withComponentInputBinding()`, path parameters like `:id` and query params like `?tab=overview` are automatically bound to component Signal inputs (`input.required()`), completely eliminating the need to subscribe to `ActivatedRoute.paramMap` observables. 
+>
+> *"Angular 21 has completely transitioned to a functional, standalone-first architecture for routing and network infrastructure. Class-based guards implementing `CanActivate` and class-based `HttpInterceptor` multi-providers are replaced by `CanActivateFn` and `HttpInterceptorFn`.
+> Functional guards execute within an injection context, allowing direct calls to `inject()` without constructor boilerplate. Instead of returning `false` or manually calling `router.navigate()`, guards return `RedirectCommand(urlTree)`, eliminating route cancellation side-effects.
+> Furthermore, with `withComponentInputBinding()`, path parameters like `:id` and query params like `?tab=overview` are automatically bound to component Signal inputs (`input.required()`), completely eliminating the need to subscribe to `ActivatedRoute.paramMap` observables.
 > On the HTTP layer, `provideHttpClient(withInterceptors([authInterceptor]))` produces a clean, tree-shakeable functional pipeline, significantly shrinking bundle sizes compared to legacy NgModule providers."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Enterprise SaaS with 150 localized micro-frontends.  
 **Incident**: When users refreshed deep-linked reporting pages (e.g., `/reports/4092?view=pivot`), the dashboard frequently rendered empty data or threw `TypeError: Cannot read properties of undefined (reading 'get')` during initial load.  
 **Root Cause**: Components subscribed to `this.route.paramMap` inside `ngOnInit`. Due to asynchronous microtask timing during SSR hydration, child components initiated API calls *before* the route observable emitted the first parameter, sending `undefined` IDs to the backend.  
 **Resolution**:
+
 1. Enabled **`withComponentInputBinding()`** in `provideRouter`.
 2. Refactored the component route parameter to a **Signal Input**: `readonly reportId = input.required<string>();`.
 3. Linked the API data fetch to a **`computed()` / `toObservable()` Signal pipeline** that only fires when `reportId()` is populated.  

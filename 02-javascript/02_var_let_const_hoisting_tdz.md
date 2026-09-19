@@ -1,6 +1,7 @@
 # var vs let vs const, Hoisting & Temporal Dead Zone (TDZ)
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** var function-scoped hota hai aur hoist hokar undefined initialize ho jata hai. let aur const block-scoped hote hain aur declaration se pehle unhe access karne par ReferenceError aata hai (TDZ).
 >
 > **Real-World Analogy:** Announcing a meeting without setting an agenda (var = undefined) vs reserving a conference room where you cannot enter until the start time (let/const in TDZ).
@@ -8,6 +9,7 @@
 ---
 
 ## 2. 📌 Core Mechanics & Key Points
+
 - `var` is function-scoped and re-declarable; hoisted and initialized with `undefined`.
 - `let` and `const` are block-scoped (`{}`); hoisted into the Temporal Dead Zone (TDZ) without initialization.
 - Accessing `let` or `const` in TDZ throws a `ReferenceError`.
@@ -55,6 +57,7 @@ console.log(globalVar);   // 100 (Leaked outside block!)
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Can you explain var vs let vs const, Hoisting & Temporal Dead Zone (TDZ) and your production experience with it?"
 >
 > **You:** "The fundamental differences are scoping and hoisting. var is function-scoped and initialized as undefined during hoisting. let and const are block-scoped and hoisted into the Temporal Dead Zone until initialized. const prevents binding re-assignment. Modern JavaScript standardizes on const by default and let when re-assignment is needed."
@@ -62,10 +65,11 @@ console.log(globalVar);   // 100 (Leaked outside block!)
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** Asynchronous analytics tracking loops with `var i` logging the final loop index for all delayed timers.
-* **Task / Challenge:** Overcoming performance bottlenecks, race conditions, or architecture fragility under scale.
-* **Action Taken:** Replaced `var` with block-scoped `let`, creating an individual lexical binding for each loop iteration.
-* **Result & Business Impact:** Fixed index reporting bugs on 1.4 million logged user interaction events.
+
+- **Situation:** Asynchronous analytics tracking loops with `var i` logging the final loop index for all delayed timers.
+- **Task / Challenge:** Overcoming performance bottlenecks, race conditions, or architecture fragility under scale.
+- **Action Taken:** Replaced `var` with block-scoped `let`, creating an individual lexical binding for each loop iteration.
+- **Result & Business Impact:** Fixed index reporting bugs on 1.4 million logged user interaction events.
 
 🗣️ **Script to Tell Interviewer:**
 *"In our production systems, asynchronous analytics tracking loops with `var i` logging the final loop index for all delayed timers. I took charge of the architecture by replaced `var` with block-scoped `let`, creating an individual lexical binding for each loop iteration., successfully achieving fixed index reporting bugs on 1.4 million logged user interaction events.."*

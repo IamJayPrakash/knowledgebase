@@ -2,9 +2,11 @@
 
 ---
 
-### Q101: System Design — Design an Enterprise Multi-Tenant RAG Search Platform for 1,000 Corporate Clients.
+### Q101: System Design — Design an Enterprise Multi-Tenant RAG Search Platform for 1,000 Corporate Clients
+
 - **Problem Statement**: Build a secure, SOC2-compliant RAG system indexing millions of internal enterprise documents with strict tenant isolation, sub-100ms search latency, and role-based access control (RBAC).
 - **Architecture Breakdown**:
+
   ```
   [ User Search API ] ──> [ Auth & Tenant Router (JWT/RBAC) ] ──> [ Semantic Query Cache ]
                                       │ (Cache Miss)
@@ -26,6 +28,7 @@
                                       ▼
                [ Generation LLM with Citation Verification ]
   ```
+
 - **Key Design Choices**:
   1. **Tenant Isolation**: Leverage Qdrant with integrated payload indexing (`tenant_id` and `user_group_ids` evaluated during HNSW graph traversal).
   2. **Two-Stage Retrieval**: BM25 (Elasticsearch) + Dense Vector search merged via RRF ($k=60$), re-ranked with a local `bge-reranker-large` model on an Nvidia L4 GPU.
@@ -33,9 +36,11 @@
 
 ---
 
-### Q102: System Design — Design an Autonomous Customer Support Multi-Agent System with Human-in-the-Loop.
+### Q102: System Design — Design an Autonomous Customer Support Multi-Agent System with Human-in-the-Loop
+
 - **Problem Statement**: Automate tier-1 e-commerce customer support (order lookups, address updates, refunds) with self-healing tools, strict fraud controls, and human manager escalation for high-value refunds.
 - **Architecture Breakdown**:
+
   ```mermaid
   stateDiagram-v2
       [*] --> Supervisor
@@ -56,6 +61,7 @@
       GeneralFAQ --> Supervisor: Policy Answered
       Supervisor --> [*]: Final Response to Customer
   ```
+
 - **Key Design Choices**:
   1. **Framework**: LangGraph StateGraph with `PostgresSaver` for conversation checkpointing.
   2. **Human-in-the-Loop**: Use `interrupt_before=["execute_stripe_refund_node"]` whenever refund exceeds \$50. Graph state freezes and alerts human support via Slack/Retool dashboard.
@@ -63,7 +69,8 @@
 
 ---
 
-### Q103: System Design — Design a Low-Latency Real-Time Code Completion Copilot.
+### Q103: System Design — Design a Low-Latency Real-Time Code Completion Copilot
+
 - **Problem Statement**: Provide inline code completions inside IDEs (VS Code / JetBrains) with strict sub-150ms Time-To-First-Token (TTFT) and high multi-token throughput.
 - **Architecture Breakdown**:
   - **IDE Plugin**: Debounces typing events (50ms), extracts surrounding file context using Tree-sitter AST parsing (current function signature, imports, preceding 20 lines, cursor position).
@@ -74,7 +81,8 @@
 
 ---
 
-### Q104: System Design — Design an Automated Financial Document Processing Engine for Complex Multi-Column PDFs.
+### Q104: System Design — Design an Automated Financial Document Processing Engine for Complex Multi-Column PDFs
+
 - **Problem Statement**: Extract structured balance sheets, P&L tables, and executive summaries from 100-page quarterly financial reports with 99.9% numerical accuracy.
 - **Architecture Breakdown**:
   1. **Vision-Language Ingestion (ColPali)**: Index raw page screenshots directly into multi-vector patch embeddings to preserve table layout and footnotes.
@@ -84,7 +92,8 @@
 
 ---
 
-### Q105: System Design — Design a High-Volume AI Security Guardrail Gateway Processing 10,000 Requests/Sec.
+### Q105: System Design — Design a High-Volume AI Security Guardrail Gateway Processing 10,000 Requests/Sec
+
 - **Problem Statement**: Provide an enterprise ingress/egress proxy that redacts PII, blocks prompt injections, and prevents secret leaks with an added latency overhead of less than 25ms.
 - **Architecture Breakdown**:
   - **Layer 1: Fast Regex & Heuristic Bloom Filters (< 2ms)**:
@@ -97,7 +106,8 @@
 
 ---
 
-### Q106: System Design — Design a Self-Healing Text-to-SQL Analytics Agent.
+### Q106: System Design — Design a Self-Healing Text-to-SQL Analytics Agent
+
 - **Problem Statement**: Enable business analysts to query a 200-table data warehouse in plain English with 0% risk of data modification and automated correction of syntax errors.
 - **Architecture Breakdown**:
   1. **Schema Pruning**: Use vector similarity to retrieve only the top-8 most relevant table schemas and column descriptions based on the user's natural language question.
@@ -108,7 +118,8 @@
 
 ---
 
-### Q107: System Design — Design an Automated Continuous Evaluation & Benchmarking CI/CD Pipeline for LLMs.
+### Q107: System Design — Design an Automated Continuous Evaluation & Benchmarking CI/CD Pipeline for LLMs
+
 - **Problem Statement**: Eliminate subjective "vibe checks" and automatically block pull requests that degrade RAG accuracy or increase hallucinations.
 - **Architecture Breakdown**:
   - **Golden Test Dataset**: 500 hand-curated and synthetic (Query, Ground-Truth Context, Ground-Truth Answer) triplets stored in Git LFS.
@@ -119,7 +130,8 @@
 
 ---
 
-### Q108: System Design — Design a Real-Time Audio Meeting Summarizer & Action-Item Tracker.
+### Q108: System Design — Design a Real-Time Audio Meeting Summarizer & Action-Item Tracker
+
 - **Problem Statement**: Ingest live multi-speaker audio streams, transcribe speaker-diarized text in real time, and generate rolling meeting summaries and extracted task assignments.
 - **Architecture Breakdown**:
   1. **Audio Ingestion**: WebSocket stream chunked into 3-second PCM audio buffers.
@@ -129,7 +141,8 @@
 
 ---
 
-### Q109: System Design — Design a GraphRAG Enterprise Knowledge Discovery Platform.
+### Q109: System Design — Design a GraphRAG Enterprise Knowledge Discovery Platform
+
 - **Problem Statement**: Enable global thematic exploration over 50,000 unstructured customer research reports where standard vector RAG fails to provide high-level conceptual answers.
 - **Architecture Breakdown**:
   1. **Entity-Relationship Extraction**: Batched LLM pipeline parses documents into Graph Nodes (Entities), Edges (Relationships), and Claims.
@@ -139,9 +152,11 @@
 
 ---
 
-### Q110: System Design — Design a Cost & Latency Optimization Architecture for a 10M DAU GenAI Application.
+### Q110: System Design — Design a Cost & Latency Optimization Architecture for a 10M DAU GenAI Application
+
 - **Problem Statement**: Cut monthly frontier model API costs from \$1,200,000 to under \$300,000 while reducing P95 user latency by 60%.
 - **Architecture Breakdown**:
+
   ```
   [ Incoming User Query ]
              │
@@ -159,6 +174,7 @@
   - Prefix Caching enabled                     - Prompt caching enabled
   - Continuous batching                        - Strict token output limits
   ```
+
 - **Cost Reduction Drivers**:
   1. **Semantic Caching**: Handles 28% of repetitive user queries at \$0 cost.
   2. **Intelligent Model Routing**: Routes 70% of straightforward queries to a local, 4-bit quantized Llama 3 8B model hosted on spot GPU instances (costing \$0.0002 per 1K tokens vs \$0.015).

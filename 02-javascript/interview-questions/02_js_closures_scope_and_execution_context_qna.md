@@ -1,9 +1,11 @@
 # JavaScript Master Interview Bank: Part 2 (Q21 - Q40)
+
 ## Closures, Lexical Scope, Execution Context & `this`
 
 ---
 
 ### Q21: What is an Execution Context in JavaScript, and what are its two phases?
+
 **Answer:**
 An **Execution Context** is an abstract environment created by the JavaScript engine to evaluate and execute code. Every execution context has two phases:
 
@@ -20,7 +22,9 @@ An **Execution Context** is an abstract environment created by the JavaScript en
 ---
 
 ### Q22: What is the Call Stack and how does a Stack Overflow occur?
+
 **Answer:**
+
 - The **Call Stack** is a Last-In, First-Out (LIFO) data structure that tracks active execution contexts.
 - When a script runs, the **Global Execution Context (GEC)** is pushed onto the bottom of the stack.
 - When a function is invoked, its **Function Execution Context (FEC)** is pushed onto the stack. When it returns, it is popped off.
@@ -36,7 +40,9 @@ function recurse() {
 ---
 
 ### Q23: What is a Closure and how is it implemented internally in the V8 engine?
+
 **Answer:**
+
 - A **Closure** is the combination of a function bundled together with references to its surrounding lexical state (the lexical environment). It gives an inner function access to an outer function's scope even after the outer function has returned.
 - **V8 Engine Internals:**
   - V8 parses function scopes statically during compilation.
@@ -59,17 +65,21 @@ console.log(counter()); // 2
 
 ---
 
-### Q24: How do you solve the classic `for (var i = 0; i < 5; i++) setTimeout` problem? Explain all 3 solutions.
+### Q24: How do you solve the classic `for (var i = 0; i < 5; i++) setTimeout` problem? Explain all 3 solutions
+
 **Answer:**
+
 ```javascript
 for (var i = 0; i < 5; i++) {
   setTimeout(() => console.log(i), 100);
 }
 // Outputs: 5, 5, 5, 5, 5
 ```
+
 **Why:** `var` is function-scoped. There is only one shared variable `i`. By the time the macrotask callbacks run after 100ms, the loop has completed and `i === 5`.
 
 **Solution 1: Block Scope with `let` (Modern Standard)**
+
 ```javascript
 for (let i = 0; i < 5; i++) {
   setTimeout(() => console.log(i), 100); // Outputs: 0, 1, 2, 3, 4
@@ -78,6 +88,7 @@ for (let i = 0; i < 5; i++) {
 ```
 
 **Solution 2: IIFE (Immediately Invoked Function Expression - ES5)**
+
 ```javascript
 for (var i = 0; i < 5; i++) {
   (function(j) {
@@ -87,6 +98,7 @@ for (var i = 0; i < 5; i++) {
 ```
 
 **Solution 3: Pass arguments directly to `setTimeout`**
+
 ```javascript
 for (var i = 0; i < 5; i++) {
   setTimeout((val) => console.log(val), 100, i);
@@ -96,7 +108,9 @@ for (var i = 0; i < 5; i++) {
 ---
 
 ### Q25: What is Function Currying and why is it useful?
+
 **Answer:**
+
 - **Currying** is the mathematical technique of transforming a function that takes multiple arguments into a sequence of nested unary functions that each take a single argument: $f(a, b, c) \to f(a)(b)(c)$.
 - **Benefits:**
   1. Higher code reusability via **Partial Application**.
@@ -126,8 +140,10 @@ console.log(doubleAndTriple(5)); // 30
 
 ---
 
-### Q26: Implement a generic `memoize` function using Closures and Map.
+### Q26: Implement a generic `memoize` function using Closures and Map
+
 **Answer:**
+
 ```javascript
 function memoize(fn) {
   const cache = new Map();
@@ -156,7 +172,8 @@ console.log(expensiveFib(40)); // Fast calculation without redundant branches
 
 ---
 
-### Q27: How is `this` determined in JavaScript? List the 4 binding rules in order of precedence.
+### Q27: How is `this` determined in JavaScript? List the 4 binding rules in order of precedence
+
 **Answer:**
 The value of `this` is not fixed; it is evaluated at **call-site** invocation time according to 4 precedence rules:
 
@@ -174,7 +191,9 @@ The value of `this` is not fixed; it is evaluated at **call-site** invocation ti
 ---
 
 ### Q28: What are the differences between `call()`, `apply()`, and `bind()`?
+
 **Answer:**
+
 - **`call(thisArg, arg1, arg2, ...)`**: Invokes the function immediately with `this` bound to `thisArg` and arguments passed individually as a comma-separated list.
 - **`apply(thisArg, [argsArray])`**: Invokes the function immediately with `this` bound to `thisArg` and arguments passed as an array-like collection.
 - **`bind(thisArg, arg1, ...)`**: Does **not** invoke the function immediately. Instead, it returns a new bound function with `this` permanently set to `thisArg` and optional pre-configured preset arguments.
@@ -194,9 +213,11 @@ console.log(boundGreet("."));                        // "Hey, Sarah."
 ---
 
 ### Q29: Can you re-bind a function created with `.bind()`?
+
 **Answer:**
 **No.** A hard-bound function returned by `.bind()` cannot be changed with a subsequent `.bind()`, `.call()`, or `.apply()`.
 Under the hood, `bind()` wraps the target function in an internal wrapper closure:
+
 ```javascript
 // Simplified polyfill of bind:
 Function.prototype.myBind = function(context, ...args) {
@@ -206,12 +227,15 @@ Function.prototype.myBind = function(context, ...args) {
   };
 };
 ```
+
 Because `context` is permanently stored in the closure of the returned wrapper, subsequent calls to `.call()` only bind `this` on the outer wrapper, which ignores it and delegates to `originalFn.apply(context)`.
 
 ---
 
 ### Q30: Why do Arrow Functions not have their own `this`, `arguments`, or `prototype`?
+
 **Answer:**
+
 - Arrow functions were introduced in ES6 primarily for lightweight inline functional programming and callbacks.
 - **`this`:** Evaluated lexically from the outer scope, preventing the common bug where callbacks inside `setTimeout` or event listeners unexpectedly rebound `this` to `window` or the DOM node.
 - **`arguments`:** Arrow functions do not bind an `arguments` object; use standard ES6 `...rest` parameters instead.
@@ -220,7 +244,9 @@ Because `context` is permanently stored in the closure of the returned wrapper, 
 ---
 
 ### Q31: What is the difference between Function Declarations and Function Expressions?
+
 **Answer:**
+
 - **Function Declaration:**  
   `function foo() {}` is hoisted completely into memory during the creation phase. It can be invoked before its line of appearance in source code.
 - **Function Expression:**  
@@ -229,7 +255,9 @@ Because `context` is permanently stored in the closure of the returned wrapper, 
 ---
 
 ### Q32: What is an IIFE (Immediately Invoked Function Expression) and why was it vital pre-ES6?
+
 **Answer:**
+
 - Syntax: `(function() { /* private scope */ })();`
 - **Purpose:** Before ES6 introduced block-scoped `let` and `const` and ES modules, JavaScript only had function scope.
 - Developers used IIFEs to create isolated private scopes (Module Pattern) to avoid polluting the global namespace and leaking variables across third-party scripts.
@@ -237,7 +265,9 @@ Because `context` is permanently stored in the closure of the returned wrapper, 
 ---
 
 ### Q33: How does Scope Chaining work when resolving identifiers?
+
 **Answer:**
+
 - Every Lexical Environment contains an **Environment Record** (local identifiers) and an **Outer Reference** (link to the parent lexical environment).
 - When a variable is referenced, the JavaScript engine first checks the local environment record.
 - If not found, it traverses up the parent lexical environment via `Outer Reference`.
@@ -246,7 +276,9 @@ Because `context` is permanently stored in the closure of the returned wrapper, 
 ---
 
 ### Q34: What are Common Sources of Memory Leaks in JavaScript Closures?
+
 **Answer:**
+
 1. **Accidental Global Variables:** Assigning to undeclared identifiers in non-strict mode leaks to the `window`/`global` root.
 2. **Forgotten Timers & Intervals:** `setInterval` holding a closure referencing a large object prevents that object from being garbage-collected until `clearInterval()` is called.
 3. **Detached DOM Elements retained in Closures:** Keeping references to removed DOM elements inside an event listener callback.
@@ -254,8 +286,10 @@ Because `context` is permanently stored in the closure of the returned wrapper, 
 
 ---
 
-### Q35: Explain the "Accidental Shared Closure Context" leak in V8.
+### Q35: Explain the "Accidental Shared Closure Context" leak in V8
+
 **Answer:**
+
 ```javascript
 let theThing = null;
 
@@ -273,21 +307,27 @@ function replaceThing() {
 }
 setInterval(replaceThing, 100);
 ```
+
 **Why it leaks:** `someMethod` and `unused` share the same lexical scope context. Because `unused` references `originalThing`, the entire context keeps `originalThing` alive. Every 100ms, a linked list of old `theThing` objects grows indefinitely in memory until an Out-of-Memory crash occurs.
 
 ---
 
 ### Q36: What is a Pure Function and what are its properties?
+
 **Answer:**
 A function is **Pure** if it satisfies two strict criteria:
+
 1. **Deterministic:** For the same input arguments, it always returns the exact same output.
 2. **Zero Side Effects:** It does not mutate external state, modify input arguments, make I/O network requests, write to disk, or alter global variables.
+
 - **Benefits:** Trivially easy to test, safely memoizable, and concurrency-safe.
 
 ---
 
 ### Q37: How do you implement a once-only (`once`) execution wrapper using Closures?
+
 **Answer:**
+
 ```javascript
 function once(fn) {
   let executed = false;
@@ -314,7 +354,9 @@ initDb("postgres://localhost"); // Returns cached result without logging
 ---
 
 ### Q38: What is Tail Call Optimization (TCO) and does JavaScript support it?
+
 **Answer:**
+
 - **Tail Call:** A subroutine call performed as the final action of a function.
 - **Tail Call Optimization:** Reusing the current stack frame instead of allocating a new one when a function returns a tail call, enabling infinite recursion without stack overflow ($O(1)$ stack space).
 - **JavaScript Status:** Specified in ES6 for strict mode (`"use strict"`), but **only Safari (WebKit)** implemented it. V8 (Chrome/Node.js) and SpiderMonkey (Firefox) dropped TCO support due to debugging difficulties (erased stack traces in Error objects) and performance edge-case penalties.
@@ -322,7 +364,9 @@ initDb("postgres://localhost"); // Returns cached result without logging
 ---
 
 ### Q39: What is Debouncing vs Throttling?
+
 **Answer:**
+
 - **Debounce:** Delays function execution until a specified delay has elapsed **since the last time** it was invoked. (Resets timer on each call).
   - *Use Case:* Search bar autocomplete input, window resize completion.
 - **Throttle:** Guarantees that a function is executed **at most once** within a specified time window. (Does not reset timer).
@@ -331,6 +375,8 @@ initDb("postgres://localhost"); // Returns cached result without logging
 ---
 
 ### Q40: What happens if you call `delete obj.prop` vs `delete varName`?
+
 **Answer:**
+
 - `delete obj.prop`: Removes the own property `prop` from object `obj`. Returns `true` if successful or if the property did not exist. Returns `false` (or throws `TypeError` in strict mode) if the property is non-configurable (`configurable: false`).
 - `delete varName`: Throws a `SyntaxError: Delete of an unqualified identifier in strict mode`. Variables declared with `var`, `let`, or `const` cannot be deleted because they are non-configurable properties on their respective scope environment records.

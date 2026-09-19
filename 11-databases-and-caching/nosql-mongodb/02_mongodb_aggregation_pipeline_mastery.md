@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 MongoDB Aggregation Pipeline ek **Industrial Oil Refinery** ki tarah hai:
 Stage 1: Raw crude oil pipeline mein enter hota hai.
 Stage 2 (`$match`): Kachra aur mitti chhan kar alag kar di jati hai.

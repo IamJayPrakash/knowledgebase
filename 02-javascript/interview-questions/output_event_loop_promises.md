@@ -4,7 +4,8 @@
 
 ## Problem 1: The Classic Microtask vs Macrotask Race
 
-### Code:
+### Code
+
 ```javascript
 console.log("1");
 
@@ -27,7 +28,8 @@ new Promise((resolve, reject) => {
 console.log("7");
 ```
 
-### Output:
+### Output
+
 ```
 1
 4
@@ -38,7 +40,8 @@ console.log("7");
 3
 ```
 
-### Detailed Execution Trace:
+### Detailed Execution Trace
+
 1. `console.log("1")` runs synchronously -> **Prints 1**.
 2. `setTimeout` callback registered to Macrotask/Timer Queue with 0ms delay.
 3. `new Promise(executor)` executes **synchronously** immediately upon creation. `console.log("4")` runs -> **Prints 4**. `resolve()` changes Promise state to `fulfilled`.
@@ -56,7 +59,8 @@ console.log("7");
 
 ## Problem 2: Async/Await with Chained Promises
 
-### Code:
+### Code
+
 ```javascript
 async function async1() {
   console.log("async1 start");
@@ -86,7 +90,8 @@ new Promise((resolve) => {
 console.log("script end");
 ```
 
-### Output:
+### Output
+
 ```
 script start
 async1 start
@@ -98,7 +103,8 @@ promise2
 setTimeout
 ```
 
-### Explanation:
+### Explanation
+
 - `script start` runs synchronously.
 - `setTimeout` goes to Macrotask queue.
 - `async1()` is invoked. Prints `async1 start`.

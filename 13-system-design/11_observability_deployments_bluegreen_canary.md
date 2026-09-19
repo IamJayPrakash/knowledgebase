@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Correlation ID**: Ek **Hospital Patient Token Number** ki tarah hai: Jab mareez hospital aata hai, use Token #42 milta hai. Doctor, Blood Test Lab, X-Ray room, aur Pharmacy sabhi register mein sirf Token #42 likhte hain. Agar koi gadbad hoti hai, toh Token #42 search karte hi poora rasta pata chal jata hai (**Distributed Tracing**).
 **Canary Release**: Purane zamane mein koyla khadan (Coal mine) mein gas leak test karne ke liye choti **Canary Bird** le jaate the. Agar bird safe rahi, toh workers andar jaate the. Software mein 5% traffic naye version par bhejte hain; agar error rate zero raha, tabhi baaki 95% traffic switch karte hain!
 

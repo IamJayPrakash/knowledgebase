@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine a busy **Airport Departure Terminal Manager**:
+
 - Manager (Single Threaded Event Loop) lagataar 6 specific counters (Phases) ke chakkar lagata hai:
   1. **Timers Counter**: Ghadi check karta hai—kya kisi flight ka board time ho gaya? (`setTimeout`, `setInterval`).
   2. **Pending I/O Counter**: Kya kisi purani cancelled flight ka system error report pending hai?
@@ -17,7 +19,8 @@ Imagine a busy **Airport Departure Terminal Manager**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The 6 Discrete Phases**:
    - **1. Timers**: Executes callbacks scheduled by `setTimeout()` and `setInterval()` whose threshold has expired.
    - **2. Pending Callbacks**: Executes I/O callbacks deferred from previous iterations (e.g. some TCP socket errors).
@@ -26,20 +29,22 @@ Imagine a busy **Airport Departure Terminal Manager**:
    - **5. Check**: Executes callbacks scheduled specifically via `setImmediate()`.
    - **6. Close Callbacks**: Handles teardown events (e.g., `socket.on('close', ...)`).
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 2. **`process.nextTick()` vs `setImmediate()`**:
    - Despite its name, `process.nextTick()` does NOT run on the "next tick"—it runs **immediately after the current operation**, before the event loop advances to the next phase.
    - `setImmediate()` runs during the **Check phase** of the event loop.
-3. **Microtask Queue Priority**:
+2. **Microtask Queue Priority**:
    - Between *every individual phase* of the Libuv event loop, Node.js exhausts two microtask queues:
      1. `process.nextTick` queue (highest priority).
      2. Promise resolution microtask queue (`Promise.resolve()`, `queueMicrotask`).
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 4. **The `setTimeout(fn, 0)` vs `setImmediate(fn)` Race Condition**:
    - When run in the main module context, whether `setTimeout(0)` or `setImmediate()` executes first is non-deterministic because it depends on OS process performance and clock jitter.
    - However, when wrapped inside an **I/O callback (Poll phase)**, `setImmediate()` is **100% guaranteed** to run before `setTimeout()`, because the loop transitions from Poll $\to$ Check before wrapping around to Timers!
-5. **Event Loop Starvation**:
+2. **Event Loop Starvation**:
    - Recursive `process.nextTick()` calls completely starve the event loop, preventing Node.js from ever reaching the Poll phase to accept incoming network sockets.
 
 ---
@@ -175,18 +180,21 @@ EXPECTED DETERMINISTIC EXECUTION OUTPUT:
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Node.js achieves non-blocking asynchronous concurrency using the Libuv C event loop, which continuously cycles through 6 distinct phases: Timers, Pending Callbacks, Idle/Prepare, Poll, Check, and Close Callbacks. 
-> The core engine is the Poll phase: it retrieves and executes new I/O events from the OS kernel. If the queue is empty, the loop blocks in Poll waiting for network packets—unless callbacks are queued in the Check phase, in which case it advances to Check to run `setImmediate()`. 
-> Crucially, `process.nextTick()` and Promise microtasks do not belong to Libuv; they are managed by Node.js and drain completely between *every single phase transition*. 
+>
+> *"Node.js achieves non-blocking asynchronous concurrency using the Libuv C event loop, which continuously cycles through 6 distinct phases: Timers, Pending Callbacks, Idle/Prepare, Poll, Check, and Close Callbacks.
+> The core engine is the Poll phase: it retrieves and executes new I/O events from the OS kernel. If the queue is empty, the loop blocks in Poll waiting for network packets—unless callbacks are queued in the Check phase, in which case it advances to Check to run `setImmediate()`.
+> Crucially, `process.nextTick()` and Promise microtasks do not belong to Libuv; they are managed by Node.js and drain completely between *every single phase transition*.
 > A classic senior interview trap is comparing `setTimeout(fn, 0)` with `setImmediate(fn)`: at top-level script execution, their ordering is non-deterministic due to OS clock granularity; however, inside an I/O callback, `setImmediate()` is mathematically guaranteed to execute first because the loop moves directly from Poll to Check before cycling back to Timers."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Real-Time FinTech Payment Webhook Gateway.  
 **Incident**: During Black Friday surges, the payment notification service stopped accepting new incoming HTTP webhooks, causing thousands of payment confirmations to fail. Metrics showed CPU was at 100%, yet the database was idle and no outgoing requests were executing.  
 **Root Cause**: A junior engineer implemented an in-memory retry mechanism using recursive `process.nextTick()` to retry failed database writes. Because `process.nextTick` queues drain continuously before the event loop can advance, the recursive queue starved the event loop, completely blocking the Libuv Poll phase from ever accepting incoming TCP connections.  
 **Resolution**:
+
 1. Replaced recursive `process.nextTick()` with **`setImmediate()`** and **exponential backoff via timers**, allowing the loop to cycle through Poll on every retry.
 2. Added an event loop lag health-check monitor using `perf_hooks` (`monitorEventLoopDelay`).
 3. Alerted on any loop delay exceeding 50ms to auto-shed traffic to secondary replicas.  

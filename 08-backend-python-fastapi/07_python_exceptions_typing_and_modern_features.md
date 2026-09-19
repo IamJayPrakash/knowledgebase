@@ -1,7 +1,9 @@
 # Python Exception Handling, Type Hints & Modern Features (Python 3.10+)
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - `try-except-else-finally`:
 >   - `try`: "Main ye kaam karne ki koshish kar raha hoon."
 >   - `except`: "Agar koi gadbad hui toh yahan sambhalo."
@@ -16,7 +18,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **`try...except...else...finally` Flow**:
   - `else`: Runs **only if no exception occurred** in the `try` block. Avoids putting too much code inside `try`!
   - `finally`: **Always executes**, even after `return`, `break`, or `continue`.
@@ -24,7 +27,8 @@
 - **Type Annotations**: Python remains dynamically typed at runtime; type annotations (`name: str = "Jay"`) do not enforce types at runtime, but are verified by static type checkers like `mypy` and utilized by FastAPI for automatic request serialization and Swagger validation.
 - **The Walrus Operator (`:=`)**: Assigns values to variables as part of a larger expression (`if (n := len(items)) > 10:`).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Explicit Exception Chaining (`raise ... from e`)**:
   - In Python 3, when you catch an exception and raise a custom business exception, writing `raise CustomError("failed") from original_exc` populates `__cause__` and outputs `The above exception was the direct cause of the following exception:`.
   - Writing `raise CustomError() from None` explicitly suppresses the context (`__context__`), hiding internal database driver traces from client responses for security.
@@ -147,6 +151,7 @@ print(route_webhook_event({"type": "BATCH", "items": ["Task-1", "Task-2", "Task-
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the purpose of the `else` clause in a `try-except` block, and how does Python 3's `raise ... from` work?"
 >
 > **You:** "In Python, the `else` clause in a `try-except` block executes only if no exception was raised in the `try` block. Using `else` is a critical best practice because it minimizes the amount of code inside `try`, preventing developers from accidentally catching unintended exceptions from unrelated lines. Regarding exception chaining, Python 3 introduces `raise NewException() from original_exc`. This explicitly links the new high-level exception to the low-level cause in the `__cause__` attribute, preserving the entire causal stack trace for debugging. Alternatively, using `from None` suppresses the underlying context, preventing internal implementation details like database connection strings or passwords from leaking to external clients."
@@ -154,7 +159,8 @@ print(route_webhook_event({"type": "BATCH", "items": ["Task-1", "Task-2", "Task-
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An API gateway converted internal downstream service errors into standard HTTP 500 JSON responses. However, because downstream library exceptions were caught and re-thrown without chaining, all error logs in Datadog displayed generic `InternalServerError: Request failed` without the original HTTP connection timeout or database connection reset stack trace.
-* **Task / Challenge:** Restore complete error trace visibility in distributed logs without leaking internal system traces to external API consumers.
-* **Action Taken:** Refactored the global exception handler across 24 microservices to use explicit exception chaining (`raise GatewayTimeoutError(...) from exc`). On the client response boundary, custom serializer middleware stripped `__cause__` for external HTTP JSON responses while formatting the full `__cause__` trace into Datadog JSON structured logs.
-* **Result & Business Impact:** Cut Mean Time to Resolution (MTTR) for downstream gateway outages from 45 minutes to under 3 minutes.
+
+- **Situation:** An API gateway converted internal downstream service errors into standard HTTP 500 JSON responses. However, because downstream library exceptions were caught and re-thrown without chaining, all error logs in Datadog displayed generic `InternalServerError: Request failed` without the original HTTP connection timeout or database connection reset stack trace.
+- **Task / Challenge:** Restore complete error trace visibility in distributed logs without leaking internal system traces to external API consumers.
+- **Action Taken:** Refactored the global exception handler across 24 microservices to use explicit exception chaining (`raise GatewayTimeoutError(...) from exc`). On the client response boundary, custom serializer middleware stripped `__cause__` for external HTTP JSON responses while formatting the full `__cause__` trace into Datadog JSON structured logs.
+- **Result & Business Impact:** Cut Mean Time to Resolution (MTTR) for downstream gateway outages from 45 minutes to under 3 minutes.

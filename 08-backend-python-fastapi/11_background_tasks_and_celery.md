@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **FastAPI BackgroundTasks** ek **Waiter ka Note** hai: Waiter customer ko bill dekar bolta hai "Aap ja sakte hain", aur jaate-jaate restaurant ke register mein transaction note kar deta hai. Ye chote kamo (email bhejna, log likhna) ke liye perfect hai.
 **Celery with Redis** ek **Alag Dedicated Factory** hai: Agar kaam 15 minute ka video transcoding ya heavy ML model execution hai, toh restaurant ka waiter wo kaam factory bhej deta hai. Server restart hone par bhi Celery ka kaam gayab nahi hota.
 
@@ -40,6 +41,7 @@ def register_user(email: str, username: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(send_welcome_email, email, username)
     return {"message": "User registered successfully. Email queued."}
 ```
+
 ---
 
 ## 4. 📊 Visual Architecture Diagram
@@ -63,6 +65,7 @@ BackgroundTasks vs Distributed Celery Workers:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "When should you use FastAPI's built-in `BackgroundTasks` versus an external task queue like Celery or RQ?"
 >
 > **You:** "FastAPI's `BackgroundTasks` executes tasks in-process within the same Starlette worker threadpool after returning the HTTP response. It is ideal for lightweight, non-critical tasks like sending a confirmation email or writing an audit log. However, if the server restarts or crashes, pending in-process background tasks are lost forever. For heavy compute (video transcoding, ML inference, batch reports), mission-critical workflows, or jobs requiring retry backoff and monitoring, we use a distributed task queue like Celery or BullMQ backed by Redis or RabbitMQ."
@@ -70,7 +73,8 @@ BackgroundTasks vs Distributed Celery Workers:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A video processing portal used `BackgroundTasks` to transcode user video uploads. When multiple users uploaded 4K videos simultaneously, the API server ran out of CPU and memory, dropping all incoming HTTP requests and causing cluster restarts that killed in-flight transcoding jobs.
-* **Task / Challenge:** Decouple video transcoding from the web API to prevent server crashes and guarantee job recovery.
-* **Action Taken:** Decoupled the transcoding pipeline by replacing `BackgroundTasks` with Celery workers backed by Amazon SQS and Redis. The web API immediately responded with HTTP 202 Accepted and the task ID, while dedicated Celery worker containers scaled independently on GPU nodes.
-* **Result & Business Impact:** Restored 99.99% API uptime, eliminated lost jobs with automatic SQS visibility retries, and enabled processing 50 concurrent video transcode jobs without impacting web traffic.
+
+- **Situation:** A video processing portal used `BackgroundTasks` to transcode user video uploads. When multiple users uploaded 4K videos simultaneously, the API server ran out of CPU and memory, dropping all incoming HTTP requests and causing cluster restarts that killed in-flight transcoding jobs.
+- **Task / Challenge:** Decouple video transcoding from the web API to prevent server crashes and guarantee job recovery.
+- **Action Taken:** Decoupled the transcoding pipeline by replacing `BackgroundTasks` with Celery workers backed by Amazon SQS and Redis. The web API immediately responded with HTTP 202 Accepted and the task ID, while dedicated Celery worker containers scaled independently on GPU nodes.
+- **Result & Business Impact:** Restored 99.99% API uptime, eliminated lost jobs with automatic SQS visibility retries, and enabled processing 50 concurrent video transcode jobs without impacting web traffic.

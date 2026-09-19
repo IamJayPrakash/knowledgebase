@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Binary Heap / Priority Queue** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Binary Heap / Priority Queue] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Binary Heap / Priority Queue] ---> Validated Optimal Resu
 A complete binary tree stored in an array providing O(1) access to the min (or max) element, with O(log N) insertion and deletion.
 
 ### ❓ When to Apply?
-- When continually extracting top-K elements, merging K sorted streams, or calculating running medians.
+
+* When continually extracting top-K elements, merging K sorted streams, or calculating running medians.
 
 ### 🚫 When NOT to Apply?
-- When searching for arbitrary elements (heaps are not searchable in O(1) or O(log N); requires O(N) scan).
+
+* When searching for arbitrary elements (heaps are not searchable in O(1) or O(log N); requires O(N) scan).
 
 ---
 
@@ -67,7 +71,8 @@ A complete binary tree stored in an array providing O(1) access to the min (or m
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner re-sorts the entire array on every new element insertion in O(N log N) time.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer uses a single unbounded heap when a bounded heap of size K is far more optimal.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Binary Heap / Priority Queue)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer maintains a fixed-size heap or dual heaps (Min-Heap + Max-Heap for streaming medians), bounding memory to O(K).*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 23 (Merge k Sorted Lists), LeetCode 347 (Top K Frequent Elements), LeetCode 295 (Find Median from Data Stream).**
+
+* **LeetCode 23 (Merge k Sorted Lists), LeetCode 347 (Top K Frequent Elements), LeetCode 295 (Find Median from Data Stream).**

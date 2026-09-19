@@ -1,9 +1,11 @@
 # Java 21 & Spring Boot Master Interview Bank: Part 3 (Q41 - Q60)
+
 ## Concurrency, Threading, Memory Model & Virtual Threads (Loom)
 
 ---
 
-### Q41: Explain the Java Thread Lifecycle and 6 Thread States.
+### Q41: Explain the Java Thread Lifecycle and 6 Thread States
+
 **Answer:**
 
 ```
@@ -34,21 +36,25 @@ Acquires lock            │              │ Notified / Time elapsed
 ---
 
 ### Q42: What is the difference between `synchronized` and `ReentrantLock`?
+
 **Answer:**
+
 | Feature | `synchronized` (Keyword) | `ReentrantLock` (Class) |
 | :--- | :--- | :--- |
 | **Acquisition** | Implicit block scope; releases automatically on block exit. | Explicit `lock.lock()` and mandatory `finally { lock.unlock(); }`. |
 | **Non-blocking Try** | ❌ No. Thread blocks indefinitely. | ✅ Yes. `lock.tryLock()` or `lock.tryLock(timeout, unit)`. |
-| **Fairness Guarantee**| ❌ No. Non-fair (barging). | ✅ Yes. Can configure fair ordering: `new ReentrantLock(true)`. |
+| **Fairness Guarantee** | ❌ No. Non-fair (barging). | ✅ Yes. Can configure fair ordering: `new ReentrantLock(true)`. |
 | **Interruptibility** | ❌ Cannot be interrupted while blocked. | ✅ Yes. `lock.lockInterruptibly()` responds to interruption. |
-| **Condition Variables**| Single wait-set (`wait()`, `notify()`). | Multiple independent conditions (`lock.newCondition()`). |
+| **Condition Variables** | Single wait-set (`wait()`, `notify()`). | Multiple independent conditions (`lock.newCondition()`). |
 
 ---
 
-### Q43: What does the `volatile` keyword do in Java? Explain the Java Memory Model (JMM).
+### Q43: What does the `volatile` keyword do in Java? Explain the Java Memory Model (JMM)
+
 **Answer:**
 Modern multi-core CPUs cache variables in local L1/L2 CPU caches.
 Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be flushed to main RAM, remaining invisible to Thread 2 running on CPU Core 2.
+
 - **`volatile` guarantees two properties:**
   1. **Visibility:** Writes to a volatile variable are immediately flushed to main memory; reads always bypass CPU caches and read directly from main RAM.
   2. **Instruction Reordering Prevention:** Inserts hardware **Memory Barriers** preventing the JIT compiler and CPU from reordering instructions across the volatile read/write barrier (**Happens-Before Relationship**).
@@ -57,9 +63,12 @@ Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be fl
 ---
 
 ### Q44: How do `AtomicInteger` and Atomic classes work without locks?
+
 **Answer:**
+
 - Atomic classes (`AtomicInteger`, `AtomicReference`, `LongAdder`) achieve lock-free thread safety using **hardware-level CAS (Compare-And-Swap)** instructions (e.g. `cmpxchg` in x86 assembly).
 - **The CAS Loop:**
+
   ```java
   public final int incrementAndGet() {
       int current;
@@ -71,12 +80,15 @@ Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be fl
       return next;
   }
   ```
+
 - If another thread modified the value in the background, CAS fails and the loop retries instantly without suspending the thread or incurring OS context-switching overhead.
 
 ---
 
 ### Q45: What is the ABA Problem in CAS and how does `AtomicStampedReference` solve it?
+
 **Answer:**
+
 - **ABA Problem:** Thread 1 reads value $A$. Thread 2 changes $A \to B \to A$. Thread 1 executes CAS, observes value is still $A$, and assumes nothing changed, which can corrupt node pointers in lock-free linked lists.
 - **Solution:** **`AtomicStampedReference<V>`** pairs the object reference with an integer version stamp / sequence counter:
   `(Reference: A, Stamp: 1) -> (B, 2) -> (A, 3)`.
@@ -85,7 +97,9 @@ Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be fl
 ---
 
 ### Q46: What is the difference between `CountDownLatch` and `CyclicBarrier`?
+
 **Answer:**
+
 - **`CountDownLatch`:**
   - One or more threads wait until a counter decrements to zero (`latch.countDown()`, `latch.await()`).
   - **Single-use only:** Once the count reaches zero, it **cannot be reset**.
@@ -96,7 +110,9 @@ Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be fl
 ---
 
 ### Q47: How does `Semaphore` work?
+
 **Answer:**
+
 - A `Semaphore` controls access to a shared resource by maintaining a set of **permits**:
   - `semaphore.acquire()`: Grabs a permit; blocks if no permits are available.
   - `semaphore.release()`: Returns a permit back to the semaphore.
@@ -104,8 +120,10 @@ Without `volatile`, updates made by Thread 1 in CPU Core 1's cache may not be fl
 
 ---
 
-### Q48: Explain `ThreadPoolExecutor` parameters and Sizing Formulas.
+### Q48: Explain `ThreadPoolExecutor` parameters and Sizing Formulas
+
 **Answer:**
+
 ```java
 ThreadPoolExecutor executor = new ThreadPoolExecutor(
     corePoolSize,       // Minimum active worker threads
@@ -116,7 +134,9 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
     rejectedHandler     // Rejection policy when queue is full
 );
 ```
+
 **Thread Pool Sizing Formulas:**
+
 1. **For CPU-Bound Tasks:**
    $$\text{Threads} = \text{CPU Cores} + 1$$
    (Adding more threads than cores causes thrashing and context switching).
@@ -127,8 +147,10 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(
 ---
 
 ### Q49: What are the 4 Rejected Execution Policies in `ThreadPoolExecutor`?
+
 **Answer:**
 When both the task queue is full AND worker thread count has reached `maximumPoolSize`:
+
 1. **`AbortPolicy` (Default):** Throws `RejectedExecutionException`.
 2. **`CallerRunsPolicy`:** Forces the calling thread (e.g. HTTP request thread) to execute the task itself, applying natural **backpressure** and slowing down submissions.
 3. **`DiscardPolicy`:** Silently drops the rejected task without error.
@@ -137,7 +159,9 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q50: How do you detect and analyze Deadlocks in production Java applications?
+
 **Answer:**
+
 - **Detection Tools:**
   1. Generate a **Thread Dump**: `jstack <pid> > threaddump.txt` or `jcmd <pid> Thread.print`.
   2. Inspect the bottom of the dump: the JVM automatically runs cycle detection and outputs:
@@ -148,8 +172,10 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q51: How does `CompletableFuture` enable non-blocking asynchronous composition?
+
 **Answer:**
 `CompletableFuture` represents a future result and provides monadic functional composition:
+
 - `supplyAsync(() -> fetchUser())`: Submits task to `ForkJoinPool`.
 - `.thenApply(user -> user.getEmail())`: Transforms result when available.
 - `.thenCompose(email -> fetchOrders(email))`: Flattens dependent async calls (flatMap).
@@ -159,7 +185,9 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q52: What is Java 21 Project Loom and why are Platform Threads limited?
+
 **Answer:**
+
 - **Platform OS Threads (Traditional Java):**
   - Thin 1-to-1 wrappers around OS kernel threads.
   - **High Cost:** Each OS thread allocates **1 MB of reserved virtual memory for its stack** and context-switching requires kernel privilege switches.
@@ -172,7 +200,9 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q53: How does Carrier Thread Unmounting work in Virtual Threads?
+
 **Answer:**
+
 - Virtual Threads run on top of a small pool of underlying OS Platform Threads called **Carrier Threads** (default: number of CPU cores).
 - **Non-blocking Continuation:**
   1. When code on a Virtual Thread initiates a blocking I/O operation (e.g., `socket.read()`, JDBC query, or `Thread.sleep()`), the JVM intercepts the call.
@@ -183,7 +213,9 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q54: What is Thread Pinning in Virtual Threads and how do you avoid it?
+
 **Answer:**
+
 - **Thread Pinning:** Occurs when a Virtual Thread executes a blocking operation while holding a native monitor lock, preventing it from unmounting from its Carrier Thread. The underlying OS thread remains stuck!
 - **Primary Causes:**
   1. Executing a blocking call inside a **`synchronized` block or method**.
@@ -193,10 +225,13 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q55: Why should you NEVER pool Virtual Threads?
+
 **Answer:**
+
 - Traditional thread pools (`Executors.newFixedThreadPool`) exist because OS threads are expensive to create and destroy.
 - Virtual Threads are so lightweight that **creating a Virtual Thread is as cheap as allocating a plain Java object**.
 - **Best Practice:** Create a new Virtual Thread per task and let it terminate upon task completion:
+
   ```java
   // ✅ IDIOMATIC JAVA 21:
   try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
@@ -207,7 +242,9 @@ When both the task queue is full AND worker thread count has reached `maximumPoo
 ---
 
 ### Q56: What is Structured Concurrency in Java 21 (Preview)?
+
 **Answer:**
+
 - Treats multiple concurrent tasks running in different threads as a **single unit of work**, ensuring that if one subtask fails, all other sibling tasks are automatically cancelled, eliminating thread leaks.
 - Uses `StructuredTaskScope`:
 
@@ -226,7 +263,9 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 ---
 
 ### Q57: What are Scoped Values (JEP 446) and why do they replace `ThreadLocal`?
+
 **Answer:**
+
 - `ThreadLocal` has significant flaws with Virtual Threads:
   1. Unbounded memory footprint when millions of virtual threads allocate thread-local maps.
   2. Mutability allows code anywhere to alter thread context unpredictably.
@@ -237,14 +276,18 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 ---
 
 ### Q58: What is the difference between `Thread.sleep()` and `Object.wait()`?
+
 **Answer:**
+
 - **`Thread.sleep(ms)`**: Puts the current thread to sleep for a specified duration. **Does NOT release any monitor locks** held by the thread.
 - **`object.wait()`**: Must be called from inside a `synchronized(object)` block. **Releases the object monitor lock immediately**, allowing other waiting threads to acquire the lock and call `.notify()`.
 
 ---
 
 ### Q59: What is `ThreadLocal` and how does it cause Memory Leaks in Application Servers?
+
 **Answer:**
+
 - Provides thread-isolated variables (each thread accessing `threadLocal.get()` has its own independent copy).
 - **The Memory Leak:**
   In Tomcat/Spring Boot, threads are pooled and reused across thousands of HTTP requests.
@@ -253,7 +296,9 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 ---
 
 ### Q60: How does `LongAdder` outperform `AtomicLong` under high contention?
+
 **Answer:**
+
 - Under heavy concurrent writes (e.g. 64 threads incrementing simultaneously), `AtomicLong` suffers severe performance degradation because all 64 threads compete on a single memory address via CAS, resulting in continuous failed retry loops.
 - **`LongAdder` (Cell Striping):**
   - Maintains an array of counter cells.

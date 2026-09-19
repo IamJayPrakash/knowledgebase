@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Browser screen par web page draw karna ek **Film Shooting** ki tarah hai:
+
 1. Script milti hai (HTML Parser -> DOM Tree banata hai).
 2. Costumes decide hote hain (CSS Parser -> CSSOM Tree banata hai).
 3. Script aur Costume milte hain: Jo actors screen par aayenge sirf unhe list kiya jata hai (Render Tree: `display: none` wale actors bahar nikal diye jate hain!).
@@ -50,6 +52,7 @@ function goodResizeBoxes(boxes) {
   });
 }
 ```
+
 ---
 
 ## 4. 📊 Visual Architecture Diagram
@@ -65,6 +68,7 @@ Critical Rendering Path (CRP) Execution Flow:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What happens in the browser from the moment HTML and CSS are received to the time pixels appear on screen, and what is Layout Thrashing?"
 >
 > **You:** "The browser constructs the DOM tree from HTML and the CSSOM tree from CSS in parallel. Because CSS is render-blocking, the Render Tree cannot be constructed until the CSSOM is complete. The Render Tree includes only visible nodes, discarding `display: none` elements. Next, the Layout phase computes exact geometric coordinates, followed by Paint which rasterizes pixels, and Compositing which coordinates GPU layers. Layout Thrashing occurs when JavaScript repeatedly interleaves reading geometric properties like `offsetHeight` with style writes, forcing the browser into expensive synchronous reflows on every loop iteration. We resolve this by batching all reads before performing writes."
@@ -72,7 +76,8 @@ Critical Rendering Path (CRP) Execution Flow:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An e-commerce product listing page experienced severe scroll stuttering and 15 FPS frame drops on mobile Safari when expanding product specification accordion tabs across 50 items.
-* **Task / Challenge:** Restore 60 FPS smooth scrolling and eliminate layout reflow delays.
-* **Action Taken:** Performance profiling identified layout thrashing inside a resize listener that queried `element.getBoundingClientRect()` immediately after adjusting container heights. Refactored the DOM mutations using `FastDOM` patterns (batching reads then batching writes) and transitioned accordion animations to CSS `transform` and `opacity` to keep execution entirely on the GPU compositor thread.
-* **Result & Business Impact:** Eliminated 100% of forced synchronous layouts, restoring a smooth 60 FPS scroll rate and reducing mobile accordion interaction latency from 320ms to 8ms.
+
+- **Situation:** An e-commerce product listing page experienced severe scroll stuttering and 15 FPS frame drops on mobile Safari when expanding product specification accordion tabs across 50 items.
+- **Task / Challenge:** Restore 60 FPS smooth scrolling and eliminate layout reflow delays.
+- **Action Taken:** Performance profiling identified layout thrashing inside a resize listener that queried `element.getBoundingClientRect()` immediately after adjusting container heights. Refactored the DOM mutations using `FastDOM` patterns (batching reads then batching writes) and transitioned accordion animations to CSS `transform` and `opacity` to keep execution entirely on the GPU compositor thread.
+- **Result & Business Impact:** Eliminated 100% of forced synchronous layouts, restoring a smooth 60 FPS scroll rate and reducing mobile accordion interaction latency from 320ms to 8ms.

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Memory leak ek dukan mein empty boxes jama hone jaisa hai. Har baar naya saman aata hai, box khali ho jata hai lekin dukan se bahar dustbin mein fekne ke bajaye aap use kone mein stack karte rehte ho. Shuru mein koi dikkat nahi hoti, lekin 3 mahine baad dukan mein chalne ki jagah nahi bachti aur dukan band karni padti hai (Browser crash ya Node.js OOM kill).
 In V8 engine, Garbage Collector tab tak memory free nahi karta jab tak root (`window` ya global scope) se us memory block tak ka rasta (`retaining path`) juda hua hai.
 
@@ -123,6 +124,7 @@ class CleanWidget {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "When diagnosing memory leaks in JavaScript, I follow a systematic 3-step profiling methodology. First, reproduce the suspected workflow in Chrome DevTools under the **Memory Tab** and record a **Heap Snapshot** before and after the action. In the comparison view, I sort by **Retained Size** and inspect constructors like `Detached HTMLDivElement` or `Closure`. Second, I examine the **Retainers Tree** to pinpoint the exact GC Root holding the reference—typically a dangling `setInterval`, an un-removed `window.addEventListener`, or an uncleared cache in a module singleton. Third, in Node.js, I use tools like `clinic doctor` or trigger heap snapshots via `v8.writeHeapSnapshot()` under memory spikes to analyze heap allocation deltas."
 
 ---

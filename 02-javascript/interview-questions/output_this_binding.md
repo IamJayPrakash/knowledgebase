@@ -4,7 +4,8 @@
 
 ## Problem 1: Object Method vs Detached Callback
 
-### Code:
+### Code
+
 ```javascript
 const user = {
   name: "Jay",
@@ -23,14 +24,16 @@ console.log(extracted());
 console.log(user.getArrowName());
 ```
 
-### Output:
+### Output
+
 ```
 Jay
 undefined (or Window name in non-strict browser)
 undefined
 ```
 
-### Explanation:
+### Explanation
+
 1. `user.getName()`: Method invocation with dot notation. The object left of the dot (`user`) becomes the `this` context. Returns `"Jay"`.
 2. `extracted()`: The function reference was copied to a standalone variable and invoked without dot notation. Default binding applies: in strict mode `this` is `undefined`, in non-strict browser it is `window`. Returns `undefined`.
 3. `user.getArrowName()`: Arrow functions do **not** have their own `this`. They capture `this` lexically from the enclosing lexical scope at declaration time. Here, the enclosing scope of the object literal is the global/module scope (not the `user` object!), where `name` is undefined.
@@ -39,7 +42,8 @@ undefined
 
 ## Problem 2: Nested Arrow Functions & Arguments
 
-### Code:
+### Code
+
 ```javascript
 const obj = {
   count: 10,
@@ -59,12 +63,14 @@ obj.regular()();
 obj.arrow()();
 ```
 
-### Output:
+### Output
+
 ```
 A: undefined
 B: 10
 ```
 
-### Explanation:
+### Explanation
+
 - `obj.regular()` returns a standard function. When invoked as `()`, it has default binding (`this` = `global` or `undefined`). Hence `this.count` is `undefined`.
 - `obj.arrow()` was invoked with `obj` as `this`. Inside `arrow()`, `this` points to `obj`. The returned arrow function lexically captures this exact `this` reference. When invoked as `()`, it retains `obj` as `this`, printing `10`.

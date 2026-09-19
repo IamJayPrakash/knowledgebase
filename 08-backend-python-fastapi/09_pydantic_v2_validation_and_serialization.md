@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Pydantic V1 ek manual airport luggage inspector jaisa tha jo Python mein line-by-line check karta tha.
 Pydantic V2 ek **High-Speed Industrial Scanner** hai jiska core engine pure **Rust (`pydantic-core`)** mein likha gaya hai. Ye 5x se 20x fast validation karta hai aur invalid data ko API router ke andar ghusne hi nahi deta.
 
@@ -48,6 +49,7 @@ class UserRegistrationSchema(BaseModel):
             raise ValueError("Passwords do not match!")
         return self
 ```
+
 ---
 
 ## 4. 📊 Visual Architecture Diagram
@@ -77,6 +79,7 @@ Pydantic V2 Rust Engine Validation Pipeline:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What makes Pydantic V2 fundamentally faster than V1, and how do you handle cross-field validation?"
 >
 > **You:** "Pydantic V2 achieves a 5x to 20x performance improvement by moving the entire parsing, validation, and JSON serialization core into Rust via `pydantic-core`. Instead of traversing Python ASTs and executing slow interpreted loops, validation rules are compiled into a optimized Rust state machine. For cross-field validation, V2 replaces V1's `@root_validator` with `@model_validator(mode='after')`, which executes after individual fields are validated and types are guaranteed, allowing clean, type-safe cross-attribute assertions."
@@ -84,6 +87,7 @@ Pydantic V2 Rust Engine Validation Pipeline:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
+
 * **Situation:** An IoT telematics ingest API received 40,000 JSON sensor packets per second. Under Pydantic V1, CPU consumption hovered at 95% and request serialization introduced an 85ms bottleneck per payload batch.
 * **Task / Challenge:** Reduce CPU utilization under 40% and cut validation latency under 10ms.
 * **Action Taken:** Upgraded FastAPI and migrated schemas to Pydantic V2. Replaced `.dict()` with `.model_dump()` and utilized `pydantic-core` direct JSON serialization via `.model_dump_json()`. Enabled `strict=True` on numerical telemetry fields to eliminate unnecessary type coercion.

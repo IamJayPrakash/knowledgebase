@@ -1,10 +1,13 @@
 # React Master Interview Bank: Part 1 (Q1 - Q20)
+
 ## Foundations, JSX, Virtual DOM & Component Architecture
 
 ---
 
 ### Q1: What is JSX and how does the React compiler transform it under the hood?
+
 **Answer:**
+
 - JSX (JavaScript XML) is a syntax extension for JavaScript that allows writing HTML-like markup inside JavaScript files.
 - Browsers cannot execute JSX natively; it must be compiled into standard JavaScript by Babel or SWC.
 - **Classic Runtime (pre-React 17):**
@@ -28,7 +31,9 @@ const element = _jsx("button", {
 ---
 
 ### Q2: What is the Virtual DOM and what is its architectural purpose?
+
 **Answer:**
+
 - The **Virtual DOM (VDOM)** is a lightweight in-memory representation of the real browser DOM tree consisting of plain JavaScript objects (React Elements).
 - **Architectural Purpose:**
   Direct DOM manipulation is slow because modifying the real DOM triggers expensive browser engine pipeline stages: CSS recalculation, Layout (reflow), and Repaint.
@@ -40,16 +45,20 @@ const element = _jsx("button", {
 ---
 
 ### Q3: How does React's Reconciliation Diffing Algorithm work? What are its heuristic assumptions?
+
 **Answer:**
 Comparing two arbitrary trees has an algorithmic complexity of $O(N^3)$ (where $N$ is the number of nodes).
 React reduces this to an $O(N)$ linear algorithm based on **two heuristic assumptions**:
+
 1. **Different Component Types produce Different Trees:** If an element changes from `<div>` to `<span>`, React dismantles the entire old subtree and builds a new one from scratch (unmounting old components and state).
 2. **Stable Keys for Lists:** In child lists, elements with matching `key` props are treated as stable across renders. The algorithm can identify insertions, deletions, and moves without reconstructing matching siblings.
 
 ---
 
 ### Q4: Why is using array `index` as a `key` considered an anti-pattern? When is it acceptable?
+
 **Answer:**
+
 - **Why it's an Anti-Pattern:**
   If elements in a list can be reordered, inserted at the beginning, or filtered, using the array index binds component state to the **index position** rather than the **underlying item data**.
   - *Symptom:* Form inputs retain values from deleted items, uncontrolled component state drifts, and CSS animations glitch.
@@ -62,7 +71,9 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q5: What is the difference between Controlled and Uncontrolled Components?
+
 **Answer:**
+
 | Dimension | Controlled Component | Uncontrolled Component |
 | :--- | :--- | :--- |
 | **State Source of Truth** | Stored in **React State** (`useState`). | Stored directly in the **Browser DOM** element. |
@@ -73,14 +84,18 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q6: Why can't browsers read file input values in a Controlled manner?
+
 **Answer:**
+
 - An `<input type="file" />` is **always an uncontrolled component** in React.
 - **Security Constraint:** For security reasons, JavaScript cannot set the `value` attribute of a file input programmatically (to prevent malicious websites from uploading arbitrary files from a user's hard drive). Its value can only be set by a direct user interaction via the OS file picker, and is read in React via `ref.current.files`.
 
 ---
 
 ### Q7: What are React Synthetic Events and how do they work in React 17/18/19?
+
 **Answer:**
+
 - **SyntheticEvent** is React's cross-browser wrapper around native browser events (`e.nativeEvent`), normalizing inconsistent browser APIs across Chrome, Safari, Firefox, and Edge.
 - **Event Delegation Architecture:**
   - **In React 16 and earlier:** React attached a single global event listener at the root `document` level.
@@ -90,7 +105,9 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q8: What is the difference between Element, Component, and Instance in React?
+
 **Answer:**
+
 - **React Element:** A plain, immutable JavaScript object describing what you want to see on screen: `{ type: 'button', props: { className: 'btn' } }`. Produced by JSX.
 - **React Component:** A reusable blueprint (a function or class) that accepts `props` as input and returns a React Element tree.
 - **React Instance:** The internal stateful entity created by React to track the component. In modern React, instances are internal **Fiber Nodes** representing component state, hooks, and DOM references.
@@ -98,14 +115,18 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q9: What are Pure Components and how do they optimize rendering?
+
 **Answer:**
+
 - In class components, `React.PureComponent` implements `shouldComponentUpdate()` with a **shallow prop and state comparison**.
 - In functional components, wrapping a component in **`React.memo(Component, arePropsEqual)`** achieves the identical optimization: if props have not changed (via shallow `===` comparison), React skips rendering that component and reuses the previous virtual DOM snapshot.
 
 ---
 
 ### Q10: What are High-Order Components (HOCs) and what are their trade-offs?
+
 **Answer:**
+
 - A **Higher-Order Component (HOC)** is a pure function that takes a component as an argument and returns an enhanced component: `const EnhancedComponent = withAuth(BaseComponent);`.
 - **Use Cases:** Cross-cutting concerns in legacy codebases (Authentication checks, Analytics logging, Theme injection).
 - **Trade-offs / Drawbacks:**
@@ -117,7 +138,9 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q11: What is the Render Props pattern?
+
 **Answer:**
+
 - A technique for sharing code between React components using a prop whose value is a function that returns a React Element: `<DataProvider render={(data) => <Chart data={data} />} />`.
 - Solved HOC prop collisions by explicitly passing data down as function parameters.
 - *Modern Status:* Largely replaced by custom hooks (`const data = useData()`), but still useful for headless UI components (e.g. Downshift, TanStack Table).
@@ -125,14 +148,18 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q12: What is the difference between Props and State?
+
 **Answer:**
+
 - **Props (Properties):** Immutable data passed from a parent component down to a child component (unidirectional data flow). A child cannot mutate its own props.
 - **State:** Mutable data managed internally within a component that holds information that may change over the component's lifetime. Changing state triggers a re-render of the component and its children.
 
 ---
 
 ### Q13: What are React Fragments (`<React.Fragment>` or `<>...</>`) and why are they needed?
+
 **Answer:**
+
 - React components must return a **single root node** because a function can only return a single value, and reconciliation requires an anchor point.
 - Fragments allow grouping a list of children without adding extra wrapper nodes (like redundant `<div>`s) to the real DOM tree.
 - **`<React.Fragment key={id}>`**: Required when rendering a list of fragments that require a `key` prop (the short syntax `<>...</>` does not accept attributes or keys).
@@ -140,7 +167,9 @@ React reduces this to an $O(N)$ linear algorithm based on **two heuristic assump
 ---
 
 ### Q14: What are Portals (`ReactDOM.createPortal`) and when must you use them?
+
 **Answer:**
+
 - `ReactDOM.createPortal(child, containerDOMNode)` renders a React child into a DOM node that exists **outside the DOM hierarchy of the parent component**.
 - **When to Use:** Modals, tooltips, dialogs, and popovers that need to break out of parent containers with `overflow: hidden`, `z-index` stacking context traps, or transform constraints.
 - **Event Bubbling Behavior:** Even though the portal node lives elsewhere in the real DOM, synthetic events **bubble up through the React component tree**, not the real DOM tree!
@@ -160,7 +189,9 @@ function Modal({ isOpen, children }) {
 ---
 
 ### Q15: What are Error Boundaries and what types of errors do they NOT catch?
+
 **Answer:**
+
 - An **Error Boundary** is a class component that catches JavaScript errors anywhere in its child component tree, logs the errors, and displays a fallback UI instead of crashing the entire application.
 - Implemented via `static getDerivedStateFromError(error)` (to render fallback UI) and `componentDidCatch(error, errorInfo)` (to log errors to Sentry/Datadog).
 - **Errors NOT Caught by Error Boundaries:**
@@ -172,7 +203,9 @@ function Modal({ isOpen, children }) {
 ---
 
 ### Q16: How does Prop Drilling differ from Context API?
+
 **Answer:**
+
 - **Prop Drilling:** Passing props down through multiple layers of intermediate components that do not actually need the data, merely to deliver it to a deeply nested child.
 - **React Context:** Provides a way to pass data through the component tree without having to pass props down manually at every level (Teleporting state).
 - **Caution:** Context is designed for low-frequency global updates (Theme, Auth user, Locale). Storing high-frequency state (e.g. mouse coordinates, form inputs) in Context triggers unnecessary re-renders of all consuming components.
@@ -180,7 +213,9 @@ function Modal({ isOpen, children }) {
 ---
 
 ### Q17: What is Strict Mode (`<React.StrictMode>`) and why does it run effects twice?
+
 **Answer:**
+
 - StrictMode is a development-only tool that highlights potential problems in an application:
   1. Identifies components with unsafe lifecycles.
   2. Warns about legacy string refs and deprecated findDOMNode usage.
@@ -193,7 +228,9 @@ function Modal({ isOpen, children }) {
 ---
 
 ### Q18: What is the difference between Declarative and Imperative programming in React?
+
 **Answer:**
+
 - **Imperative Programming (Vanilla JS / jQuery):** You explicitly describe *every step* of how to mutate the DOM:
   `const btn = document.querySelector('button'); btn.classList.add('active'); btn.textContent = 'Saved';`
 - **Declarative Programming (React):** You describe *what the UI should look like* for a given state:
@@ -203,8 +240,10 @@ function Modal({ isOpen, children }) {
 ---
 
 ### Q19: How do you pass data from a Child Component to a Parent Component?
+
 **Answer:**
 In React's unidirectional data flow, data flows down via props. To send data upwards:
+
 1. The Parent defines a callback function: `const handleSelect = (data) => { ... };`.
 2. The Parent passes this function to the Child as a prop: `<Child onSelect={handleSelect} />`.
 3. The Child invokes the callback with arguments: `props.onSelect(childData)`.
@@ -212,7 +251,9 @@ In React's unidirectional data flow, data flows down via props. To send data upw
 ---
 
 ### Q20: What are Default Props in modern React functional components?
+
 **Answer:**
+
 - In legacy React, `Component.defaultProps = { theme: 'dark' }` was used.
 - In modern functional components, `defaultProps` is deprecated. Use **native ES6 default parameter values** directly in the function signature:
 

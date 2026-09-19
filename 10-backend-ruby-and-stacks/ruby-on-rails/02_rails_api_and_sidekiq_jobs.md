@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Rails API mode ek restaurant ke **Express Drive-Thru Window** jaisa hai: Dining room aur plates (HTML Views, Sprockets) ko hata diya gaya hai, sirf fast JSON deliver hota hai.
 **Sidekiq** ek **Dedicated Delivery Boy** ki tarah hai: Customer ne pizza order kiya, counter executive ne receipt print karke kitchen hook (Redis Queue) par latka di aur customer ko 2 second mein receipt pakda di. Delivery boy (Sidekiq worker) background mein pizza pack karke delivery karta rehta hai.
 

@@ -18,4 +18,5 @@
 ---
 
 ## 🎯 Coding Exercises
+
 * [**`coding_simple_rag_pipeline_python.md`**](./coding_simple_rag_pipeline_python.md) — Live coding implementation of an in-memory RAG pipeline in pure Python.

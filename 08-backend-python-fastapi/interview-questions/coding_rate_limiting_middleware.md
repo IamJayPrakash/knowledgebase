@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Rate limiter ek club ke bouncer ki tarah hai. Rules hain: "Ek minute mein ek aadmi 60 se zyada drinks nahi le sakta". Bouncer har customer ke aane ka exact time stamp register karta hai. Agar pichle 60 seconds ke andar 60 stamps ho chuke hain, toh bouncer bolta hai: `"HTTP 429: Too Many Requests, bhai 5 second wait kar!"`.
 
 ---

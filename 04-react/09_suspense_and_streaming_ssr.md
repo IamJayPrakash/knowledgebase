@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Traditional SSR (Old School)**: Ek restaurant jahan jab tak starter, main course, aur dessert teeno ek sath ready nahi hote, tab tak waiter table par ek glass paani bhi nahi rakhta! Customer bhooka baitha rehta hai (**All-or-Nothing Waterfall Bottleneck**).
 **Streaming SSR with Suspense**: Jaise hi roti bani, waiter table par roti rakh deta hai; daal ban rahi hai toh uski jagah ek card rakh deta hai: "Daal 2 minute mein aa rahi hai" (`<Suspense fallback={<Skeleton />}>`). Aur sabse mazedaar baat: Agar customer pehle roti khana chahta hai, toh waiter pehle usi par ghee lagata hai (**Selective Hydration based on User Interaction**)!
 
@@ -107,6 +108,7 @@ export function AppShell({ postResource, commentsResource }) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "React 18's Streaming SSR and Suspense overhaul the traditional all-or-nothing SSR paradigm. Previously, SSR required fetching all server data, rendering the entire HTML document, and loading all JavaScript before hydrating the page. With `renderToPipeableStream` and Suspense boundaries, the server streams the initial UI shell instantly using HTTP chunked transfer. Slower data sections stream progressively as HTML replacement scripts. Furthermore, Selective Hydration allows React to hydrate distinct Suspense subtrees independently, reprioritizing hydration on-the-fly based on user interaction clicks."
 
 ---

@@ -14,6 +14,7 @@
 ---
 
 ## 📌 Additional Architecture Reference Guides
+
 - 🌟 [Top Angular 21 Architecture Interview Guide](./angular21_top_interview_questions.md)
 - 🚀 [Angular 21 Signals & Reactivity Deep Dive](../01_angular21_signals_and_reactivity.md)
 - ⚡ [Zoneless Architecture & Change Detection](../02_angular21_zoneless_architecture.md)

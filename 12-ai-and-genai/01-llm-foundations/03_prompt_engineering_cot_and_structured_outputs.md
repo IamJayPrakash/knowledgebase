@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you hire a brilliant college intern who has read every textbook in the world but has **zero common sense** about your specific company's formats:
+
 - **Zero-Shot**: You say: *"Iss receipt ka total nikaal ke mujhe do."* (The intern might give you a 2-page essay or a casual WhatsApp reply).
 - **Few-Shot**: You hand them **two completed examples**: *"Dekho, pehle invoice ka output aisa tha, doosre ka aisa tha. Ab teesra karo."* The intern instantly mimics the exact style.
 - **Chain-of-Thought (CoT)**: Instead of demanding an instant answer for a complex math riddle, you instruct: *"Seedha final number mat bolo. Pehle rough paper par Step 1, Step 2 likho, phir final answer box mein dalo."* By writing intermediate steps, they catch their own calculation errors.
@@ -13,7 +15,8 @@ Imagine you hire a brilliant college intern who has read every textbook in the w
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Zero-Shot vs Few-Shot**:
    - Zero-shot asks the model to execute a task without examples.
    - Few-shot provides $K$ input-output demonstrations directly in the prompt context. It aligns output formatting and style without model fine-tuning.
@@ -22,19 +25,21 @@ Imagine you hire a brilliant college intern who has read every textbook in the w
    - Zero-Shot CoT: Appending the trigger phrase *"Let's think step by step"* prompts the model to generate reasoning tokens before committing to an answer.
    - Few-Shot CoT: Providing step-by-step reasoning demonstrations substantially improves performance on multi-step reasoning, mathematical proofs, and logic puzzles.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **Tree of Thoughts (ToT)**:
    - Generalizes CoT by exploring multiple reasoning branches concurrently. The model generates candidate steps, evaluates the viability of each branch, and uses depth-first or breadth-first search to backtrack when a path leads to a dead end.
-5. **ReAct Prompting (Reason + Act)**:
+2. **ReAct Prompting (Reason + Act)**:
    - Combines reasoning traces with task-specific actions:
      `Thought: ... -> Action: [Tool Name] -> Action Input: ... -> Observation: ... -> Thought: ... -> Final Answer`.
-6. **Structured Outputs (JSON Mode vs Constrained Decoding)**:
+3. **Structured Outputs (JSON Mode vs Constrained Decoding)**:
    - **Naive JSON Mode**: Asking the LLM in plain English to "Return only valid JSON" frequently yields malformed JSON, unescaped quotes, or markdown wrappers (` ```json `).
    - **Constrained Decoding / JSON Schema**: Modern inference engines enforce a context-free grammar (CFG) or JSON Schema directly at the token sampling step. Non-compliant tokens receive an attention logit of $-\infty$, guaranteeing **100% syntactically valid JSON**.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 7. **Context Priming & Sycophancy Bias**: If your few-shot examples or system prompt include biased assertions ("Don't you agree that X is bad?"), the LLM will hallucinate justifications to flatter the user prompt.
-8. **Token Bloat in Long Few-Shot Prompts**: Large few-shot prompts consume substantial context window budget and increase TTFT (Time-To-First-Token). Use semantic retrieval to dynamically inject only the top-2 most relevant examples instead of static 10-shot templates.
+2. **Token Bloat in Long Few-Shot Prompts**: Large few-shot prompts consume substantial context window budget and increase TTFT (Time-To-First-Token). Use semantic retrieval to dynamically inject only the top-2 most relevant examples instead of static 10-shot templates.
 
 ---
 
@@ -201,17 +206,20 @@ for entity in parsed_analysis.entities:
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Prompt engineering in production has evolved far beyond creative phrasing into rigorous interface design. We apply three core techniques: Few-Shot In-Context Learning, Chain-of-Thought (CoT) reasoning, and Constrained Structured Outputs. 
-> Few-shot learning grounds the model's stylistic variance by conditioning the attention heads on concrete demonstrations. For reasoning-heavy tasks, Chain-of-Thought forces the autoregressive generation to emit intermediate reasoning tokens into the context window, dramatically improving accuracy by letting the model compute partial solutions before generating the final conclusion. 
+>
+> *"Prompt engineering in production has evolved far beyond creative phrasing into rigorous interface design. We apply three core techniques: Few-Shot In-Context Learning, Chain-of-Thought (CoT) reasoning, and Constrained Structured Outputs.
+> Few-shot learning grounds the model's stylistic variance by conditioning the attention heads on concrete demonstrations. For reasoning-heavy tasks, Chain-of-Thought forces the autoregressive generation to emit intermediate reasoning tokens into the context window, dramatically improving accuracy by letting the model compute partial solutions before generating the final conclusion.
 > Crucially, for production backend integration, we never rely on unconstrained regex parsing. We use modern constrained decoding—such as OpenAI Structured Outputs or Pydantic with Outlines/Instructor—which guides the model's logits using context-free grammars (CFGs) to mathematically guarantee 100% type-safe JSON conforming to our schema."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Healthcare claims pre-authorization automation SaaS.  
 **Incident**: A legacy medical coding prompt parsed incoming hospital clinical notes using naive zero-shot prompts asking for JSON. During high-volume surges, 7.3% of API responses returned corrupted JSON (missing trailing brackets, unexpected markdown backticks, or hallucinated ICD-10 keys). This triggered thousands of unhandled parser exceptions in the billing microservice.  
 **Root Cause**: The prompt relied on soft natural language guidance without schema enforcement, and did not include a scratchpad field. When faced with complex multi-page patient charts, the model attempted to produce ICD codes immediately without reasoning through exclusions.  
 **Resolution**:
+
 1. Implemented **Pydantic Structured Outputs** via OpenAI `response_format={"type": "json_schema"}` to enforce valid JSON at the sampling logit level.
 2. Injected a mandatory `clinical_rationale` (CoT) array field as the first key in the Pydantic model so the LLM had to write clinical justifications before emitting numerical codes.
 3. Added a 2-shot dynamic exemplar retriever using vector similarity to inject relevant diagnosis examples into the context.  

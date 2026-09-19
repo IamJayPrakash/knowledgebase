@@ -30,6 +30,7 @@
 ## 🎯 Master Question Index (1 - 100)
 
 ### Part 1: Foundations, Types, Coercion & Operators (Q1 - Q20)
+
 * [`01_js_foundations_types_and_operators_qna.md`](./01_js_foundations_types_and_operators_qna.md)
   1. Primitive data types and memory layout (Stack vs Heap).
   2. `typeof null === 'object'` and `typeof NaN === 'number'` historical context.
@@ -53,6 +54,7 @@
   20. Tagged template literals and sanitization.
 
 ### Part 2: Closures, Lexical Scope, Execution Context & `this` (Q21 - Q40)
+
 * [`02_js_closures_scope_and_execution_context_qna.md`](./02_js_closures_scope_and_execution_context_qna.md)
   21. Execution Context creation vs execution phases.
   22. Call Stack LIFO structure and Stack Overflow triggers.
@@ -76,6 +78,7 @@
   40. `delete obj.prop` vs `delete varName`.
 
 ### Part 3: Objects, Prototypes, Inheritance & ES6 Classes (Q41 - Q60)
+
 * [`03_js_objects_prototypes_and_classes_qna.md`](./03_js_objects_prototypes_and_classes_qna.md)
   41. The Prototype Chain and property delegation.
   42. `__proto__` vs `prototype` differences and pointers.
@@ -99,6 +102,7 @@
   60. `Symbol.toPrimitive` and custom object type coercion.
 
 ### Part 4: Async Architecture, Event Loop, Promises & Concurrency (Q61 - Q80)
+
 * [`04_js_async_event_loop_and_promises_qna.md`](./04_js_async_event_loop_and_promises_qna.md)
   61. Complete Event Loop diagram: Call Stack, Microtasks, Render, Macrotasks.
   62. Complex output tracing snippet breakdown (Promises + Timers + Microtasks).
@@ -122,6 +126,7 @@
   80. Error handling differences between Microtasks and Macrotasks.
 
 ### Part 5: V8 Internals, Memory Management, DOM & Modern ECMAScript (Q81 - Q100)
+
 * [`05_js_v8_memory_dom_and_modern_es_qna.md`](./05_js_v8_memory_dom_and_modern_es_qna.md)
   81. V8 Engine pipeline: Ignition interpreter vs TurboFan compiler.
   82. Hidden Classes (Shapes) and Inline Caching (IC) optimization.
@@ -147,6 +152,7 @@
 ---
 
 ## 💻 Machine Coding & Polyfill Challenges
+
 * [`coding_polyfill_promise_all.md`](./coding_polyfill_promise_all.md) — Implement `Promise.all` with fail-fast rejection.
 * [`coding_deep_clone.md`](./coding_deep_clone.md) — Circular-reference safe recursive deep clone.
 * [`coding_debounce_and_throttle.md`](./coding_debounce_and_throttle.md) — Debounce & Throttle with leading/trailing options.

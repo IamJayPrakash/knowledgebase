@@ -14,28 +14,32 @@ You may assume that each input would have **exactly one solution**, and you may 
 
 You can return the answer in any order.
 
-### 📥 Example 1:
+### 📥 Example 1
+
 ```text
 Input: nums = [2, 7, 11, 15], target = 9
 Output: [0, 1]
 Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 ```
 
-### 📥 Example 2:
+### 📥 Example 2
+
 ```text
 Input: nums = [3, 2, 4], target = 6
 Output: [1, 2]
 Explanation: Because nums[1] + nums[2] == 6, we return [1, 2].
 ```
 
-### 📥 Example 3:
+### 📥 Example 3
+
 ```text
 Input: nums = [3, 3], target = 6
 Output: [0, 1]
 Explanation: Both elements are identical, but located at different indices [0, 1].
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * `2 <= nums.length <= 10^4` *(Notice: N can be up to 10,000. An $O(N^2)$ algorithm will take $10^8$ operations, risking Time Limit Exceeded!)*
 * `-10^9 <= nums[i] <= 10^9` *(Numbers can be negative, zero, or very large integers).*
 * `-10^9 <= target <= 10^9` *(Target can also be negative).*
@@ -48,10 +52,11 @@ Explanation: Both elements are identical, but located at different indices [0, 1
 > **Hinglish Intuition:**
 > Socho aap ek dukaan me ho aur aapki jeb me total **₹9** hain (`target = 9`).  
 > Counter par items rakhe hain: `[₹2, ₹7, ₹11, ₹15]`.  
-> 
+>
 > * **Newbie Tareeka (Brute Force):** Aap pehle ₹2 ka item uthate ho, fir dukaan ke saare baaki items ek-ek karke check karte ho: *Kya 2+7=9 hai?* Haan! Lekin agar array 10,000 items ka hota, toh aapko har item ke liye baaki 9,999 items baar-baar dekhne padte (Double for-loop: bohot thaka dene wala aur slow).
-> 
+>
 > * **Smart Tareeka (Hash Map Diary):** Aap apne paas ek choti **Notebook (Hash Map)** rakhte ho.  
+>
 > 1. Aapne pehla item dekha: **₹2**. Aapko kitna aur chahiye ₹9 banane ke liye? `9 - 2 = 7`.  
 > 2. Aapne notebook khol ke dekha: *Kya maine pehle kabhi ₹7 dekha hai?* Nahi!  
 >    Toh aapne notebook me note kar liya: `Notebook[2] = Index 0` *(Mujhe ₹2 mila tha index 0 par)*.  
@@ -78,11 +83,13 @@ Time Complexity: O(1) (Constant Time Instant Lookup)
 ```
 
 ### ❓ When to Apply a Hash Map?
+
 1. Whenever you need **$O(1)$ fast lookups** instead of re-scanning an array.
 2. Whenever you need to remember **frequencies** or **indices** of elements you have already visited.
 3. Whenever a problem asks for a **pair, complement, or frequency** (e.g., $A + B = \text{Target} \implies B = \text{Target} - A$).
 
 ### 🚫 When NOT to Apply a Hash Map?
+
 1. When memory is strictly limited (Hash Maps require $O(N)$ extra heap memory).
 2. When the array is already **sorted** (In sorted arrays, **Two Pointers** gives $O(1)$ extra space without needing a Hash Map).
 3. When you need elements in strict sorted order (Standard hash tables do not preserve sorting).
@@ -119,7 +126,8 @@ Iteration 1 (i = 1):
 
 A beginner checks every possible pair using two nested `for` loops.
 
-#### 💡 How the Newbie Thinks:
+#### 💡 How the Newbie Thinks
+
 *"Let me take the first number, and compare it with the second, third, fourth... If none match, take the second number and compare with the third, fourth..."*
 
 ```javascript
@@ -141,7 +149,8 @@ function twoSumBruteForce(nums, target) {
 }
 ```
 
-#### ⚠️ Why This Fails in Production & Interviews:
+#### ⚠️ Why This Fails in Production & Interviews
+
 * For an array of size $N = 10,000$, $N^2 = 100,000,000$ (100 Million comparisons).
 * The algorithm will get **Time Limit Exceeded (TLE)** on modern test suites.
 
@@ -177,7 +186,8 @@ function twoSumTwoPass(nums, target) {
 }
 ```
 
-#### ⚠️ Intermediate Limitations:
+#### ⚠️ Intermediate Limitations
+
 * It makes **two full passes** over the array.
 * It requires careful edge-case logic to prevent an element from matching with itself.
 
@@ -188,6 +198,7 @@ function twoSumTwoPass(nums, target) {
 A senior engineer combines lookup and insertion into a **single pass**. Each element looks *backwards* at what has already been seen. Self-matching is mathematically impossible!
 
 #### JavaScript / TypeScript Implementation
+
 ```javascript
 // Time Complexity: O(N) | Space Complexity: O(N)
 function twoSum(nums, target) {
@@ -216,6 +227,7 @@ function twoSum(nums, target) {
 ```
 
 #### Python 3 Implementation
+
 ```python
 # Time Complexity: O(N) | Space Complexity: O(N)
 def twoSum(nums: list[int], target: int) -> list[int]:
@@ -244,12 +256,12 @@ def twoSum(nums: list[int], target: int) -> list[int]:
 ## 🎯 The Senior Interview Pitch (Say Exactly This!)
 
 > **Interviewer:** *"Walk me through how you would solve Two Sum."*
-> 
+>
 > **You:**  
 > *"The intuitive brute-force solution is to check every pair using two nested loops, giving an $O(N^2)$ time complexity and $O(1)$ space. However, for $N = 10,000$, this will exceed execution limits.*
-> 
+>
 > *We can optimize this to **$O(N)$ linear time** by trading space for time using a **Hash Map**. In a single pass, for each element `x`, we calculate its complement `target - x`. We check if this complement exists in our map. If it does, we immediately return the complement's stored index and the current index. If not, we record `x` and its index in the map.*
-> 
+>
 > *This guarantees an optimal **$O(N)$ time complexity** because Hash Map lookups and insertions run in $O(1)$ average time, with **$O(N)$ auxiliary space**."*
 
 ---
@@ -259,7 +271,7 @@ def twoSum(nums: list[int], target: int) -> list[int]:
 * **Situation:** In an automated financial accounting system, our batch reconciliation job was matching 50,000 daily bank credit records against pending customer invoice ledger balances.
 * **The Problem:** The legacy code utilized a nested loop ($O(N^2)$) comparing transactions. The nightly reconciliation job was taking **48 minutes** to finish, blocking midnight reporting pipelines.
 * **The Action:** I refactored the matching service to use the **Two Sum Hash Map pattern**. We loaded the invoice balances into an in-memory Hash Map indexed by balance amounts, and streamed the bank credits in a single $O(N)$ pass.
-* **The Result & Metrics:** 
+* **The Result & Metrics:**
   * Execution time plummeted from **48 minutes down to 6.2 seconds** (99.7% speedup).
   * Completely eliminated database lock timeouts during end-of-day settlement.
 
@@ -268,6 +280,7 @@ def twoSum(nums: list[int], target: int) -> list[int]:
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this **Complement Lookup Pattern**, you can solve:
+
 1. **LeetCode 15 (3Sum):** Sort array, fix element `i`, and turn the remaining problem into a Two Sum target search.
 2. **LeetCode 167 (Two Sum II - Input Array Is Sorted):** When array is sorted, replace Hash Map with **Two Pointers** ($O(1)$ space).
 3. **LeetCode 560 (Subarray Sum Equals K):** Uses a Hash Map storing **Prefix Sums** to find subarrays summing to $K$ in $O(N)$ time.

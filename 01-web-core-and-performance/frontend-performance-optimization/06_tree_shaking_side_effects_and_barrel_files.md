@@ -1,7 +1,9 @@
 # Tree-Shaking, SideEffects & Barrel File Optimization Masterclass
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Tree-Shaking: Ek aam ke ped ko jor se hilana—sirf wahi aam (functions) neeche girenge jo sach mein pake hue hain, sukhi lakdiya (unused code) ped par hi chhoot jayengi! Agar aapne 10,000 lines ki library se sirf 1 chota function `add(a, b)` import kiya hai, toh production bundle mein baaki 9,999 lines nahi aani chahiye!
 > - Barrel File (`index.ts`): Ek aisi directory jahan 500 files ek hi darwaze (`index.ts`) se bahar aati hain. Agar aapko sirf 1 panna chahiye, tab bhi compiler ko saare 500 panno ki checking karni padti hai, jisse build time aur bundle size dono blast ho jate hain!
 >
@@ -11,7 +13,8 @@
 
 ## 2. 📌 Core Mechanics & Build Internals (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **What is Tree-Shaking?**: Dead-code elimination performed by modern bundlers (Vite, Rollup, Webpack, esbuild) that removes unused exports from the final JavaScript production bundle.
 - **Strict Requirement: ES Modules (ESM)**:
   - Tree-shaking **ONLY works with ES Modules** (`import` / `export`).
@@ -19,7 +22,8 @@
 - **The Barrel File Trap (`index.ts`)**:
   - Writing `import { Button } from '@/components'` where `components/index.ts` re-exports 80 components forces the bundler to parse and bundle all 80 components (and their sub-dependencies!) if side effects cannot be disproven.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **`"sideEffects": false` in `package.json`**:
   - By default, bundlers assume any imported file might execute global side effects (modifying `window`, polyfills, CSS imports).
   - Adding `"sideEffects": false` in `package.json` explicitly promises the bundler: *"If an export from this module is not imported, you can safely drop the entire file and its sub-imports!"*
@@ -121,6 +125,7 @@ export default defineConfig({
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What causes tree-shaking to fail in modern frontend builds, and how do you resolve it?"
 >
 > **You:** "Tree-shaking fails primarily due to three reasons: First, consuming CommonJS dependencies that cannot be statically analyzed at build time. Second, missing `"sideEffects": false` declarations in `package.json`, which forces bundlers to retain unused files under the assumption they alter global state. Third, monolithic barrel files (`index.ts`) that re-export hundreds of components, pulling in entire dependency subtrees. I resolve this by enforcing ES Modules, declaring `"sideEffects": ["*.css"]`, using `/*#__PURE__*/` comments on top-level factory calls, and configuring lint rules like `no-restricted-imports` to force direct path imports (`import { Button } from '@ui/button'`)."
@@ -128,7 +133,8 @@ export default defineConfig({
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A Next.js customer portal bundle size ballooned to 2.4MB on the initial landing page, driving mobile LCP over 5.2 seconds.
-* **Task / Challenge:** Reduce the initial vendor JavaScript bundle from 2.4MB to under 300KB.
-* **Action Taken:** Analyzed the bundle using `@next/bundle-analyzer`. Discovered that importing a single icon from an internal icon library `import { CheckIcon } from '@company/icons'` pulled in 1,800 SVG icons and Lodash because the icon package lacked `"sideEffects": false` in its `package.json` and used a giant barrel file. Added `"sideEffects": false`, migrated to SVGR direct imports, and replaced `lodash` with `lodash-es`.
-* **Result & Business Impact:** Slashed initial bundle size from 2.4MB down to 184KB (a 92.3% reduction), accelerating LCP by 2.8 seconds and saving $18,000 monthly in CDN egress bandwidth.
+
+- **Situation:** A Next.js customer portal bundle size ballooned to 2.4MB on the initial landing page, driving mobile LCP over 5.2 seconds.
+- **Task / Challenge:** Reduce the initial vendor JavaScript bundle from 2.4MB to under 300KB.
+- **Action Taken:** Analyzed the bundle using `@next/bundle-analyzer`. Discovered that importing a single icon from an internal icon library `import { CheckIcon } from '@company/icons'` pulled in 1,800 SVG icons and Lodash because the icon package lacked `"sideEffects": false` in its `package.json` and used a giant barrel file. Added `"sideEffects": false`, migrated to SVGR direct imports, and replaced `lodash` with `lodash-es`.
+- **Result & Business Impact:** Slashed initial bundle size from 2.4MB down to 184KB (a 92.3% reduction), accelerating LCP by 2.8 seconds and saving $18,000 monthly in CDN egress bandwidth.

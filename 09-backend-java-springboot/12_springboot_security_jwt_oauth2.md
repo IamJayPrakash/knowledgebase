@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Spring Security ek **Multi-Tier Airport Border Security** ki tarah hai:
+
 1. **SecurityFilterChain**: Har passenger ko alag-alag security counters se guzarna padta hai (Passport check, baggage scanner, metal detector).
 2. **OncePerRequestFilter (JWT Check)**: Guard passenger ka wristband (JWT Token) scan karta hai, dekhta hai ki signature valid hai ya nahi, aur passenger ka verified identity badge (`SecurityContextHolder`) pehnata hai.
 3. **Method Security (`@PreAuthorize`)**: VIP Lounge ke gate par ek aur guard khada hai jo sirf un logo ko andar jane deta hai jinke badge pe `ROLE_ADMIN` likha ho!
@@ -61,6 +63,7 @@ public class SecurityConfig {
     }
 }
 ```
+
 ---
 
 ## 4. 📊 Visual Architecture Diagram
@@ -92,6 +95,7 @@ Spring Security 6 Stateless JWT Filter Chain:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "How do you implement stateless JWT authentication in Spring Boot 3 and Spring Security 6?"
 >
 > **You:** "In Spring Boot 3 and Spring Security 6, authentication is configured declaratively using a `SecurityFilterChain` bean, deprecating the legacy `WebSecurityConfigurerAdapter`. We set session creation policy to `SessionCreationPolicy.STATELESS`, disable CSRF because JWTs stored in headers are immune to CSRF, and insert a custom `JwtAuthenticationFilter` before `UsernamePasswordAuthenticationFilter`. The filter parses the Bearer token, validates the HMAC-SHA256 or RSA cryptographic signature and expiration, extracts username and authorities, and populates `SecurityContextHolder`. Method-level authorization is enforced cleanly using `@EnableMethodSecurity` and `@PreAuthorize('hasRole(...)')`."
@@ -99,7 +103,8 @@ Spring Security 6 Stateless JWT Filter Chain:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
+
 * **Situation:** A banking microservice ecosystem suffered authentication bottlenecks because each downstream service made an internal REST call back to the Auth Service to validate sessions on every single API request, adding 45ms overhead.
-* **Task / Challenge:** Reduce authentication latency from 45ms to $< 1	ext{ms}$ while maintaining zero-trust token revocation capability.
+* **Task / Challenge:** Reduce authentication latency from 45ms to $< 1 ext{ms}$ while maintaining zero-trust token revocation capability.
 * **Action Taken:** Migrated to asymmetric RSA-256 JWT tokens. Downstream Spring Boot 3 services verified tokens locally in memory using the Auth Service's public key (0ms network overhead). For instant token revocation upon logout, integrated Redis token blacklisting checking a high-speed in-memory set during JWT filter execution.
 * **Result & Business Impact:** Cut authentication overhead from 45ms to 0.4ms across 120 microservices, reducing global API response times by 35%.

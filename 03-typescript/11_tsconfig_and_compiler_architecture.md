@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 TypeScript Compiler (`tsc`) ek **High-Tech Airport Customs Scanner** ki tarah hai, aur `tsconfig.json` us scanner ki **Sensitivity Settings File** hai.
+
 - Agar aapne `strict: true` rakha hai, toh scanner har choti se choti suspicious cheez (`any`, uninitialized variables, null access) par beep karega.
 - Agar aapne sensitivity kam kar di (`noImplicitAny: false`), toh koi bhi illegal bag leke nikal jayega aur airport ke bahar (production runtime) crash ho jayega.
 
@@ -92,6 +94,7 @@ TypeScript Compiler (`tsc`) ek **High-Tech Airport Customs Scanner** ki tarah ha
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "A production-grade `tsconfig.json` balances maximum type safety with fast build performance. Beyond turning on `strict: true`, the most critical flag for preventing runtime bugs is `noUncheckedIndexedAccess`, which forces TypeScript to type dictionary and array lookups as `T | undefined` rather than assuming the element always exists. For performance, setting `skipLibCheck: true` prevents redundant re-checking of third-party node_modules declarations, while enabling `incremental: true` allows `tsc` to persist build state graphs and drastically accelerate developer compilation loops."
 
 ---

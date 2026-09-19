@@ -1,6 +1,7 @@
 # JavaScript Objects, Destructuring, Spread/Rest & Deep vs Shallow Cloning
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Shallow copy ek ghar ki chaabi duplicate karne jaisa hai (Bahari darwaza naya hai, par andar ka kamra wahi ek hi hai!). Agar guest room mein aag lagegi, toh dono chaabi walo ke liye lagegi. Deep copy ek naya ghar hubahu banana hai (Har kamra, sofa, furniture alag memory mein create hota hai).
 >
 > **Real-World Analogy:** A photocopy of a page containing a web link (Shallow Copy): you have a separate piece of paper, but the link points to the exact same website. A Deep Copy prints out the entire website content on fresh physical paper.
@@ -9,7 +10,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Object Destructuring**: Extracting properties into individual variables (`const { name, age = 18 } = user`).
 - **Renaming / Aliasing**: `const { name: userName } = user`.
 - **Rest Operator (`...`)**: Gathers remaining properties into a new object (`const { id, ...details } = user`).
@@ -18,7 +20,8 @@
   - Shallow Copy (`Object.assign({}, obj)` or `{ ...obj }`): Only copies the top-level primitives. Nested objects share the exact same reference on the Heap!
   - Deep Copy (`structuredClone(obj)` or custom recursive copier): Creates brand-new copies of all nested objects and arrays.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **`JSON.parse(JSON.stringify(obj))` Pitfalls**:
   - Drops `undefined`, functions, and `Symbol` properties completely.
   - Converts `Date` objects to ISO string representations instead of preserving Date instances.
@@ -132,6 +135,7 @@ console.log('Distinct Objects:', clonedUser !== originalUser);      // true
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Why shouldn't you use `JSON.parse(JSON.stringify(object))` for deep cloning in production?"
 >
 > **You:** "While `JSON.parse(JSON.stringify())` works for simple primitive trees, it breaks down in production. It silently strips `undefined`, functions, and `Symbol` keys, coerces `Date` objects into plain strings, converts `NaN` to `null`, and throws a fatal uncaught exception when encountering circular references. In modern Node.js and browsers, we should prefer native `structuredClone()`, or use an explicit recursive cloner with a `WeakMap` to cleanly handle cyclic references and special object types."
@@ -139,7 +143,8 @@ console.log('Distinct Objects:', clonedUser !== originalUser);      // true
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** In an insurance underwriting platform, policy drafts allowed underwriters to test quote adjustments. When an underwriter altered a draft deductible, the live underwriting policy was inadvertently mutated.
-* **Task / Challenge:** Tracking down why production policies were changing without a save action being submitted.
-* **Action Taken:** Root cause analysis revealed the draft creation service was doing a shallow spread `{ ...livePolicy }`. While top-level fields were cloned, the `pricingTiers` array and nested discount objects pointed to the production database cache. Replaced the shallow spread with `structuredClone()`.
-* **Result & Business Impact:** Completely eliminated policy cross-contamination and passed regulatory financial audits with zero data corruption.
+
+- **Situation:** In an insurance underwriting platform, policy drafts allowed underwriters to test quote adjustments. When an underwriter altered a draft deductible, the live underwriting policy was inadvertently mutated.
+- **Task / Challenge:** Tracking down why production policies were changing without a save action being submitted.
+- **Action Taken:** Root cause analysis revealed the draft creation service was doing a shallow spread `{ ...livePolicy }`. While top-level fields were cloned, the `pricingTiers` array and nested discount objects pointed to the production database cache. Replaced the shallow spread with `structuredClone()`.
+- **Result & Business Impact:** Completely eliminated policy cross-contamination and passed regulatory financial audits with zero data corruption.

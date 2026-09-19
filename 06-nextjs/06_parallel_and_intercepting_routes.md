@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are browsing **Instagram or Pinterest**:
+
 - **Normal Web Navigation**: Jab aap kisi photo par click karte ho, toh purana page gayab ho jata hai aur ek naya blank page khulta hai jisme sirf wo photo hoti hai. Agar aapko wapas feed dekhni hai, toh browser ka back button dabana padta hai aur feed wapas load hoti hai.
 - **Intercepting Routes (`(..)photo/[id]`)**:
   - Jab aap feed scroll karte waqt photo par click karte ho, toh Next.js route ko **"intercept" (chura)** leta hai!
@@ -16,7 +18,8 @@ Imagine you are browsing **Instagram or Pinterest**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Parallel Routes (`@folder` convention)**:
    - Allows rendering one or more pages concurrently within the same parent layout using named slots.
    - Defined using the `@slot` directory naming convention (e.g., `app/dashboard/@analytics/page.tsx` and `app/dashboard/@metrics/page.tsx`).
@@ -29,18 +32,20 @@ Imagine you are browsing **Instagram or Pinterest**:
      - `(..)(..)folder`: Intercepts routes **two levels up**.
      - `(...)folder`: Intercepts routes from the **root app directory**.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **The Shareable Modal Pattern**:
    - Clicking a photo link from `/feed` intercepts to `(..)photo/[id]` and renders inside `@modal`.
    - Direct hard-refresh or sharing the URL `/photo/101` renders the standalone `app/photo/[id]/page.tsx`.
-4. **The Critical `default.js` Convention**:
+2. **The Critical `default.js` Convention**:
    - During hard browser refreshes or unrelated route navigations, Next.js needs to know what to render in parallel slots that do not match the current URL.
    - If `default.tsx` is missing from an unmatched slot during a hard reload, Next.js throws a **404 Not Found**. Always define `default.tsx` returning `null` or a fallback component.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **Dismissing Intercepted Modals**:
    - Closing an intercepted modal requires calling `router.back()` to pop the browser history stack, restoring the previous URL without triggering a full page re-render.
-6. **Independent Error Boundaries per Slot**:
+2. **Independent Error Boundaries per Slot**:
    - Each parallel slot can have its own `error.tsx` and `loading.tsx`, ensuring that an error in `@analytics` does not crash the main dashboard `@metrics` slot.
 
 ---
@@ -159,19 +164,22 @@ export function InterceptedDetailModal({ params }: { params: { id: string } }) {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Next.js App Router provides two advanced routing primitives that revolutionize complex multi-view applications: Parallel Routes and Intercepting Routes. 
-> Parallel Routes—denoted by `@slot` directory conventions—allow developers to render multiple independent sub-pages simultaneously within the same parent layout. Each slot maintains its own independent loading and error boundaries, preventing a slow analytics query from blocking primary dashboard content. 
-> Intercepting Routes—denoted by `(..)folder` conventions—allow developers to intercept client-side transitions to display contextual overlays like modals while updating the browser address bar. 
-> The killer advantage is Shareability: if a user clicks a gallery item, it intercepts into an in-context modal; but if they refresh the page or share the link, Next.js renders the full standalone page without client-side state loss. 
+>
+> *"Next.js App Router provides two advanced routing primitives that revolutionize complex multi-view applications: Parallel Routes and Intercepting Routes.
+> Parallel Routes—denoted by `@slot` directory conventions—allow developers to render multiple independent sub-pages simultaneously within the same parent layout. Each slot maintains its own independent loading and error boundaries, preventing a slow analytics query from blocking primary dashboard content.
+> Intercepting Routes—denoted by `(..)folder` conventions—allow developers to intercept client-side transitions to display contextual overlays like modals while updating the browser address bar.
+> The killer advantage is Shareability: if a user clicks a gallery item, it intercepts into an in-context modal; but if they refresh the page or share the link, Next.js renders the full standalone page without client-side state loss.
 > In production, the most critical architectural rule is defining `default.tsx` for every parallel slot; without it, unmatched slots trigger 404 errors during hard page refreshes."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Creative Portfolio & Photography Marketplace.  
 **Incident**: Users browsing photo feeds complained that clicking a photo opened a full-page view, losing their scroll position when clicking "Back". When engineers built a basic React modal popup, users could not share photo URLs or use browser Back/Forward navigation, causing a 35% drop in viral sharing traffic.  
 **Root Cause**: Traditional SPAs forced a rigid binary choice: either full page routes (URL-friendly, but breaks feed scroll) or local state modals (preserves scroll, but un-shareable with broken history).  
 **Resolution**:
+
 1. Refactored the gallery using **Parallel Routes (`@modal`)** and **Intercepting Routes (`(..)photo/[id]`)**.
 2. Soft navigations inside the feed intercept to render a lightbox modal over the feed while updating the URL to `/photo/:id`.
 3. Hard refreshes or external shares route directly to `app/photo/[id]/page.tsx` for full standalone SSR.  

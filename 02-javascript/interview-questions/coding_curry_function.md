@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Currying ek assembly line pizza counter ki tarah hai. Ek bar mein pura pizza lene ke bajaye, aap pehle crust select karte ho `order('thin')`, fir agle counter pe cheese `('mozzarella')`, fir agle counter pe toppings `('jalapeno')`. Jab sare mandatory ingredients poore ho jate hain, chef pizza deliver kar deta hai!
 
 ---

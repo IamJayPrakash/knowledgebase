@@ -10,12 +10,12 @@
 
 > A production-grade, zero-to-advanced engineering reference and technical interview preparation repository for **Software Engineers, Senior Technical Leads, Full-Stack Developers (MERN/MEAN), Java/Spring Boot Engineers, AI/LLM Specialists, and System Architects (0 to 8+ Years Experience)**.
 
-
 ---
 
 ## 🌟 The "6-Pillar" Pedagogical Gold Standard
 
 Every single concept, architectural breakdown, and LeetCode solution in this repository strictly adheres to the **6-Pillar Educational Framework**:
+
 1. 🐣 **Layman's Analogy (Hinglish + Everyday Real-World ELI5):** Crystal-clear everyday intuition so anyone, from absolute beginners to experienced engineers, grasps concepts effortlessly.
 2. 📌 **Point-Wise Core Mechanics & Edge Cases:** Concise breakdown of what happens under the hood without confusing academic jargon.
 3. 📊 **Visual ASCII & Mermaid Architecture Diagrams:** Direct visual mapping of data structures, runtime memory models, execution event loops, and distributed cloud architectures.
@@ -80,12 +80,12 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 | **Python Collections** | List over-allocation, compact dict hash table, comprehensions | [`08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md`](./08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md) |
 | **Python Decorators** | LEGB rule, `*args`/`**kwargs`, closures, `@functools.wraps` | [`08-backend-python-fastapi/03_python_functions_scopes_args_kwargs_and_decorators.md`](./08-backend-python-fastapi/03_python_functions_scopes_args_kwargs_and_decorators.md) |
 | **Python OOP & MRO** | Dunder methods, C3 Linearization MRO, cooperative `super()` | [`08-backend-python-fastapi/04_python_oop_classes_dunder_methods_and_mro.md`](./08-backend-python-fastapi/04_python_oop_classes_dunder_methods_and_mro.md) |
-| **Python Generators & with**| `yield` state suspension, context managers `__enter__`/`__exit__` | [`08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md`](./08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md) |
+| **Python Generators & with** | `yield` state suspension, context managers `__enter__`/`__exit__` | [`08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md`](./08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md) |
 | **Python GC & GIL** | Reference counting, Cyclic GC generations, GIL & multiprocessing | [`08-backend-python-fastapi/06_python_memory_gc_gil_and_concurrency.md`](./08-backend-python-fastapi/06_python_memory_gc_gil_and_concurrency.md) |
 | **FastAPI Pydantic V2** | Rust core validation, field and model validators | [`08-backend-python-fastapi/09_pydantic_v2_validation_and_serialization.md`](./08-backend-python-fastapi/09_pydantic_v2_validation_and_serialization.md) |
 | **Java Pass-by-Value** | JDK/JVM architecture, 8 primitives, Integer Cache, Pass-by-value | [`09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md`](./09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md) |
 | **Java Strings & SCP** | String Constant Pool, immutability, `StringBuilder`, `equals` | [`09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md`](./09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md) |
-| **Java OOP & Polymorphism**| 4 pillars, dynamic dispatch via vtable, abstract vs interfaces | [`09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md`](./09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md) |
+| **Java OOP & Polymorphism** | 4 pillars, dynamic dispatch via vtable, abstract vs interfaces | [`09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md`](./09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md) |
 | **Java Collections** | `ArrayList` vs `LinkedList`, `HashMap` treeification to Red-Black | [`09-backend-java-springboot/04_java_collections_framework_list_set_queue_map.md`](./09-backend-java-springboot/04_java_collections_framework_list_set_queue_map.md) |
 | **Java Generics & PECS** | Producer Extends Consumer Super, Type Erasure, Bridge methods | [`09-backend-java-springboot/05_java_generics_wildcards_and_type_erasure.md`](./09-backend-java-springboot/05_java_generics_wildcards_and_type_erasure.md) |
 | **Java Modern Features** | Lambdas, Stream pipelines, Records, Sealed classes, Java 21 switch | [`09-backend-java-springboot/07_java_modern_features_streams_lambdas_records_sealed.md`](./09-backend-java-springboot/07_java_modern_features_streams_lambdas_records_sealed.md) |
@@ -95,7 +95,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 | **Spring Security JWT** | `SecurityFilterChain`, stateless sessions, `@PreAuthorize` | [`09-backend-java-springboot/12_springboot_security_jwt_oauth2.md`](./09-backend-java-springboot/12_springboot_security_jwt_oauth2.md) |
 | **Spring Resilience4j** | Circuit breaker states (Closed, Open, Half-Open), Retries | [`09-backend-java-springboot/13_springboot_microservices_and_resilience4j.md`](./09-backend-java-springboot/13_springboot_microservices_and_resilience4j.md) |
 | **PostgreSQL MVCC** | `xmin`/`xmax` headers, Autovacuum, Partial Indexes | [`11-databases-and-caching/sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md`](./11-databases-and-caching/sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md) |
-| **PostgreSQL Partitioning**| Range/List/Hash declarative partitions, partition pruning | [`11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md`](./11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md) |
+| **PostgreSQL Partitioning** | Range/List/Hash declarative partitions, partition pruning | [`11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md`](./11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md) |
 | **Redis Distributed Lock** | Atomic Redlock (`SET NX PX`), Lua script release | [`11-databases-and-caching/redis-caching/02_redis_distributed_locking_and_pubsub.md`](./11-databases-and-caching/redis-caching/02_redis_distributed_locking_and_pubsub.md) |
 | **LLM Fundamentals & BPE** | Tokenization, Context Window, Temperature, Top-P/Top-K | [`12-ai-and-genai/01-llm-foundations/01_llm_fundamentals_tokens_context_and_sampling.md`](./12-ai-and-genai/01-llm-foundations/01_llm_fundamentals_tokens_context_and_sampling.md) |
 | **Self-Attention & RoPE** | QKV formula, Multi-Head Attention, RoPE, KV-Cache | [`12-ai-and-genai/01-llm-foundations/02_transformer_architecture_and_self_attention.md`](./12-ai-and-genai/01-llm-foundations/02_transformer_architecture_and_self_attention.md) |
@@ -129,6 +129,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 ## 🗂️ Module-by-Module Directory Links
 
 ### 01. ⚡ Web Performance & Core Web Vitals ([`01-web-core-and-performance/`](./01-web-core-and-performance/))
+
 * **Web Core Vitals (Measurement, Attribution & Codebase Fixes):**
   * [`web-core-vitals/01_core_web_vitals_lcp_inp_cls.md`](./01-web-core-and-performance/web-core-vitals/01_core_web_vitals_lcp_inp_cls.md) — Overview of Google CWV thresholds (LCP $\le 2.5\text{s}$, INP $\le 200\text{ms}$, CLS $\le 0.1$).
   * [`web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md`](./01-web-core-and-performance/web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md) — Input delay, presentation delay, long tasks ($> 50\text{ms}$), and yielding.
@@ -148,6 +149,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./01-web-core-and-performance/interview-questions/README.md) — 60 Deep Dive Questions: Core Web Vitals (LCP, INP, CLS), Browser Rendering Pipeline, and Network/Bundling Optimization.
 
 ### 02. 🟨 JavaScript Core Engine & Asynchronous Internals ([`02-javascript/`](./02-javascript/))
+
 * **Beginner Foundations:**
   * [`01_data_types_and_type_coercion.md`](./02-javascript/01_data_types_and_type_coercion.md) — 7 Primitive types vs Heap references, implicit type coercion, `typeof` quirks.
   * [`02_var_let_const_hoisting_tdz.md`](./02-javascript/02_var_let_const_hoisting_tdz.md) — Function vs Block scope, Variable/Function Hoisting, Temporal Dead Zone.
@@ -173,16 +175,19 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./02-javascript/interview-questions/README.md) — 100 Deep Dive Questions: Types & Operators, Closures & Scope, Prototypes & Classes, Event Loop & Promises, V8 Heap & DOM Events.
 
 ### 03. 🟦 TypeScript Engineering & Type Systems ([`03-typescript/`](./03-typescript/))
+
 * **Core Topics:** Basic types, Unions & Intersections, Interfaces vs Type Aliases, Generics & Constraints, Conditional Types & `infer`, Mapped Types & Template Literals, Utility Types from scratch, Function Utility Types, Nominal Branding, `.d.ts` Ambient declarations, `tsconfig.json` architecture.
 * **Master Interview Question Bank (50 Questions):**
   * [`interview-questions/README.md`](./03-typescript/interview-questions/README.md) — 50 Deep Dive Questions: Types & Generics (Q1-Q25), Advanced Types, `infer` & Compiler Internals (Q26-Q50).
 
 ### 04. ⚛️ React & Concurrent Architecture ([`04-react/`](./04-react/))
+
 * **Core Topics:** Fiber Reconciler, Virtual DOM diffing & keys, State hooks & linked lists, `useEffect` vs `useLayoutEffect`, Memoization (`useMemo`/`useCallback`/`React.memo`), Context API vs Zustand, Custom hooks, Suspense & Streaming SSR, React 19 Actions.
 * **Master Interview Question Bank (100 Questions):**
   * [`interview-questions/README.md`](./04-react/interview-questions/README.md) — 100 Deep Dive Questions: VDOM & JSX, Hooks Internals, Fiber Reconciliation, Performance & Memoization, Server Components & React 19.
 
 ### 05. 🅰️ Modern Angular 21 Architecture ([`05-angular-21/`](./05-angular-21/))
+
 * [`01_angular21_signals_and_reactivity.md`](./05-angular-21/01_angular21_signals_and_reactivity.md) — Writable signals, `computed()`, `effect()`, signal inputs.
 * [`02_angular21_zoneless_architecture.md`](./05-angular-21/02_angular21_zoneless_architecture.md) — Angular 21 default zoneless change detection and signal dirty marking.
 * [`03_angular21_defer_block_and_lazy_loading.md`](./05-angular-21/03_angular21_defer_block_and_lazy_loading.md) — `@defer`, `@placeholder`, `@loading`, `@error` triggers.
@@ -195,6 +200,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./05-angular-21/interview-questions/README.md) — 50 Deep Dive Questions: Signals & Zoneless Reactivity (Q1-Q25), Architecture, SSR & Performance (Q26-Q50).
 
 ### 06. ▲ Next.js 15 Fullstack Framework ([`06-nextjs/`](./06-nextjs/))
+
 * [`01_app_router_and_react_server_components.md`](./06-nextjs/01_app_router_and_react_server_components.md) — Server Components vs Client Components.
 * [`02_server_actions_and_mutations.md`](./06-nextjs/02_server_actions_and_mutations.md) — Type-safe RPC mutations with `"use server"` and Zod validation.
 * [`03_caching_and_revalidation_deep_dive.md`](./06-nextjs/03_caching_and_revalidation_deep_dive.md) — 4-tier Caching (Request Memoization, Data Cache, Full Route, Router Cache).
@@ -205,6 +211,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./06-nextjs/interview-questions/README.md) — 50 Deep Dive Questions: App Router, RSC & Server Actions (Q1-Q25), Caching, Streaming & Production Operations (Q26-Q50).
 
 ### 07. 🟢 Backend Node.js & Express ([`07-backend-node/`](./07-backend-node/))
+
 * [`01_libuv_event_loop_phases.md`](./07-backend-node/01_libuv_event_loop_phases.md) — Libuv 6 event loop phases.
 * [`02_streams_buffers_and_backpressure.md`](./07-backend-node/02_streams_buffers_and_backpressure.md) — Binary chunks, `highWaterMark`, and backpressure drainage.
 * [`03_worker_threads_cluster_and_scaling.md`](./07-backend-node/03_worker_threads_cluster_and_scaling.md) — Cluster multi-process vs Worker Threads shared memory.
@@ -214,8 +221,8 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * **Master Interview Question Bank (60 Questions):**
   * [`interview-questions/README.md`](./07-backend-node/interview-questions/README.md) — 60 Deep Dive Questions: Libuv Event Loop & Concurrency (Q1-Q20), Streams & Memory (Q21-Q40), Express & Production Scaling (Q41-Q60).
 
-
 ### 08. 🐍 Python Core & FastAPI Enterprise ([`08-backend-python-fastapi/`](./08-backend-python-fastapi/))
+
 * **Python Core Foundations:**
   * [`01_python_fundamentals_syntax_types_and_mutability.md`](./08-backend-python-fastapi/01_python_fundamentals_syntax_types_and_mutability.md) — CPython execution model, dynamic typing, variables as name bindings, memory mutability vs immutability, `id()`, `is` vs `==`, small integer caching.
   * [`02_python_collections_lists_tuples_dicts_sets.md`](./08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md) — `list` over-allocation resizing formula, `tuple` immutability & hashability, `set` hash table operations, Python 3.7+ Compact Dict split-table architecture.
@@ -234,6 +241,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./08-backend-python-fastapi/interview-questions/README.md) — 100 Deep Dive Questions: Python Core (Q1-Q20), OOP & Dunder (Q21-Q40), Asyncio & GIL (Q41-Q60), FastAPI & Pydantic (Q61-Q80), SQLAlchemy & Celery (Q81-Q100).
 
 ### 09. ☕ Core Java 21 & Spring Boot 3 ([`09-backend-java-springboot/`](./09-backend-java-springboot/))
+
 * **Core Java Foundations (Newbie to Experienced):**
   * [`01_java_fundamentals_jvm_primitives_and_pass_by_value.md`](./09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md) — Bytecode compilation (`javac`), JVM ClassLoader, Tiered JIT (C1/C2), 8 Primitive types vs Wrapper classes, Integer Cache (`[-128, 127]`), and Pass-by-value proof.
   * [`02_java_strings_memory_string_pool_stringbuilder.md`](./09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md) — String immutability rationale, String Constant Pool (SCP) in Heap, `String.intern()`, `StringBuilder` vs `StringBuffer`, and `equals()` & `hashCode()` contract.
@@ -254,11 +262,13 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./09-backend-java-springboot/interview-questions/README.md) — 100 Deep Dive Questions: JVM & Memory (Q1-Q20), OOP & Collections (Q21-Q40), Concurrency & Virtual Threads (Q41-Q60), Spring Boot Core (Q61-Q80), Security & Microservices (Q81-Q100).
 
 ### 10. 💎 Ruby on Rails & Fullstack Stacks ([`10-backend-ruby-and-stacks/`](./10-backend-ruby-and-stacks/))
+
 * [`ruby-on-rails/01_ruby_on_rails_mvc_active_record.md`](./10-backend-ruby-and-stacks/ruby-on-rails/01_ruby_on_rails_mvc_active_record.md) — Rails convention over configuration, Active Record, migrations.
 * [`ruby-on-rails/02_rails_api_and_sidekiq_jobs.md`](./10-backend-ruby-and-stacks/ruby-on-rails/02_rails_api_and_sidekiq_jobs.md) — API mode (`--api`), ActiveJob, and Redis-backed Sidekiq workers.
 * [`mean-vs-mern/01_mean_vs_mern_stack_architecture.md`](./10-backend-ruby-and-stacks/mean-vs-mern/01_mean_vs_mern_stack_architecture.md) — Complete comparative analysis of MEAN vs MERN.
 
 ### 11. 🗄️ Databases & Caching ([`11-databases-and-caching/`](./11-databases-and-caching/))
+
 * [`sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md`](./11-databases-and-caching/sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md) — MVCC, dead tuples, Autovacuum, Partial Indexes, `EXPLAIN (ANALYZE, BUFFERS)`.
 * [`sql-postgresql/02_postgresql_partitioning_and_replication.md`](./11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md) — Range/List/Hash partitioning, pruning, and WAL replication.
 * [`redis-caching/01_redis_data_structures_and_eviction_policies.md`](./11-databases-and-caching/redis-caching/01_redis_data_structures_and_eviction_policies.md) — Hashes, Sorted Sets, LRU vs LFU eviction policies.
@@ -269,6 +279,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/README.md`](./11-databases-and-caching/interview-questions/README.md) — 60 Deep Dive Questions: SQL & PostgreSQL Internals (Q1-Q20), Redis Caching & Distributed Systems (Q21-Q40), NoSQL & MongoDB Architecture (Q41-Q60).
 
 ### 12. 🤖 AI & GenAI Systems Engineering ([`12-ai-and-genai/`](./12-ai-and-genai/))
+
 * **01. LLM Foundations & Transformers:**
   * [`01-llm-foundations/01_llm_fundamentals_tokens_context_and_sampling.md`](./12-ai-and-genai/01-llm-foundations/01_llm_fundamentals_tokens_context_and_sampling.md) — Next-token prediction, BPE Tokenization, Context Window limits, Temperature, Top-P, Top-K, Frequency/Presence penalties.
   * [`01-llm-foundations/02_transformer_architecture_and_self_attention.md`](./12-ai-and-genai/01-llm-foundations/02_transformer_architecture_and_self_attention.md) — Scaled Dot-Product Attention, $Q, K, V$ intuition, Multi-Head Attention, RoPE (Rotary Position Embeddings), KV-Cache, and FlashAttention.
@@ -305,6 +316,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/coding_simple_rag_pipeline_python.md`](./12-ai-and-genai/interview-questions/coding_simple_rag_pipeline_python.md) — Pure Python Vector Store & RAG pipeline from scratch.
 
 ### 13. 🏗️ System Design (HLD & LLD) ([`13-system-design/`](./13-system-design/))
+
 * **Core Foundations & 50 Concepts Playbook:**
   * [`00_master_50_system_design_concepts.md`](./13-system-design/00_master_50_system_design_concepts.md) — Complete 50 concepts encyclopedia across Scalability, Consensus, Caching, Protocols, and Resilience.
   * [`System_Design_Interview_Questions (1).pdf`](./13-system-design/System_Design_Interview_Questions%20%281%29.pdf) — 📕 **Printable PDF Document**: 50 System Design Concepts & High-Frequency Interview Questions guide.
@@ -326,11 +338,13 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
   * [`interview-questions/system_design_interview_framework.md`](./13-system-design/interview-questions/system_design_interview_framework.md) — The 4-step structural interview framework.
 
 ### 14. 🧮 Complete Blind 75 LeetCode Problem Set ([`14-leetcode-blind-75/`](./14-leetcode-blind-75/))
+
 * **All 75 curated Blind 75 problems** complete across 18 pattern subdirectories.
 * Includes data structure memory foundations from scratch, 3 evolution versions (Newbie $O(N^2)$ brute-force vs Intermediate vs Senior $O(N)$ optimal), step-by-step trace tables, line-by-line comments, interview pitches, and STAR production war stories.
 * [`interview-questions/dsa_patterns_cheat_sheet_and_meta_heuristics.md`](./14-leetcode-blind-75/interview-questions/dsa_patterns_cheat_sheet_and_meta_heuristics.md) — Master pattern recognition matrix & templates.
 
 ### 15. 🧪 Testing & DevOps ([`15-testing-and-devops/`](./15-testing-and-devops/))
+
 * [`testing-playwright-jest/01_playwright_e2e_testing_guide.md`](./15-testing-and-devops/testing-playwright-jest/01_playwright_e2e_testing_guide.md) — Playwright E2E cross-browser automation and auto-waiting.
 * [`testing-playwright-jest/02_jest_unit_and_integration_testing.md`](./15-testing-and-devops/testing-playwright-jest/02_jest_unit_and_integration_testing.md) — Jest and React Testing Library integration and asynchronous API mocking.
 * [`devops-docker-kubernetes-cicd/01_docker_kubernetes_production_setup.md`](./15-testing-and-devops/devops-docker-kubernetes-cicd/01_docker_kubernetes_production_setup.md) — Multi-stage Docker builds and Kubernetes pod/service configurations.
@@ -339,8 +353,8 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * **Master Interview Question Bank (50 Questions):**
   * [`interview-questions/README.md`](./15-testing-and-devops/interview-questions/README.md) — 50 Deep Dive Questions: Jest, RTL & Playwright (Q1-Q25), Docker, Kubernetes & CI/CD (Q26-Q50).
 
-
 ### 16. 🎯 Master Interview Cheatsheets & Company Guides ([`16-interview-master-guides/`](./16-interview-master-guides/))
+
 * [`01_fullstack_quick_recall_cheatsheet.md`](./16-interview-master-guides/01_fullstack_quick_recall_cheatsheet.md) — 5-minute pre-interview review card.
 * [`02_system_design_cheat_sheet.md`](./16-interview-master-guides/02_system_design_cheat_sheet.md) — Math formulas, latency numbers, and trade-off theorems.
 * [`interview-questions/behavioral_star_method_master_guide.md`](./16-interview-master-guides/interview-questions/behavioral_star_method_master_guide.md) — Senior Lead behavioral STAR templates with metrics.
@@ -393,4 +407,3 @@ We warmly welcome contributions from developers worldwide! Whether fixing a typo
 ## 📄 License
 
 This repository is licensed under the [MIT License](./LICENSE). Feel free to use, share, and learn!
-

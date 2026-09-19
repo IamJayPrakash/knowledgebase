@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine building with **Smart Electronic Sensors instead of Old Metal Wires**:
+
 - **Legacy Angular (`@Input()`, `@Output()`, `@ViewChild()` Decorators)**:
   - Parent component child ko ek purani wire deta tha. Agar input badal gaya, toh child ko pata nahi chalta tha jab tak wo manual lifecycle hook (`ngOnChanges`) mein jaakar check na kare.
   - `@ViewChild` ka reference template render hone se pehle `undefined` rehta tha, jisse `Cannot read property of undefined` errors aate the!
@@ -16,7 +18,8 @@ Imagine building with **Smart Electronic Sensors instead of Old Metal Wires**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Signal Inputs (`input()` / `input.required()`)**:
    - Replaces the `@Input()` decorator.
    - An `input()` is a read-only Signal: `readonly title = input<string>('Default');`.
@@ -28,21 +31,23 @@ Imagine building with **Smart Electronic Sensors instead of Old Metal Wires**:
    - Generates both an input signal and an automatic output change emitter (`[value]` + `(valueChange)`).
    - Enables seamless two-way banana-in-a-box syntax: `[(value)]="parentSignal"`.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **Signal Queries (`viewChild()` / `viewChildren()`)**:
    - Replaces `@ViewChild('myRef')` and `@ViewChildren()`.
    - Returns a Signal holding the queried component or DOM reference: `readonly inputElement = viewChild<ElementRef>('searchBox');`.
    - Since it is a Signal, components can create `computed()` signals derived directly from DOM queries!
-5. **No More `ngOnChanges`**:
+2. **No More `ngOnChanges`**:
    - In legacy Angular, reacting to input changes required implementing `OnChanges` and inspecting `SimpleChanges` dictionaries.
    - With Signal inputs, developers use standard `computed()` or `effect()`, eliminating lifecycle hook boilerplate completely.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 6. **Input Transformations & Aliasing**:
    - Modern inputs support built-in transforms:
      `readonly disabled = input(false, { transform: booleanAttribute });`
    - Automatically coerces empty HTML attributes `<my-comp disabled />` into boolean `true`.
-7. **Zoneless Signal Query Timing**:
+2. **Zoneless Signal Query Timing**:
    - In Zoneless Angular 21, `viewChild()` signals resolve synchronously as soon as the template view is created, eliminating the classic "ExpressionChangedAfterItHasBeenCheckedError" during query access.
 
 ---
@@ -192,19 +197,22 @@ export class CounterWidgetComponent {
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"In Angular 21, the legacy decorator-based component API (`@Input()`, `@Output()`, `@ViewChild()`, `@ContentChild()`) has been completely superseded by functional Signal APIs. 
-> `input()` and `input.required()` return read-only Signals, eliminating the need for `ngOnChanges` and enabling direct composition into `computed()` signals and `effect()` blocks. 
-> Two-way data binding is simplified via `model()`, which creates a unified WritableSignal that handles both incoming props and outgoing change events under the standard `[(banana-in-a-box)]` syntax with zero event-emitter boilerplate. 
-> For DOM queries, `viewChild()` and `contentChildren()` return Signal wrappers around template elements, eliminating lifecycle race conditions and null-pointer errors. 
+>
+> *"In Angular 21, the legacy decorator-based component API (`@Input()`, `@Output()`, `@ViewChild()`, `@ContentChild()`) has been completely superseded by functional Signal APIs.
+> `input()` and `input.required()` return read-only Signals, eliminating the need for `ngOnChanges` and enabling direct composition into `computed()` signals and `effect()` blocks.
+> Two-way data binding is simplified via `model()`, which creates a unified WritableSignal that handles both incoming props and outgoing change events under the standard `[(banana-in-a-box)]` syntax with zero event-emitter boilerplate.
+> For DOM queries, `viewChild()` and `contentChildren()` return Signal wrappers around template elements, eliminating lifecycle race conditions and null-pointer errors.
 > Combined with Zoneless change detection, Signal inputs ensure that when a prop updates, Angular notifies only the exact dependent template nodes rather than running dirty checks across the entire component subtree."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Global Enterprise SaaS Analytics Dashboard.  
 **Incident**: A core financial filter component triggered frequent `ExpressionChangedAfterItHasBeenCheckedError` crashes during route transitions, breaking dashboard loading for 14% of enterprise sessions.  
 **Root Cause**: The component used legacy `@ViewChild` decorators paired with `@Input()` setters. Inside `ngAfterViewInit`, the component checked DOM dimensions and mutated input state synchronously to adjust column widths. In Angular's two-pass check cycle, this caused the child view to disagree with the parent view within the same tick.  
 **Resolution**:
+
 1. Migrated inputs to **Signal Inputs (`input.required()`)**.
 2. Migrated DOM references to **Signal Queries (`viewChild<ElementRef>()`)**.
 3. Converted width calculation into a **`computed()` signal** derived from the `viewChild()` dimensions.  

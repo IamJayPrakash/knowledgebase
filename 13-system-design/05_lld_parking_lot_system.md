@@ -3,9 +3,11 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Parking lot ek **Object-Oriented Mall Parking** hai.
 Gaadiyan alag-alag type ki hoti hain (Bike, Car, Truck). Har gaadi ke liye alag size ka spot chahiye (Compact, Large, Handicapped).
 System ko pata hona chahiye ki:
+
 - Gaadi aayi -> Ticket print karo jisme entry time ho.
 - Gaadi gayi -> Total hours calculate karo, fee calculate karo, aur spot ko khali mark karo.
 - SOLID Principles aur Strategy Pattern use karo taaki agar kal nayi Electric Car parking ya Hourly Fee rule badal jaye, toh pura code na rewrite karna pade!
@@ -13,6 +15,7 @@ System ko pata hona chahiye ki:
 ---
 
 ## 📌 2. Core OOP Design Patterns Applied
+
 1. **Singleton Pattern**: For `ParkingLot` central instance.
 2. **Factory Pattern**: For `Vehicle` and `ParkingFeeStrategy` instantiation.
 3. **Strategy Pattern**: For calculating parking charges (Flat rate vs Hourly vs Dynamic peak rate).

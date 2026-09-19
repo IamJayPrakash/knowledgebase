@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Autocomplete search Google search bar ki tarah hai. Agar user "A-P-P-L-E" type kar raha hai, toh har letter par backend ko hit karna bewakoofi hai. Aap thoda intezaar karte ho jab tak user ruka na ho (`Debounce`). Aur agar user ne pehle "Apple" search kiya tha, toh dobara server par jaane ke bajaye memory drawer (`LRU Cache`) se turant dikha dete ho!
 
 ---

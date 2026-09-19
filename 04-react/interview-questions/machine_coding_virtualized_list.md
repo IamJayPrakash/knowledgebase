@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 Agar ek list mein 100,000 items hain, toh browser mein 100,000 `<div>` elements create karna browser ko freeze kar dega.
 Virtualization ek **Cinema Screen** ki tarah hai: Screen par sirf wahi 10 actors dikhte hain jo camera ke samne hain. Jaise hi camera scroll karta hai, bahar gaye actors ko hata diya jata hai aur naye aane wale actors ko screen par draw kiya jata hai. Browser mein hamesha sirf 15-20 DOM nodes rehte hain!
 

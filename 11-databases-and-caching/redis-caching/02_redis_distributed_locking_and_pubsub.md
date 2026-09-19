@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Single server par ek process thread lock (`mutex`) lagana aasan hai. Lekin jab 20 microservice servers chal rahe hon, toh ek hi database row ko ek sath update hone se rokne ke liye ek **Central Distributed Room Key** chahiye hoti hai.
 Redis Distributed Lock (`SET resource_name my_random_token NX PX 30000`) ek **Single Bathroom Key** ki tarah hai:
 `NX` = Sirf tab key milegi jab bathroom khali ho.

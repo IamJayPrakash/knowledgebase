@@ -25,6 +25,7 @@
 ## 🎯 Master Question Index (1 - 100)
 
 ### Part 1: Scale, Latency, Storage, Databases & Caching (Q1 - Q20)
+
 * [`01_system_design_fundamentals_scale_and_storage_qna.md`](./01_system_design_fundamentals_scale_and_storage_qna.md)
   1. Scalability vs Availability vs Reliability differences and formulas.
   2. Latency vs Throughput trade-offs and Little's Law.
@@ -48,6 +49,7 @@
   20. Index cardinality, selectivity, and partial indexes.
 
 ### Part 2: Distributed Systems, Consensus, CAP Theorem & Consistency (Q21 - Q40)
+
 * [`02_distributed_systems_consensus_and_consistency_qna.md`](./02_distributed_systems_consensus_and_consistency_qna.md)
   21. CAP Theorem trade-offs with CP and AP real-world systems.
   22. PACELC Theorem extending CAP under normal non-partitioned operation.
@@ -71,6 +73,7 @@
   40. Read-Repair in leaderless distributed databases.
 
 ### Part 3: Event-Driven Architecture, Streaming, LSM Trees & Batch Processing (Q41 - Q60)
+
 * [`03_event_driven_streaming_and_messaging_qna.md`](./03_event_driven_streaming_and_messaging_qna.md)
   41. Message Queue (RabbitMQ) vs Distributed Commit Log (Kafka) comparison.
   42. Message delivery semantics: At-Most-Once, At-Least-Once, and Exactly-Once.
@@ -94,6 +97,7 @@
   60. Change Data Capture (CDC) via Debezium and WAL log streaming.
 
 ### Part 4: Protocols, Resilience, Security & SRE Patterns (Q61 - Q80)
+
 * [`04_protocols_resilience_and_sre_patterns_qna.md`](./04_protocols_resilience_and_sre_patterns_qna.md)
   61. REST vs GraphQL vs gRPC vs WebSockets vs WebRTC protocol decision matrix.
   62. HTTP/2 binary framing and stream multiplexing vs HTTP/1.1 HoL blocking.
@@ -117,6 +121,7 @@
   80. Distributed Leaky Bucket rate limiting implementation in Redis.
 
 ### Part 5: Top 20 Real-World High-Level System Design Architectures (Q81 - Q100)
+
 * [`05_classic_hld_architectures_and_case_studies_qna.md`](./05_classic_hld_architectures_and_case_studies_qna.md)
   81. Design a Scalable URL Shortener (TinyURL / Bitly).
   82. Design a Social Media News Feed with Celebrity Hybrid Fanout (Twitter / Instagram).
@@ -142,5 +147,6 @@
 ---
 
 ## 📐 Playbooks & Frameworks
+
 * [`system_design_interview_framework.md`](./system_design_interview_framework.md) — 45-Minute Senior/Staff Interview Playbook and Back-of-the-Envelope formulas.
 * [`top_system_design_interview_questions_catalog.md`](./top_system_design_interview_questions_catalog.md) — Quick Recall Catalog & Architecture Cheat Sheet.

@@ -1,6 +1,7 @@
 # TCS Technical Interview Guide: High-Frequency Questions & Simple Pointers
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** TCS ke technical interview me sabse zyada focus basic fundamentals, clean code, OOPs concepts, SQL queries, aur web basics par hota hai. Yahan complex algorithm se zyada clear concepts aur communication dekhte hain.
 >
 > **Real-World Analogy:** A foundation inspection of a building: they want to confirm the foundation pillars are strong before checking the luxury penthouse design.
@@ -8,6 +9,7 @@
 ---
 
 ## 2. 📌 Core Mechanics & Key Points
+
 - Difference between `var`, `let`, and `const` (Scope, Re-declaration, Hoisting).
 - Difference between `==` and `===` (Loose equality with type coercion vs Strict equality).
 - OOPs 4 Pillars: Encapsulation (Capsule/Data hiding), Abstraction (ATM screen), Inheritance (Parent-Child), Polymorphism (Overloading & Overriding).
@@ -67,6 +69,7 @@ console.log(getSecondLargest([12, 35, 1, 10, 34, 1])); // 34
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Can you explain TCS Technical Interview Guide and your production experience with it?"
 >
 > **You:** "For TCS technical interviews, success relies on clear, structured communication. Begin each answer with a crisp 1-sentence definition, explain with a practical daily life example, state 2-3 key technical differences point-wise, and mention the code syntax cleanly."
@@ -74,10 +77,11 @@ console.log(getSecondLargest([12, 35, 1, 10, 34, 1])); // 34
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** Clearing TCS Digital / Innovator technical interview bands for enterprise digital transformation assignments.
-* **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
-* **Action Taken:** Structured responses using point-wise technical explanations, followed by clean whiteboard code showing variable dry runs.
-* **Result & Business Impact:** Scored highest grade assessment rating and fast-track placement into premium cloud architecture accounts.
+
+- **Situation:** Clearing TCS Digital / Innovator technical interview bands for enterprise digital transformation assignments.
+- **Task / Challenge:** Resolving critical production bottlenecks, scaling limits, or security vulnerabilities under active business pressure.
+- **Action Taken:** Structured responses using point-wise technical explanations, followed by clean whiteboard code showing variable dry runs.
+- **Result & Business Impact:** Scored highest grade assessment rating and fast-track placement into premium cloud architecture accounts.
 
 🗣️ **Script to Tell Interviewer:**
 *"In one of my core projects, clearing tcs digital / innovator technical interview bands for enterprise digital transformation assignments. I spearheaded the solution by structured responses using point-wise technical explanations, followed by clean whiteboard code showing variable dry runs., successfully achieving scored highest grade assessment rating and fast-track placement into premium cloud architecture accounts.."*

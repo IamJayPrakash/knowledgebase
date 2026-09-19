@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Mapped Type ek **Factory Conveyor Belt (`Array.prototype.map`)** ki tarah hai, jo values ko transform karne ke bajaye **Object ke Keys aur Types** ko transform karta hai. Agar aapke paas 50 fields ka form object hai, toh ek mapped type har field par jaakar usko ek jhatke mein `readonly` ya `optional (?)` bana sakta hai.
 Template Literal Type JavaScript ke backtick strings (`` `hello ${name}` ``) ka type-level roop hai: Aap strings ke valid patterns ko compile-time par lock kar sakte ho, jaise `GET /api/users` ya `#FFFFFF` hex colors.
 
@@ -97,6 +98,7 @@ const validCyan: HexColor = "#00FFFF";
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Mapped types allow us to iterate over existing keys and produce modified object contracts dynamically, utilizing modifiers like `-readonly` or `-?` to strip immutability or optionality. Combined with TypeScript 4.1's key remapping using the `as` clause and template literal types, we can perform compile-time string metaprogramming—such as automatically generating strongly-typed getter/setter interfaces or validating event strings like `on${Capitalize<Event>}`. This drastically reduces manual boilerplate while maintaining ironclad compile-time safety."
 
 ---

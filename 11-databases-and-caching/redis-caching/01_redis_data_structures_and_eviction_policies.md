@@ -3,8 +3,10 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Redis ek **Ultra-Fast Formula 1 Pit Stop Storage** hai: Sara data computer ke Hard Disk ke bajaye seedhe **RAM (In-Memory)** mein rehta hai, isliye microsecond response time milta hai.
 Lekin RAM mehengi aur limited hoti hai. Jab RAM bharne lagti hai, toh Redis ka **Eviction Policy** decide karta hai ki kaun sa purana data bahar feka jaye:
+
 - **LRU (Least Recently Used)**: Jo saman sabse lambe time se kisi ne nahi chhua, use feko.
 - **LFU (Least Frequently Used)**: Jo saman sabse kam baar use hua, use feko.
 

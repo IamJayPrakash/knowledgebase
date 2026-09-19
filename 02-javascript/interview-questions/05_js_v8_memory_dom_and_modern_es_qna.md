@@ -1,9 +1,11 @@
 # JavaScript Master Interview Bank: Part 5 (Q81 - Q100)
+
 ## V8 Internals, Memory Management, DOM & Modern ECMAScript
 
 ---
 
-### Q81: Explain the V8 Engine architecture: Ignition vs TurboFan.
+### Q81: Explain the V8 Engine architecture: Ignition vs TurboFan
+
 **Answer:**
 
 ```
@@ -30,7 +32,9 @@ JavaScript Source Code
 ---
 
 ### Q82: What are Hidden Classes (Shapes) and Inline Caches (IC) in V8?
+
 **Answer:**
+
 - **Hidden Classes (Shapes/Maps):** In dynamic languages like JavaScript, object properties can be added at runtime. V8 assigns an internal hidden class to every object. Objects with the same property order share the same hidden class.
 - **Inline Caching (IC):** V8 caches property memory offsets directly in machine code. If subsequent objects share the identical Hidden Class, property lookup is an instant single memory read.
 - **Optimization Tip:** Always initialize object properties in the exact same order and avoid deleting properties with `delete` (use `null` or `undefined` instead), which transitions the object into slow dictionary mode.
@@ -47,6 +51,7 @@ const p3 = {}; p3.y = 1; p3.x = 2;
 ---
 
 ### Q83: How does Garbage Collection work in V8 (Generational Garbage Collection)?
+
 **Answer:**
 V8 uses **Generational Garbage Collection** based on the Weak Generational Hypothesis (most objects die young):
 
@@ -66,8 +71,10 @@ V8 uses **Generational Garbage Collection** based on the Weak Generational Hypot
 ---
 
 ### Q84: What are GC Roots in JavaScript?
+
 **Answer:**
 A **GC Root** is an anchor object that is considered unconditionally reachable:
+
 1. Active local variables and function parameters on the Call Stack.
 2. The Global Object (`window` in browsers, `global` in Node.js).
 3. DOM trees attached to the document.
@@ -78,7 +85,9 @@ A **GC Root** is an anchor object that is considered unconditionally reachable:
 ---
 
 ### Q85: What are Detached DOM Tree leaks and how do you diagnose them?
+
 **Answer:**
+
 - A **Detached DOM Node** occurs when an HTML element is removed from the DOM tree (`element.remove()` or `parent.removeChild()`), but a JavaScript variable or event listener closure continues to hold a reference to that element or any of its child nodes.
 - **Diagnosis:**
   1. Open Chrome DevTools $\to$ **Memory** tab.
@@ -88,7 +97,8 @@ A **GC Root** is an anchor object that is considered unconditionally reachable:
 
 ---
 
-### Q86: Explain Event Propagation: Capturing vs Target vs Bubbling phases.
+### Q86: Explain Event Propagation: Capturing vs Target vs Bubbling phases
+
 **Answer:**
 
 ```
@@ -110,7 +120,9 @@ A **GC Root** is an anchor object that is considered unconditionally reachable:
 ---
 
 ### Q87: What is Event Delegation and why is it superior for dynamic lists?
+
 **Answer:**
+
 - **Event Delegation:** Attaching a single event listener to a common parent element instead of attaching separate listeners to every individual child item.
 - It leverages **Event Bubbling**. When a child item is clicked, the event bubbles up to the parent, where `event.target` identifies the specific child.
 - **Benefits:**
@@ -130,14 +142,18 @@ document.getElementById("todo-list").addEventListener("click", (event) => {
 ---
 
 ### Q88: What is the difference between `event.target` and `event.currentTarget`?
+
 **Answer:**
+
 - **`event.target`**: The actual DOM element where the event **originated** (the deepest child clicked by the user).
 - **`event.currentTarget`**: The DOM element to which the **event handler is currently attached** (the element processing the listener).
 
 ---
 
 ### Q89: What is the difference between `event.stopPropagation()` and `event.stopImmediatePropagation()`?
+
 **Answer:**
+
 - **`event.stopPropagation()`**: Stops the event from traveling further up (bubbling) or down (capturing) the DOM tree. However, other event listeners attached to the **same element** will still execute.
 - **`event.stopImmediatePropagation()`**: Stops propagation to other elements **AND** prevents any subsequent event listeners attached to the **same element** from running.
 - **`event.preventDefault()`**: Does NOT stop propagation; it merely cancels the browser's default behavior (e.g. following a link or submitting a form).
@@ -145,7 +161,9 @@ document.getElementById("todo-list").addEventListener("click", (event) => {
 ---
 
 ### Q90: What is the `MutationObserver` API and when should you use it?
+
 **Answer:**
+
 - `MutationObserver` provides the ability to watch for changes being made to the DOM tree (child list additions/removals, attribute changes, text modifications).
 - **Advantage:** Executes asynchronously as a **Microtask** at the end of the current JavaScript turn, batching multiple changes to prevent layout thrashing.
 - Replaced obsolete, performance-killing DOM Mutation Events (`DOMNodeInserted`).
@@ -165,7 +183,9 @@ observer.observe(document.body, { childList: true, subtree: true });
 ---
 
 ### Q91: What is the `IntersectionObserver` API and what problems does it solve?
+
 **Answer:**
+
 - `IntersectionObserver` asynchronously observes changes in the intersection of a target element with an ancestor element or the top-level viewport.
 - **Problems Solved:** Replaces scroll event listeners (`window.onscroll` + `getBoundingClientRect()`), which force synchronous layouts and cause jank.
 - **Use Cases:** Image lazy-loading, infinite scrolling feeds, tracking ad impressions, animating elements when scrolled into view.
@@ -187,7 +207,9 @@ document.querySelectorAll("img[data-src]").forEach(img => imageObserver.observe(
 ---
 
 ### Q92: How does the `ResizeObserver` API work?
+
 **Answer:**
+
 - `ResizeObserver` reports changes to the dimensions of an Element's content box or border box.
 - Executes before paint, avoiding infinite layout cycles.
 - **Ideal Use Case:** Responsive components (Container Queries polyfills, dynamic canvas/chart re-rendering based on parent container size).
@@ -195,7 +217,9 @@ document.querySelectorAll("img[data-src]").forEach(img => imageObserver.observe(
 ---
 
 ### Q93: What is the `Proxy` object and what are Interception Traps?
+
 **Answer:**
+
 - `new Proxy(target, handler)` wraps a target object and intercepts fundamental operations.
 - The `handler` object contains **traps**—methods that intercept operations:
   - `get(target, prop, receiver)`
@@ -220,7 +244,9 @@ state.count = 5; // Logs: "Setting count to 5"
 ---
 
 ### Q94: Why should you always use `Reflect` inside `Proxy` traps?
+
 **Answer:**
+
 - The `Reflect` API contains methods matching all 13 Proxy traps (`Reflect.get`, `Reflect.set`, etc.).
 - **Benefits:**
   1. Preserves the correct `this` context across prototypal inheritance using the `receiver` argument.
@@ -239,7 +265,9 @@ const proxy = new Proxy(target, {
 ---
 
 ### Q95: What are the differences between CommonJS (CJS) and ES Modules (ESM)?
+
 **Answer:**
+
 | Feature | CommonJS (CJS) | ES Modules (ESM) |
 | :--- | :--- | :--- |
 | **Syntax** | `require()` / `module.exports` | `import` / `export` |
@@ -251,14 +279,18 @@ const proxy = new Proxy(target, {
 ---
 
 ### Q96: How does Tree-Shaking work and why is ESM mandatory for it?
+
 **Answer:**
+
 - **Tree-Shaking** (Dead Code Elimination) removes unused exports from final production bundles.
 - Bundlers (Webpack, Rollup, Vite, esbuild) rely on ESM's **static module structure**. Because `import` and `export` cannot change at runtime, bundlers construct an exact dependency graph during compile-time, identifying which functions are never referenced and pruning them safely.
 
 ---
 
 ### Q97: What is Top-Level Await in ES2022?
+
 **Answer:**
+
 - Allows using the `await` keyword at the top level of an ES module without wrapping it in an `async IIFE`.
 - Execution of dependent consumer modules is paused until the top-level awaited promise resolves.
 - **Use Cases:** Dynamic resource loading, database connection initialization, conditional polyfills.
@@ -271,7 +303,9 @@ export const connection = await createDbConnection();
 ---
 
 ### Q98: What is `Array.prototype.toSorted()`, `toReversed()`, and `toSpliced()` in ES2023?
+
 **Answer:**
+
 - Introduced to provide **non-mutating, pure counterparts** to mutating array methods:
   - `toSorted()` returns a new sorted array (unlike `sort()` which mutates).
   - `toReversed()` returns a new reversed array (unlike `reverse()`).
@@ -288,7 +322,9 @@ console.log(numbers); // [3, 1, 2] (Original untouched!)
 ---
 
 ### Q99: What are Web Workers and how do they communicate with the main thread?
+
 **Answer:**
+
 - Web Workers run scripts in background OS threads **completely decoupled from the main UI thread**.
 - They have their own execution context, call stack, and memory space (no access to `window`, `document`, or DOM).
 - **Communication:** Via message passing (`postMessage()` and `onmessage` event handlers).
@@ -297,6 +333,8 @@ console.log(numbers); // [3, 1, 2] (Original untouched!)
 ---
 
 ### Q100: How do `SharedArrayBuffer` and `Atomics` enable multi-threaded shared memory?
+
 **Answer:**
+
 - **`SharedArrayBuffer`**: Allows allocating raw binary memory accessible simultaneously by the main thread and multiple Web Workers without copying.
 - **`Atomics`**: Provides atomic operations (`Atomics.add`, `Atomics.compareExchange`, `Atomics.wait`, `Atomics.notify`) to prevent race conditions and synchronize memory access across threads safely without data corruption.

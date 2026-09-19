@@ -1,7 +1,9 @@
 # Java Exception Handling: Hierarchy, Checked vs Unchecked & Try-With-Resources
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - `Throwable`: Har museebat ka dada (Grandparent class).
 > - `Error`: Ghar mein bhukamp ya aag lag jana (`OutOfMemoryError`)—ispe aap kuch nahi kar sakte, building se bahar bhagna padega (JVM crashes, application cannot recover).
 > - `Checked Exception`: Ghar se nikalte waqt mummy ka bolna ki "Chhata leke jao, baarish ho sakti hai" (`IOException`). Compiler aapko ghar se bahar nikalne hi nahi dega jab tak aap chhata (try-catch ya throws) na le lo!
@@ -14,7 +16,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Exception Hierarchy**:
   - `java.lang.Throwable`
     - `java.lang.Error`: Serious system issues (`OutOfMemoryError`, `StackOverflowError`). Applications should **never** catch `Error`.
@@ -28,7 +31,8 @@
   - Automatically closes any resource implementing `java.lang.AutoCloseable` or `java.io.Closeable` when leaving the block.
   - Eliminates boilerplate `finally { if (res != null) res.close(); }` code.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Suppressed Exceptions**:
   - If an exception is thrown inside the `try` block AND another exception is thrown when closing the resource in `close()`, the `close()` exception is **suppressed** so the primary root-cause exception is not lost. You can inspect them via `e.getSuppressed()`.
 - **Exception Anti-Patterns in Production**:
@@ -135,6 +139,7 @@ public class ExceptionHandlingDemo {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the difference between Checked and Unchecked exceptions, and why is `try-with-resources` preferred over `finally`?"
 >
 > **You:** "Checked exceptions inherit directly from `Exception` and represent anticipated, recoverable conditions like network drops or file missing; the Java compiler forces developers to either catch them or declare them using `throws`. Unchecked exceptions extend `RuntimeException` and indicate programming errors like `NullPointerException` or invalid arguments, which should be resolved by code validation rather than catch blocks. `try-with-resources` is preferred over traditional `finally` blocks because it ensures deterministic closure of `AutoCloseable` resources, drastically reduces boilerplate, and cleanly manages suppressed exceptions so secondary exceptions thrown during resource closing do not obscure the primary application failure."
@@ -142,7 +147,8 @@ public class ExceptionHandlingDemo {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A Spring Boot banking API began experiencing severe connection pool exhaustion (`HikariCP: Connection is not available, request timed out after 30000ms`) during peak trading hours, degrading service availability to 85%.
-* **Task / Challenge:** Identify and resolve the database connection leak without increasing pool limits or restarting servers.
-* **Action Taken:** Thread dump and code analysis revealed that a legacy reporting method opened raw JDBC connections inside a traditional `try-catch` block. When an unexpected `NullPointerException` occurred before the `finally` block's null check, the connection was never closed. Refactored all raw database and stream calls to use Java 7 `try-with-resources`.
-* **Result & Business Impact:** Permanently resolved the connection leak, restoring 99.99% API availability and stabilizing HikariCP active connection counts at under 20% capacity.
+
+- **Situation:** A Spring Boot banking API began experiencing severe connection pool exhaustion (`HikariCP: Connection is not available, request timed out after 30000ms`) during peak trading hours, degrading service availability to 85%.
+- **Task / Challenge:** Identify and resolve the database connection leak without increasing pool limits or restarting servers.
+- **Action Taken:** Thread dump and code analysis revealed that a legacy reporting method opened raw JDBC connections inside a traditional `try-catch` block. When an unexpected `NullPointerException` occurred before the `finally` block's null check, the connection was never closed. Refactored all raw database and stream calls to use Java 7 `try-with-resources`.
+- **Result & Business Impact:** Permanently resolved the connection leak, restoring 99.99% API availability and stabilizing HikariCP active connection counts at under 20% capacity.

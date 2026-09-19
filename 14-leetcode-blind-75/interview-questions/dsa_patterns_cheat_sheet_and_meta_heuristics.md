@@ -3,8 +3,10 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 DSA problem dekh kar ghabrana ek un-labeled medicine box dekhne jaisa hai.
 Lekin agar aapke paas **Doctor ka Symptom Checker (Meta-Heuristics)** ho, toh aap problem ki shakal (Constraints & Keywords) dekh kar 5 second mein pehchan loge:
+
 - "Sorted array hai aur search karna hai?" ➔ **Binary Search ($O(\log N)$)**!
 - "Subarray sum / longest substring poocha hai?" ➔ **Sliding Window**!
 - "Top K / Most frequent elements?" ➔ **Min-Heap / Max-Heap**!

@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Two Pointers (Bidirectional & Directional Pointers)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Two Pointers (Bidirectional & Directional Pointers)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Two Pointers (Bidirectional & Directional Pointers)] --->
 Two Pointers uses two integer index variables moving towards each other (bidirectional) or at different speeds (fast/slow) to avoid nested loops.
 
 ### ❓ When to Apply?
-- On sorted arrays, palindromes, container boundaries, or cycle detection where comparing elements at both ends eliminates search space.
+
+* On sorted arrays, palindromes, container boundaries, or cycle detection where comparing elements at both ends eliminates search space.
 
 ### 🚫 When NOT to Apply?
-- When the collection is unsorted and sorting it would destroy required original index positions without auxiliary indexing.
+
+* When the collection is unsorted and sorting it would destroy required original index positions without auxiliary indexing.
 
 ---
 
@@ -67,7 +71,8 @@ Two Pointers uses two integer index variables moving towards each other (bidirec
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner checks every pair or slice with nested loops, taking O(N^2) time.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate engineer uses extra memory (e.g. allocating reversed arrays or hash sets) to avoid manipulating pointers in place.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Two Pointers (Bidirectional & Directional Pointers))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A staff engineer applies in-place two-pointer convergence, achieving O(N) time with O(1) auxiliary space.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 11 (Container With Most Water), LeetCode 15 (3Sum), LeetCode 125 (Valid Palindrome), LeetCode 167 (Two Sum II).**
+
+* **LeetCode 11 (Container With Most Water), LeetCode 15 (3Sum), LeetCode 125 (Valid Palindrome), LeetCode 167 (Two Sum II).**

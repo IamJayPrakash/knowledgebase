@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Interval Scheduling & Sweep Line Technique** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Interval Scheduling & Sweep Line Technique] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Interval Scheduling & Sweep Line Technique] ---> Validate
 Problems dealing with start and end times [start, end]. Usually solved by sorting by start time or end time, followed by linear merging.
 
 ### ❓ When to Apply?
-- Calendar bookings, meeting room scheduling, resource allocation, and overlapping time range collapses.
+
+* Calendar bookings, meeting room scheduling, resource allocation, and overlapping time range collapses.
 
 ### 🚫 When NOT to Apply?
-- When intervals cannot be sorted or compared along a single dimension.
+
+* When intervals cannot be sorted or compared along a single dimension.
 
 ---
 
@@ -67,7 +71,8 @@ Problems dealing with start and end times [start, end]. Usually solved by sortin
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner checks every interval pair against all other intervals in O(N^2) time.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer sorts but struggles with boundary overlaps (`start <= prev_end` vs `start < prev_end`).*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Interval Scheduling & Sweep Line Technique)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer sorts intervals deterministically and collapses overlapping ranges in a single O(N) pass, or uses Min-Heaps / Sweep Line for concurrent resource counts.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 56 (Merge Intervals), LeetCode 57 (Insert Interval), LeetCode 435 (Non-overlapping Intervals), LeetCode 252 & 253 (Meeting Rooms I & II).**
+
+* **LeetCode 56 (Merge Intervals), LeetCode 57 (Insert Interval), LeetCode 435 (Non-overlapping Intervals), LeetCode 252 & 253 (Meeting Rooms I & II).**

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Batch Processing (MapReduce)** ek **Mahine Ke Akhir Ka Electricity Bill** hai: Poore 30 din ka data jama hota hai, raat ko ek sath calculate hota hai aur subah bill nikalta hai.
 **Stream Processing (Kafka / Flink)** ek **Live Electric Meter Counter** hai: Jaise hi aapne fan on kiya, meter ka pahiya ghoomta hai aur live reading reflect hoti hai (Millisecond real-time event calculation).
 **Exactly-Once Processing**: Banking ATM jaisa hai: Chahe network disconnect ho jaye, aapke account se paisa do baar deduct nahi hoga.

@@ -24,22 +24,26 @@ In Series A to Unicorn tech interviews, nobody tests textbook definitions. CTOs 
 ## 🎯 2. High-Frequency Startup Architecture Scenarios & Spoken Answer Scripts
 
 ### Scenario 1: The Emergency Cloud Cost Audit (FinOps)
+>
 > **Interviewer:** *"Our AWS bill unexpectedly surged by \$25,000 this month. RDS CPU is pinned at 90%, and DynamoDB read capacity unit costs are spiraling. As our new Tech Lead, how do you audit, stabilize, and slash cloud costs within your first 72 hours?"*
 
 **The Staff Engineer Pitch (Say Exactly This):**
 > *"I approach cloud cost emergencies using a three-phase triage framework: Telemetry, Elimination, and Architectural Optimization.
-> 
+>
 > **Hours 0–24 (Telemetry & Quick Wins):**
+>
 > 1. I immediately pull AWS Cost Explorer grouped by API operation and examine RDS Performance Insights.
 > 2. I look for the top-3 expensive SQL queries consuming 80% of database load. Almost always, this is caused by a missing index triggering sequential table scans on a high-traffic table, or an N+1 query introduced in a recent deployment.
 > 3. For DynamoDB, I check if queries are running expensive `Scan` operations instead of partition-key `Query` operations, or if hot partition keys are throttling.
-> 
+>
 > **Hours 24–48 (Remediation & Caching):**
+>
 > 1. I deploy covering composite indexes to eliminate the table scans.
 > 2. I introduce an in-memory Redis Cache-Aside layer with a 5-minute TTL on the top-3 read queries. This typically offloads 75–85% of queries from Postgres directly into RAM.
 > 3. I configure DynamoDB DAX (DynamoDB Accelerator) or transition tables from Provisioned Capacity to On-Demand (if traffic is bursty) or purchase 1-year Savings Plans if traffic is baseline steady.
-> 
+>
 > **Hours 48–72 (Permanent Architectural Fixes):**
+>
 > 1. I migrate database compute to AWS Graviton (ARM64) instances (e.g. `r6g` series), which delivers a 20% cost reduction with 40% higher performance out of the box.
 > 2. I configure S3 Lifecycle rules transitioning older raw logs and file uploads from Standard to Infrequent Access (IA) and Glacier Instant Retrieval.
 > In my previous role, this playbook slashed our monthly infrastructure bill by 62% in one week without dropping a single active feature."*
@@ -47,9 +51,11 @@ In Series A to Unicorn tech interviews, nobody tests textbook definitions. CTOs 
 ---
 
 ### Scenario 2: Designing a Zero-to-One High-Throughput Event Ingestion Pipeline with a 3-Person Team
+>
 > **Interviewer:** *"We just signed an enterprise partner that will stream 40,000 events/second (IoT/telemetry/clickstream) starting next month. We have a team of 3 engineers and cannot spend full-time managing Kafka clusters. How do you design this system?"*
 
 **The Architecture Breakdown:**
+
 ```
 [ 40,000 Events/Sec ] ──> [ AWS API Gateway (Direct Service Proxy) ]
                                       │ (Zero Lambda Overhead!)
@@ -70,6 +76,7 @@ In Series A to Unicorn tech interviews, nobody tests textbook definitions. CTOs 
 ```
 
 **Key Architectural Decisions:**
+
 1. **No Custom Ingestion Servers**: Use an AWS API Gateway Direct Integration directly pushing to Kinesis Data Streams. This eliminates managing Auto Scaling Groups or container fleets.
 2. **Zero-Maintenance Storage**: Kinesis Firehose automatically buffers and converts JSON events into columnar Parquet format, flushing directly to S3.
 3. **Analytics Engine**: Point **ClickHouse** or **Snowflake** to the S3 bucket via external tables, enabling real-time aggregate queries over billions of rows without writing custom ETL pipelines.
@@ -77,9 +84,11 @@ In Series A to Unicorn tech interviews, nobody tests textbook definitions. CTOs 
 ---
 
 ### Scenario 3: Monolith to Modular Microservices Migration (The Strangler Fig Pattern)
+>
 > **Interviewer:** *"We have a 5-year-old Node.js / Django monolith that is becoming hard to maintain. Deployments take 45 minutes, and bugs in checkout crash the whole app. How do you lead the transition without halting new feature development?"*
 
 **The Strategic Migration Plan:**
+
 1. **Do NOT Attempt a "Big Bang" Rewrite**: Big-bang rewrites are fatal for startups; they take 18 months, during which competitors ship 50 new features, and the new system never reaches parity.
 2. **Apply the Strangler Fig Pattern**:
    - Deploy an API Gateway / Reverse Proxy (Cloudflare / NGINX / Kong) in front of the monolith.

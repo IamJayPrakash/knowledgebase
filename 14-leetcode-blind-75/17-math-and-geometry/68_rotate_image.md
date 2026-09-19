@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Matrix Transformations & Boundary Traversal** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Matrix Transformations & Boundary Traversal] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Matrix Transformations & Boundary Traversal] ---> Validat
 In-place grid mutations and boundary pointer manipulations (top, bottom, left, right) traversing 2D matrices without extra buffer allocations.
 
 ### ❓ When to Apply?
-- Image rotation, spiral matrix generation, matrix transpositions, and cyclic shifts.
+
+* Image rotation, spiral matrix generation, matrix transpositions, and cyclic shifts.
 
 ### 🚫 When NOT to Apply?
-- When matrix elements cannot be transposed in place.
+
+* When matrix elements cannot be transposed in place.
 
 ---
 
@@ -67,7 +71,8 @@ In-place grid mutations and boundary pointer manipulations (top, bottom, left, r
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner allocates a brand new auxiliary 2D matrix, failing in-place memory requirements.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer mutates elements but overwrites values before reading them.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Matrix Transformations & Boundary Traversal)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer decomposes transformations into mathematical primitives (e.g., 90° clockwise rotation = Transpose matrix + Reverse each row) in O(1) extra space.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 48 (Rotate Image), LeetCode 54 (Spiral Matrix), LeetCode 73 (Set Matrix Zeroes).**
+
+* **LeetCode 48 (Rotate Image), LeetCode 54 (Spiral Matrix), LeetCode 73 (Set Matrix Zeroes).**

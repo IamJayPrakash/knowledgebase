@@ -1,7 +1,9 @@
 # Python Collections Framework: Lists, Tuples, Sets, Dictionaries & Internal Hash Tables
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - `list`: Ek stretchy rubber-band notebook jisme jab chahe naya panna jod sakte ho ($O(1)$ append).
 > - `tuple`: Ek laminated certificate jo ek baar ban gaya toh badla nahi ja sakta (Immutable, fast, thread-safe).
 > - `set`: Ek VIP party guest list jisme duplicates allowed nahi hain aur security guard turant bata deta hai guest aya hai ya nahi ($O(1)$ search).
@@ -13,7 +15,8 @@
 
 ## 2. 📌 Core Mechanics & Time Complexities (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **`list`**: Ordered, mutable, allows duplicates.
   - Append to end: $O(1)$ amortized.
   - Insert/Delete at beginning: $O(N)$ (must shift all remaining elements in memory!).
@@ -29,7 +32,8 @@
   - Dict: `{k: v for k, v in pairs}`
   - Set: `{x for x in nums}`
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **List Over-Allocation Strategy**: CPython dynamic arrays do not grow element-by-element. When the allocated buffer is full, CPython resizes using the formula: `new_allocated = (size >> 3) + (size < 9 ? 3 : 6) + size`. This ensures amortized $O(1)$ appends.
 - **Python 3.7+ Compact Dict Architecture**: Historically, Python dicts were sparse hash tables (wasting 66% memory). Since 3.7, dicts use a split structure: a dense `entries` array holding `[hash, key, value]` in insertion order, and a compact sparse `indices` table. This reduced dict memory footprint by **20% to 25%** and guaranteed insertion order iteration!
 - **Collision Resolution**: CPython dictionaries resolve hash collisions via **open addressing with pseudo-random probing** (perturbation algorithm: `j = ((5*j) + 1 + perturb) >> 5`), preventing clustering vulnerabilities.
@@ -112,6 +116,7 @@ print("Score to Students Grouping:", score_to_names)
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Why is checking membership in a set `O(1)` while in a list it is `O(N)`?"
 >
 > **You:** "In a list, elements are stored sequentially in a contiguous array. To find an item (`x in my_list`), Python must perform a linear scan comparing each element until a match is found, resulting in $O(N)$ time complexity. In contrast, a `set` is backed by a hash table. Python immediately hashes the target element using `hash(x)`, masks the hash to find the bucket index, and directly looks up the memory bucket in average $O(1)$ time. This is why converting lists to sets before membership filtering yields massive performance gains in large datasets."
@@ -119,7 +124,8 @@ print("Score to Students Grouping:", score_to_names)
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A fraud detection engine checked incoming transactions against a blacklist of 500,000 compromised card tokens. Under peak load of 3,000 transactions per second, API latency spiked to 2.8 seconds and caused gateway timeouts.
-* **Task / Challenge:** Reduce transaction evaluation latency from 2.8s to sub-10ms.
-* **Action Taken:** Profiling with `cProfile` showed 94% of CPU time was spent in `token in blacklist_list`, where `blacklist_list` was stored as a Python `list`. Converted the blacklist storage to a Python `set` with $O(1)$ hash lookups.
-* **Result & Business Impact:** Cut membership lookup time from 180ms per query to 0.05ms, reducing 99th percentile API latency from 2.8s to 4ms and maintaining 100% SLA during Black Friday.
+
+- **Situation:** A fraud detection engine checked incoming transactions against a blacklist of 500,000 compromised card tokens. Under peak load of 3,000 transactions per second, API latency spiked to 2.8 seconds and caused gateway timeouts.
+- **Task / Challenge:** Reduce transaction evaluation latency from 2.8s to sub-10ms.
+- **Action Taken:** Profiling with `cProfile` showed 94% of CPU time was spent in `token in blacklist_list`, where `blacklist_list` was stored as a Python `list`. Converted the blacklist storage to a Python `set` with $O(1)$ hash lookups.
+- **Result & Business Impact:** Cut membership lookup time from 180ms per query to 0.05ms, reducing 99th percentile API latency from 2.8s to 4ms and maintaining 100% SLA during Black Friday.

@@ -18,6 +18,7 @@
 ## 🎯 Master Question Index (1 - 60)
 
 ### Part 1: Core Web Vitals (LCP, INP, CLS) & Field vs Lab Metrics (Q1 - Q20)
+
 * [`01_core_web_vitals_lcp_inp_cls_qna.md`](./01_core_web_vitals_lcp_inp_cls_qna.md)
   1. Google's 3 Core Web Vitals in 2024-2026 and 75th percentile thresholds.
   2. Why Google replaced FID (First Input Delay) with INP (Interaction to Next Paint).
@@ -41,6 +42,7 @@
   20. The `stale-while-revalidate` caching header.
 
 ### Part 2: Critical Rendering Path, Browser Engine & Layout Optimization (Q21 - Q40)
+
 * [`02_rendering_pipeline_and_browser_internals_qna.md`](./02_rendering_pipeline_and_browser_internals_qna.md)
   21. The 6 stages of the Critical Rendering Path (DOM, CSSOM, Render Tree, Layout, Paint, Composite).
   22. Why CSS is Render-Blocking while JavaScript is Parser-Blocking.
@@ -64,6 +66,7 @@
   40. Partytown offloading third-party marketing tags to Web Workers.
 
 ### Part 3: Network Protocols, Bundling, Tree-Shaking & Caching (Q41 - Q60)
+
 * [`03_network_bundling_and_caching_optimization_qna.md`](./03_network_bundling_and_caching_optimization_qna.md)
   41. HTTP/3 (QUIC / UDP) eliminating transport-level Head-of-Line blocking.
   42. The "Barrel File" (`index.ts`) re-export performance trap.

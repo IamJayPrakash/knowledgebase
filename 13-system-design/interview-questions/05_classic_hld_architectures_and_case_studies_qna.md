@@ -1,10 +1,13 @@
 # System Design Master Interview Bank: Part 5 (Q81 - Q100)
+
 ## Top 20 Real-World High-Level System Design Architectures
 
 ---
 
-### Q81: Design a Scalable URL Shortener (TinyURL / Bitly).
+### Q81: Design a Scalable URL Shortener (TinyURL / Bitly)
+
 **Architecture & Key Decisions:**
+
 1. **Capacity Estimation:** 500M new URLs/month. Read-to-write ratio = 10:1. Total URLs in 5 years = 30 Billion.
 2. **Short URL Encoding:**
    - Base62 characters: `[0-9, a-z, A-Z]`.
@@ -18,8 +21,10 @@
 
 ---
 
-### Q82: Design a Social Media News Feed (Twitter / Instagram).
+### Q82: Design a Social Media News Feed (Twitter / Instagram)
+
 **Architecture & Key Decisions:**
+
 1. **Fanout on Write (Push Model):**
    - When a user posts a tweet, find all followers and inject the `tweet_id` into each follower's pre-computed Redis timeline list.
    - *Advantage:* Instant read latency ($O(1)$ read from Redis).
@@ -35,8 +40,10 @@
 
 ---
 
-### Q83: Design a Real-Time Chat & Messaging Platform (WhatsApp / Discord).
+### Q83: Design a Real-Time Chat & Messaging Platform (WhatsApp / Discord)
+
 **Architecture & Key Decisions:**
+
 1. **Connection Layer:** Statefull **WebSocket Gateway** clusters maintaining persistent TCP connections with online users.
 2. **User Session Registry:** Distributed Redis cluster mapping `user_id -> gateway_server_ip`.
 3. **Message Routing Flow:**
@@ -49,14 +56,17 @@
 
 ---
 
-### Q84: Design an E-Commerce Flash Sale & Inventory System (Black Friday / Flipkart Big Billion Days).
+### Q84: Design an E-Commerce Flash Sale & Inventory System (Black Friday / Flipkart Big Billion Days)
+
 **Architecture & Key Decisions:**
+
 1. **The Core Challenge:** 1,000,000 users attempting to purchase 1,000 items simultaneously without overselling or crashing the database.
 2. **Layer 1: Static Edge Caching:** Product details page cached at CDN with 0ms origin load.
 3. **Layer 2: Edge Rate Limiting:** Drop automated bot traffic and duplicate click spam at API Gateway.
 4. **Layer 3: In-Memory Atomic Inventory Reservation:**
    - Storing inventory in PostgreSQL with `SELECT FOR UPDATE` causes massive lock contention and database connection timeouts.
    - Store inventory in a **Redis Cluster using Lua scripts**:
+
      ```lua
      local stock = tonumber(redis.call('get', KEYS[1]))
      if stock > 0 then
@@ -66,13 +76,16 @@
        return 0 -- Sold out!
      end
      ```
+
 5. **Layer 4: Async Order Processing:** Successful Redis reservations emit an order event to a Kafka queue. Background workers pull orders from Kafka and persist to PostgreSQL at a steady, sustainable write rate.
 6. **Payment Timeout:** If payment is not completed within 15 minutes, an event triggers stock increment back to Redis.
 
 ---
 
-### Q85: Design a Proximity Service / Location-Based Search (Uber / Yelp).
+### Q85: Design a Proximity Service / Location-Based Search (Uber / Yelp)
+
 **Architecture & Key Decisions:**
+
 1. **The Spatial Problem:** Finding businesses within radius $R$ of latitude/longitude coordinates $(\text{lat}, \text{lng})$ requires 2D spatial indexing. Standard B-Trees are 1-dimensional.
 2. **Spatial Indexing Options:**
    - **Geohash:** Hierarchical spatial index that encodes 2D lat/lng into a Base32 string. Prefix matching allows finding nearby bounding boxes (e.g. `dr5ru` is adjacent to `dr5rv`).
@@ -82,8 +95,10 @@
 
 ---
 
-### Q86: Design a Video Streaming Service (YouTube / Netflix).
+### Q86: Design a Video Streaming Service (YouTube / Netflix)
+
 **Architecture & Key Decisions:**
+
 1. **Video Ingestion & Transcoding Pipeline:**
    - User uploads master video file to Cloud Object Storage (S3 / GCS).
    - Ingestion service splits video into small 2-second to 10-second chunks.
@@ -95,8 +110,10 @@
 
 ---
 
-### Q87: Design a Distributed Web Crawler (Google / Search Engine).
+### Q87: Design a Distributed Web Crawler (Google / Search Engine)
+
 **Architecture & Key Decisions:**
+
 1. **URL Frontier:** Priority Queue of URLs to crawl. Enforces **Politeness** (not overwhelming any single host) via domain queues and delay timers.
 2. **DNS Resolver Cache:** Local in-memory DNS caching to avoid repeating expensive DNS queries for millions of URLs.
 3. **HTML Fetcher & Parser:** Asynchronous headless browsers executing JavaScript and extracting anchor links.
@@ -105,8 +122,10 @@
 
 ---
 
-### Q88: Design a Collaborative Real-Time Document Editor (Google Docs / Figma).
+### Q88: Design a Collaborative Real-Time Document Editor (Google Docs / Figma)
+
 **Architecture & Key Decisions:**
+
 1. **The Concurrency Problem:** Multiple users typing simultaneously at different positions in the same document without overwriting each other's edits.
 2. **Operational Transformation (OT - Google Docs):**
    - Centralized server orders all operations.
@@ -119,10 +138,13 @@
 
 ---
 
-### Q89: Design a Distributed Unique ID Generator (Twitter Snowflake).
+### Q89: Design a Distributed Unique ID Generator (Twitter Snowflake)
+
 **Architecture & Key Decisions:**
+
 1. **Requirements:** 64-bit integer (fits in `BIGINT`), globally unique, monotonically roughly time-ordered, capable of generating $> 100,000\text{ IDs/sec}$.
 2. **Snowflake 64-Bit Bit Allocation:**
+
    ```
    1 bit: Sign bit (always 0)
    41 bits: Epoch Timestamp in milliseconds (Provides 69 years of unique IDs)
@@ -130,13 +152,16 @@
    5 bits: Worker Node ID (0 - 31)
    12 bits: Local Sequence Number (0 - 4095 per millisecond per node)
    ```
+
 3. **Throughput:** $4,096 \text{ IDs/millisecond/node} \approx 4.096 \text{ Million IDs/sec}$ per node with zero network lock contention!
 4. **Clock Drift Protection:** If physical clock jumps backward (NTP sync), the generator pauses or rejects requests until the clock catches up to the previous timestamp.
 
 ---
 
-### Q90: Design a Real-Time Ride-Sharing Matching Engine (Uber / Grab).
+### Q90: Design a Real-Time Ride-Sharing Matching Engine (Uber / Grab)
+
 **Architecture & Key Decisions:**
+
 1. **Driver Location Ingestion:** Drivers emit GPS location every 4 seconds. Handled by a high-throughput Netty / Go WebSocket gateway.
 2. **Spatial Partitioning (Uber H3):** Earth is divided into hexagonal grid cells of varying resolutions.
 3. **In-Memory Location Index:** Hexagon cells hold sets of available `driver_ids` in Redis.
@@ -148,8 +173,10 @@
 
 ---
 
-### Q91: Design a Distributed Metrics Monitoring & Alerting System (Datadog / Prometheus).
+### Q91: Design a Distributed Metrics Monitoring & Alerting System (Datadog / Prometheus)
+
 **Architecture & Key Decisions:**
+
 1. **Metrics Collection:** Push vs Pull model. (Prometheus pulls metrics from `/metrics` endpoints; StatsD pushes UDP packets).
 2. **Time-Series Database (TSDB):**
    - Writes are 99% append-only time-series data: `(metric_name, labels, timestamp, value)`.
@@ -159,8 +186,10 @@
 
 ---
 
-### Q92: Design a Search Typeahead / Autocomplete System (Google Search).
+### Q92: Design a Search Typeahead / Autocomplete System (Google Search)
+
 **Architecture & Key Decisions:**
+
 1. **Core Data Structure:** **Trie (Prefix Tree)** stored in RAM.
    - Each Trie node stores the character and pre-computes the **Top 5 most frequent search queries** starting with that prefix.
 2. **Offline Aggregation Pipeline:**
@@ -171,8 +200,10 @@
 
 ---
 
-### Q93: Design a Cloud File Storage & Synchronization Service (Dropbox / Google Drive).
+### Q93: Design a Cloud File Storage & Synchronization Service (Dropbox / Google Drive)
+
 **Architecture & Key Decisions:**
+
 1. **Block-Level Chunking:** Files are split into fixed 4MB chunks.
 2. **Content-Addressable Storage (CAS):** Each chunk is hashed using SHA-256 (`chunk_hash`).
    - Enables **Global Deduplication**: If multiple users upload the same 4GB operating system ISO, the file is stored in S3 exactly once.
@@ -181,8 +212,10 @@
 
 ---
 
-### Q94: Design a Webhook Delivery Engine (Stripe / GitHub).
+### Q94: Design a Webhook Delivery Engine (Stripe / GitHub)
+
 **Architecture & Key Decisions:**
+
 1. **The Challenge:** Delivering millions of HTTP POST notifications to third-party customer servers that may be down, slow, or misconfigured.
 2. **Queue Architecture:** Kafka queues partition events by `customer_id` to guarantee in-order delivery per tenant.
 3. **Security:** Every webhook request includes an **HMAC-SHA256 signature** in headers (`X-Signature`) computed with customer's secret key to prevent spoofing.
@@ -192,8 +225,10 @@
 
 ---
 
-### Q95: Design a High-Volume Ad Click Event Aggregator (Click Fraud Detection).
+### Q95: Design a High-Volume Ad Click Event Aggregator (Click Fraud Detection)
+
 **Architecture & Key Decisions:**
+
 1. **Scale:** 100,000 clicks/sec. Financial advertisers must be billed accurately without double-counting click fraud.
 2. **Ingestion Layer:** Load balancers distribute clicks to stateless API servers emitting to Kafka topics partitioned by `ad_id`.
 3. **Click Deduplication (Sliding Window):**
@@ -202,8 +237,10 @@
 
 ---
 
-### Q96: Design a Distributed Lock Manager (Redlock vs ZooKeeper/etcd).
+### Q96: Design a Distributed Lock Manager (Redlock vs ZooKeeper/etcd)
+
 **Architecture & Key Decisions:**
+
 1. **Redis Redlock:**
    - Client attempts to acquire lock across $N$ independent Redis master nodes (e.g. 5 nodes) using `SET resource_name my_random_value NX PX 30000`.
    - Lock is acquired if client gets lock on majority ($\ge 3$) nodes within a timeout.
@@ -214,8 +251,10 @@
 
 ---
 
-### Q97: Design an Online Payment Gateway & Financial Ledger System (Stripe / PayPal).
+### Q97: Design an Online Payment Gateway & Financial Ledger System (Stripe / PayPal)
+
 **Architecture & Key Decisions:**
+
 1. **Two-Phase Payment Flow:**
    - **Authorize:** Reserves funds on customer's credit card.
    - **Capture:** Transfers funds after order fulfillment.
@@ -228,8 +267,10 @@
 
 ---
 
-### Q98: Design a Live Video Streaming Chat (Twitch / YouTube Live with 10M Viewers).
+### Q98: Design a Live Video Streaming Chat (Twitch / YouTube Live with 10M Viewers)
+
 **Architecture & Key Decisions:**
+
 1. **The Broadcast Fanout Problem:** If a creator has 1,000,000 concurrent viewers and chat messages flow at 1,000 messages/sec, sending every message to every viewer requires 1 Billion socket writes/sec (impossible for standard WebSockets).
 2. **Chat Room Sharding:**
    - The single live chat room is divided into virtual sub-rooms (e.g., 100 sub-rooms).
@@ -240,8 +281,10 @@
 
 ---
 
-### Q99: Design a Distributed Web Gateway API Rate Limiter (Cloudflare / Kong).
+### Q99: Design a Distributed Web Gateway API Rate Limiter (Cloudflare / Kong)
+
 **Architecture & Key Decisions:**
+
 1. **Multi-Tier Rate Limiting:**
    - **Tier 1 (Edge CDN):** BGP Anycast and WAF drop known DDoS IPs, volumetric SYN floods, and blacklisted user agents.
    - **Tier 2 (Gateway Layer):** Distributed Token Bucket backed by Redis cluster enforcing tenant API limits (e.g., 1,000 requests/minute).
@@ -251,8 +294,10 @@
 
 ---
 
-### Q100: Design a Global Notification Service (Twilio / Firebase Cloud Messaging).
+### Q100: Design a Global Notification Service (Twilio / Firebase Cloud Messaging)
+
 **Architecture & Key Decisions:**
+
 1. **Multi-Channel Delivery:** Orchestrates Push (APNS, FCM), SMS (Twilio, Sinch), and Email (SendGrid, SES).
 2. **User Preferences & Quiet Hours:**
    - Database stores user notification preferences, language, and quiet hours (e.g., no push notifications between 10 PM and 7 AM in user's local timezone).

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 React 19 React history ka sabse bada paradigm shift hai.
 Pehle developers ko har form ke liye `isSubmitting`, `error`, `useCallback`, `useMemo` ka jhanjhat paalna padta tha.
 React 19 ka **React Compiler (Forget)** ek **Invisible Auto-Tuner** ki tarah hai: Aapko code mein manually `useMemo` ya `useCallback` lagane ki zaroorat hi nahi hai; compiler AST level par dekh leta hai ki kahan calculation cache karni hai.
@@ -105,6 +106,7 @@ export function UserProfileCard({ currentUsername }) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "React 19 represents a monumental evolution in developer experience and performance. Core innovations include Actions and `useActionState`, which natively manage pending states, error handling, and form lifecycle transitions without manual boolean flags. The `use()` API allows conditional Promise and Context consumption directly inside components. With `useOptimistic`, optimistic UI state rollbacks are handled declaratively. Finally, the React Compiler eliminates manual memoization ceremonies (`useMemo`, `useCallback`, `React.memo`) by compiling fine-grained memoization directly into the emitted JavaScript at build time."
 
 ---

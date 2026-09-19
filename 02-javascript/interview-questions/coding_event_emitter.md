@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 `EventEmitter` ek newspaper publishing agency ki tarah hai. Readers aate hain aur kisi topic ke liye subscribe karte hain (`emitter.on('sports', callback)`). Jab bhi sports department nayi khabar print karta hai (`emitter.emit('sports', news)`), agency har subscribed reader ke ghar newspaper bhej deti hai. Agar koi reader subscription cancel kare (`emitter.off('sports', callback)`), use aage se khabar nahi milti.
 
 ---

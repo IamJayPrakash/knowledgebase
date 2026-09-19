@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Har baar jab parent component re-render hota hai, JavaScript uske andar ke har function aur object ko ek **Naye Memory Address** par recreate karta hai (`{} !== {}`).
 `React.memo` ek **Security Guard** ki tarah hai jo component ke gate par khada rehta hai: Agar parent re-render hua lekin props change nahi huye, toh guard bolta hai: "Andar sab wahi hai, dobara paint mat karo".
 `useCallback` ek **Function Reference Locker** hai jo function ka purana memory address reuse karta hai taaki guard ko bewakoof na banaya jaye.
@@ -104,6 +105,7 @@ export function ProductCatalog() {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Memoization in React aims to preserve referential equality and avoid unnecessary re-render cycles of subtrees. `React.memo` wraps a component to shallowly compare incoming props against previous props. However, `React.memo` is rendered useless if the parent passes un-memoized object literals or inline arrow functions, because new memory references invalidate shallow equality on every render. We pair `React.memo` with `useCallback` to stabilize function references and `useMemo` to stabilize complex transformed data or expensive calculations. We apply memoization selectively where profiling in React DevTools demonstrates actual render bottlenecks."
 
 ---

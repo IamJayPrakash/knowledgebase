@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Binary Tree & Binary Search Tree (DFS & BFS)** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Binary Tree & Binary Search Tree (DFS & BFS)] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Binary Tree & Binary Search Tree (DFS & BFS)] ---> Valida
 Hierarchical node structure where each node has at most two children. BSTs maintain the invariant: left < root < right.
 
 ### ❓ When to Apply?
-- Hierarchical data modeling, priority systems, fast searching (BST), and directory structures.
+
+* Hierarchical data modeling, priority systems, fast searching (BST), and directory structures.
 
 ### 🚫 When NOT to Apply?
-- When data is linear and doesn't warrant node pointer overhead.
+
+* When data is linear and doesn't warrant node pointer overhead.
 
 ---
 
@@ -67,7 +71,8 @@ Hierarchical node structure where each node has at most two children. BSTs maint
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner struggles with recursion base cases and call-stack returns.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer writes recursive DFS without validating stack limits or tree balance.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Binary Tree & Binary Search Tree (DFS & BFS))
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer seamlessly transitions between recursive DFS and iterative queue-based BFS, handling edge cases like skewed trees with O(1) auxiliary Morris traversals where applicable.*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 226 (Invert Binary Tree), LeetCode 104 (Max Depth), LeetCode 98 (Validate BST), LeetCode 102 (Level Order Traversal).**
+
+* **LeetCode 226 (Invert Binary Tree), LeetCode 104 (Max Depth), LeetCode 98 (Validate BST), LeetCode 102 (Level Order Traversal).**

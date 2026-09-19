@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Next.js App Router ka Caching System ek **4-Tier Smart Fridge** ki tarah hai:
+
 1. **Request Memoization (Table top)**: Ek hi khana 3 log mang rahe hain, toh kitchen mein ek hi baar banta hai.
 2. **Data Cache (Freezer)**: Server par API response freeze ho jata hai taaki baar-baar bahar market (database) na jana pade.
 3. **Full Route Cache (Ready-made Lunchbox)**: Pura HTML page pehle se pack hai, aate hi de do.
@@ -86,6 +88,7 @@ export default async function ProductsPage() {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Next.js App Router implements a multi-tier caching architecture spanning both server and client runtimes. It operates across four distinct layers: Request Memoization, which deduplicates identical fetch requests within a single render cycle; the Data Cache, which persists API responses across requests; the Full Route Cache, which stores pre-rendered HTML and RSC payloads; and the Client Router Cache, which accelerates client-side navigation. We control this behavior through segment configurations like `export const dynamic = 'force-dynamic'` and leverage on-demand revalidation via `revalidateTag` to purge stale caches instantly upon database mutations."
 
 ---

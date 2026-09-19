@@ -1,7 +1,9 @@
 # Third-Party Script Optimization, Partytown & Web Workers Masterclass
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - Third-Party Scripts: Aapne ek luxury car khareedi (Aapka fast React/Angular code), lekin car ke peeche 10 heavy truck (Google Tag Manager, Facebook Pixel, Hotjar, TikTok tracking) rassi se baandh diye! Car ka engine (Browser Main Thread) unhi trucks ko kheenchne mein poora exhaust ho jata hai aur car slow ho jati hai!
 > - Web Workers & Partytown: Un saare 10 trucks ke liye ek alag bypass highway (Background Worker Thread) bana dena. Ab car akele highway par 150 km/h se bhagegi, aur saare tracking analytics background mein chupchap chalte rahenge bina UI ko roke!
 >
@@ -11,7 +13,8 @@
 
 ## 2. 📌 Core Mechanics & Strategy (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **The Problem with Third-Party Scripts**: Analytics, chat widgets (Intercom/Zendesk), and marketing tags run heavy JavaScript on the **Main Thread**, competing directly with user clicks, animations, and LCP rendering.
 - **Script Loading Attributes**:
   - Normal `<script src="...">`: Blocks HTML parsing immediately!
@@ -19,7 +22,8 @@
   - `<script defer src="...">`: Downloads in parallel, executes **only after HTML parsing finishes**, maintaining execution order.
 - **Delayed Loading Pattern**: Never load marketing pixels on page load. Load them on **first user interaction** (first scroll, click, or touch) or via `requestIdleCallback()`.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Partytown Architecture**:
   - Standard Web Workers cannot access the DOM (`window`, `document`, `localStorage`).
   - **Partytown** runs third-party scripts (Google Tag Manager, Hubspot, Mixpanel) inside a Web Worker. When the third-party script reads or writes the DOM (`document.cookie`, `window.dataLayer.push()`), Partytown intercepts the call via a JavaScript `Proxy` and sends a **synchronous XMLHttpRequest / Atomics.wait** over a Service Worker bridge to the main thread!
@@ -122,6 +126,7 @@ Main Thread Contention vs Partytown Web Worker Offloading:
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Third-party marketing scripts (GTM, Hotjar, Facebook Pixel) are destroying the website's performance and INP. How do you fix this without breaking marketing tracking?"
 >
 > **You:** "Third-party marketing tags are notorious for hijacking the main thread with long tasks. I solve this using a three-tiered architectural strategy: First, for heavy interactive widgets like customer support chats (Intercom/Zendesk), I implement the Facade Pattern—rendering a static, lightweight 2KB CSS/SVG placeholder and only loading the multi-megabyte third-party SDK on actual user click. Second, for analytics tracking pixels, I offload execution off the main thread entirely using Partytown, which runs scripts inside background Web Workers and proxies DOM access. Third, for non-critical tags, I delay initialization until after the page is idle using `requestIdleCallback` or the first user scroll event."
@@ -129,7 +134,8 @@ Main Thread Contention vs Partytown Web Worker Offloading:
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** An e-commerce brand had 28 marketing tags loaded via Google Tag Manager (Hotjar, Criteo, TikTok Pixel, Google Ads). Total Blocking Time (TBT) was 1,400ms and mobile INP was 540ms, directly impacting mobile checkout conversions.
-* **Task / Challenge:** Reclaim main thread responsiveness and reduce TBT under 150ms without dropping any marketing attribution pixels.
-* **Action Taken:** Implemented Partytown on Cloudflare Workers edge. Re-tagged all GTM scripts to `type="text/partytown"`, moving cookie reads and telemetry dispatching into background Web Workers. For the Zendesk customer support widget, replaced the synchronous script with a static SVG facade button that dynamically imported Zendesk on click.
-* **Result & Business Impact:** Slashed Total Blocking Time (TBT) from 1,400ms to 65ms (a 95% reduction), lowered INP from 540ms to 85ms, and increased mobile add-to-cart rate by 8.7%.
+
+- **Situation:** An e-commerce brand had 28 marketing tags loaded via Google Tag Manager (Hotjar, Criteo, TikTok Pixel, Google Ads). Total Blocking Time (TBT) was 1,400ms and mobile INP was 540ms, directly impacting mobile checkout conversions.
+- **Task / Challenge:** Reclaim main thread responsiveness and reduce TBT under 150ms without dropping any marketing attribution pixels.
+- **Action Taken:** Implemented Partytown on Cloudflare Workers edge. Re-tagged all GTM scripts to `type="text/partytown"`, moving cookie reads and telemetry dispatching into background Web Workers. For the Zendesk customer support widget, replaced the synchronous script with a static SVG facade button that dynamically imported Zendesk on click.
+- **Result & Business Impact:** Slashed Total Blocking Time (TBT) from 1,400ms to 65ms (a 95% reduction), lowered INP from 540ms to 85ms, and increased mobile add-to-cart rate by 8.7%.

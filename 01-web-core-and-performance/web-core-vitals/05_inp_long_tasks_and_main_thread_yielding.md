@@ -1,6 +1,7 @@
 # Interaction to Next Paint (INP): Long Tasks, Main-Thread Yielding & Scheduler API
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Socho aap kisi bank ke cash counter par khade ho. Aapke aage ek aadmi 500 alag-alag cheque ek saath process karwa raha hai (Long Task on Main Thread). Cashier aapki taraf dekh bhi nahi pa raha (Frozen UI). Agar cashier har 5 cheque ke baad aapki taraf dekh kar bol de "Haanji, aapka token number note kar liya hai, 1 minute rukiye" (Yielding to main thread), toh aapko gussa nahi aayega! INP yahi measure karta hai: Click karne ke baad screen par agli frame kitni jaldi badli!
 >
 > **Real-World Analogy:** A smartphone touch screen during a heavy software update. If you tap the 'Cancel' button and the phone screen freezes for 800ms before showing a pressed state, you feel the phone is lagging or broken. INP measures this responsiveness lag across every single click, tap, and keystroke throughout the user's entire session.
@@ -9,20 +10,22 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **What is INP?**: Interaction to Next Paint measures page responsiveness throughout the entire user journey (Replaced FID - First Input Delay in March 2024).
 - **Target Thresholds**:
-  - 🟢 **Good**: $\le 200	ext{ milliseconds}$
-  - 🟡 **Needs Improvement**: $200	ext{ms} - 500	ext{ms}$
-  - 🔴 **Poor**: $> 500	ext{ milliseconds}$
+  - 🟢 **Good**: $\le 200 ext{ milliseconds}$
+  - 🟡 **Needs Improvement**: $200 ext{ms} - 500 ext{ms}$
+  - 🔴 **Poor**: $> 500 ext{ milliseconds}$
 - **The 3 Phases of an Interaction**:
-  $$	ext{INP} = 	ext{Input Delay} + 	ext{Processing Time} + 	ext{Presentation Delay}$$
+  $$ ext{INP} =  ext{Input Delay} +  ext{Processing Time} +  ext{Presentation Delay}$$
   1. **Input Delay**: Time waiting for previous main-thread tasks to finish before your event handler even starts.
   2. **Processing Time**: Execution time taken by your JavaScript event callbacks (`onClick`, `onChange`).
   3. **Presentation Delay**: Time taken by the browser to recalculate layout, repaint pixels, and composite the next visual frame.
 
-### 🧓 What an Experienced Candidate Knows:
-- **Long Tasks Definition**: Any JavaScript task that blocks the main thread for **more than 50 milliseconds**. Tasks $> 50	ext{ms}$ create visible frame drops ($< 60	ext{fps}$) and delay user input processing.
+### 🧓 What an Experienced Candidate Knows
+
+- **Long Tasks Definition**: Any JavaScript task that blocks the main thread for **more than 50 milliseconds**. Tasks $> 50 ext{ms}$ create visible frame drops ($< 60 ext{fps}$) and delay user input processing.
 - **Yielding to the Main Thread (`scheduler.yield()`)**:
   - `setTimeout(fn, 0)`: Yields to the Macrotask queue, but introduces an artificial delay (minimum 4ms clamp for nested timers) and relinquishes priority to other unrelated macrotasks.
   - `scheduler.yield()`: Modern web API (Chrome 129+) that yields execution back to the browser event loop to paint a frame or handle pending user input, and then **immediately resumes the task ahead of unrelated background tasks**!
@@ -132,14 +135,16 @@ function updateElementsOptimally(elements) {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is Interaction to Next Paint (INP), and how do you optimize it in high-frequency interactive applications?"
 >
-> **You:** "INP measures the total latency between a user interaction—such as a click, tap, or keypress—and the next visual paint on the screen, capturing worst-case user responsiveness throughout the session with a target of under 200ms. An interaction consists of input delay, processing time, and presentation delay. To optimize INP, I eliminate Long Tasks ($> 50	ext{ms}$) by breaking synchronous loops into chunks and yielding to the main thread via `scheduler.yield()`. I also eliminate layout thrashing by batching DOM reads before writes, defer non-urgent React updates using `useTransition`, and offload CPU-intensive operations like data parsing or crypto to Web Workers."
+> **You:** "INP measures the total latency between a user interaction—such as a click, tap, or keypress—and the next visual paint on the screen, capturing worst-case user responsiveness throughout the session with a target of under 200ms. An interaction consists of input delay, processing time, and presentation delay. To optimize INP, I eliminate Long Tasks ($> 50 ext{ms}$) by breaking synchronous loops into chunks and yielding to the main thread via `scheduler.yield()`. I also eliminate layout thrashing by batching DOM reads before writes, defer non-urgent React updates using `useTransition`, and offload CPU-intensive operations like data parsing or crypto to Web Workers."
 
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A SaaS analytics platform had a searchable data grid with 10,000 rows. When users typed into the filter input, the UI froze for 650ms per keystroke, causing an INP of 820ms on mobile devices and high customer churn.
-* **Task / Challenge:** Reduce filter input latency from 820ms to under 100ms.
-* **Action Taken:** Profiling with Chrome DevTools Performance panel showed a single monolithic task running regex filtering and full DOM re-rendering on every keyup event. Applied two changes: First, wrapped the state update in React 18 `useTransition` so keystrokes remained urgent while table filtering ran concurrently at lower priority. Second, moved the 10,000-row regex filtering into a dedicated Web Worker using `Comlink`.
-* **Result & Business Impact:** Slashed 75th percentile INP from 820ms down to 48ms, completely eliminating keystroke lag and increasing user search engagement by 28%.
+
+- **Situation:** A SaaS analytics platform had a searchable data grid with 10,000 rows. When users typed into the filter input, the UI froze for 650ms per keystroke, causing an INP of 820ms on mobile devices and high customer churn.
+- **Task / Challenge:** Reduce filter input latency from 820ms to under 100ms.
+- **Action Taken:** Profiling with Chrome DevTools Performance panel showed a single monolithic task running regex filtering and full DOM re-rendering on every keyup event. Applied two changes: First, wrapped the state update in React 18 `useTransition` so keystrokes remained urgent while table filtering ran concurrently at lower priority. Second, moved the 10,000-row regex filtering into a dedicated Web Worker using `Comlink`.
+- **Result & Business Impact:** Slashed 75th percentile INP from 820ms down to 48ms, completely eliminating keystroke lag and increasing user search engagement by 28%.

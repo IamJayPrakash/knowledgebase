@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are appearing for an **Open-Book Board Exam**:
+
 - **Naive LLM**: Aap bina kisi kitaab ke exam hall mein baithe ho. Jo dimaag mein 2 saal pehle padha tha, wahi likh rahe ho (high chance of forgetting exact dates or hallucinating facts).
 - **RAG (Retrieval-Augmented Generation)**: Aapke desk par **10,000 pages ki encyclopedias** hain. Lekin aap poori 10,000 pages ek minute mein nahi padh sakte!
 - **Chunking**: Aap pehle encyclopedias ko 1-1 page ke chote, self-contained chapters mein kaat kar index karte ho (**Smart Chunking**).
@@ -14,7 +16,8 @@ Imagine you are appearing for an **Open-Book Board Exam**:
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **The RAG Tri-Step Flow**:
    - **Ingestion**: Load documents $\to$ Split into Chunks $\to$ Generate Embeddings $\to$ Store in Vector DB.
    - **Retrieval**: User Query $\to$ Query Embedding $\to$ Similarity Search $\to$ Top-K relevant chunks retrieved.
@@ -24,7 +27,8 @@ Imagine you are appearing for an **Open-Book Board Exam**:
    - Long documents dilute vector semantics (an entire 50-page book compressed into 1 vector loses granular facts).
    - Keeps context window lean and cost-effective.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **Core Chunking Strategies**:
    - **Fixed-Size Chunking**: Splits text every $N$ characters/tokens (e.g., 500 characters with 50 character overlap). Simplest, but frequently cuts sentences in half mid-thought.
    - **Recursive Character Chunking**: Splits hierarchically using a priority list of separators: `["\n\n", "\n", " ", ""]`. Keeps paragraphs and sentences intact before resorting to word-level splits.
@@ -33,9 +37,10 @@ Imagine you are appearing for an **Open-Book Board Exam**:
      - Embeds small chunks (e.g., 100 tokens) for high-precision semantic retrieval.
      - When a small chunk is matched, retrieves the broader **Parent Chunk** (e.g., 1000 tokens) or entire document section to provide complete surrounding context to the generation LLM.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 4. **Context Lost at Boundaries**: Chunks without overlap lose critical pronoun references. Always enforce a 10%–20% chunk overlap (`chunk_overlap=50` for `chunk_size=500`).
-5. **Lost in the Middle Phenomenon**: LLM attention mechanisms prioritize tokens at the extreme beginning and end of the prompt context. If the most critical retrieved chunk is placed in the middle of 10 chunks, the LLM may overlook it. Re-order retrieved chunks so the highest-scoring chunk is at the very top or bottom of the context.
+2. **Lost in the Middle Phenomenon**: LLM attention mechanisms prioritize tokens at the extreme beginning and end of the prompt context. If the most critical retrieved chunk is placed in the middle of 10 chunks, the LLM may overlook it. Re-order retrieved chunks so the highest-scoring chunk is at the very top or bottom of the context.
 
 ---
 
@@ -207,18 +212,21 @@ print(assembled_prompt)
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"Naive RAG fails in production primarily because of poor ingestion and context fragmentation. Retrieval-Augmented Generation relies on a three-phase contract: Chunking, Retrieval, and Grounded Synthesis. 
-> Rather than arbitrary fixed-character slicing, we use Recursive Character Chunking to preserve sentence and paragraph cohesion, maintaining a 10-20% overlap window to prevent boundary information loss. 
-> For complex hierarchical documents such as legal contracts or financial reports, we implement Parent-Document (Small-to-Big) Chunking: we embed small 100-token chunks for pinpoint semantic vector search, but retrieve the larger 1000-token parent container for LLM generation. 
+>
+> *"Naive RAG fails in production primarily because of poor ingestion and context fragmentation. Retrieval-Augmented Generation relies on a three-phase contract: Chunking, Retrieval, and Grounded Synthesis.
+> Rather than arbitrary fixed-character slicing, we use Recursive Character Chunking to preserve sentence and paragraph cohesion, maintaining a 10-20% overlap window to prevent boundary information loss.
+> For complex hierarchical documents such as legal contracts or financial reports, we implement Parent-Document (Small-to-Big) Chunking: we embed small 100-token chunks for pinpoint semantic vector search, but retrieve the larger 1000-token parent container for LLM generation.
 > This eliminates the classic trade-off between retrieval specificity and conversational context. Finally, we mitigate the 'Lost-in-the-Middle' attention anomaly by dynamically placing the highest-scoring chunks at the top and bottom of the context window."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: Fortune 500 Insurance claims processing portal.  
 **Incident**: Customer support agents using an internal RAG assistant reported that the AI frequently gave incorrect coverage limits and missed policy clauses on multi-column PDF claims, leading to wrongful claim rejections.  
 **Root Cause**: The ingestion script used a naive text extractor that read PDFs left-to-right across the entire page geometry. This interweaved sentences from Column 1 and Column 2 together into a garbled stream, destroying semantic sentence structure before chunking. Furthermore, fixed 200-word chunks cut policy exclusion clauses directly in half.  
 **Resolution**:
+
 1. Replaced the naive parser with a layout-aware PDF parser (extracting reading order by bounding boxes).
 2. Implemented **Parent-Child Chunking**: small sentence-level children (50 tokens) linked to parent policy tables (500 tokens).
 3. Added metadata headers (`policy_type`, `state`, `effective_date`) directly prepended to every chunk string before embedding.  

@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Express ek **Assembly Line Car Factory** ki tarah hai. Ek raw car chassis (HTTP Request) entry gate par aati hai.
 Station 1: Guard ticket check karta hai (`AuthMiddleware`).
 Station 2: Body paint hoti hai (`BodyParserMiddleware`).
@@ -78,4 +79,5 @@ app.use((err, req, res, next) => {
 ---
 
 ## 🎯 4. The "Interview Pitch"
+>
 > "Express.js is an unopinionated routing and middleware engine built on the Chain of Responsibility design pattern. Requests travel through a linked pipeline of handlers where each middleware can inspect headers, mutate the request context, end the response, or invoke `next()`. Error handling in Express relies on a specialized four-argument signature `(err, req, res, next)`. In enterprise setups, organizing domain endpoints into isolated `express.Router()` instances allows composing decoupled sub-applications with their own localized middleware guards."

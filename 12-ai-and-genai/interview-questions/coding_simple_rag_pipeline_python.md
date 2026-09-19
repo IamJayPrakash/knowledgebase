@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy
+
 RAG pipeline ek **Open-Book Exam** ki tarah hai: Jab question aata hai, toh student (Search Engine) library se relevant 2 page nikalta hai (`Chunk Retrieval`), aur fir professor (LLM) ko bolta hai: "Sirf in 2 panno ko dekh kar answer likho, apne man se kahani mat banao" (`Grounded Prompt Generation`)!
 
 ---

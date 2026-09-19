@@ -21,6 +21,7 @@
 ## 🎯 Master Question Index (1 - 100)
 
 ### Part 1: Core Java Foundations, JVM Architecture & Memory Management (Q1 - Q20)
+
 * [`01_java_core_foundations_jvm_and_memory_qna.md`](./01_java_core_foundations_jvm_and_memory_qna.md)
   1. Internal architecture of the JVM: ClassLoader, Memory, Engine.
   2. JVM Runtime Data Areas (Heap, Stack, Metaspace, PC, Native).
@@ -44,6 +45,7 @@
   20. `Comparable` (natural) vs `Comparator` (custom dynamic) ordering.
 
 ### Part 2: OOP, Collections Framework, Generics & Streams (Q21 - Q40)
+
 * [`02_java_oop_collections_generics_and_exceptions_qna.md`](./02_java_oop_collections_generics_and_exceptions_qna.md)
   21. Dynamic Method Dispatch and Metaspace vtables.
   22. Abstract Classes vs Interfaces in Java 21.
@@ -67,6 +69,7 @@
   40. Functional Interfaces and SAM interface rules.
 
 ### Part 3: Concurrency, Threading, Memory Model & Virtual Threads (Q41 - Q60)
+
 * [`03_java_concurrency_threads_and_virtual_threads_qna.md`](./03_java_concurrency_threads_and_virtual_threads_qna.md)
   41. Java Thread Lifecycle and 6 Thread States.
   42. `synchronized` monitor locks vs `ReentrantLock` features.
@@ -90,6 +93,7 @@
   60. `LongAdder` cell striping performance under high contention.
 
 ### Part 4: Spring Boot Core, IoC Container, AOP & Spring Data JPA (Q61 - Q80)
+
 * [`04_spring_boot_core_ioc_and_data_qna.md`](./04_spring_boot_core_ioc_and_data_qna.md)
   61. Complete Spring Bean Lifecycle phases.
   62. Why Field Injection is an architectural anti-pattern.
@@ -113,6 +117,7 @@
   80. Spring Boot Actuator production operational endpoints.
 
 ### Part 5: Spring Security 6, Microservices, Resilience4j & Production Ops (Q81 - Q100)
+
 * [`05_spring_boot_security_microservices_and_resilience_qna.md`](./05_spring_boot_security_microservices_and_resilience_qna.md)
   81. Spring Security 6 Filter Chain architecture.
   82. Configuring a modern stateless `SecurityFilterChain`.
@@ -138,4 +143,5 @@
 ---
 
 ## ⚡ Quick Refresher
+
 * [`top_java_springboot_interview_questions.md`](./top_java_springboot_interview_questions.md) — High-frequency senior interview question summary.

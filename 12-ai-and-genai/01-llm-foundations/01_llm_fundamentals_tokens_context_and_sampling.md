@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine a large language model (LLM) as an **ultra-fast predictive keyboard** on your smartphone, but trained on nearly all human writing on the internet.
+
 - When you type *"Main kal Subah office..."*, your phone keyboard predicts *"jaunga"* (90% probability) or *"nahi jaunga"* (10% probability).
 - An LLM does not see human words or letters directly. It breaks text into small puzzle pieces called **Tokens** (like syllables or word fragments).
 - **Context Window** is the size of the model's short-term desk: agar desk par sirf 10 files rakhne ki jagah hai, toh 11th file aate hi pehli file desk se gir jaati hai (context truncation).
@@ -15,7 +17,8 @@ Imagine a large language model (LLM) as an **ultra-fast predictive keyboard** on
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Next-Token Prediction**: An LLM is an autoregressive probabilistic function: $P(w_t \mid w_1, w_2, \dots, w_{t-1})$. It generates text by repeatedly predicting the single most plausible next token given all preceding tokens.
 2. **Tokens vs Words**: 1 token is roughly $0.75$ words in English (~4 characters). Non-English languages (Hindi, Arabic, Japanese) or code indentation often require 2–5x more tokens due to tokenizer vocabulary splits.
 3. **Chat Roles**: Modern instruction-tuned models structure input into three primary roles:
@@ -23,21 +26,23 @@ Imagine a large language model (LLM) as an **ultra-fast predictive keyboard** on
    - `user`: The human prompt or query.
    - `assistant`: The generated model response or conversational history.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 4. **Byte-Pair Encoding (BPE)**: Subword tokenization algorithm (used by GPT-4, Llama 3) that merges the most frequent byte pairs iteratively. Prevents Out-Of-Vocabulary (OOV) errors because unknown words fallback to raw bytes.
-5. **Context Window Dynamics**:
+2. **Context Window Dynamics**:
    - Total Tokens = `Prompt Tokens (Input)` + `Completion Tokens (Output)`.
    - If `Prompt Tokens` exceeds the context window limit ($N$), the model fails with a 400 Bad Request error.
-6. **Sampling Parameters Mechanics**:
+3. **Sampling Parameters Mechanics**:
    - **Softmax Temperature ($T$)**: Scaled logits $z_i' = \frac{z_i}{T}$. When $T \to 0$, argmax dominates (greedy decoding). When $T > 1$, probability distribution flattens.
    - **Top-K Sampling**: Restricts sampling pool strictly to the $K$ most probable tokens.
    - **Top-P (Nucleus Sampling)**: Dynamically selects the smallest set of tokens whose cumulative probability exceeds threshold $P$ (e.g., $P=0.9$).
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 7. **Repetition and Presence Penalties**:
    - `frequency_penalty`: Penalizes tokens proportionally to how many times they have already appeared in the output (prevents infinite loops).
    - `presence_penalty`: Flat one-off penalty applied to any token that has appeared at least once (encourages introducing new topics).
-8. **Token Length Pitfall**: A character-level regex match or slice will corrupt multi-byte UTF-8 tokens. Never truncate prompts by raw string character count; always use model-specific tokenizers (e.g., `tiktoken`).
+2. **Token Length Pitfall**: A character-level regex match or slice will corrupt multi-byte UTF-8 tokens. Never truncate prompts by raw string character count; always use model-specific tokenizers (e.g., `tiktoken`).
 
 ---
 
@@ -173,16 +178,19 @@ print(f"Sampled Next Token: '{picked_token}'")
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"In production LLM systems, generating text is fundamentally an iterative next-token prediction task. Input text is tokenized via Byte-Pair Encoding (BPE) into discrete subword IDs. The transformer produces unnormalized output scores called logits over its vocabulary. 
+>
+> *"In production LLM systems, generating text is fundamentally an iterative next-token prediction task. Input text is tokenized via Byte-Pair Encoding (BPE) into discrete subword IDs. The transformer produces unnormalized output scores called logits over its vocabulary.
 > To control generation behavior, we tune three levers: Temperature, Top-K, and Top-P. Temperature scales logits before softmax—values close to 0 sharpen the peak toward greedy deterministic decoding (crucial for code and SQL), while higher temperatures flatten the distribution for creative diversity. Top-P nucleus sampling dynamically truncates the candidate pool to the smallest set whose cumulative probability mass exceeds threshold P, eliminating low-probability hallucination tails without artificially limiting vocabulary like a fixed Top-K would."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: FinTech automated KYC & document classification platform.  
 **Incident**: Production classification LLM calls had an alarming 4.8% failure rate during contract parsing, where the model would generate hallucinations, malformed JSON, or wander into repetitive looping sentences like *"and the document and the document and..."*.  
 **Root Cause**: The engineering team left the default OpenAI SDK parameters intact (`temperature=1.0`, `top_p=1.0`, `presence_penalty=0.0`, `frequency_penalty=0.0`) for a structured JSON classification prompt. At $T=1.0$, the model randomly sampled low-probability tail tokens that broke JSON delimiters.  
 **Resolution**:
+
 1. Clamped `temperature=0.0` (pure greedy decoding) for strict deterministic JSON schemas.
 2. Injected a strict `frequency_penalty=0.5` to break infinite repetitive generation loops.
 3. Implemented exact input token pre-flight budgeting using `tiktoken` to reject requests exceeding 95% of the model's context window.  

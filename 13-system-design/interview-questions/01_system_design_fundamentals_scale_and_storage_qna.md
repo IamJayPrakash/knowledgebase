@@ -1,10 +1,13 @@
 # System Design Master Interview Bank: Part 1 (Q1 - Q20)
+
 ## Scale, Latency, Storage, Databases & Caching
 
 ---
 
 ### Q1: What is the difference between Scalability, Availability, and Reliability?
+
 **Answer:**
+
 - **Scalability:** The ability of a system to handle increased load without performance degradation by adding resources (Vertical scaling / scaling up, or Horizontal scaling / scaling out).
 - **Availability:** The percentage of time a system remains operational and accessible to process requests over a given period (e.g. 99.99% "Four Nines" = at most 52.6 minutes of downtime per year). Calculated as:
   $$\text{Availability} = \frac{\text{MTBF}}{\text{MTBF} + \text{MTTR}}$$
@@ -15,7 +18,9 @@
 ---
 
 ### Q2: What is the trade-off between Latency and Throughput?
+
 **Answer:**
+
 - **Latency:** The time required to process a single request from client dispatch to response delivery (measured in milliseconds; reported as P50, P90, P99, P99.9).
 - **Throughput:** The number of actions or operations processed per unit of time (measured in Queries Per Second `QPS`, Requests Per Second `RPS`, or Megabytes/sec).
 - **The Trade-off:** Maximizing throughput often increases latency due to queuing delays (Little's Law: $L = \lambda W$). Batching multiple operations increases throughput by amortizing fixed network/disk overhead, but increases the latency of individual items waiting in the batch buffer.
@@ -23,7 +28,9 @@
 ---
 
 ### Q3: When should you choose SQL (Relational) vs NoSQL (Non-Relational)?
+
 **Answer:**
+
 ```
                             System Requirements
                                      │
@@ -39,8 +46,10 @@
 
 ---
 
-### Q4: Explain ACID properties in Relational Database Management Systems.
+### Q4: Explain ACID properties in Relational Database Management Systems
+
 **Answer:**
+
 - **Atomicity:** All operations within a transaction succeed completely or all are rolled back. No partial state is ever committed.
 - **Consistency:** A transaction transitions the database from one valid state to another, satisfying all schema constraints, cascades, foreign keys, and unique checks.
 - **Isolation:** Concurrent transactions execute without interfering with one another. (Isolation Levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable).
@@ -49,7 +58,9 @@
 ---
 
 ### Q5: How do B-Tree and B+Tree Indexes work, and why are B+Trees preferred for databases?
+
 **Answer:**
+
 - **B-Tree:** Self-balancing multi-way search tree. Keys and data pointers are stored in both internal nodes and leaf nodes.
 - **B+Tree:**
   1. Internal nodes store **keys only** (acting as routing signposts), allowing each 4KB disk page to hold hundreds of branching keys (High Fanout, low tree height $\le 3-4$ levels).
@@ -60,7 +71,9 @@
 ---
 
 ### Q6: What is a Clustered Index vs a Non-Clustered (Secondary) Index?
+
 **Answer:**
+
 - **Clustered Index:**
   - Dictates the **physical order of rows on disk storage**.
   - The leaf nodes of the clustered index contain the actual table row data.
@@ -73,7 +86,9 @@
 ---
 
 ### Q7: What is a Covering Index and how does it eliminate Bookmark Lookups?
+
 **Answer:**
+
 - A **Covering Index** contains all the columns referenced in a query (`SELECT`, `WHERE`, `ORDER BY`).
 - Because all requested data exists directly inside the leaf nodes of the secondary index tree, the database engine satisfies the entire query from the index alone without touching the underlying table blocks, cutting disk I/O in half.
 
@@ -88,7 +103,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q8: What is Horizontal Partitioning (Sharding) and how do you choose a Shard Key?
+
 **Answer:**
+
 - **Sharding:** Dividing a single database table horizontally across multiple autonomous database servers (shards), where each server holds a subset of the rows.
 - **Selecting an Ideal Shard Key:**
   1. **High Cardinality:** Key must have millions of distinct values (e.g., `user_id` or `uuid`), avoiding low-cardinality keys like `country` or `gender`.
@@ -98,7 +115,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q9: What are the trade-offs of Range-Based vs Hash-Based vs Directory-Based Sharding?
+
 **Answer:**
+
 | Sharding Strategy | Mechanism | Pros | Cons |
 | :--- | :--- | :--- | :--- |
 | **Range-Based** | Partition by contiguous value ranges (`A-C`, `D-F` or timestamps). | Natural support for range scans. | **Hotspots** on recent dates or active categories. |
@@ -108,7 +127,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q10: What is Consistent Hashing and how does it solve the $N$-Node Rehashing Problem?
+
 **Answer:**
+
 - In naive hashing (`Hash(k) % N`), if a node is added or removed ($N \to N+1$), almost **100% of all keys rehash to different servers**, triggering massive cache invalidation storms.
 - **Consistent Hashing:**
   1. Maps both servers and cache keys to positions on a circular **360-degree Hash Ring** (e.g. $[0, 2^{32}-1]$).
@@ -118,8 +139,10 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 
 ---
 
-### Q11: Explain Caching Strategies: Cache-Aside vs Write-Through vs Write-Back vs Refresh-Ahead.
+### Q11: Explain Caching Strategies: Cache-Aside vs Write-Through vs Write-Back vs Refresh-Ahead
+
 **Answer:**
+
 - **Cache-Aside (Lazy Loading):**
   App reads from cache. On cache miss, app reads from DB, writes to cache, and returns. Most popular pattern; cache only holds requested data.
 - **Write-Through:**
@@ -132,7 +155,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q12: What is a Cache Stampede (Thundering Herd) and how do you prevent it?
+
 **Answer:**
+
 - **Cache Stampede:** Occurs when a high-traffic cache key expires or is invalidated, and thousands of concurrent client requests miss the cache at the same millisecond and hit the backend database simultaneously, crashing the database.
 - **Mitigations:**
   1. **Distributed Mutex (Locking):** Only the first request acquires a lock (`SET NX PX` in Redis) to query DB and update cache; other requests wait or retry.
@@ -143,7 +168,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q13: What is the difference between Cache Eviction Policies: LRU, LFU, and FIFO?
+
 **Answer:**
+
 - **LRU (Least Recently Used):** Discards the item that has not been accessed for the longest period of time (tracks access timestamp / linked list order).
 - **LFU (Least Frequently Used):** Discards the item with the lowest access count. Solves the flaw where an old, popular item is evicted due to a sudden burst of one-off scans.
 - **FIFO (First-In, First-Out):** Evicts items in the order they were inserted, regardless of access frequency.
@@ -151,14 +178,18 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q14: What is Connection Pooling and why is opening DB connections expensive?
+
 **Answer:**
+
 - Establishing a database connection involves: DNS resolution, TCP 3-way handshake, TLS negotiation, authentication credentials verification, and allocating server process memory (often 2-10 MB per connection in PostgreSQL).
 - **Connection Pool (HikariCP / PgBouncer):** Maintains a pre-allocated cache of persistent database connections. Applications borrow a connection from the pool, execute their query, and return the connection to the pool without closing the underlying TCP socket.
 
 ---
 
 ### Q15: What is Database Denormalization and when should you use it?
+
 **Answer:**
+
 - **Denormalization:** Intentionally adding redundant data to database tables to eliminate expensive multi-table JOINs and optimize read query latency.
 - **When to Use:** Read-heavy systems (e.g. 100:1 read-to-write ratio) where read latency SLAs (P99 < 20ms) cannot be achieved with normalized relational schemas.
 - **Trade-off:** Increases storage space and introduces update anomalies (updating a customer name requires updating multiple denormalized tables or asynchronous background worker synchronization).
@@ -166,7 +197,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q16: What is the N+1 Query Problem and how do you detect and fix it?
+
 **Answer:**
+
 - Occurs when an ORM queries a parent record, and then executes $N$ separate SQL queries to fetch child relations for each of the $N$ parent records.
   - *Example:* 1 query to fetch 50 orders + 50 individual queries to fetch each order's customer = 51 queries.
 - **Fix:** Eager Loading via SQL `JOIN` or `IN` operator:
@@ -175,7 +208,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q17: What are Read Replicas and Replication Lag?
+
 **Answer:**
+
 - **Read Replicas:** Secondary database nodes continuously synchronized with the Primary (Write) database via asynchronous replication of Write-Ahead Logs (WAL).
 - **Replication Lag:** The delay between when data is committed on the Primary and when it is applied on the Replica.
 - **Impact (Read-Your-Own-Writes Problem):** A user updates their profile, the write goes to Primary, they refresh immediately, and the read hits an out-of-sync Replica, showing their old profile!
@@ -184,7 +219,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q18: What is Layer 4 vs Layer 7 Load Balancing?
+
 **Answer:**
+
 - **Layer 4 (Transport Layer - TCP/UDP):**
   - Routes traffic based on IP address and TCP port alone without inspecting payload.
   - High performance, minimal CPU overhead. Cannot inspect HTTP headers, cookies, or URL paths.
@@ -197,7 +234,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q19: What Load Balancing Algorithms exist and when do you use each?
+
 **Answer:**
+
 1. **Round Robin:** Sequential rotation across instances. Best for stateless servers with identical hardware and equal request durations.
 2. **Weighted Round Robin:** Assigns higher request shares to more powerful server nodes.
 3. **Least Connections:** Routes to the server with the fewest active TCP connections. Ideal for long-lived connections (WebSockets, database pools).
@@ -207,7 +246,9 @@ CREATE INDEX idx_users_status_covering ON users (status) INCLUDE (user_id, email
 ---
 
 ### Q20: What is Database Index Cardinality and Selective Indexing?
+
 **Answer:**
+
 - **Cardinality:** The number of unique values in a table column relative to the total number of rows.
   - *High Cardinality:* `user_id`, `email`, `uuid` (unique values per row). Excellent candidates for B+Tree indexes.
   - *Low Cardinality:* `gender`, `is_active`, `status` (only 2-5 unique values across millions of rows).

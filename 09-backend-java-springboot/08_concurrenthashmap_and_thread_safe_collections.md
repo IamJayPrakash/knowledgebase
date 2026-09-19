@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 **Plain HashMap** ek bina security guard wali dukan jaisa hai: Agar ek customer saman utha raha hai aur doosra customer usi shelf par naya saman thos raha hai, toh pura shelf toot kar bikhar sakta hai (**Infinite Loop / Data Corruption in Multithreading**).
 **`Hashtable` (Purana Java 1.0)** dukan ke bahar **Bada Lohe Ka Phatak** laga deta hai: Ek baar mein sirf ek hi customer dukan ke andar ja sakta hai, chahe dukan mein 100 aisle khali hon! (Extreme lock contention).
 **`ConcurrentHashMap`** ek **Smart Supermarket** ki tarah hai: Aisle 1 par biscuit khareedne wala aur Aisle 5 par sabzi lene wala dono ek sath bina kisi ladai ke saman le sakte hain! Sirf usi specific bucket par lock lagta hai jahan do log ek hi item ko chhoote hain (**Fine-Grained Bucket-Level Locking via CAS & Synchronized Node**)!
@@ -14,7 +15,7 @@
 1. **HashMap Internal Storage**:
    - Backed by an array of `Node<K, V>[] table` (Buckets).
    - Index calculated as: `index = (n - 1) & hash(key)`.
-   - Default capacity: 16, Load factor: 0.75. Resizes to double ($32$) when elements exceed threshold ($16 	imes 0.75 = 12$).
+   - Default capacity: 16, Load factor: 0.75. Resizes to double ($32$) when elements exceed threshold ($16  imes 0.75 = 12$).
 2. **Java 8 Treeification Threshold**:
    - When a bucket's linked list length exceeds **8** and table capacity is $\ge 64$, the bucket linked list converts into a **Red-Black Tree** (`TreeNode`).
    - Worst-case lookup time improves from $O(N)$ to $O(\log N)$, defending against Hash Collision DoS attacks.
@@ -83,6 +84,7 @@ public class HighThroughputMetricsStore {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "In Java collections, `HashMap` is non-thread-safe and can enter corrupted states under concurrent mutations. Java 8 introduced treeification, converting hash collision buckets from linked lists to Red-Black Trees once a bucket exceeds 8 entries, safeguarding lookup performance at $O(\log N)$. For concurrent environments, `ConcurrentHashMap` abandons the coarse segment-locking of Java 7 in favor of fine-grained bucket-level synchronization. Read operations are entirely lock-free via volatile field reads. Write operations insert into empty buckets using lock-free hardware CAS primitives and synchronize solely on the individual bucket head node when collisions occur, delivering near-linear throughput scaling across CPU cores."
 
 ---

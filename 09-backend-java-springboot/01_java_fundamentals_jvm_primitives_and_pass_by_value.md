@@ -1,7 +1,9 @@
 # Java Platform Fundamentals: JDK vs JRE vs JVM, Primitives & Pass-by-Value
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:**
+>
 > - JDK (Java Development Kit): Ek pura kitchen setup jisme recipe book, chaku, gas chulha sab hai (Compiler + Tools).
 > - JRE (Java Runtime Environment): Ek dining table jahan sirf bana hua khana serve karke khaya ja sakta hai (Libraries + JVM, no cooking/compiler).
 > - JVM (Java Virtual Machine): Ek magical chef jo kisi bhi sheher (Windows, Mac, Linux) mein ja kar wahi same recipe (Bytecode) padh kar waisa hi tasty khana bana deta hai ("Write Once, Run Anywhere").
@@ -13,7 +15,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Execution Architecture**:
   - `javac MyProgram.java` compiles source code into platform-independent `.class` bytecode.
   - The JVM executes bytecode on the host operating system via ClassLoader, Bytecode Verifier, and Execution Engine (Interpreter + JIT Compiler).
@@ -32,7 +35,8 @@
   - **Trap**: Unboxing a `null` wrapper throws a runtime `NullPointerException`!
 - **Strictly Pass-by-Value**: Java is **100% Pass-by-Value**. There is no pass-by-reference in Java! When an object is passed, the reference address is copied by value. Reassigning the reference inside a method has zero effect on the caller's reference.
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Integer Cache Pool**: Java caches `Integer` objects in the range **`-128 to 127`**. Therefore, `Integer a = 100; Integer b = 100; a == b` is `true`, but `Integer c = 200; Integer d = 200; c == d` is `false`! Always use `.equals()` for object comparison.
 - **JIT Compiler Optimization (Tiered Compilation)**:
   - C1 (Client Compiler): Fast startup with basic optimizations.
@@ -143,6 +147,7 @@ public class JavaFundamentalsDemo {
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Is Java pass-by-value or pass-by-reference, and how does the Integer Cache affect equality checks?"
 >
 > **You:** "Java is strictly pass-by-value, without exception. When you pass an object, the value being passed is the 32-bit or 64-bit reference address pointing to that object on the heap. Therefore, you can mutate the object's internal fields through the copied reference, but reassigning the reference variable itself inside the method has zero effect on the caller. Regarding object comparisons, Java maintains an internal flyweight Integer Cache for values between -128 and 127. Comparing Integers with `==` checks reference equality, which accidentally succeeds within the cached range but silently fails for values >= 128. In enterprise applications, we must always enforce `.equals()` for object comparisons to avoid subtle data bugs."
@@ -150,7 +155,8 @@ public class JavaFundamentalsDemo {
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** A banking payment reconciliation pipeline processed transaction batches. During a quarterly audit, duplicate transaction alerts were missed when transaction amounts exceeded $127.00.
-* **Task / Challenge:** Identify why transaction ID matching worked for transactions 1 through 127 but silently produced false negatives for transaction ID 128 and above.
-* **Action Taken:** Inspected the reconciliation filter and found the line `if (currentTx.getId() == previousTx.getId())`. The `id` field was of type `java.lang.Long`. For values up to 127, the JVM cache returned identical references, masking the bug during basic unit tests. Replaced `==` with `.equals()` and added an automated ArchUnit static analysis rule banning `==` comparisons on wrapper classes.
-* **Result & Business Impact:** Fixed the reconciliation logic, passing compliance audits across 4.5 million daily financial transactions.
+
+- **Situation:** A banking payment reconciliation pipeline processed transaction batches. During a quarterly audit, duplicate transaction alerts were missed when transaction amounts exceeded $127.00.
+- **Task / Challenge:** Identify why transaction ID matching worked for transactions 1 through 127 but silently produced false negatives for transaction ID 128 and above.
+- **Action Taken:** Inspected the reconciliation filter and found the line `if (currentTx.getId() == previousTx.getId())`. The `id` field was of type `java.lang.Long`. For values up to 127, the JVM cache returned identical references, masking the bug during basic unit tests. Replaced `==` with `.equals()` and added an automated ArchUnit static analysis rule banning `==` comparisons on wrapper classes.
+- **Result & Business Impact:** Fixed the reconciliation logic, passing compliance audits across 4.5 million daily financial transactions.

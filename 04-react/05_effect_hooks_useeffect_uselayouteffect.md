@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Socho aap ek theatre play ke director ho.
 `useLayoutEffect` **Parda Uthne Se Pehle (Before Browser Paint)** ka kaam hai: Agar stage par kisi actor ki cap tedi hai, toh director parda uthne se pehle hi use theek kar deta hai taaki audience ko kuch ajeeb na dikhe (Zero visual flicker).
 `useEffect` **Parda Uthne Ke Baad (After Browser Paint)** ka kaam hai: Play chal raha hai, parda uth chuka hai, aur background mein sound team speaker ki volume check kar rahi hai ya lighting log save kar rahi hai (Asynchronous non-blocking network calls / logging).
@@ -103,6 +104,7 @@ export function SmartTooltip({ targetRect, content }) {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "`useEffect` and `useLayoutEffect` have identical signatures but fundamentally different execution timings. `useEffect` is scheduled after the browser layout and paint phases, ensuring that side effects like API requests, event listeners, and timers never block user interactions or visual frame rendering. In contrast, `useLayoutEffect` executes synchronously immediately after DOM mutations but before the browser paints the pixels. It is reserved for reading layout geometry—such as scroll position or bounding rect dimensions—and mutating the DOM to eliminate visual jumping or flickering before the user sees the screen."
 
 ---

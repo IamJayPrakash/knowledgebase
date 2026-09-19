@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Conditional type TypeScript ka **Ternary Operator (`condition ? true : false`)** hai, jo runtime values ke liye nahi balki **Types** ke liye kaam karta hai: `T extends U ? X : Y`.
 `infer` keyword ek **X-Ray Scanner** ki tarah hai: Socho ek gift box band hai (`Promise<User>`). Aapko nahi pata andar kya hai. `infer` keyword box ke andar jhankta hai, andar ke object ka type nikalta hai (`infer U`), aur use bahar nikal kar aapke haath mein de deta hai (`U` ban jata hai `User`).
 
@@ -94,6 +95,7 @@ type Filtered = MyExclude<"a" | "b" | "c", "a">; // "b" | "c"
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Conditional types introduce logic branching into TypeScript's type system via `T extends U ? X : Y`. When `T` is a naked type parameter over a union, it distributes automatically across each union constituent. The `infer` keyword enables pattern matching inside conditional type checks, allowing us to dynamically extract inner types from compound structures like Promise resolutions, function return types, constructor arguments, or tuple elements. This enables building custom utility types like `ReturnType<T>`, `Parameters<T>`, and `Awaited<T>` from scratch."
 
 ---

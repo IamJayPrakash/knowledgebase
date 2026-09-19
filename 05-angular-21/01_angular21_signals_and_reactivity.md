@@ -1,6 +1,7 @@
 # Angular 21 Signals: Writable, Computed, Effects & Signal Inputs
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Angular 21 me Signals primary reactivity primitive hain. Pehle Angular pura component tree check karta tha change detection ke liye. Signals ke saath Angular ko exact pata hota hai ki DOM ka kaunsa chhota sa tukda update karna hai, jisse rendering ultra-fast ho jati hai.
 >
 > **Real-World Analogy:** A smart home electricity grid: instead of turning on every generator in the city to check if a lamp was switched on, Signals pinpoint the exact wire and bulb directly.
@@ -8,6 +9,7 @@
 ---
 
 ## 2. 📌 Core Mechanics & Key Points
+
 - Writable Signals (`signal(value)`): Direct reactive value wrappers with `.set()` and `.update()` methods.
 - Computed Signals (`computed(() => ...)`): Derived reactive values that are lazily evaluated and memoized (only recalculate when dependencies change).
 - Effects (`effect(() => ...)`): Side-effect runners that execute whenever tracked signals change (logging, canvas rendering, local storage sync).
@@ -87,6 +89,7 @@ export class ShoppingCartComponent {
 ---
 
 ## 5. 🎯 Senior Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "Can you explain Angular 21 Signals and how you use it in Angular 21?"
 >
 > **You:** "Angular 21 Signals introduce fine-grained reactivity as the core primitive. Unlike legacy Zone.js dirty-checking which traverses the component tree, Signals establish a dynamic dependency graph. Computed signals are lazily evaluated and memoized, while template bindings update only the specific DOM text nodes whose underlying signal has changed, dramatically boosting runtime performance."
@@ -94,10 +97,11 @@ export class ShoppingCartComponent {
 ---
 
 ## 6. 💼 Real-World Project Challenge (STAR Production Story)
-* **Situation:** Financial trading portal rendering 2,500 real-time cryptocurrency orderbook updates per second with frequent browser frame drops.
-* **Task / Challenge:** Modernizing frontend architecture, resolving change detection performance bottlenecks, and optimizing bundle weight.
-* **Action Taken:** Refactored legacy RxJS component tree bindings to Angular 21 Signals and computed properties.
-* **Result & Business Impact:** Browser UI thread CPU consumption dropped from 72% down to 14%; frame rate stabilized at a rock-solid 60 FPS.
+
+- **Situation:** Financial trading portal rendering 2,500 real-time cryptocurrency orderbook updates per second with frequent browser frame drops.
+- **Task / Challenge:** Modernizing frontend architecture, resolving change detection performance bottlenecks, and optimizing bundle weight.
+- **Action Taken:** Refactored legacy RxJS component tree bindings to Angular 21 Signals and computed properties.
+- **Result & Business Impact:** Browser UI thread CPU consumption dropped from 72% down to 14%; frame rate stabilized at a rock-solid 60 FPS.
 
 🗣️ **Script to Tell Interviewer:**
 *"In our enterprise Angular applications, financial trading portal rendering 2,500 real-time cryptocurrency orderbook updates per second with frequent browser frame drops. I spearheaded the modernization by refactored legacy rxjs component tree bindings to angular 21 signals and computed properties., which successfully browser ui thread cpu consumption dropped from 72% down to 14%; frame rate stabilized at a rock-solid 60 fps.."*

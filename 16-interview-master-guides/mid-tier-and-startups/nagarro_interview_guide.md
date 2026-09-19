@@ -26,6 +26,7 @@ Nagarro operates on an **"Enterprise Agile & Engineering Excellence"** model. As
 ---
 
 ### Q1: Implement a Thread-Safe, Zero-Leak LRU Cache from Scratch
+
 **Interviewer Goal:** Tests understanding of composite data structures (`HashMap` + doubly linked list) and concurrency control.
 
 ```python
@@ -105,6 +106,7 @@ class LRUCache:
 ---
 
 ### Q2: Deep Dive: JavaScript / Node.js Event Loop vs Multi-Threaded Java Memory Model
+
 **Interviewer Goal:** Assess cross-stack depth when designing client-server systems.
 
 | Dimension | Node.js (V8 + Libuv) | Java (JVM Multi-Threading) |
@@ -117,6 +119,7 @@ class LRUCache:
 ---
 
 ### Q3: Monorepo Architecture vs Polyrepo for Enterprise Micro-Frontends
+
 **Interviewer Goal:** Nagarro frequently consults enterprise clients migrating large legacy frontend suites.
 
 ```mermaid
@@ -134,6 +137,7 @@ graph TD
 ```
 
 **Trade-off Defense Matrix:**
+
 - **Monorepo Advantages:** Single atomic PRs across shared design systems and consuming apps; zero version-drift (`npm publish` delay eliminated); unified linting, CI caching, and automated dependency updates via computation graphs.
 - **Monorepo Challenges:** Large repo clone size, git index bottlenecks, strict CI branch protection and ownership boundaries required (`CODEOWNERS`).
 - **When to Choose Polyrepo:** Completely decoupled teams in different business units with zero shared code and disparate regulatory/security clearance boundaries.
@@ -141,6 +145,7 @@ graph TD
 ---
 
 ### Q4: Design a Distributed Rate Limiter for Multi-Tenant APIs
+
 **Interviewer Goal:** System design question evaluating concurrency, distributed state, and fault tolerance.
 
 ```
@@ -156,6 +161,7 @@ Client Request
 ```
 
 #### Redis Lua Script (Atomicity Guaranteed)
+
 ```lua
 -- KEYS[1]: rate_limit_key (e.g. ratelimit:tenant_123:minute)
 -- ARGV[1]: window_size_in_seconds (e.g. 60)
@@ -179,18 +185,22 @@ end
 ## 🌟 3. STAR Production War Story: Nagarro Client Transformation
 
 ### Situation
+
 A Fortune 500 logistics client's tracking platform suffered severe P99 latency spikes (over 8,200 ms) and dropped 12% of webhook events during peak shipping holidays due to synchronized SQL polling and database locking across 20+ legacy instances.
 
 ### Task
+
 As the Technical Lead, redesign the tracking ingestion pipeline to achieve sub-100ms P99 latency, guarantee zero event loss, and support 50,000 webhook events/sec without scaling SQL write clusters.
 
 ### Action
+
 1. **Decoupled Ingestion via Event Broker:** Replaced synchronous database inserts with an async Kafka ingestion buffer backed by schema-validated Avro contracts.
 2. **Idempotency & Deduplication Layer:** Deployed Redis sliding-window Bloom filters at the edge gateway to drop duplicate webhook deliveries (eliminating 18% redundant database operations).
 3. **CQRS & Read-Side Caching:** Separated write pipeline from tracking read queries using Redis read-aside clusters populated by Kafka consumer workers.
 4. **Resilience & Circuit Breaking:** Implemented Envoy rate limiters and Resilience4j circuit breakers on third-party carrier connectors.
 
 ### Result
+
 - **P99 Read Latency:** Reduced from 8,200 ms to **48 ms** (99.4% improvement).
 - **Throughput:** Supported peak volume of **62,000 events/sec** with zero event drops.
 - **Infrastructure Cost:** Lowered database instance provisioning costs by **42%** by offloading read spikes to distributed Redis caches.

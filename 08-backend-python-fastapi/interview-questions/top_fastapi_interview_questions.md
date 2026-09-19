@@ -5,11 +5,13 @@
 ## 🏗️ Core Architecture & Async Event Loop Internals
 
 ### Q1: What happens if you run blocking synchronous I/O inside an `async def` endpoint in FastAPI?
+
 **Answer:**
+
 - In an `async def` route, FastAPI runs the coroutine directly on the single OS thread executing the `asyncio` event loop.
 - If you call blocking synchronous functions (e.g., `time.sleep()`, synchronous `requests.get()`, or legacy synchronous database drivers like `psycopg2`), the **entire event loop thread halts**.
 - **Impact:** All concurrent requests from other clients waiting on the event loop are completely frozen until the blocking call finishes.
-- **Solution:** 
+- **Solution:**
   1. Use non-blocking async libraries: `asyncio.sleep()`, `httpx.AsyncClient()`, `asyncpg`, `aiofiles`.
   2. If a blocking third-party library must be used, declare the route with standard `def` (without `async`). FastAPI detects `def` endpoints and automatically offloads their execution to an internal `anyio` threadpool (`concurrent.futures.ThreadPoolExecutor`), keeping the main event loop unblocked.
   3. Explicitly offload via `await anyio.to_thread.run_sync(blocking_fn, arg1)`.
@@ -44,7 +46,9 @@ def good_sync_threadpool():
 ---
 
 ### Q2: How does FastAPI achieve automatic OpenAPI / Swagger generation?
+
 **Answer:**
+
 - FastAPI is built on top of Starlette and Pydantic.
 - At application startup, FastAPI uses Python's `inspect` module and type annotations (`typing.Annotated`, `get_type_hints`) on route functions and dependency providers.
 - It translates Python type hints, Pydantic model schemas, and HTTP parameter locations (`Query`, `Path`, `Header`, `Cookie`, `Body`) into standard JSON Schema definitions conforming to the **OpenAPI 3.1.0** specification.
@@ -53,15 +57,19 @@ def good_sync_threadpool():
 ---
 
 ### Q3: What is the difference between `model_dump()` and `model_dump_json()` in Pydantic V2?
+
 **Answer:**
+
 - **Pydantic V1 vs V2:** Pydantic V2 completely rewrote its core validation and serialization logic in Rust (`pydantic-core`), replacing `model.dict()` and `model.json()`.
 - **`model_dump()`:** Serializes a Pydantic model into a native Python dictionary (`dict`). Performs field conversions (e.g., Datetime objects, Enums, UUIDs) according to model configuration.
 - **`model_dump_json()`:** Serializes the model **directly** into a UTF-8 JSON string directly in compiled Rust code. It is up to 5x-10x faster than calling `json.dumps(model.model_dump())` because it avoids intermediate Python dictionary allocations.
 
 ---
 
-### Q4: Explain the FastAPI Dependency Injection (`Depends`) lifecycle and sub-dependencies.
+### Q4: Explain the FastAPI Dependency Injection (`Depends`) lifecycle and sub-dependencies
+
 **Answer:**
+
 - FastAPI's Dependency Injection system (`Depends`) resolves dependencies recursively using a directed acyclic graph (DAG).
 - When a request enters an endpoint:
   1. FastAPI inspects all `Depends(...)` parameters.
@@ -91,7 +99,9 @@ def read_items(db: str = Depends(get_db_session)):
 ---
 
 ### Q5: What is the difference between FastAPI `BackgroundTasks` and Celery / Redis Queues?
+
 **Answer:**
+
 | Dimension | FastAPI `BackgroundTasks` | Distributed Task Queue (Celery / ARQ / RQ) |
 | :--- | :--- | :--- |
 | **Execution Environment** | Runs in-process inside the same ASGI worker process (either event loop or threadpool). | Runs out-of-process in dedicated background worker containers. |
@@ -102,6 +112,7 @@ def read_items(db: str = Depends(get_db_session)):
 ---
 
 ### Q6: How do you implement global Exception Handling in FastAPI without leaking stack traces?
+
 **Answer:**
 Use `@app.exception_handler` to catch custom application exceptions and standard `RequestValidationError`:
 
@@ -140,7 +151,9 @@ async def generic_exception_handler(request: Request, exc: Exception):
 ---
 
 ### Q7: How does SQLAlchemy 2.0 async engine integrate with FastAPI connection pooling?
+
 **Answer:**
+
 - In async FastAPI, synchronous engines block the event loop. Use `create_async_engine` from `sqlalchemy.ext.asyncio` with an async driver like `asyncpg` (PostgreSQL) or `aiomysql` (MySQL).
 - Configure `pool_size` (baseline persistent connections) and `max_overflow` (surge connections allowed above pool size).
 - Always use `async_sessionmaker` and clean dependency teardown via `async with session: yield session`.
@@ -179,7 +192,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 ---
 
 ### Q8: What is Starlette Middleware and how does it differ from a Router Dependency?
+
 **Answer:**
+
 - **Middleware:** Executes at the lowest ASGI protocol layer for **every single request** entering the server before routing occurs. It can inspect and modify raw headers, handle CORS, enforce TLS, compress payloads (GZip), and measure overall request latency.
 - **Router Dependency (`Depends`):** Executes after Starlette routes the request to a specific endpoint. It has access to typed route path parameters, query parameters, and Pydantic validated body data.
 - **Interview Rule of Thumb:** Use Middleware for universal cross-cutting network concerns (CORS, trace IDs, security headers). Use Dependencies for endpoint-specific domain logic (Authentication, RBAC authorization, DB transactions).
@@ -187,8 +202,10 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 ---
 
 ### Q9: How do you stream large data or real-time events in FastAPI?
+
 **Answer:**
 FastAPI provides `StreamingResponse` from Starlette:
+
 1. **Large file downloads:** Stream chunks from disk or S3 without loading entire gigabytes into RAM.
 2. **Server-Sent Events (SSE):** Push real-time text updates to frontend clients over long-lived HTTP connections (`media_type="text/event-stream"`).
 
@@ -212,7 +229,9 @@ async def stream_progress():
 ---
 
 ### Q10: How do you deploy FastAPI for High Concurrency in Production?
+
 **Answer:**
+
 - **The Golden Production Stack:** **Gunicorn as Process Manager + Uvicorn as ASGI Worker**.
 - FastAPI runs inside single-threaded Python processes. To utilize all available CPU cores on a multi-core VM or Kubernetes node, run Gunicorn managing multiple Uvicorn worker instances:
 
@@ -227,13 +246,16 @@ gunicorn main:app \
   --access-logfile - \
   --error-logfile -
 ```
+
 - In Kubernetes, prefer **1 or 2 workers per pod** and scale horizontally via Kubernetes Horizontal Pod Autoscaler (HPA) targeting CPU and memory utilization.
 
 ---
 
 ### Q11: How do you handle WebSockets in FastAPI with connection pooling?
+
 **Answer:**
 FastAPI supports native ASGI WebSockets with `WebSocketEndpoint` or `@app.websocket`:
+
 ```python
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
@@ -271,7 +293,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
 ---
 
 ### Q12: How does Pydantic V2 Field Validation work (`@field_validator` vs `@model_validator`)?
+
 **Answer:**
+
 - `@field_validator`: Validates individual fields. Accepts `mode='before'` (runs on raw input prior to type coercion) or `mode='after'` (runs after Pydantic parsed the field type).
 - `@model_validator`: Validates cross-field relationships across the entire object (e.g., ensuring `end_date > start_date` or `password == confirm_password`).
 
@@ -302,19 +326,19 @@ class BookingRequest(BaseModel):
 
 ### Q13-Q20: Rapid-Fire Senior Architect Scenarios
 
-13. **How to implement API versioning in FastAPI?**  
+ 1. **How to implement API versioning in FastAPI?**  
     Use APIRouters with path prefixes: `app.include_router(v1_router, prefix="/api/v1")` and `app.include_router(v2_router, prefix="/api/v2")`.
-14. **How to protect routes with OAuth2 and JWT tokens?**  
+ 2. **How to protect routes with OAuth2 and JWT tokens?**  
     Use `OAuth2PasswordBearer(tokenUrl="token")` with `python-jose` or `pyjwt` to decode claims, validating expiration timestamp (`exp`) and issuer (`iss`).
-15. **What is `response_model_exclude_unset=True`?**  
+ 3. **What is `response_model_exclude_unset=True`?**  
     Prevents returning default model fields that were not explicitly set in the data payload, keeping responses compact.
-16. **How to handle rate limiting per IP or User ID?**  
+ 4. **How to handle rate limiting per IP or User ID?**  
     Integrate `slowapi` (built on `limits` with Redis backend) using decorator `@limiter.limit("60/minute")`.
-17. **How to prevent N+1 query problems in FastAPI with SQLAlchemy?**  
+ 5. **How to prevent N+1 query problems in FastAPI with SQLAlchemy?**  
     Use `select(Order).options(selectinload(Order.items))` or `joinedload` to eagerly fetch relations in one or two queries.
-18. **What is Lifespan events (`lifespan` context manager)?**  
+ 6. **What is Lifespan events (`lifespan` context manager)?**  
     Replaces deprecated `@app.on_event("startup")` and `@app.on_event("shutdown")`. Uses an `asynccontextmanager` passed to `FastAPI(lifespan=lifespan)` for clean startup initialization and shutdown disposal.
-19. **How to run CPU-intensive tasks without blocking the server?**  
+ 7. **How to run CPU-intensive tasks without blocking the server?**  
     Offload CPU calculations to `concurrent.futures.ProcessPoolExecutor` or an external Celery/Ray cluster.
-20. **How to implement distributed tracing in FastAPI?**  
+ 8. **How to implement distributed tracing in FastAPI?**  
     Instrument FastAPI with OpenTelemetry (`FastAPIInstrumentor.instrument_app(app)`) to automatically export W3C TraceContext headers to Jaeger or AWS X-Ray.

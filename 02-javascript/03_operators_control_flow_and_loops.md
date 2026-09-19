@@ -1,6 +1,7 @@
 # JavaScript Operators, Type Casting & Control Flow
 
 ## 1. 🐣 Layman's Analogy (Hinglish + Real-World)
+>
 > **Hinglish Intuition:** Jaise real life mein traffic signal pe green light hone par hi gaadi aage badhti hai (Conditional execution), waise hi code mein decisions lene ke liye operators aur control flow use hote hain. `==` aalsi dost hai jo type check kiye bina 'haan' bol deta hai, jabki `===` strict inspector hai jo ID card (type) aur shakal (value) dono verify karta hai!
 >
 > **Real-World Analogy:** A security checkpoint: Loose equality (`==`) lets anyone with a printed ticket pass even if the name format is slightly off (e.g. number `5` vs string `'5'`). Strict equality (`===`) checks both the ticket number AND biometric identity (exact type and value).
@@ -9,7 +10,8 @@
 
 ## 2. 📌 Core Mechanics & Edge Cases (Newbie ➡️ Experienced)
 
-### 👶 What a Newbie Needs to Understand:
+### 👶 What a Newbie Needs to Understand
+
 - **Comparison Operators**: Always use strict equality (`===`) instead of loose equality (`==`). `==` triggers implicit type coercion which creates unexpected bugs (`0 == ''` is `true`, `false == []` is `true`).
 - **Logical Operators**: `&&` (AND - returns first falsy or last truthy value), `||` (OR - returns first truthy or last falsy value), `!` (NOT - inverts boolean).
 - **Falsy Values in JavaScript**: Exactly 8 values: `false`, `0`, `-0`, `0n` (BigInt), `""` (empty string), `null`, `undefined`, `NaN`. Everything else is truthy!
@@ -21,7 +23,8 @@
   - `for...of`: Iterates over **values** of iterables (Arrays, Strings, Maps, Sets).
   - `for...in`: Iterates over **enumerable property keys** of an object (Hazardous on arrays because it visits prototype chain and indices as strings).
 
-### 🧓 What an Experienced Candidate Knows:
+### 🧓 What an Experienced Candidate Knows
+
 - **Bitwise Operators for Performance**: Bitwise operations (`| 0`, `>>`, `<<`) coerce 64-bit IEEE-754 floating point numbers to 32-bit signed integers in V8.
 - **Short-Circuit Logical Assignment**: `&&=`, `||=`, `??=` avoid unnecessary re-assignments and setter invocations.
 - **Switch Jump Table Optimization**: V8 compiles dense numeric or string `switch` statements into O(1) jump tables or hash lookup tables rather than chained O(N) `if-else` branches.
@@ -111,6 +114,7 @@ delete Array.prototype.customMethod;
 ---
 
 ## 5. 🎯 Interview Answering Pitch (Say Exactly This!)
+>
 > **Interviewer:** "What is the difference between `==`, `===`, `||`, and `??` in JavaScript?"
 >
 > **You:** "In JavaScript, double equals `==` performs implicit type coercion using the abstract equality comparison algorithm, which leads to counter-intuitive truthy results like `[] == false`. Triple equals `===` checks both value and type without coercion, which is the industry standard. For fallback values, logical OR `||` checks for any falsy value, which inadvertently overrides valid values like `0`, empty string `""`, and `false`. Nullish coalescing `??` specifically checks only for `null` or `undefined`, making it the safe, deterministic choice for configuration defaults."
@@ -118,7 +122,8 @@ delete Array.prototype.customMethod;
 ---
 
 ## 6. 💼 Production War Story & Project Challenge (STAR Scenario)
-* **Situation:** In an e-commerce checkout service, premium customers configured a `discountPercentage: 0` during specific flash sales, but the cart total calculation used `const discount = user.discount || defaultDiscount (15)`.
-* **Task / Challenge:** Customers with zero discount configurations were unexpectedly receiving 15% promotional deductions, leading to revenue leakage during audited vendor campaigns.
-* **Action Taken:** Migrated the pricing engine to use strict nullish coalescing `??` and optional chaining `?.`, backed by schema validation that explicitly treated `0` as a valid numeric float.
-* **Result & Business Impact:** Eliminated duplicate promotional discounts across 1.2M daily checkout transactions, saving $45,000 in unintended promotional deductions in Q1.
+
+- **Situation:** In an e-commerce checkout service, premium customers configured a `discountPercentage: 0` during specific flash sales, but the cart total calculation used `const discount = user.discount || defaultDiscount (15)`.
+- **Task / Challenge:** Customers with zero discount configurations were unexpectedly receiving 15% promotional deductions, leading to revenue leakage during audited vendor campaigns.
+- **Action Taken:** Migrated the pricing engine to use strict nullish coalescing `??` and optional chaining `?.`, backed by schema validation that explicitly treated `0` as a valid numeric float.
+- **Result & Business Impact:** Eliminated duplicate promotional discounts across 1.2M daily checkout transactions, saving $45,000 in unintended promotional deductions in Q1.

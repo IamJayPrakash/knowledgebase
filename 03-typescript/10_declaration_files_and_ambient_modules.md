@@ -3,7 +3,8 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
-`.d.ts` file ek **Movie Subtitle File (`.srt`)** ki tarah hoti hai. Movie (JavaScript file) mein sirf action aur sound hai. Lekin movie player (TypeScript Compiler / IDE) ko samajhne ke liye ek alag text file chahiye hoti hai jo bataye ki kaun sa character kab kya bol raha hai. 
+
+`.d.ts` file ek **Movie Subtitle File (`.srt`)** ki tarah hoti hai. Movie (JavaScript file) mein sirf action aur sound hai. Lekin movie player (TypeScript Compiler / IDE) ko samajhne ke liye ek alag text file chahiye hoti hai jo bataye ki kaun sa character kab kya bol raha hai.
 `.d.ts` files contain **zero runtime JavaScript code**; they only describe the types so your IDE can provide autocomplete and type safety for raw JS files or global browser variables.
 
 ---
@@ -101,6 +102,7 @@ declare module "express-serve-static-core" {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "TypeScript declaration files with the `.d.ts` extension provide type definitions for JavaScript code without emitting any runtime artifacts. They are utilized in three primary scenarios: first, providing types for untyped third-party npm packages via DefinitelyTyped (`@types/*`); second, declaring non-code assets like SVGs and CSS modules via wildcard declarations (`declare module '*.png'`); and third, performing module augmentation to extend existing library types—such as adding a strongly-typed `user` object to Express's `Request` interface."
 
 ---

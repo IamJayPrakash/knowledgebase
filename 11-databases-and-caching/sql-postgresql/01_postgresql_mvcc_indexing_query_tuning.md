@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Purane databases mein jab koi data update karta tha, toh wo table par tala (Lock) laga deta tha: "Main edit kar raha hoon, koi read nahi karega!".
 PostgreSQL ka **MVCC (Multi-Version Concurrency Control)** ek **Google Docs Version History** ki tarah hai:
 Jab koi writer document update karta hai, wo purani line ko erase nahi karta; wo ek nayi line add kar deta hai jisme naya timestamp hota hai. Readers purana snapshot bina ruke padhte rehte hain! **"Readers never block writers, and writers never block readers."**
@@ -82,6 +83,7 @@ ON orders (customer_id) INCLUDE (total_amount, order_date);
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "PostgreSQL delivers high-concurrency throughput through Multi-Version Concurrency Control (MVCC). Rather than locking rows during updates, Postgres writes a new tuple version with an updated `xmin` transaction identifier while marking the previous version with `xmax`. Transactions observe snapshots determined by transaction isolation levels, guaranteeing that readers never block writers. Because obsolete dead tuples generate table bloat, Autovacuum periodically reclaims dead space. When tuning queries, I inspect `EXPLAIN (ANALYZE, BUFFERS)` to diagnose Sequential Scans, leverage Covering Indexes with the `INCLUDE` clause to achieve zero-heap Index Only Scans, and deploy Partial Indexes to minimize index bloat."
 
 ---

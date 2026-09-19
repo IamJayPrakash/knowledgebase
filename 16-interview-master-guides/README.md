@@ -7,16 +7,19 @@
 ## 🗂️ Module Contents & Fast Revision Index
 
 ### 1. Rapid Recall Cheatsheets
+
 * [**`01_fullstack_quick_recall_cheatsheet.md`**](./01_fullstack_quick_recall_cheatsheet.md)
-  - 5-minute pre-interview revision card covering JS event loop, Prototypal inheritance, `this` rules, React diffing, Angular 21 Signals & Zoneless, and Node.js.
+  * 5-minute pre-interview revision card covering JS event loop, Prototypal inheritance, `this` rules, React diffing, Angular 21 Signals & Zoneless, and Node.js.
 * [**`02_system_design_cheat_sheet.md`**](./02_system_design_cheat_sheet.md)
-  - Back-of-the-envelope math, QPS calculations, hardware latency numbers, and CAP/PACELC trade-offs.
+  * Back-of-the-envelope math, QPS calculations, hardware latency numbers, and CAP/PACELC trade-offs.
 
 ### 2. Behavioral Leadership & STAR Scenarios
+
 * [**`interview-questions/behavioral_star_method_master_guide.md`**](./interview-questions/behavioral_star_method_master_guide.md)
-  - High-stakes production outage war stories, senior technical disagreement handling, and leadership STAR templates with quantifiable metrics.
+  * High-stakes production outage war stories, senior technical disagreement handling, and leadership STAR templates with quantifiable metrics.
 
 ### 3. Service MNC Tier Guides
+
 * [**`service-mnc-tier/tcs_interview_guide.md`**](./service-mnc-tier/tcs_interview_guide.md) — TCS Technical Round 1 & 2 guide.
 * [**`service-mnc-tier/infosys_interview_guide.md`**](./service-mnc-tier/infosys_interview_guide.md) — Infosys Specialist Programmer & Senior Developer guide.
 * [**`service-mnc-tier/wipro_interview_guide.md`**](./service-mnc-tier/wipro_interview_guide.md) — Wipro L1/L2 Technical rounds & microservices.
@@ -25,6 +28,7 @@
 * [**`service-mnc-tier/01_top_mnc_interview_questions_tcs_accenture.md`**](./service-mnc-tier/01_top_mnc_interview_questions_tcs_accenture.md) — High-frequency cross-MNC interview questions and simple, confident answers.
 
 ### 4. Product Companies & Startups
+
 * [**`mid-tier-and-startups/jll_interview_guide.md`**](./mid-tier-and-startups/jll_interview_guide.md) — JLL scenario-based problem solving and secure auth architectures.
 * [**`mid-tier-and-startups/nagarro_interview_guide.md`**](./mid-tier-and-startups/nagarro_interview_guide.md) — Nagarro design patterns and algorithmic rigor.
 * [**`mid-tier-and-startups/startup_tech_lead_interview_guide.md`**](./mid-tier-and-startups/startup_tech_lead_interview_guide.md) — Series A-C Startup Tech Lead trade-offs, cloud cost reduction, and zero-to-one delivery.

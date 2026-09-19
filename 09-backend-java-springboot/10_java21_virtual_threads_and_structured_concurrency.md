@@ -3,6 +3,7 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Purane Java mein **Platform Thread (OS Thread)** ek **Badi Luxury Bus** ki tarah hota tha: Bus bohot bhari hoti hai, har bus chalane ke liye 1 MB memory chahiye hoti hai, aur ek city mein 2,000 se zyada bus chalte hi traffic jam ho jata tha (**Thread Exhaustion**). Agar passenger ko bank counter par 5 second wait karna hai, toh poori 1 MB ki bus wahi khadi rehti thi!
 Java 21 ke **Virtual Threads (Project Loom)** ek **Lightweight E-Scooter / Metro Ticket** ki tarah hain: E-scooter sirf kuch bytes (1 KB) ki RAM leta hai! Aap ek hi laptop par **10 Lakh (1,000,000) Virtual Threads** chala sakte ho! Jaise hi koi thread database ya network I/O ka wait karta hai, JVM use chupke se side mein park kar deta hai (**Unmount from Carrier Thread**) aur doosre thread ko processor pakda deta hai!
 
@@ -11,8 +12,8 @@ Java 21 ke **Virtual Threads (Project Loom)** ek **Lightweight E-Scooter / Metro
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
 1. **Platform Threads vs Virtual Threads**:
-   - **Platform Thread**: 1-to-1 wrapper around an operating system thread. Heavyweight ($\sim 1 	ext{ MB}$ stack allocated in OS virtual memory). Max $\sim 5,000$ concurrent threads per JVM.
-   - **Virtual Thread**: $M$-to-$N$ user-mode thread managed directly by the JVM runtime. Ultra-lightweight ($\sim 1 	ext{ KB}$ initial stack in JVM heap). Millions can run concurrently.
+   - **Platform Thread**: 1-to-1 wrapper around an operating system thread. Heavyweight ($\sim 1  ext{ MB}$ stack allocated in OS virtual memory). Max $\sim 5,000$ concurrent threads per JVM.
+   - **Virtual Thread**: $M$-to-$N$ user-mode thread managed directly by the JVM runtime. Ultra-lightweight ($\sim 1  ext{ KB}$ initial stack in JVM heap). Millions can run concurrently.
 2. **Continuation & Carrier Threads**:
    - Virtual threads run on top of standard platform threads called **Carrier Threads** (backed by a `ForkJoinPool`).
    - When a virtual thread encounters blocking I/O (e.g. `Socket.read()`, `Thread.sleep()`), the JVM **unmounts** the virtual thread from the carrier thread and saves its call stack to the heap. The carrier thread immediately executes another virtual thread!
@@ -111,6 +112,7 @@ public class VirtualThreadDemo {
 ---
 
 ## 🎯 5. The "Interview Pitch"
+>
 > "Java 21 Virtual Threads revolutionize backend scalability by decoupling application concurrency from operating system thread limits. Historically, high-throughput microservices had to choose between synchronous thread-per-request architectures—which cap concurrency around a few thousand connections due to the 1MB platform thread stack overhead—or complex, unreadable reactive frameworks like WebFlux/Project Reactor. Virtual Threads deliver the best of both worlds: you write intuitive, readable, sequential synchronous code with standard `try-catch` blocks, while the JVM unmounts virtual threads from carrier threads during blocking socket I/O. This enables a single Spring Boot 3 service on Java 21 to sustain over 50,000 concurrent blocking I/O requests with minimal CPU and memory overhead."
 
 ---

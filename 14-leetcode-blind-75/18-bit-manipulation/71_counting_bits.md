@@ -10,14 +10,16 @@
 
 This problem tests your mastery of **Bitwise Operations & Binary Arithmetic** under production constraints.
 
-### 📥 Example Scenarios:
+### 📥 Example Scenarios
+
 ```text
 Standard Input / Output Flow:
 Input Collection ---> [Bitwise Operations & Binary Arithmetic] ---> Validated Optimal Result
 - Evaluates optimal edge cases, zero-allocations, and boundary conditions.
 ```
 
-### ⚠️ Constraints & Edge Cases:
+### ⚠️ Constraints & Edge Cases
+
 * Input sizes range up to $N = 10^5$.
 * Time Complexity Target: Must execute in $O(N)$ or $O(N \log N)$ to avoid Time Limit Exceeded (TLE).
 * Space Complexity Target: Minimize heap allocations to reduce garbage collection pauses.
@@ -40,10 +42,12 @@ Input Collection ---> [Bitwise Operations & Binary Arithmetic] ---> Validated Op
 Direct manipulation of bits using AND (&), OR (|), XOR (^), NOT (~), and bit shifts (<<, >>). Executes in 1 CPU cycle.
 
 ### ❓ When to Apply?
-- Low-level system flags, parity checking, arithmetic without operators, and finding single non-duplicate numbers.
+
+* Low-level system flags, parity checking, arithmetic without operators, and finding single non-duplicate numbers.
 
 ### 🚫 When NOT to Apply?
-- When numbers exceed 32-bit integer limits without BigInt support.
+
+* When numbers exceed 32-bit integer limits without BigInt support.
 
 ---
 
@@ -67,7 +71,8 @@ Direct manipulation of bits using AND (&), OR (|), XOR (^), NOT (~), and bit shi
 
 ### ❌ Version 1: The Absolute Newbie Approach (Brute Force)
 
-#### 💡 How the Newbie Thinks & Why It Fails:
+#### 💡 How the Newbie Thinks & Why It Fails
+
 *A beginner converts numbers to binary strings ('10101'), loops through characters, and counts '1's.*
 
 ```javascript
@@ -86,7 +91,8 @@ function solveBruteForce(inputData) {
 
 ### ⚠️ Version 2: The Intermediate Approach (Sorting / Extra Space)
 
-#### 💡 How the Intermediate Thinks:
+#### 💡 How the Intermediate Thinks
+
 *An intermediate developer checks all 32 bits sequentially in a loop.*
 
 ```javascript
@@ -102,10 +108,12 @@ function solveIntermediate(inputData) {
 
 ### ✅ Version 3: The Senior / Optimal Approach (Bitwise Operations & Binary Arithmetic)
 
-#### 💡 How the Senior Thinks:
+#### 💡 How the Senior Thinks
+
 *A senior engineer applies bit tricks like Brian Kernighan's algorithm (`n &= (n - 1)` clearing the lowest set bit in O(number of 1s)) or XOR cancellation (`x ^ x = 0`).*
 
 #### JavaScript / TypeScript Implementation (Line-by-Line Commented)
+
 ```javascript
 function solveOptimal(inputData) {
   // Line 1: Initialize optimal data structure or pointers
@@ -127,6 +135,7 @@ function solveOptimal(inputData) {
 ```
 
 #### Python 3 Implementation (Line-by-Line Commented)
+
 ```python
 def solve_optimal(input_data):
     # Line 1: Initialize optimal state tracking
@@ -165,4 +174,5 @@ def solve_optimal(input_data):
 ## 🔄 Pattern Transferability: Where Else Can You Apply This?
 
 Once you master this pattern, you can apply it directly to:
-- **LeetCode 191 (Number of 1 Bits), LeetCode 338 (Counting Bits), LeetCode 268 (Missing Number), LeetCode 371 (Sum of Two Integers).**
+
+* **LeetCode 191 (Number of 1 Bits), LeetCode 338 (Counting Bits), LeetCode 268 (Missing Number), LeetCode 371 (Sum of Two Integers).**

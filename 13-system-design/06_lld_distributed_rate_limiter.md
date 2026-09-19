@@ -3,12 +3,14 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Rate Limiter ek **Token Dispenser Machine** ki tarah hai.
 Har user ko ek bucket milti hai jisme har second 5 naye tokens girtay hain (**Token Bucket Algorithm**). Jab user API request karta hai, toh ek token kharch ho jata hai. Agar bucket khali ho gayi, toh system request reject kar deta hai (`429 Too Many Requests`).
 
 ---
 
 ## 📌 2. Key Algorithms Compared
+
 1. **Token Bucket**: Allows controlled bursts; tokens refill at constant rate.
 2. **Leaky Bucket**: Enforces strictly smooth output rate like a FIFO queue.
 3. **Sliding Window Log**: Stores timestamps of every request (accurate, high memory).

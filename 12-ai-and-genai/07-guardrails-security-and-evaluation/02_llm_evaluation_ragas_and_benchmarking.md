@@ -3,7 +3,9 @@
 ---
 
 ## 🐣 1. Layman's Analogy (Hinglish + Real-World ELI5)
+
 Imagine you are the **Principal of a School evaluating an Open-Book Exam**:
+
 - Har student (AI Model) ko exam paper mila hai. Aap unke answers ko check karne ke liye **3 strict tests (The RAG Triad)** karte ho:
   1. **Context Relevance (Kabaad Filtering)**: Kya student ke assistant ne sahi kitab ke pages dhoond kar diye, ya irrelevant kabaad bhar diya?
   2. **Faithfulness / Groundedness (Sachai Ka Test)**: Kya student ne jo answer likha hai, wo sach mein unhi pages par likha tha? Ya dimaag se man-ghadant kahani (hallucination) bana di?
@@ -15,23 +17,26 @@ Isko automate karne ke liye hum ek Senior Teacher AI ko **LLM-as-a-Judge** banak
 
 ## 📌 2. Point-Wise Core Mechanics & Edge Cases
 
-### Newbie Essentials:
+### Newbie Essentials
+
 1. **Why Manual Evaluation Fails**: Human evaluation is slow, expensive, unscalable, and inconsistent across annotators. Production AI systems require automated, quantitative metrics to prevent silent regressions during CI/CD prompt or model changes.
 2. **The RAG Triad (The 3 Pillar Metrics)**:
    - **Context Relevance (Precision/Recall)**: Measures whether the retrieved chunks are noise-free and contain all necessary information to answer the question.
    - **Faithfulness (Groundedness)**: Verifies that every single statement in the generated answer can be mathematically inferred from the retrieved context. (Score = 1.0 means Zero Hallucination).
    - **Answer Relevance**: Measures whether the generated answer directly addresses the user prompt, regardless of factual grounding.
 
-### Intermediate Mechanics:
+### Intermediate Mechanics
+
 3. **The Ragas Framework**:
    - Industry-standard evaluation library for RAG pipelines.
    - Uses an LLM to decompose generated answers into atomic claims:
      $$\text{Faithfulness} = \frac{|\text{Number of Claims Supported by Context}|}{|\text{Total Claims in Answer}|}$$
    - Computes Answer Relevance via reverse question generation: asks the judge LLM to generate questions based *only* on the answer, and measures cosine embedding similarity between the synthetic questions and original user query.
-4. **Synthetic Test Data Generation**:
+2. **Synthetic Test Data Generation**:
    - Uses frontier models to generate hundreds of (Context, Question, Ground-Truth Answer) triplets from raw knowledge base chunks, creating automated regression suites.
 
-### Senior / Lead Edge Cases:
+### Senior / Lead Edge Cases
+
 5. **LLM-as-a-Judge Biases & Mitigations**:
    - **Position Bias**: Judges favor candidate A over candidate B in pairwise evaluations. *Mitigation*: Run evaluation twice, swapping $(A, B) \to (B, A)$, and average the scores.
    - **Verbosity Bias**: Judges inherently assign higher scores to longer, wordier answers even if they contain redundant fluff. *Mitigation*: Penalize length or instruct judge to grade solely on factual conciseness.
@@ -190,18 +195,21 @@ for item in res_b["audit_trail"]:
 ---
 
 ## 🎯 5. The "Interview Pitch" (Spoken Answer)
-> *"In production Generative AI, subjective human 'vibe checks' are replaced with rigorous, automated quantitative evaluations. We ground our benchmarking framework in the RAG Triad: Context Relevance, Faithfulness, and Answer Relevance. 
-> Context Relevance measures the signal-to-noise ratio of our vector retrieval pipeline; Faithfulness computes the mathematical ratio of verifiable claims in the generated response against the retrieved source chunks, acting as a strict hallucination detector; and Answer Relevance confirms semantic alignment with the user's intent. 
-> To automate this at scale, we use frameworks like Ragas or DeepEval powered by an LLM-as-a-Judge architecture. 
+>
+> *"In production Generative AI, subjective human 'vibe checks' are replaced with rigorous, automated quantitative evaluations. We ground our benchmarking framework in the RAG Triad: Context Relevance, Faithfulness, and Answer Relevance.
+> Context Relevance measures the signal-to-noise ratio of our vector retrieval pipeline; Faithfulness computes the mathematical ratio of verifiable claims in the generated response against the retrieved source chunks, acting as a strict hallucination detector; and Answer Relevance confirms semantic alignment with the user's intent.
+> To automate this at scale, we use frameworks like Ragas or DeepEval powered by an LLM-as-a-Judge architecture.
 > To safeguard against judge bias, we apply three critical countermeasures: we swap candidate prompt ordering to eliminate Position Bias, we instruct the judge to penalize verbosity to avoid Length Bias, and we calibrate automated metrics against human golden datasets with Pearson and Spearman correlation coefficients exceeding 0.85 before integrating them into our GitHub Actions CI/CD release gates."*
 
 ---
 
 ## 💼 6. Production War Story
+
 **Company**: EdTech AI Math & Physics Tutoring SaaS with 2M students.  
 **Incident**: When upgrading the underlying chat model to a faster quantized checkpoint, thousands of student complaints flooded Reddit claiming the tutor had started hallucinating incorrect calculus steps and making up bogus formula names. Product engagement dropped by 22% in a single week.  
 **Root Cause**: The engineering team had zero automated CI evaluation pipeline. They tested only 5 manual demo prompts in a playground before merging the pull request and deploying directly to production.  
 **Resolution**:
+
 1. Built a **Golden Evaluation Suite of 1,200 curated STEM problem-solution pairs**.
 2. Automated evaluation using **Ragas (Faithfulness and Answer Relevance)** inside GitHub Actions.
 3. Implemented a strict **Deployment Gate**: any PR where Faithfulness dropped below **0.95** or Answer Relevance dropped below **0.92** triggered an automatic build failure and blocked production deployment.  

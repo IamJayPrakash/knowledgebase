@@ -22,6 +22,7 @@
 ## 🎯 Master Question Index (1 - 100)
 
 ### Part 1: Python Core, Mutability, Memory & Data Structures (Q1 - Q20)
+
 * [`01_python_core_mutability_memory_and_types_qna.md`](./01_python_core_mutability_memory_and_types_qna.md)
   1. CPython execution model, bytecode compilation, and the Python Virtual Machine (PVM).
   2. Variables as reference labels ("name tags") vs memory buckets.
@@ -45,6 +46,7 @@
   20. `frozenset` immutable hashable sets.
 
 ### Part 2: Functions, Scopes, Decorators, OOP & MRO (Q21 - Q40)
+
 * [`02_python_functions_oop_dunder_and_mro_qna.md`](./02_python_functions_oop_dunder_and_mro_qna.md)
   21. The LEGB Scope resolution rule.
   22. `global` vs `nonlocal` keywords.
@@ -68,6 +70,7 @@
   40. Structural Duck Typing with `typing.Protocol`.
 
 ### Part 3: GIL, Garbage Collection, Concurrency & Asyncio Internals (Q41 - Q60)
+
 * [`03_python_gil_gc_concurrency_and_asyncio_qna.md`](./03_python_gil_gc_concurrency_and_asyncio_qna.md)
   41. Global Interpreter Lock (GIL) purpose and reference count safety.
   42. PEP 703 Free-Threaded Python (No-GIL) in Python 3.13.
@@ -91,6 +94,7 @@
   60. `asyncio.Semaphore` preventing connection exhaustion.
 
 ### Part 4: FastAPI Core, ASGI, Pydantic V2 & Dependency Injection (Q61 - Q80)
+
 * [`04_fastapi_pydantic_di_and_architecture_qna.md`](./04_fastapi_pydantic_di_and_architecture_qna.md)
   61. ASGI vs WSGI architectural comparison.
   62. What happens in `def` (threadpool) vs `async def` (event loop) endpoints.
@@ -114,6 +118,7 @@
   80. Datetime parsing and serialization in Pydantic V2.
 
 ### Part 5: SQLAlchemy 2.0 Async, Celery, WebSockets & Production Scaling (Q81 - Q100)
+
 * [`05_fastapi_sqlalchemy_celery_and_production_ops_qna.md`](./05_fastapi_sqlalchemy_celery_and_production_ops_qna.md)
   81. SQLAlchemy 2.0 Async Engine and Session configuration.
   82. `expire_on_commit=False` preventing async lazy-load errors.
@@ -139,5 +144,6 @@
 ---
 
 ## 💻 Machine Coding & Refresher
+
 * [`coding_rate_limiting_middleware.md`](./coding_rate_limiting_middleware.md) — Distributed Sliding Window Rate Limiting Middleware.
 * [`top_fastapi_interview_questions.md`](./top_fastapi_interview_questions.md) — Senior Lead Quick Refresher.

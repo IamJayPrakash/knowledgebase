@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Tech & Senior Interview Knowledge Base</title>
+  <meta name="description" content="Production-grade engineering reference & technical interview preparation portal covering 337 documents and 1,289+ questions across all software engineering tracks.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Markdown Parser & Highlight.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css" id="hljs-theme">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- KaTeX for LaTeX Math -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+  <!-- Mermaid.js -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- Pre-built manifest -->
+  <script src="./assets/manifest.js"></script>
+
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --bg-hover: #30363d;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --border-color: #30363d;
+      --accent-color: #58a6ff;
+      --accent-hover: #79c0ff;
+      --accent-soft: rgba(56, 139, 253, 0.15);
+      --success-color: #3fb950;
+      --sidebar-width: 320px;
+      --toc-width: 240px;
+      --header-height: 64px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f6f8fa;
+      --bg-tertiary: #eaeef2;
+      --bg-hover: #e1e4e8;
+      --text-primary: #1f2328;
+      --text-secondary: #57606a;
+      --text-muted: #8c959f;
+      --border-color: #d0d7de;
+      --accent-color: #0969da;
+      --accent-hover: #0550ae;
+      --accent-soft: rgba(9, 105, 218, 0.1);
+      --success-color: #1a7f37;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Reading Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #58a6ff, #a371f7, #3fb950);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+
+    /* Top Navbar */
+    header.top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 900;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .header-brand span.logo-icon {
+      font-size: 1.6rem;
+    }
+
+    .badge-stats {
+      background: var(--accent-soft);
+      color: var(--accent-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid rgba(88, 166, 255, 0.2);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .search-trigger-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+
+    .search-trigger-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--text-primary);
+    }
+
+    .search-trigger-btn kbd {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent-color);
+    }
+
+    /* Layout Wrapper */
+    .app-container {
+      display: flex;
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Sidebar */
+    aside.sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      height: calc(100vh - var(--header-height));
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      overflow-y: auto;
+      padding: 16px;
+      z-index: 800;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sidebar-search-box input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .sidebar-search-box input:focus {
+      border-color: var(--accent-color);
+    }
+
+    .track-category {
+      margin-bottom: 8px;
+    }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .track-header:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .track-header .chevron {
+      font-size: 0.75rem;
+      transition: transform 0.2s;
+    }
+
+    .track-header.collapsed .chevron {
+      transform: rotate(-90deg);
+    }
+
+    .track-file-list {
+      list-style: none;
+      padding-left: 6px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track-header.collapsed + .track-file-list {
+      display: none;
+    }
+
+    .track-file-item a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.84rem;
+      transition: all 0.15s ease;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .track-file-item a:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .track-file-item a.active {
+      background: var(--accent-soft);
+      color: var(--accent-color);
+      font-weight: 600;
+      border-left: 3px solid var(--accent-color);
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Main Content Area */
+    main.content-area {
+      margin-left: var(--sidebar-width);
+      padding: 40px 60px;
+      flex: 1;
+      max-width: 1040px;
+      min-width: 0;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+    }
+
+    .breadcrumbs a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    /* Markdown Document Typography */
+    .markdown-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-primary);
+    }
+
+    .markdown-body h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      letter-spacing: -0.5px;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .markdown-body h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      color: var(--accent-hover);
+    }
+
+    .markdown-body h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    .markdown-body p {
+      margin-bottom: 18px;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+      margin-bottom: 18px;
+      padding-left: 28px;
+    }
+
+    .markdown-body li {
+      margin-bottom: 6px;
+    }
+
+    .markdown-body hr {
+      border: 0;
+      height: 1px;
+      background: var(--border-color);
+      margin: 36px 0;
+    }
+
+    .markdown-body blockquote {
+      border-left: 4px solid var(--accent-color);
+      padding: 12px 18px;
+      background: var(--bg-secondary);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+      font-style: normal;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .markdown-body th, .markdown-body td {
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    .markdown-body th {
+      background: var(--bg-tertiary);
+      font-weight: 600;
+    }
+
+    .markdown-body tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Code Blocks */
+    .code-container {
+      position: relative;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 14px;
+      background: var(--bg-tertiary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-color);
+    }
+
+    .markdown-body pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .markdown-body :not(pre) > code {
+      background: var(--bg-tertiary);
+      color: var(--accent-hover);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Floating Table of Contents (Right side) */
+    aside.toc-container {
+      position: fixed;
+      top: var(--header-height);
+      right: 20px;
+      width: var(--toc-width);
+      padding: 24px 12px;
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+      font-size: 0.82rem;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 1px solid var(--border-color);
+      padding-left: 12px;
+    }
+
+    .toc-list li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: block;
+      transition: color 0.15s;
+    }
+
+    .toc-list li a:hover {
+      color: var(--accent-color);
+    }
+
+    .toc-list li.toc-h3 {
+      padding-left: 12px;
+    }
+
+    /* Modal / Search Overlay */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 100px;
+      z-index: 2000;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .search-modal {
+      width: 100%;
+      max-width: 640px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .search-modal-header {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search-modal-header input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+
+    .search-results-list {
+      max-height: 400px;
+      overflow-y: auto;
+      list-style: none;
+      padding: 8px;
+    }
+
+    .search-result-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: background 0.15s;
+    }
+
+    .search-result-item:hover, .search-result-item.selected {
+      background: var(--bg-hover);
+    }
+
+    .search-result-item .item-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .search-result-item .item-path {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Mobile Hamburger */
+    .menu-toggle-btn {
+      display: none;
+    }
+
+    @media (max-width: 1200px) {
+      aside.toc-container {
+        display: none;
+      }
+      main.content-area {
+        max-width: 100%;
+        padding: 30px 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle-btn {
+        display: flex;
+      }
+      aside.sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      aside.sidebar.open {
+        transform: translateX(0);
+      }
+      main.content-area {
+        margin-left: 0;
+        padding: 24px 16px;
+      }
+      .badge-stats {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Header -->
+  <header class="top-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button class="btn-icon menu-toggle-btn" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
+      <a href="#/README.md" class="header-brand">
+        <span class="logo-icon">🧠</span>
+        <span>KnowledgeBase</span>
+        <span class="badge-stats">337 Docs · 1,289+ Questions</span>
+      </a>
+    </div>
+
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger">
+        <span>🔍 Search Docs...</span>
+        <kbd>/</kbd>
+      </button>
+
+      <button class="btn-icon" id="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+
+      <a href="https://github.com/IamJayPrakash/knowledgebase" target="_blank" rel="noopener noreferrer" class="btn-icon" title="View GitHub Repository">
+        <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-search-box">
+        <input type="text" id="sidebar-filter" placeholder="Filter files in sidebar...">
+      </div>
+      <div id="tree-root"></div>
+    </aside>
+
+    <!-- Main Content Reader -->
+    <main class="content-area">
+      <div class="breadcrumbs" id="breadcrumbs">Home</div>
+      <article class="markdown-body" id="article-content">
+        <div style="text-align: center; padding: 60px 0;">
+          <h2>Loading Knowledge Base...</h2>
+          <p style="color: var(--text-secondary); margin-top: 10px;">Rendering documentation and question banks...</p>
+        </div>
+      </article>
+    </main>
+
+    <!-- Floating Table of Contents -->
+    <aside class="toc-container">
+      <div class="toc-title">On This Page</div>
+      <ul class="toc-list" id="toc-root"></ul>
+    </aside>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div class="modal-backdrop" id="search-modal">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <input type="text" id="modal-search-input" placeholder="Search by topic, question, or technology (e.g. LCP, Fiber, Signals, Raft)..." autocomplete="off">
+        <kbd style="font-size: 0.75rem; padding: 3px 6px; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-muted);">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="modal-search-results"></ul>
+    </div>
+  </div>
+
+  <script>
+    // --- State & Manifest Initialization ---
+    let docsList = window.DOCS_MANIFEST || [];
+    let currentPath = '';
+
+    // Human friendly Track names and Icons
+    const TRACK_METADATA = {
+      '01-web-core-and-performance': { name: '01. Web Performance & Core Web Vitals', icon: '⚡' },
+      '02-javascript': { name: '02. JavaScript Core Engine & V8', icon: '🟨' },
+      '03-typescript': { name: '03. TypeScript Engineering & Types', icon: '🟦' },
+      '04-react': { name: '04. React 19 & Concurrent Architecture', icon: '⚛️' },
+      '05-angular-21': { name: '05. Modern Angular 21 Zoneless', icon: '🅰️' },
+      '06-nextjs': { name: '06. Next.js 15 App Router & RSC', icon: '▲' },
+      '07-backend-node': { name: '07. Node.js & Libuv Runtime', icon: '🟢' },
+      '08-backend-python-fastapi': { name: '08. Python Core & FastAPI Enterprise', icon: '🐍' },
+      '09-backend-java-springboot': { name: '09. Core Java 21 & Spring Boot 3', icon: '☕' },
+      '10-backend-ruby-and-stacks': { name: '10. Ruby on Rails & MEAN/MERN', icon: '💎' },
+      '11-databases-and-caching': { name: '11. Databases, SQL, Redis & MongoDB', icon: '🗄️' },
+      '12-ai-and-genai': { name: '12. AI & GenAI Systems Engineering', icon: '🤖' },
+      '13-system-design': { name: '13. System Design (HLD & LLD)', icon: '🏗️' },
+      '14-leetcode-blind-75': { name: '14. LeetCode Blind 75 Mastery', icon: '🧮' },
+      '15-testing-and-devops': { name: '15. Testing & Cloud DevOps', icon: '🧪' },
+      '16-interview-master-guides': { name: '16. MNC & Startup Interview Guides', icon: '🎯' },
+      'Root': { name: 'Repository Overview', icon: '📖' }
+    };
+
+    // Configure Marked
+    marked.setOptions({
+      highlight: function(code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return hljs.highlight(code, { language: lang }).value;
+          } catch (__) {}
+        }
+        return hljs.highlightAuto(code).value;
+      },
+      breaks: false,
+      gfm: true
+    });
+
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('kb-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('kb-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+
+      const hljsTheme = document.getElementById('hljs-theme');
+      if (next === 'light') {
+        hljsTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+      } else {
+        hljsTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css';
+      }
+    });
+
+    // Mobile Sidebar Toggle
+    const menuBtn = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    // Build Left Navigation Tree
+    function renderSidebarTree(filterText = '') {
+      const treeRoot = document.getElementById('tree-root');
+      treeRoot.innerHTML = '';
+
+      const grouped = {};
+      docsList.forEach(doc => {
+        if (filterText && !doc.title.toLowerCase().includes(filterText.toLowerCase()) && !doc.path.toLowerCase().includes(filterText.toLowerCase())) {
+          return;
+        }
+        const track = doc.track || 'Root';
+        if (!grouped[track]) grouped[track] = [];
+        grouped[track].push(doc);
+      });
+
+      Object.keys(grouped).forEach(trackKey => {
+        const meta = TRACK_METADATA[trackKey] || { name: trackKey, icon: '📁' };
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'track-category';
+
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'track-header';
+        headerDiv.innerHTML = `
+          <span>${meta.icon} ${meta.name}</span>
+          <span class="chevron">▼</span>
+        `;
+
+        headerDiv.addEventListener('click', () => {
+          headerDiv.classList.toggle('collapsed');
+        });
+
+        const listUl = document.createElement('ul');
+        listUl.className = 'track-file-list';
+
+        grouped[trackKey].forEach(doc => {
+          const li = document.createElement('li');
+          li.className = 'track-file-item';
+          const isActive = currentPath === doc.path;
+          li.innerHTML = `
+            <a href="#/${doc.path}" class="${isActive ? 'active' : ''}" title="${doc.title}">
+              <span>📄</span>
+              <span>${doc.title}</span>
+            </a>
+          `;
+          listUl.appendChild(li);
+        });
+
+        categoryDiv.appendChild(headerDiv);
+        categoryDiv.appendChild(listUl);
+        treeRoot.appendChild(categoryDiv);
+      });
+    }
+
+    // Sidebar text filter
+    document.getElementById('sidebar-filter').addEventListener('input', (e) => {
+      renderSidebarTree(e.target.value);
+    });
+
+    // --- Markdown Loading & Rendering ---
+    async function loadDocument(filePath) {
+      if (!filePath) filePath = 'README.md';
+      filePath = filePath.replace(/^#\/?/, '');
+      currentPath = filePath;
+
+      // Update sidebar active states
+      document.querySelectorAll('.track-file-item a').forEach(a => {
+        const href = a.getAttribute('href').replace(/^#\/?/, '');
+        if (href === filePath) {
+          a.classList.add('active');
+          // Expand parent if collapsed
+          const parentCategory = a.closest('.track-category');
+          if (parentCategory) {
+            parentCategory.querySelector('.track-header').classList.remove('collapsed');
+          }
+        } else {
+          a.classList.remove('active');
+        }
+      });
+
+      // Update Breadcrumbs
+      const pathParts = filePath.split('/');
+      const breadcrumbsEl = document.getElementById('breadcrumbs');
+      breadcrumbsEl.innerHTML = pathParts.map((part, index) => {
+        return index === pathParts.length - 1 ? `<span>${part}</span>` : `<a href="#/${pathParts.slice(0, index + 1).join('/')}">${part}</a>`;
+      }).join(' / ');
+
+      // Fetch file content
+      const articleEl = document.getElementById('article-content');
+      try {
+        const response = await fetch('./' + filePath);
+        if (!response.ok) throw new Error(`HTTP ${response.status}: Failed to load ${filePath}`);
+        const markdown = await response.text();
+
+        // Render Markdown
+        let renderedHtml = marked.parse(markdown);
+
+        // Process LaTeX KaTeX math: $inline$ and $$display$$
+        renderedHtml = renderedHtml.replace(/\$\$([\s\S]+?)\$\$/g, (match, expr) => {
+          try {
+            return katex.renderToString(expr.trim(), { displayMode: true });
+          } catch (e) {
+            return `<pre class="katex-error">${expr}</pre>`;
+          }
+        });
+        renderedHtml = renderedHtml.replace(/\$([^\$\n]+?)\$/g, (match, expr) => {
+          try {
+            return katex.renderToString(expr.trim(), { displayMode: false });
+          } catch (e) {
+            return `<code>${expr}</code>`;
+          }
+        });
+
+        articleEl.innerHTML = renderedHtml;
+
+        // Enhance Code Blocks (Add Header with language and copy button)
+        articleEl.querySelectorAll('pre code').forEach(codeBlock => {
+          const pre = codeBlock.parentElement;
+          const container = document.createElement('div');
+          container.className = 'code-container';
+
+          const classNames = codeBlock.className || '';
+          const langMatch = classNames.match(/language-(\w+)/);
+          const lang = langMatch ? langMatch[1] : 'code';
+
+          const header = document.createElement('div');
+          header.className = 'code-header';
+          header.innerHTML = `
+            <span>${lang.toUpperCase()}</span>
+            <button class="copy-btn">Copy</button>
+          `;
+
+          const copyBtn = header.querySelector('.copy-btn');
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+              copyBtn.textContent = 'Copied!';
+              setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+            });
+          });
+
+          pre.parentNode.insertBefore(container, pre);
+          container.appendChild(header);
+          container.appendChild(pre);
+        });
+
+        // Intercept relative markdown links inside the document
+        articleEl.querySelectorAll('a').forEach(anchor => {
+          const href = anchor.getAttribute('href');
+          if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+            anchor.addEventListener('click', (e) => {
+              e.preventDefault();
+              // Calculate resolved relative path
+              const baseDir = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/')) : '';
+              let target = href;
+              if (baseDir) {
+                const parts = baseDir.split('/');
+                const targetParts = href.split('/');
+                for (const part of targetParts) {
+                  if (part === '.') continue;
+                  if (part === '..') {
+                    parts.pop();
+                  } else {
+                    parts.push(part);
+                  }
+                }
+                target = parts.join('/');
+              }
+              window.location.hash = `#/${target}`;
+            });
+          }
+        });
+
+        // Generate On-This-Page TOC
+        generateTableOfContents();
+
+        // Render Mermaid Diagrams if present
+        articleEl.querySelectorAll('pre code.language-mermaid').forEach((el, idx) => {
+          const code = el.innerText;
+          const wrapper = document.createElement('div');
+          wrapper.className = 'mermaid';
+          wrapper.textContent = code;
+          el.closest('.code-container').replaceWith(wrapper);
+        });
+        mermaid.init(undefined, articleEl.querySelectorAll('.mermaid'));
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Close mobile drawer if open
+        sidebar.classList.remove('open');
+
+      } catch (err) {
+        articleEl.innerHTML = `
+          <div style="padding: 40px; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-color);">
+            <h2 style="color: #f85149;">Failed to load document</h2>
+            <p style="margin-top: 10px; color: var(--text-secondary);">${err.message}</p>
+            <p style="margin-top: 14px;"><a href="#/README.md" style="color: var(--accent-color);">← Return to Root README</a></p>
+          </div>
+        `;
+      }
+    }
+
+    // Generate Table of Contents
+    function generateTableOfContents() {
+      const tocRoot = document.getElementById('toc-root');
+      tocRoot.innerHTML = '';
+      const headings = document.getElementById('article-content').querySelectorAll('h2, h3');
+
+      headings.forEach((heading, idx) => {
+        if (!heading.id) {
+          heading.id = 'heading-' + idx;
+        }
+        const li = document.createElement('li');
+        li.className = heading.tagName.toLowerCase() === 'h3' ? 'toc-h3' : 'toc-h2';
+        li.innerHTML = `<a href="#${heading.id}">${heading.innerText}</a>`;
+
+        li.querySelector('a').addEventListener('click', (e) => {
+          e.preventDefault();
+          heading.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        tocRoot.appendChild(li);
+      });
+    }
+
+    // Reading Progress Listener
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // --- Search Modal Engine ---
+    const searchModal = document.getElementById('search-modal');
+    const searchTrigger = document.getElementById('search-trigger');
+    const modalInput = document.getElementById('modal-search-input');
+    const modalResults = document.getElementById('modal-search-results');
+
+    function openSearchModal() {
+      searchModal.classList.add('open');
+      modalInput.value = '';
+      modalInput.focus();
+      renderSearchResults('');
+    }
+
+    function closeSearchModal() {
+      searchModal.classList.remove('open');
+    }
+
+    searchTrigger.addEventListener('click', openSearchModal);
+
+    // Keyboard Shortcuts (Ctrl+K or '/')
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT')) {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+      }
+    });
+
+    searchModal.addEventListener('click', (e) => {
+      if (e.target === searchModal) closeSearchModal();
+    });
+
+    modalInput.addEventListener('input', (e) => {
+      renderSearchResults(e.target.value.trim().toLowerCase());
+    });
+
+    function renderSearchResults(query) {
+      modalResults.innerHTML = '';
+      if (!query) {
+        modalResults.innerHTML = `<li style="padding: 20px; color: var(--text-muted); text-align: center;">Type to search all 337 documents and 1,289+ questions...</li>`;
+        return;
+      }
+
+      const matches = docsList.filter(doc =>
+        doc.title.toLowerCase().includes(query) ||
+        doc.path.toLowerCase().includes(query)
+      ).slice(0, 20);
+
+      if (matches.length === 0) {
+        modalResults.innerHTML = `<li style="padding: 20px; color: var(--text-muted); text-align: center;">No documents found matching "${query}"</li>`;
+        return;
+      }
+
+      matches.forEach(doc => {
+        const li = document.createElement('li');
+        li.className = 'search-result-item';
+        li.innerHTML = `
+          <div class="item-title">${doc.title}</div>
+          <div class="item-path">${doc.path}</div>
+        `;
+        li.addEventListener('click', () => {
+          closeSearchModal();
+          window.location.hash = `#/${doc.path}`;
+        });
+        modalResults.appendChild(li);
+      });
+    }
+
+    // --- Router (Hash Change) ---
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash || '#/README.md';
+      loadDocument(hash.replace(/^#\/?/, ''));
+    });
+
+    // Initial Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSidebarTree();
+      const initialHash = window.location.hash ? window.location.hash.replace(/^#\/?/, '') : 'README.md';
+      loadDocument(initialHash);
+    });
+  </script>
+</body>
+</html>

@@ -44,8 +44,13 @@ knowledgebase/
 
 Use this index or `CTRL+F` to jump directly to any concept across the knowledge base:
 
-| Topic / Keyword | Core Concept Covered | Direct File Link |
-| :--- | :--- | :--- |
+| **Core Web Vitals (LCP/INP/CLS)** | Google CWV thresholds, real-user metrics, SEO impact | [`01-web-core-and-performance/web-core-vitals/01_core_web_vitals_lcp_inp_cls.md`](./01-web-core-and-performance/web-core-vitals/01_core_web_vitals_lcp_inp_cls.md) |
+| **LCP Optimization** | 4 Sub-parts (TTFB, Load Delay/Duration, Render Delay), `fetchpriority` | [`01-web-core-and-performance/web-core-vitals/04_lcp_deep_dive_and_codebase_optimization.md`](./01-web-core-and-performance/web-core-vitals/04_lcp_deep_dive_and_codebase_optimization.md) |
+| **INP & Task Yielding** | Long tasks ($>50\text{ms}$), `scheduler.yield()`, layout thrashing | [`01-web-core-and-performance/web-core-vitals/05_inp_long_tasks_and_main_thread_yielding.md`](./01-web-core-and-performance/web-core-vitals/05_inp_long_tasks_and_main_thread_yielding.md) |
+| **CLS & Font Metrics** | CSS font metric overrides (`size-adjust`), `aspect-ratio`, FOUT | [`01-web-core-and-performance/web-core-vitals/06_cls_font_metrics_and_aspect_ratio_prevention.md`](./01-web-core-and-performance/web-core-vitals/06_cls_font_metrics_and_aspect_ratio_prevention.md) |
+| **DOM Virtualization** | Windowing engine from scratch, Heap Snapshots, detached DOM leaks | [`01-web-core-and-performance/frontend-performance-optimization/05_dom_virtualization_and_memory_leak_profiling.md`](./01-web-core-and-performance/frontend-performance-optimization/05_dom_virtualization_and_memory_leak_profiling.md) |
+| **Tree-Shaking & sideEffects** | Dead-code elimination, `"sideEffects": false`, barrel file bottlenecks | [`01-web-core-and-performance/frontend-performance-optimization/06_tree_shaking_side_effects_and_barrel_files.md`](./01-web-core-and-performance/frontend-performance-optimization/06_tree_shaking_side_effects_and_barrel_files.md) |
+| **Partytown Web Workers** | Offloading GTM/Meta Pixel to background workers, Facade pattern | [`01-web-core-and-performance/frontend-performance-optimization/07_third_party_scripts_and_web_workers.md`](./01-web-core-and-performance/frontend-performance-optimization/07_third_party_scripts_and_web_workers.md) |
 | **JavaScript Data Types** | 7 Primitives vs Heap references, implicit coercion, `NaN` | [`02-javascript/01_data_types_and_type_coercion.md`](./02-javascript/01_data_types_and_type_coercion.md) |
 | **JS Operators & Control Flow** | Strict equality (`===`), Nullish Coalescing (`??`), `for...of` | [`02-javascript/03_operators_control_flow_and_loops.md`](./02-javascript/03_operators_control_flow_and_loops.md) |
 | **JS Arrays In-Depth** | Mutating vs Non-mutating methods, custom `reduce` polyfill | [`02-javascript/04_arrays_in_depth_methods_and_iteration.md`](./02-javascript/04_arrays_in_depth_methods_and_iteration.md) |
@@ -102,12 +107,21 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 ## 🗂️ Module-by-Module Directory Links
 
 ### 01. ⚡ Web Performance & Core Web Vitals ([`01-web-core-and-performance/`](./01-web-core-and-performance/))
-* [`web-core-vitals/01_core_web_vitals_lcp_inp_cls.md`](./01-web-core-and-performance/web-core-vitals/01_core_web_vitals_lcp_inp_cls.md)
-* [`web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md`](./01-web-core-and-performance/web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md)
-* [`web-core-vitals/03_cls_cumulative_layout_shift_debugging.md`](./01-web-core-and-performance/web-core-vitals/03_cls_cumulative_layout_shift_debugging.md)
-* [`frontend-performance-optimization/01_critical_rendering_path_and_paint.md`](./01-web-core-and-performance/frontend-performance-optimization/01_critical_rendering_path_and_paint.md)
-* [`frontend-performance-optimization/02_bundle_splitting_and_lazy_loading.md`](./01-web-core-and-performance/frontend-performance-optimization/02_bundle_splitting_and_lazy_loading.md)
-* [`frontend-performance-optimization/03_image_and_font_optimization.md`](./01-web-core-and-performance/frontend-performance-optimization/03_image_and_font_optimization.md)
+* **Web Core Vitals (Measurement, Attribution & Codebase Fixes):**
+  * [`web-core-vitals/01_core_web_vitals_lcp_inp_cls.md`](./01-web-core-and-performance/web-core-vitals/01_core_web_vitals_lcp_inp_cls.md) — Overview of Google CWV thresholds (LCP $\le 2.5\text{s}$, INP $\le 200\text{ms}$, CLS $\le 0.1$).
+  * [`web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md`](./01-web-core-and-performance/web-core-vitals/02_inp_interaction_to_next_paint_deep_dive.md) — Input delay, presentation delay, long tasks ($> 50\text{ms}$), and yielding.
+  * [`web-core-vitals/03_cls_cumulative_layout_shift_debugging.md`](./01-web-core-and-performance/web-core-vitals/03_cls_cumulative_layout_shift_debugging.md) — Visual stability, `aspect-ratio` bounding boxes, and ad slot placeholders.
+  * [`web-core-vitals/04_lcp_deep_dive_and_codebase_optimization.md`](./01-web-core-and-performance/web-core-vitals/04_lcp_deep_dive_and_codebase_optimization.md) — The 4 LCP sub-parts (TTFB, Load Delay/Duration, Render Delay), `<link rel="preload" fetchpriority="high">`, eliminating `loading="lazy"` hero bugs, and inlining critical CSS.
+  * [`web-core-vitals/05_inp_long_tasks_and_main_thread_yielding.md`](./01-web-core-and-performance/web-core-vitals/05_inp_long_tasks_and_main_thread_yielding.md) — Main-thread task chunking via `scheduler.yield()` and `MessageChannel`, batching DOM reads/writes to eliminate layout thrashing, and React 18/19 `useTransition`.
+  * [`web-core-vitals/06_cls_font_metrics_and_aspect_ratio_prevention.md`](./01-web-core-and-performance/web-core-vitals/06_cls_font_metrics_and_aspect_ratio_prevention.md) — CSS font metric overrides (`size-adjust`, `ascent-override`), `content-visibility: auto` with `contain-intrinsic-size`, and GPU compositor animations.
+* **Frontend Performance & Codebase Architecture:**
+  * [`frontend-performance-optimization/01_critical_rendering_path_and_paint.md`](./01-web-core-and-performance/frontend-performance-optimization/01_critical_rendering_path_and_paint.md) — DOM, CSSOM, Render Tree, Reflow Layout, Repaint, Composite, and layout thrashing prevention.
+  * [`frontend-performance-optimization/02_bundle_splitting_and_lazy_loading.md`](./01-web-core-and-performance/frontend-performance-optimization/02_bundle_splitting_and_lazy_loading.md) — Route-based chunking, dynamic `import()`, tree-shaking, and vendor chunking.
+  * [`frontend-performance-optimization/03_image_and_font_optimization.md`](./01-web-core-and-performance/frontend-performance-optimization/03_image_and_font_optimization.md) — Next-gen image formats (AVIF, WebP), `<picture>` progressive fallback, and variable fonts.
+  * [`frontend-performance-optimization/04_resource_hints_speculation_rules_and_caching.md`](./01-web-core-and-performance/frontend-performance-optimization/04_resource_hints_speculation_rules_and_caching.md) — `dns-prefetch`, `preconnect`, modern Speculation Rules API for instant 0ms prerendering, Brotli compression, and `Cache-Control: immutable`.
+  * [`frontend-performance-optimization/05_dom_virtualization_and_memory_leak_profiling.md`](./01-web-core-and-performance/frontend-performance-optimization/05_dom_virtualization_and_memory_leak_profiling.md) — Virtual list windowing engine from scratch, Chrome DevTools Heap Snapshots, detached DOM nodes, and `WeakMap` leak prevention.
+  * [`frontend-performance-optimization/06_tree_shaking_side_effects_and_barrel_files.md`](./01-web-core-and-performance/frontend-performance-optimization/06_tree_shaking_side_effects_and_barrel_files.md) — ESM static analysis, `"sideEffects": false` in `package.json`, `/*#__PURE__*/` annotations, barrel file re-export bottlenecks, and bundle visualizers.
+  * [`frontend-performance-optimization/07_third_party_scripts_and_web_workers.md`](./01-web-core-and-performance/frontend-performance-optimization/07_third_party_scripts_and_web_workers.md) — Offloading third-party marketing tags (GTM, Meta Pixel) to background Web Workers via Partytown, chat widget Facade pattern, and `requestIdleCallback`.
 
 ### 02. 🟨 JavaScript Core Engine & Asynchronous Internals ([`02-javascript/`](./02-javascript/))
 * **Beginner Foundations:**

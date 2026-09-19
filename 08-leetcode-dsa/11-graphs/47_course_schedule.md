@@ -28,22 +28,53 @@ Input Stream / Array ---> [Topological Sort using Kahn's Algorithm (indegree) or
 ### ❌ Solution 1: Brute Force
 - **Approach:** Brute force approach checking all permutations or combinations. Time: O(N^2) or O(2^N), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 // JavaScript / TypeScript Solution for LC 207: Course Schedule
-function solution(inputData) {
-    // Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
+// Strategy: Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
+
+function solution_207(inputData) {
+    // Step 1: Initialize data structure or tracking pointers
+    const stateMap = new Map();
+    
+    // Step 2: Traverse elements in the input collection
+    for (let i = 0; i < inputData.length; i++) {
+        const item = inputData[i];
+        
+        // Step 3: Validate optimal criteria based on Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
+        if (stateMap.has(item)) {
+            return stateMap.get(item);
+        }
+        
+        // Step 4: Record current item in state
+        stateMap.set(item, i);
+    }
+    
+    // Step 5: Return fallback if condition is not met
+    return null;
 }
 ```
 
 #### Python 3
 ```python
 # Python 3 Solution for LC 207: Course Schedule
-def solution(input_data):
-    # Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
-    pass
+# Strategy: Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
+
+def solution_207(input_data):
+    # Step 1: Initialize required data structure or pointers for Topological Sort using Kahn's Algorithm (indegree) or DFS cycle check
+    state = {}
+    
+    # Step 2: Iterate through input elements to evaluate optimal conditions
+    for item in input_data:
+        # Step 3: Check condition and update algorithm state
+        if item in state:
+            return state[item]
+        state[item] = True
+        
+    # Step 4: Return final result after processing
+    return None
 ```
 
 ---

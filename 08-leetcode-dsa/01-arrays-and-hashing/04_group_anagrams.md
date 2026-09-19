@@ -31,17 +31,27 @@ Key 'abt' -> ['bat']
 ### ❌ Solution 1: Brute Force
 - **Approach:** Compare every word pair with O(N^2) anagram checks. Time: O(N^2 * K).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function groupAnagrams(strs) {
+    // Hash map to store sorted_string => array_of_anagrams
     const map = {};
+    
+    // Iterate through every string in the array
     for (const s of strs) {
+        // Sort letters alphabetically to form the canonical signature key
         const key = s.split('').sort().join('');
+        
+        // Initialize an empty array if key doesn't exist yet
         map[key] = map[key] || [];
+        
+        // Push the original string into its corresponding group
         map[key].push(s);
     }
+    
+    // Return an array of grouped anagram arrays
     return Object.values(map);
 }
 ```
@@ -49,11 +59,20 @@ function groupAnagrams(strs) {
 #### Python 3
 ```python
 from collections import defaultdict
+
 def groupAnagrams(strs):
+    # Defaultdict creates an empty list automatically for any new key
     groups = defaultdict(list)
+    
+    # Process each string in the input list
     for s in strs:
+        # Sort the characters of the string to create a unique canonical key
         key = tuple(sorted(s))
+        
+        # Append the original word to the list matching this sorted key
         groups[key].append(s)
+        
+    # Return all grouped anagram lists
     return list(groups.values())
 ```
 

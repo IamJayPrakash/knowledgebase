@@ -30,31 +30,62 @@ L='m', R='m' -> match -> Valid palindrome!
 ### ❌ Solution 1: Brute Force
 - **Approach:** Reverse entire cleaned string and check equality. Time: O(N), Space: O(N).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function isPalindrome(s) {
+    // Two pointers: left starting at index 0, right starting at the end
     let l = 0, r = s.length - 1;
+    
+    // Scan inward towards the center
     while (l < r) {
+        // Skip non-alphanumeric characters on the left side
         while (l < r && !/[a-zA-Z0-9]/.test(s[l])) l++;
+        
+        // Skip non-alphanumeric characters on the right side
         while (l < r && !/[a-zA-Z0-9]/.test(s[r])) r--;
-        if (s[l].toLowerCase() !== s[r].toLowerCase()) return false;
-        l++; r--;
+        
+        // Case-insensitive character comparison
+        if (s[l].toLowerCase() !== s[r].toLowerCase()) {
+            return false; // Characters do not match
+        }
+        
+        // Move both pointers towards center
+        l++;
+        r--;
     }
-    return true;
+    
+    return true; // Symmetric match confirmed
 }
 ```
 
 #### Python 3
 ```python
 def isPalindrome(s: str) -> bool:
+    # Initialize left pointer at the start and right pointer at the end
     l, r = 0, len(s) - 1
+    
+    # Continue until both pointers meet in the middle
     while l < r:
-        while l < r and not s[l].isalnum(): l += 1
-        while l < r and not s[r].isalnum(): r -= 1
-        if s[l].lower() != s[r].lower(): return False
-        l, r = l + 1, r - 1
+        # Move left pointer forward if current character is not alphanumeric
+        while l < r and not s[l].isalnum():
+            l += 1
+            
+        # Move right pointer backward if current character is not alphanumeric
+        while l < r and not s[r].isalnum():
+            r -= 1
+            
+        # Compare characters case-insensitively
+        if s[l].lower() != s[r].lower():
+            # Mismatch found: not a palindrome
+            return False
+            
+        # Move both pointers inward for next comparison
+        l += 1
+        r -= 1
+        
+    # All characters matched successfully
     return True
 ```
 

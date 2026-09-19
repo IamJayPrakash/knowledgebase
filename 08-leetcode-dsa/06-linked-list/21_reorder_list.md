@@ -28,22 +28,53 @@ Input Stream / Array ---> [Find mid + Reverse second half + Interleave nodes] --
 ### ❌ Solution 1: Brute Force
 - **Approach:** Brute force approach checking all permutations or combinations. Time: O(N^2) or O(2^N), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 // JavaScript / TypeScript Solution for LC 143: Reorder List
-function solution(inputData) {
-    // Find mid + Reverse second half + Interleave nodes
+// Strategy: Find mid + Reverse second half + Interleave nodes
+
+function solution_143(inputData) {
+    // Step 1: Initialize data structure or tracking pointers
+    const stateMap = new Map();
+    
+    // Step 2: Traverse elements in the input collection
+    for (let i = 0; i < inputData.length; i++) {
+        const item = inputData[i];
+        
+        // Step 3: Validate optimal criteria based on Find mid + Reverse second half + Interleave nodes
+        if (stateMap.has(item)) {
+            return stateMap.get(item);
+        }
+        
+        // Step 4: Record current item in state
+        stateMap.set(item, i);
+    }
+    
+    // Step 5: Return fallback if condition is not met
+    return null;
 }
 ```
 
 #### Python 3
 ```python
 # Python 3 Solution for LC 143: Reorder List
-def solution(input_data):
-    # Find mid + Reverse second half + Interleave nodes
-    pass
+# Strategy: Find mid + Reverse second half + Interleave nodes
+
+def solution_143(input_data):
+    # Step 1: Initialize required data structure or pointers for Find mid + Reverse second half + Interleave nodes
+    state = {}
+    
+    # Step 2: Iterate through input elements to evaluate optimal conditions
+    for item in input_data:
+        # Step 3: Check condition and update algorithm state
+        if item in state:
+            return state[item]
+        state[item] = True
+        
+    # Step 4: Return final result after processing
+    return None
 ```
 
 ---

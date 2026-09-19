@@ -29,16 +29,25 @@ Seen: {1} -> {1, 2} -> {1, 2, 3} -> 1 is already in Set! -> Return True
 ### ❌ Solution 1: Brute Force
 - **Approach:** Sort array and compare adjacent elements. Time: O(N log N), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function containsDuplicate(nums) {
+    // Create a Set to store unique values with O(1) lookup time
     const set = new Set();
+    
+    // Iterate through every number in the array
     for (const n of nums) {
-        if (set.has(n)) return true;
+        // If the set already has this number, duplicate detected
+        if (set.has(n)) {
+            return true;
+        }
+        // Add the current number to the set
         set.add(n);
     }
+    
+    // No duplicates found after scanning the entire array
     return false;
 }
 ```
@@ -46,10 +55,19 @@ function containsDuplicate(nums) {
 #### Python 3
 ```python
 def containsDuplicate(nums):
+    # Create an empty hash set to record numbers we have already seen
     seen = set()
+    
+    # Traverse through each number in the array
     for n in nums:
-        if n in seen: return True
+        # If the number is already in our set, we found a duplicate!
+        if n in seen:
+            # Return True immediately without checking remaining elements
+            return True
+        # Otherwise, record this number in the set
         seen.add(n)
+        
+    # If the loop finishes without returning, all elements are unique
     return False
 ```
 

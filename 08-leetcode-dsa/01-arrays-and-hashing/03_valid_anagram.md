@@ -29,17 +29,26 @@ Frequency counter counts all characters to 0 -> True
 ### ❌ Solution 1: Brute Force
 - **Approach:** Sort both strings and check if sorted(s) == sorted(t). Time: O(N log N), Space: O(N).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function isAnagram(s, t) {
+    // Quick check: strings of unequal length cannot be anagrams
     if (s.length !== t.length) return false;
+    
+    // Array of 26 zeros to track character frequencies (index 0 = 'a', 25 = 'z')
     const freq = new Array(26).fill(0);
+    
+    // Count characters in both strings in a single loop
     for (let i = 0; i < s.length; i++) {
+        // Increment for string s
         freq[s.charCodeAt(i) - 97]++;
+        // Decrement for string t
         freq[t.charCodeAt(i) - 97]--;
     }
+    
+    // Check if every character count cancelled out to zero
     return freq.every(x => x === 0);
 }
 ```
@@ -47,11 +56,21 @@ function isAnagram(s, t) {
 #### Python 3
 ```python
 def isAnagram(s: str, t: str) -> bool:
-    if len(s) != len(t): return False
+    # If string lengths differ, they cannot be anagrams
+    if len(s) != len(t):
+        return False
+        
+    # Fixed size frequency array of 26 zeros for lowercase English letters
     count = [0] * 26
+    
+    # Iterate through both strings simultaneously
     for a, b in zip(s, t):
+        # Increment frequency count for character in string 's'
         count[ord(a) - ord('a')] += 1
+        # Decrement frequency count for character in string 't'
         count[ord(b) - ord('a')] -= 1
+        
+    # If all frequency counts are exactly 0, strings are valid anagrams
     return all(x == 0 for x in count)
 ```
 

@@ -30,17 +30,30 @@ i=1: num=7, diff=2, Map has 2! -> Return [0, 1]
 ### ❌ Solution 1: Brute Force
 - **Approach:** Nested loops comparing all pairs (nums[i] + nums[j] == target). Time: O(N^2), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function twoSum(nums, target) {
+    // Create a Map to store { number => index } for O(1) time complexity lookups
     const map = new Map();
+    
+    // Loop through each element in the array with index 'i'
     for (let i = 0; i < nums.length; i++) {
+        // Calculate the complement needed: target minus current number
         const diff = target - nums[i];
-        if (map.has(diff)) return [map.get(diff), i];
+        
+        // If our Map already contains the complement we need
+        if (map.has(diff)) {
+            // Return an array containing the stored index and the current index
+            return [map.get(diff), i];
+        }
+        
+        // Otherwise, save the current number and its index in the Map
         map.set(nums[i], i);
     }
+    
+    // Fallback: return an empty array if no matching pair exists
     return [];
 }
 ```
@@ -48,10 +61,23 @@ function twoSum(nums, target) {
 #### Python 3
 ```python
 def twoSum(nums, target):
+    # Dictionary/Hash Map to store { number: its_index } for O(1) instant lookup
     seen = {}
+    
+    # Iterate through the array getting both index 'i' and the current value 'n'
     for i, n in enumerate(nums):
-        if target - n in seen: return [seen[target - n], i]
+        # Calculate the complement needed: target minus current number
+        diff = target - n
+        
+        # Check if the needed complement was already seen in our dictionary
+        if diff in seen:
+            # If found, return the index of the complement and the current index
+            return [seen[diff], i]
+            
+        # Store the current number with its index in the dictionary for future checks
         seen[n] = i
+        
+    # Return empty list if no pair is found (safety fallback)
     return []
 ```
 

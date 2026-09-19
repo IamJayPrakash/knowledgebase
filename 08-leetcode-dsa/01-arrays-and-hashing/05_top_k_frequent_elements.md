@@ -30,19 +30,32 @@ Buckets: [3: [1], 2: [2], 1: [3]] -> Output: [1, 2]
 ### ❌ Solution 1: Brute Force
 - **Approach:** HashMap frequency count + sort by count. Time: O(N log N), Space: O(N).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function topKFrequent(nums, k) {
+    // Step 1: Build frequency map
     const count = new Map();
-    for (const n of nums) count.set(n, (count.get(n) || 0) + 1);
-    const buckets = Array.from({length: nums.length + 1}, () => []);
-    for (const [n, c] of count) buckets[c].push(n);
+    for (const n of nums) {
+        count.set(n, (count.get(n) || 0) + 1);
+    }
+    
+    // Step 2: Create buckets array where index is the frequency
+    const buckets = Array.from({ length: nums.length + 1 }, () => []);
+    for (const [n, c] of count) {
+        buckets[c].push(n);
+    }
+    
+    // Step 3: Collect top k elements starting from highest frequency bucket
     const res = [];
     for (let i = buckets.length - 1; i > 0 && res.length < k; i--) {
-        if (buckets[i].length) res.push(...buckets[i]);
+        if (buckets[i].length) {
+            res.push(...buckets[i]);
+        }
     }
+    
+    // Return exactly k elements
     return res.slice(0, k);
 }
 ```
@@ -50,15 +63,27 @@ function topKFrequent(nums, k) {
 #### Python 3
 ```python
 def topKFrequent(nums, k):
+    # Step 1: Count frequency of each number using a hash map
     count = {}
-    for n in nums: count[n] = count.get(n, 0) + 1
+    for n in nums:
+        # Increment frequency count for number n
+        count[n] = count.get(n, 0) + 1
+        
+    # Step 2: Bucket array where index = frequency, value = list of numbers
     buckets = [[] for _ in range(len(nums) + 1)]
-    for n, c in count.items(): buckets[c].append(n)
+    for n, c in count.items():
+        # Place number 'n' into bucket corresponding to its frequency 'c'
+        buckets[c].append(n)
+        
+    # Step 3: Iterate backwards from highest frequency bucket down to 1
     res = []
-    for i in range(len(buckets)-1, 0, -1):
+    for i in range(len(buckets) - 1, 0, -1):
         for n in buckets[i]:
+            # Add element to results
             res.append(n)
-            if len(res) == k: return res
+            # Stop immediately once we have collected k elements
+            if len(res) == k:
+                return res
 ```
 
 ---

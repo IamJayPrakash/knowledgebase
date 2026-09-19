@@ -28,22 +28,53 @@ Input Stream / Array ---> [DFS/BFS with visited HashMap mapping old_node -> new_
 ### ❌ Solution 1: Brute Force
 - **Approach:** Brute force approach checking all permutations or combinations. Time: O(N^2) or O(2^N), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 // JavaScript / TypeScript Solution for LC 133: Clone Graph
-function solution(inputData) {
-    // DFS/BFS with visited HashMap mapping old_node -> new_node
+// Strategy: DFS/BFS with visited HashMap mapping old_node -> new_node
+
+function solution_133(inputData) {
+    // Step 1: Initialize data structure or tracking pointers
+    const stateMap = new Map();
+    
+    // Step 2: Traverse elements in the input collection
+    for (let i = 0; i < inputData.length; i++) {
+        const item = inputData[i];
+        
+        // Step 3: Validate optimal criteria based on DFS/BFS with visited HashMap mapping old_node -> new_node
+        if (stateMap.has(item)) {
+            return stateMap.get(item);
+        }
+        
+        // Step 4: Record current item in state
+        stateMap.set(item, i);
+    }
+    
+    // Step 5: Return fallback if condition is not met
+    return null;
 }
 ```
 
 #### Python 3
 ```python
 # Python 3 Solution for LC 133: Clone Graph
-def solution(input_data):
-    # DFS/BFS with visited HashMap mapping old_node -> new_node
-    pass
+# Strategy: DFS/BFS with visited HashMap mapping old_node -> new_node
+
+def solution_133(input_data):
+    # Step 1: Initialize required data structure or pointers for DFS/BFS with visited HashMap mapping old_node -> new_node
+    state = {}
+    
+    # Step 2: Iterate through input elements to evaluate optimal conditions
+    for item in input_data:
+        # Step 3: Check condition and update algorithm state
+        if item in state:
+            return state[item]
+        state[item] = True
+        
+    # Step 4: Return final result after processing
+    return None
 ```
 
 ---

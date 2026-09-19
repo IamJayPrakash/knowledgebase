@@ -31,22 +31,28 @@ Result:  [24, 12, 8,  6]
 ### ❌ Solution 1: Brute Force
 - **Approach:** Nested loop multiplying all other items for each index. Time: O(N^2), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function productExceptSelf(nums) {
+    // Initialize result array with 1s
     const res = new Array(nums.length).fill(1);
+    
+    // Step 1: Forward pass for prefix products (left of index)
     let prefix = 1;
     for (let i = 0; i < nums.length; i++) {
         res[i] = prefix;
         prefix *= nums[i];
     }
+    
+    // Step 2: Backward pass for postfix products (right of index)
     let postfix = 1;
     for (let i = nums.length - 1; i >= 0; i--) {
         res[i] *= postfix;
         postfix *= nums[i];
     }
+    
     return res;
 }
 ```
@@ -54,15 +60,26 @@ function productExceptSelf(nums) {
 #### Python 3
 ```python
 def productExceptSelf(nums):
+    # Output array initialized with 1s
     res = [1] * len(nums)
+    
+    # Step 1: Calculate prefix products (product of all elements to the left)
     prefix = 1
     for i in range(len(nums)):
+        # Store prefix product accumulated so far for index i
         res[i] = prefix
+        # Update prefix product including current element nums[i]
         prefix *= nums[i]
+        
+    # Step 2: Calculate postfix products (product of all elements to the right)
     postfix = 1
-    for i in range(len(nums)-1, -1, -1):
+    for i in range(len(nums) - 1, -1, -1):
+        # Multiply current prefix product with postfix product from the right
         res[i] *= postfix
+        # Update postfix product including current element nums[i]
         postfix *= nums[i]
+        
+    # Return the completed product array
     return res
 ```
 

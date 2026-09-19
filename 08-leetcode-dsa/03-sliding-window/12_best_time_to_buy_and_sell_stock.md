@@ -30,28 +30,45 @@ Profits: 0, 0, (5-1)=4, (3-1)=2, (6-1)=5 (Max) -> Result = 5
 ### ❌ Solution 1: Brute Force
 - **Approach:** Nested loops checking every buy and sell day pair. Time: O(N^2), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function maxProfit(prices) {
-    let minP = Infinity, maxP = 0;
-    for (const p of prices) {
-        minP = Math.min(minP, p);
-        maxP = Math.max(maxP, p - minP);
+    // Initialize minimum price to Infinity
+    let minPrice = Infinity;
+    // Initialize maximum profit to 0
+    let maxProfit = 0;
+    
+    // Traverse through daily stock prices
+    for (const price of prices) {
+        // Keep track of lowest historical purchase price
+        minPrice = Math.min(minPrice, price);
+        // Calculate profit if sold today, keep track of maximum
+        maxProfit = Math.max(maxProfit, price - minPrice);
     }
-    return maxP;
+    
+    return maxProfit;
 }
 ```
 
 #### Python 3
 ```python
 def maxProfit(prices):
-    min_p, max_p = float('inf'), 0
-    for p in prices:
-        min_p = min(min_p, p)
-        max_p = max(max_p, p - min_p)
-    return max_p
+    # Track the lowest price observed so far (start at infinity)
+    min_price = float('inf')
+    # Track the maximum profit achieved so far
+    max_profit = 0
+    
+    # Iterate through prices on each consecutive day
+    for price in prices:
+        # Update minimum buy price if current day price is lower
+        min_price = min(min_price, price)
+        # Calculate profit if sold today, update max_profit if greater
+        max_profit = max(max_profit, price - min_price)
+        
+    # Return highest profit possible (or 0 if only losses were possible)
+    return max_profit
 ```
 
 ---

@@ -29,18 +29,30 @@ Stack: [ ( ] -> [ (, [ ] -> [ (, [, { ] -> pop { -> pop [ -> pop ( -> Empty Stac
 ### ❌ Solution 1: Brute Force
 - **Approach:** Repeatedly replace '()', '[]', '{}' with '' until no changes (O(N^2)).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function isValid(s) {
+    // Stack array to track opening brackets (Last-In, First-Out)
     const stack = [];
+    // Hash map defining valid bracket pairs
     const map = { ')': '(', '}': '{', ']': '[' };
+    
+    // Inspect each bracket character
     for (const c of s) {
         if (map[c]) {
-            if (stack.pop() !== map[c]) return false;
-        } else stack.push(c);
+            // Closing bracket encountered: pop top element and verify match
+            if (stack.pop() !== map[c]) {
+                return false;
+            }
+        } else {
+            // Opening bracket encountered: push to stack
+            stack.push(c);
+        }
     }
+    
+    // Stack must be completely empty for balanced parentheses
     return stack.length === 0;
 }
 ```
@@ -48,13 +60,25 @@ function isValid(s) {
 #### Python 3
 ```python
 def isValid(s: str) -> bool:
+    # Stack to hold open brackets in order
     stack = []
+    # Mapping of closing bracket -> corresponding open bracket
     mapping = {')': '(', '}': '{', ']': '['}
+    
+    # Iterate through each character in the string
     for c in s:
+        # If character is a closing bracket
         if c in mapping:
-            if not stack or stack[-1] != mapping[c]: return False
+            # Check if stack is empty OR top bracket does not match
+            if not stack or stack[-1] != mapping[c]:
+                return False
+            # Valid match: remove the matched open bracket from stack
             stack.pop()
-        else: stack.append(c)
+        else:
+            # If character is an open bracket, push onto stack
+            stack.append(c)
+            
+    # Valid only if all opened brackets were successfully matched and closed
     return not stack
 ```
 

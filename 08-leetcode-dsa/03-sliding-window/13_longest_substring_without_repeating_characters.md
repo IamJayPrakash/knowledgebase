@@ -30,21 +30,28 @@ Next 'a' -> Shrink window: [bca] -> [cab] -> [abc] -> Max Len = 3
 ### ❌ Solution 1: Brute Force
 - **Approach:** Check all substrings for duplicates. Time: O(N^3) or O(N^2), Space: O(min(N, M)).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 function lengthOfLongestSubstring(s) {
+    // Set to keep track of characters inside active sliding window
     const set = new Set();
     let l = 0, maxLen = 0;
+    
+    // Move right boundary 'r' forward
     for (let r = 0; r < s.length; r++) {
+        // Contract window from left while duplicate character exists
         while (set.has(s[r])) {
             set.delete(s[l]);
             l++;
         }
+        // Include right character in window set
         set.add(s[r]);
+        // Record max window length
         maxLen = Math.max(maxLen, r - l + 1);
     }
+    
     return maxLen;
 }
 ```
@@ -52,13 +59,25 @@ function lengthOfLongestSubstring(s) {
 #### Python 3
 ```python
 def lengthOfLongestSubstring(s: str) -> int:
+    # Set to store unique characters currently inside our sliding window
     char_set = set()
-    l, max_len = 0, 0
+    # Left pointer of the sliding window and max length tracker
+    l = 0
+    max_len = 0
+    
+    # Expand the right pointer 'r' across the string
     for r in range(len(s)):
+        # While the incoming character s[r] is already inside the window
         while s[r] in char_set:
-            char_set.remove(s[l]); l += 1
+            # Shrink window from the left by removing s[l]
+            char_set.remove(s[l])
+            l += 1
+            
+        # Add the new character to the window set
         char_set.add(s[r])
+        # Update maximum window length achieved so far
         max_len = max(max_len, r - l + 1)
+        
     return max_len
 ```
 

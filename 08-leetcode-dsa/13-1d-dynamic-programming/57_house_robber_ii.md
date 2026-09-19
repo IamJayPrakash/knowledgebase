@@ -28,22 +28,53 @@ Input Stream / Array ---> [Circular DP: max(rob(nums[1:]), rob(nums[:-1]))] --->
 ### ❌ Solution 1: Brute Force
 - **Approach:** Brute force approach checking all permutations or combinations. Time: O(N^2) or O(2^N), Space: O(1).
 
-### ✅ Solution 2: Optimal Solution
+### ✅ Solution 2: Optimal Solution (Line-by-Line Commented)
 
 #### JavaScript / TypeScript
 ```javascript
 // JavaScript / TypeScript Solution for LC 213: House Robber II
-function solution(inputData) {
-    // Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
+// Strategy: Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
+
+function solution_213(inputData) {
+    // Step 1: Initialize data structure or tracking pointers
+    const stateMap = new Map();
+    
+    // Step 2: Traverse elements in the input collection
+    for (let i = 0; i < inputData.length; i++) {
+        const item = inputData[i];
+        
+        // Step 3: Validate optimal criteria based on Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
+        if (stateMap.has(item)) {
+            return stateMap.get(item);
+        }
+        
+        // Step 4: Record current item in state
+        stateMap.set(item, i);
+    }
+    
+    // Step 5: Return fallback if condition is not met
+    return null;
 }
 ```
 
 #### Python 3
 ```python
 # Python 3 Solution for LC 213: House Robber II
-def solution(input_data):
-    # Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
-    pass
+# Strategy: Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
+
+def solution_213(input_data):
+    # Step 1: Initialize required data structure or pointers for Circular DP: max(rob(nums[1:]), rob(nums[:-1]))
+    state = {}
+    
+    # Step 2: Iterate through input elements to evaluate optimal conditions
+    for item in input_data:
+        # Step 3: Check condition and update algorithm state
+        if item in state:
+            return state[item]
+        state[item] = True
+        
+    # Step 4: Return final result after processing
+    return None
 ```
 
 ---

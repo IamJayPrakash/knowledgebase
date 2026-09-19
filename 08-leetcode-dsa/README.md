@@ -1,6 +1,6 @@
 # 🧮 Blind 75 Master LeetCode Solutions (6-Pillar Format)
 
-> The complete, industry-standard **Blind 75 Curated LeetCode Problem Set** with **Hinglish Intuition, Layman Analogies, ASCII Visual Diagrams, Brute vs Optimal Solutions (JS & Python), Interview Answering Scripts, and Real-World Production War Stories (STAR Method)**.
+> The complete, industry-standard **Blind 75 Curated LeetCode Problem Set** with **Hinglish Intuition, Layman Analogies, ASCII Visual Diagrams, Line-by-Line Commented Code (JS & Python), Interview Answering Scripts, and Real-World Production War Stories (STAR Method)**.
 
 ---
 

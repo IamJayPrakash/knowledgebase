@@ -32,8 +32,13 @@
 
 ---
 
-## 📂 Interview Questions
-* [`interview-questions/short_questions_basics.md`](./interview-questions/short_questions_basics.md) — High-frequency conceptual questions for SDE-2/3 (`==` vs `===`, `Object.is()`, TDZ).
+## 📂 Master 100 Interview Question Bank & Coding Index
+* [`interview-questions/README.md`](./interview-questions/README.md) — 🟨 **Complete 100-Question Master Curriculum Index & Topic Guide**.
+* [`interview-questions/01_js_foundations_types_and_operators_qna.md`](./interview-questions/01_js_foundations_types_and_operators_qna.md) — Questions 1 to 20: Foundations, Types, Coercion, and Operators.
+* [`interview-questions/02_js_closures_scope_and_execution_context_qna.md`](./interview-questions/02_js_closures_scope_and_execution_context_qna.md) — Questions 21 to 40: Closures, Lexical Scope, Execution Context, and `this`.
+* [`interview-questions/03_js_objects_prototypes_and_classes_qna.md`](./interview-questions/03_js_objects_prototypes_and_classes_qna.md) — Questions 41 to 60: Objects, Prototypes, Inheritance, and ES6 Classes.
+* [`interview-questions/04_js_async_event_loop_and_promises_qna.md`](./interview-questions/04_js_async_event_loop_and_promises_qna.md) — Questions 61 to 80: Async Architecture, Event Loop, Promises, and Concurrency.
+* [`interview-questions/05_js_v8_memory_dom_and_modern_es_qna.md`](./interview-questions/05_js_v8_memory_dom_and_modern_es_qna.md) — Questions 81 to 100: V8 Internals, Memory Management, DOM, and Modern ECMAScript.
 * [`interview-questions/coding_polyfill_promise_all.md`](./interview-questions/coding_polyfill_promise_all.md) — Complete production polyfill of `Promise.all` from scratch.
 * [`interview-questions/coding_deep_clone.md`](./interview-questions/coding_deep_clone.md) — Hand-crafted recursive deep clone handling circular references and edge cases.
 * [`interview-questions/coding_debounce_and_throttle.md`](./interview-questions/coding_debounce_and_throttle.md) — Production debounce and throttle with leading and trailing options.

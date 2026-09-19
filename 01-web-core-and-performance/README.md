@@ -35,3 +35,11 @@
   - ESM static analysis, `"sideEffects": false` in `package.json`, `/*#__PURE__*/` annotations, barrel file re-export bottlenecks, and bundle analyzers.
 * [**`07_third_party_scripts_and_web_workers.md`**](./frontend-performance-optimization/07_third_party_scripts_and_web_workers.md)
   - Offloading third-party marketing tags (GTM, Meta Pixel) to background Web Workers via Partytown, chat widget Facade pattern, and `requestIdleCallback`.
+
+---
+
+## 📂 Master 60 Interview Question Bank
+* [**`interview-questions/README.md`**](./interview-questions/README.md) — ⚡ **Complete 60-Question Master Curriculum Index & Topic Guide**.
+* [**`interview-questions/01_core_web_vitals_lcp_inp_cls_qna.md`**](./interview-questions/01_core_web_vitals_lcp_inp_cls_qna.md) — Questions 1 to 20: Core Web Vitals (LCP, INP, CLS) & Field vs Lab Metrics.
+* [**`interview-questions/02_rendering_pipeline_and_browser_internals_qna.md`**](./interview-questions/02_rendering_pipeline_and_browser_internals_qna.md) — Questions 21 to 40: Critical Rendering Path, Browser Engine & Layout Optimization.
+* [**`interview-questions/03_network_bundling_and_caching_optimization_qna.md`**](./interview-questions/03_network_bundling_and_caching_optimization_qna.md) — Questions 41 to 60: Network Protocols, Bundling, Tree-Shaking & Caching.

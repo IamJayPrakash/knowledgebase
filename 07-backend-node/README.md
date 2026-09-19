@@ -34,7 +34,18 @@
 
 ---
 
+## 🎯 Master Interview Questions (60 Deep Dive Questions)
+
+For dedicated deep-dive technical interview preparation with runnable code and diagrams:
+- 📖 [Node.js Master Interview Directory](./interview-questions/README.md)
+- 🚀 [Part 1: Libuv Event Loop, Threadpool & Concurrency (Q1 - Q20)](./interview-questions/01_node_libuv_event_loop_and_concurrency_qna.md)
+- 🌊 [Part 2: Streams, Buffers, Memory & Heap Analysis (Q21 - Q40)](./interview-questions/02_node_streams_buffers_and_memory_qna.md)
+- 🛡️ [Part 3: Express/Fastify, Security & Production Scaling (Q41 - Q60)](./interview-questions/03_node_express_security_and_production_scaling_qna.md)
+
+---
+
 ## 💡 High-Yield Senior Interview Questions Pointers
+
 
 1. **How does Node.js handle I/O without blocking the main thread?**
    * *Answer Pointer:* Non-blocking OS primitives (epoll on Linux, kqueue on macOS, IOCP on Windows) are driven by Libuv's event loop. Blocking tasks (File I/O, DNS) are delegated to the Libuv C thread pool.

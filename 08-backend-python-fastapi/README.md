@@ -24,11 +24,12 @@
 
 ---
 
-## 💡 High-Yield Senior Interview Questions Pointers
-
-1. **Why does Python have a Global Interpreter Lock (GIL), and how do you bypass it?**
-   * *Answer Pointer:* The GIL protects CPython's non-thread-safe reference counting memory management. For CPU-bound parallel workloads, bypass the GIL using `multiprocessing` (independent OS processes with dedicated Python interpreters) or native C/Rust extensions (e.g. NumPy).
-2. **What happens if you run a blocking synchronous call inside an `async def` route in FastAPI?**
-   * *Answer Pointer:* It blocks Python's single asyncio event loop thread, completely freezing all concurrent requests across the worker. Solution: Use normal `def` (which runs in Starlette's threadpool) or use `await anyio.to_thread.run_sync()`.
-3. **Difference between `is` and `==` in Python?**
-   * *Answer Pointer:* `==` checks value equality (via `__eq__`), whereas `is` checks object identity (whether both operands reference the exact same memory address via `id()`).
+## 📂 Master 100 Interview Question Bank
+* [**`interview-questions/README.md`**](./interview-questions/README.md) — 🐍 **Complete 100-Question Master Curriculum Index & Topic Guide**.
+* [**`interview-questions/01_python_core_mutability_memory_and_types_qna.md`**](./interview-questions/01_python_core_mutability_memory_and_types_qna.md) — Questions 1 to 20: Python Core, Mutability, Memory, and Data Structures.
+* [**`interview-questions/02_python_functions_oop_dunder_and_mro_qna.md`**](./interview-questions/02_python_functions_oop_dunder_and_mro_qna.md) — Questions 21 to 40: Functions, Scopes, Decorators, OOP, and MRO.
+* [**`interview-questions/03_python_gil_gc_concurrency_and_asyncio_qna.md`**](./interview-questions/03_python_gil_gc_concurrency_and_asyncio_qna.md) — Questions 41 to 60: GIL, Garbage Collection, Concurrency, and Asyncio Internals.
+* [**`interview-questions/04_fastapi_pydantic_di_and_architecture_qna.md`**](./interview-questions/04_fastapi_pydantic_di_and_architecture_qna.md) — Questions 61 to 80: FastAPI Core, ASGI, Pydantic V2, and Dependency Injection.
+* [**`interview-questions/05_fastapi_sqlalchemy_celery_and_production_ops_qna.md`**](./interview-questions/05_fastapi_sqlalchemy_celery_and_production_ops_qna.md) — Questions 81 to 100: SQLAlchemy 2.0 Async, Celery, WebSockets, and Production Scaling.
+* [**`interview-questions/coding_rate_limiting_middleware.md`**](./interview-questions/coding_rate_limiting_middleware.md) — Machine Coding: Distributed Rate Limiting Middleware.
+* [**`interview-questions/top_fastapi_interview_questions.md`**](./interview-questions/top_fastapi_interview_questions.md) — Senior Lead Quick Refresher.

@@ -32,6 +32,12 @@
 * [**`05_lld_parking_lot_system.md`**](./05_lld_parking_lot_system.md) — Scalable multi-floor parking lot system with Factory and Strategy design patterns in Python.
 * [**`06_lld_distributed_rate_limiter.md`**](./06_lld_distributed_rate_limiter.md) — Token Bucket and Sliding Window rate limiting algorithms implemented in Python.
 
-### 5. Interview Preparation & Question Catalogs
-* [**`interview-questions/system_design_interview_framework.md`**](./interview-questions/system_design_interview_framework.md) — The master 4-step structural interview playbook.
-* [**`interview-questions/top_system_design_interview_questions_catalog.md`**](./interview-questions/top_system_design_interview_questions_catalog.md) — Canonical system design interview problems: Distributed Snowflake ID Generator, Distributed Key-Value Store (Dynamo-style), Scalable Notification System, and Distributed Web Crawler.
+### 5. Master 100 Interview Question Bank & Frameworks
+* [**`interview-questions/README.md`**](./interview-questions/README.md) — 🏗️ **Complete 100-Question Master Curriculum Index & Topic Guide**.
+* [**`interview-questions/01_system_design_fundamentals_scale_and_storage_qna.md`**](./interview-questions/01_system_design_fundamentals_scale_and_storage_qna.md) — Questions 1 to 20: Scale, Latency, Storage, Databases, and Caching.
+* [**`interview-questions/02_distributed_systems_consensus_and_consistency_qna.md`**](./interview-questions/02_distributed_systems_consensus_and_consistency_qna.md) — Questions 21 to 40: Distributed Systems, Consensus, CAP Theorem, and Consistency.
+* [**`interview-questions/03_event_driven_streaming_and_messaging_qna.md`**](./interview-questions/03_event_driven_streaming_and_messaging_qna.md) — Questions 41 to 60: Event-Driven Architecture, Streaming, LSM Trees, and Batch Processing.
+* [**`interview-questions/04_protocols_resilience_and_sre_patterns_qna.md`**](./interview-questions/04_protocols_resilience_and_sre_patterns_qna.md) — Questions 61 to 80: Protocols, Resilience, Security, and SRE Patterns.
+* [**`interview-questions/05_classic_hld_architectures_and_case_studies_qna.md`**](./interview-questions/05_classic_hld_architectures_and_case_studies_qna.md) — Questions 81 to 100: Top 20 Real-World High-Level System Design Architectures.
+* [**`interview-questions/system_design_interview_framework.md`**](./interview-questions/system_design_interview_framework.md) — The 45-Minute Senior/Staff System Design Interview Playbook.
+* [**`interview-questions/top_system_design_interview_questions_catalog.md`**](./interview-questions/top_system_design_interview_questions_catalog.md) — Canonical system design interview problem catalog & cheat sheet.

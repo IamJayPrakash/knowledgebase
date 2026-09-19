@@ -10,18 +10,19 @@
 
 ---
 
-## 📑 Interview Questions Index
+## 📑 Master Interview Question Banks (60 Deep Dive Questions)
 
-### 1. Rapid-Fire / Short Questions
-- [ ] `short_questions_event_loop.md` — Libuv phases, `process.nextTick` vs `setImmediate`, `UV_THREADPOOL_SIZE`.
-- [ ] `short_questions_streams.md` — 4 Stream types, Backpressure, `highWaterMark` default values.
+| Part | File | Topics Covered | Range |
+| :--- | :--- | :--- | :--- |
+| **Part 1** | [Libuv Event Loop, Threadpool & Concurrency](./01_node_libuv_event_loop_and_concurrency_qna.md) | Libuv 6 phases, Microtasks, `process.nextTick`, Threadpool, Worker Threads, IPC | Q1 – Q20 |
+| **Part 2** | [Streams, Buffers, Memory & Garbage Collection](./02_node_streams_buffers_and_memory_qna.md) | 4 Stream types, Backpressure, `pipeline()`, Buffers, V8 Heap, Heapdumps, Leaks | Q21 – Q40 |
+| **Part 3** | [Express, Fastify, Security & Production Scaling](./03_node_express_security_and_production_scaling_qna.md) | Express vs Fastify, Middleware, ReDoS, SSRF, Cluster, Graceful Shutdown, PM2 | Q41 – Q60 |
 
-### 2. Backend Coding & Stream Processing Challenges
-- [ ] `coding_stream_large_file_transform.md` — Process a 10GB CSV file line-by-line without exceeding 50MB RAM using Node Streams.
-- [ ] `coding_custom_worker_pool.md` — Build a reusable `WorkerThreadPool` to process CPU-heavy tasks across worker threads.
-- [ ] `coding_rate_limiter_middleware.md` — Implement a sliding-window rate limiter middleware for Express/Fastify using Redis.
-- [ ] `coding_custom_event_emitter.md` — Build a memory-safe custom EventEmitter with memory leak detection.
+---
 
-### 3. Senior Lead & Production Outage Scenarios
-- [ ] `scenario_cpu_100_percent_spike.md` — Troubleshooting and diagnosing a 100% CPU usage spike on a production Node cluster.
-- [ ] `scenario_memory_leak_heapdump.md` — Analyzing heap snapshots to fix a memory leak caused by global event listeners.
+## 📌 Coding & Scenario Challenges
+- [x] Stream Pipelines & Backpressure (`02_node_streams_buffers_and_memory_qna.md`)
+- [x] Worker Threads Pool Implementation (`01_node_libuv_event_loop_and_concurrency_qna.md`)
+- [x] Memory Leak Diagnosis & Heapdump Analysis (`02_node_streams_buffers_and_memory_qna.md`)
+- [x] Production Graceful Shutdown & Zero Downtime Reloads (`03_node_express_security_and_production_scaling_qna.md`)
+

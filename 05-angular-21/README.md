@@ -22,5 +22,10 @@
   - Signal Inputs (`input.required()`), Signal Outputs (`output()`), Two-Way Data Binding with `model()`, and Signal Queries (`viewChild()`).
 * [**`08_angular21_modern_routing_functional_guards_and_interceptors.md`**](./08_angular21_modern_routing_functional_guards_and_interceptors.md)
   - Functional Route Guards (`canActivate: [() => inject(...)]`), `RedirectCommand`, `withComponentInputBinding()`, and functional HTTP interceptors (`withInterceptors`).
+* [**`interview-questions/README.md`**](./interview-questions/README.md)
+  - 📖 **Angular 21 Master Interview Directory (50 Deep Dive Questions)**:
+    - ⚡ [Part 1: Signals, Zoneless & Modern Reactivity (Q1 - Q25)](./interview-questions/01_angular_signals_zoneless_and_reactivity_qna.md)
+    - 🏛️ [Part 2: Architecture, SSR, Routing & Performance (Q26 - Q50)](./interview-questions/02_angular_di_routing_ssr_and_performance_qna.md)
 * [**`interview-questions/angular21_top_interview_questions.md`**](./interview-questions/angular21_top_interview_questions.md)
   - High-frequency Angular 21 senior technical interview questions and architectural answers.
+

@@ -33,7 +33,17 @@
 
 ---
 
+## 🎯 Master Interview Questions (50 Deep Dive Questions)
+
+For dedicated deep-dive technical interview preparation with runnable code and diagrams:
+- 📖 [TypeScript Master Interview Directory](./interview-questions/README.md)
+- 🧱 [Part 1: Types, Generics & Narrowing (Q1 - Q25)](./interview-questions/01_typescript_types_generics_and_narrowing_qna.md)
+- ⚙️ [Part 2: Advanced Types, `infer` & Compiler Internals (Q26 - Q50)](./interview-questions/02_typescript_advanced_types_infer_and_compiler_qna.md)
+
+---
+
 ## 💡 High-Yield Senior Interview Questions Pointers
+
 
 1. **Difference between `unknown` and `any`?**
    * *Answer Pointer:* Both accept any value. `any` disables all type-checking (bypasses compiler). `unknown` enforces type narrowing or type assertions before performing operations on the variable, ensuring type safety.

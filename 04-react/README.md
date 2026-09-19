@@ -37,11 +37,13 @@
 
 ---
 
-## 💡 High-Yield Senior Interview Questions Pointers
-
-1. **How does React Fiber enable Concurrent Rendering?**
-   * *Answer Pointer:* Fiber breaks reconciliation into small units of work (Fiber nodes). During the Render Phase, React uses `requestIdleCallback` / `scheduler` to execute work incrementally and yield back to the browser thread if high-priority tasks (e.g. user input) arrive.
-2. **Why does Context API trigger re-renders in all consumers, and how to fix it?**
-   * *Answer Pointer:* Whenever context value reference changes, all components calling `useContext` re-render regardless of whether they use that specific property. Fixes: Split contexts by concern, memoize context value object, or use selector-based state stores like Zustand.
-3. **What is the difference between Server Components and Client Components in Next.js / React 19?**
-   * *Answer Pointer:* Server Components execute ONLY on the server, outputting a serialized JSON tree to the client with zero JS bundle footprint. Client Components render on server for initial HTML and hydrate on client, allowing interactivity (`useState`, event listeners).
+## 📂 Master 100 Interview Question Bank & Coding Index
+* [`interview-questions/README.md`](./interview-questions/README.md) — ⚛️ **Complete 100-Question Master Curriculum Index & Topic Guide**.
+* [`interview-questions/01_react_foundations_vdom_and_jsx_qna.md`](./interview-questions/01_react_foundations_vdom_and_jsx_qna.md) — Questions 1 to 20: Foundations, JSX, Virtual DOM, and Component Architecture.
+* [`interview-questions/02_react_hooks_internals_and_state_qna.md`](./interview-questions/02_react_hooks_internals_and_state_qna.md) — Questions 21 to 40: Hooks Internals, State Batching, and Lifecycle Synchronization.
+* [`interview-questions/03_react_fiber_reconciliation_and_concurrency_qna.md`](./interview-questions/03_react_fiber_reconciliation_and_concurrency_qna.md) — Questions 41 to 60: Fiber Architecture, Reconciliation, and Concurrent Mode.
+* [`interview-questions/04_react_performance_memoization_and_patterns_qna.md`](./interview-questions/04_react_performance_memoization_and_patterns_qna.md) — Questions 61 to 80: Performance Optimization, Memoization, and State Management.
+* [`interview-questions/05_react_server_components_and_react19_qna.md`](./interview-questions/05_react_server_components_and_react19_qna.md) — Questions 81 to 100: React 19, Server Components (RSC), and Fullstack Architecture.
+* [`interview-questions/machine_coding_autocomplete_search.md`](./interview-questions/machine_coding_autocomplete_search.md) — Machine Coding: Autocomplete Search with Debounce & Cache.
+* [`interview-questions/machine_coding_virtualized_list.md`](./interview-questions/machine_coding_virtualized_list.md) — Machine Coding: High-Performance Virtualized Windowing List.
+* [`interview-questions/top_react_interview_questions.md`](./interview-questions/top_react_interview_questions.md) — Senior Lead Quick Refresher.

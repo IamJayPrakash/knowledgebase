@@ -10,19 +10,18 @@
 
 ---
 
-## 📑 Interview Questions Index
+## 📑 Master Interview Question Banks (50 Deep Dive Questions)
 
-### 1. Rapid-Fire / Short Questions
-- [ ] `short_questions_type_system.md` — `unknown` vs `any` vs `never`, interface vs type, tuple types.
-- [ ] `short_questions_compiler.md` — `strictNullChecks`, `noImplicitAny`, `target` vs `module` flags.
+| Part | File | Topics Covered | Range |
+| :--- | :--- | :--- | :--- |
+| **Part 1** | [Foundations: Types, Generics & Narrowing](./01_typescript_types_generics_and_narrowing_qna.md) | `any`/`unknown`/`never`, Structural Typing, Narrowing, Type Guards, Generics, Mapped Types, `satisfies` | Q1 – Q25 |
+| **Part 2** | [Advanced Types: `infer`, Template Literals & Compiler Internals](./02_typescript_advanced_types_infer_and_compiler_qna.md) | `infer`, `ReturnType`, `Awaited`, Template Literals, Recursive Types, `tsconfig` tuning, Monorepos | Q26 – Q50 |
 
-### 2. Type Manipulation & Utility Implementation Challenges
-- [ ] `coding_utility_pick_omit.md` — Re-implement `MyPick<T, K>` and `MyOmit<T, K>` without built-ins.
-- [ ] `coding_utility_return_type.md` — Re-implement `MyReturnType<T>` using conditional types and `infer`.
-- [ ] `coding_deep_readonly.md` — Implement `DeepReadonly<T>` for arbitrarily nested objects and arrays.
-- [ ] `coding_tuple_to_union.md` — Convert a constant array/tuple to a union type (`TupleToUnion<T>`).
-- [ ] `coding_template_literal_parser.md` — Parse route parameters from URL string template (e.g. `/user/:id/:name`).
+---
 
-### 3. Senior Lead Architectural Scenarios
-- [ ] `scenario_branded_types.md` — How to enforce type-safe domain IDs (e.g. `UserId` vs `OrderId`) using Nominal / Branded Types.
-- [ ] `scenario_monorepo_types.md` — Sharing type definitions across React frontend and Node/FastAPI backend in a monorepo.
+## 📌 Utility Implementations & Architectural Challenges
+- [x] [Custom Utility Types Implementations](./coding_custom_utility_types.md)
+- [x] [Top TypeScript Senior Questions](./top_typescript_interview_questions.md)
+- [x] Recursive Route Parameter Parsing & Deep Readonly (`02_typescript_advanced_types_infer_and_compiler_qna.md`)
+- [x] Monorepo Project References (`composite: true`) & CI Performance (`02_typescript_advanced_types_infer_and_compiler_qna.md`)
+

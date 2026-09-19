@@ -40,6 +40,11 @@
 
 ---
 
-## 📂 Senior Interview Suite
-* [**`interview-questions/top_java_springboot_interview_questions.md`**](./interview-questions/top_java_springboot_interview_questions.md)
-  - Top technical interview questions on Virtual Threads, Bean scopes, `@Transactional` proxy pitfalls, and Spring Boot 3 enhancements.
+## 📂 Master 100 Interview Question Bank
+* [**`interview-questions/README.md`**](./interview-questions/README.md) — ☕ **Complete 100-Question Master Curriculum Index & Topic Guide**.
+* [**`interview-questions/01_java_core_foundations_jvm_and_memory_qna.md`**](./interview-questions/01_java_core_foundations_jvm_and_memory_qna.md) — Questions 1 to 20: Core Java Foundations, JVM Architecture, and Memory Management.
+* [**`interview-questions/02_java_oop_collections_generics_and_exceptions_qna.md`**](./interview-questions/02_java_oop_collections_generics_and_exceptions_qna.md) — Questions 21 to 40: OOP, Collections Framework, Generics, and Streams.
+* [**`interview-questions/03_java_concurrency_threads_and_virtual_threads_qna.md`**](./interview-questions/03_java_concurrency_threads_and_virtual_threads_qna.md) — Questions 41 to 60: Concurrency, Threading, Memory Model, and Virtual Threads (Loom).
+* [**`interview-questions/04_spring_boot_core_ioc_and_data_qna.md`**](./interview-questions/04_spring_boot_core_ioc_and_data_qna.md) — Questions 61 to 80: Spring Boot Core, IoC Container, AOP, and Spring Data JPA.
+* [**`interview-questions/05_spring_boot_security_microservices_and_resilience_qna.md`**](./interview-questions/05_spring_boot_security_microservices_and_resilience_qna.md) — Questions 81 to 100: Spring Security 6, Microservices, Resilience4j, and Production Ops.
+* [**`interview-questions/top_java_springboot_interview_questions.md`**](./interview-questions/top_java_springboot_interview_questions.md) — Senior Lead Quick Refresher.

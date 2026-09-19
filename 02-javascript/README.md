@@ -33,6 +33,12 @@
 ---
 
 ## 📂 Interview Questions
+* [`interview-questions/short_questions_basics.md`](./interview-questions/short_questions_basics.md) — High-frequency conceptual questions for SDE-2/3 (`==` vs `===`, `Object.is()`, TDZ).
+* [`interview-questions/coding_polyfill_promise_all.md`](./interview-questions/coding_polyfill_promise_all.md) — Complete production polyfill of `Promise.all` from scratch.
 * [`interview-questions/coding_deep_clone.md`](./interview-questions/coding_deep_clone.md) — Hand-crafted recursive deep clone handling circular references and edge cases.
-* [`interview-questions/coding_promise_all.md`](./interview-questions/coding_promise_all.md) — Complete production polyfill of `Promise.all` from scratch.
-* [`interview-questions/javascript_conceptual_questions.md`](./interview-questions/javascript_conceptual_questions.md) — High-frequency conceptual questions for SDE-2/3.
+* [`interview-questions/coding_debounce_and_throttle.md`](./interview-questions/coding_debounce_and_throttle.md) — Production debounce and throttle with leading and trailing options.
+* [`interview-questions/coding_curry_function.md`](./interview-questions/coding_curry_function.md) — Infinite currying and arity-based curry polyfills.
+* [`interview-questions/coding_event_emitter.md`](./interview-questions/coding_event_emitter.md) — Custom EventEmitter with memory leak limits and subscription tokens.
+* [`interview-questions/output_event_loop_promises.md`](./interview-questions/output_event_loop_promises.md) — Event loop execution order tracing with Microtasks and Macrotasks.
+* [`interview-questions/output_this_binding.md`](./interview-questions/output_this_binding.md) — Detailed output tracing for `this` context binding and arrow functions.
+* [`interview-questions/scenario_memory_leak_debugging.md`](./interview-questions/scenario_memory_leak_debugging.md) — Real-world heap snapshot analysis and memory leak remediation.

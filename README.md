@@ -170,6 +170,9 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * [`03_angular21_defer_block_and_lazy_loading.md`](./05-angular-21/03_angular21_defer_block_and_lazy_loading.md) — `@defer`, `@placeholder`, `@loading`, `@error` triggers.
 * [`04_angular21_standalone_components_and_inject.md`](./05-angular-21/04_angular21_standalone_components_and_inject.md) — Standalone components, `inject()` API, functional guards.
 * [`05_angular21_rxjs_interop_to_signal.md`](./05-angular-21/05_angular21_rxjs_interop_to_signal.md) — `toSignal()` and `toObservable()` bridging.
+* [`06_angular21_built_in_control_flow_and_optimization.md`](./05-angular-21/06_angular21_built_in_control_flow_and_optimization.md) — Built-in `@if`, `@for` with mandatory `track`, `@empty`, `@switch`, migration from `*ngFor`/`*ngIf`.
+* [`07_angular21_signal_inputs_outputs_model_and_queries.md`](./05-angular-21/07_angular21_signal_inputs_outputs_model_and_queries.md) — Signal queries (`input()`, `output()`, `model()`, `viewChild()`, `viewChildren()`, `contentChild()`).
+* [`08_angular21_modern_routing_functional_guards_and_interceptors.md`](./05-angular-21/08_angular21_modern_routing_functional_guards_and_interceptors.md) — Functional `CanActivateFn`, `RedirectCommand`, `withComponentInputBinding`, functional `HttpInterceptorFn`.
 * [`interview-questions/angular21_top_interview_questions.md`](./05-angular-21/interview-questions/angular21_top_interview_questions.md) — Angular 21 senior Q&A.
 
 ### 06. ▲ Next.js 15 Fullstack Framework ([`06-nextjs/`](./06-nextjs/))
@@ -177,6 +180,8 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * [`02_server_actions_and_mutations.md`](./06-nextjs/02_server_actions_and_mutations.md) — Type-safe RPC mutations with `"use server"` and Zod validation.
 * [`03_caching_and_revalidation_deep_dive.md`](./06-nextjs/03_caching_and_revalidation_deep_dive.md) — 4-tier Caching (Request Memoization, Data Cache, Full Route, Router Cache).
 * [`04_middleware_and_authentication.md`](./06-nextjs/04_middleware_and_authentication.md) — Edge routing, auth guards, and rewrite headers.
+* [`05_streaming_ssr_and_partial_prerendering.md`](./06-nextjs/05_streaming_ssr_and_partial_prerendering.md) — Streaming SSR with React Suspense, Partial Prerendering (PPR), Next.js 15 async Request APIs (`cookies()`, `headers()`).
+* [`06_parallel_and_intercepting_routes.md`](./06-nextjs/06_parallel_and_intercepting_routes.md) — Parallel routes (`@slot`), Intercepting routes (`(..)photo`), shareable modal architecture, and `default.tsx`.
 
 ### 07. 🟢 Backend Node.js & Express ([`07-backend-node/`](./07-backend-node/))
 * [`01_libuv_event_loop_phases.md`](./07-backend-node/01_libuv_event_loop_phases.md) — Libuv 6 event loop phases.

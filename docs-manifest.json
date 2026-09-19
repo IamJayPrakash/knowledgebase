@@ -1,5 +1,15 @@
 [
   {
+    "path": "README.md",
+    "title": "\ud83e\udde0 The Universal Tech & Senior Interview Knowledge Base",
+    "track": "Root"
+  },
+  {
+    "path": "01-web-core-and-performance/README.md",
+    "title": "\u26a1 01 - Web Core & Performance Engineering",
+    "track": "01-web-core-and-performance"
+  },
+  {
     "path": "01-web-core-and-performance/frontend-performance-optimization/01_critical_rendering_path_and_paint.md",
     "title": "Critical Rendering Path (CRP), CSSOM, and Render-Tree Construction",
     "track": "01-web-core-and-performance"
@@ -52,11 +62,6 @@
   {
     "path": "01-web-core-and-performance/interview-questions/README.md",
     "title": "\u26a1 Web Performance & Core Web Vitals Senior & Lead Master Interview Question Bank (60 Questions)",
-    "track": "01-web-core-and-performance"
-  },
-  {
-    "path": "01-web-core-and-performance/README.md",
-    "title": "\u26a1 01 - Web Core & Performance Engineering",
     "track": "01-web-core-and-performance"
   },
   {
@@ -180,6 +185,11 @@
     "track": "02-javascript"
   },
   {
+    "path": "02-javascript/README.md",
+    "title": "\ud83d\udfe8 JavaScript Master Curriculum & Index",
+    "track": "02-javascript"
+  },
+  {
     "path": "02-javascript/interview-questions/01_js_foundations_types_and_operators_qna.md",
     "title": "JavaScript Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "02-javascript"
@@ -202,6 +212,11 @@
   {
     "path": "02-javascript/interview-questions/05_js_v8_memory_dom_and_modern_es_qna.md",
     "title": "JavaScript Master Interview Bank: Part 5 (Q81 - Q100)",
+    "track": "02-javascript"
+  },
+  {
+    "path": "02-javascript/interview-questions/README.md",
+    "title": "\ud83d\udfe8 JavaScript Senior & Lead Master Interview Question Bank (100 Questions)",
     "track": "02-javascript"
   },
   {
@@ -240,11 +255,6 @@
     "track": "02-javascript"
   },
   {
-    "path": "02-javascript/interview-questions/README.md",
-    "title": "\ud83d\udfe8 JavaScript Senior & Lead Master Interview Question Bank (100 Questions)",
-    "track": "02-javascript"
-  },
-  {
     "path": "02-javascript/interview-questions/scenario_memory_leak_debugging.md",
     "title": "Scenario-Based: Debugging JavaScript Memory Leaks in Production",
     "track": "02-javascript"
@@ -252,11 +262,6 @@
   {
     "path": "02-javascript/interview-questions/short_questions_basics.md",
     "title": "JavaScript Core Interview Questions (Quick Recall & High-Frequency)",
-    "track": "02-javascript"
-  },
-  {
-    "path": "02-javascript/README.md",
-    "title": "\ud83d\udfe8 JavaScript Master Curriculum & Index",
     "track": "02-javascript"
   },
   {
@@ -315,6 +320,11 @@
     "track": "03-typescript"
   },
   {
+    "path": "03-typescript/README.md",
+    "title": "\ud83d\udfe6 TypeScript Master Curriculum & Index",
+    "track": "03-typescript"
+  },
+  {
     "path": "03-typescript/interview-questions/01_typescript_types_generics_and_narrowing_qna.md",
     "title": "TypeScript Foundations: Types, Generics, and Narrowing (Q1 - Q25)",
     "track": "03-typescript"
@@ -325,23 +335,18 @@
     "track": "03-typescript"
   },
   {
-    "path": "03-typescript/interview-questions/coding_custom_utility_types.md",
-    "title": "Machine Coding: Hard TypeScript Custom Utility Types",
-    "track": "03-typescript"
-  },
-  {
     "path": "03-typescript/interview-questions/README.md",
     "title": "\ud83d\udfe6 TypeScript Interview Questions & Problem Index",
     "track": "03-typescript"
   },
   {
-    "path": "03-typescript/interview-questions/top_typescript_interview_questions.md",
-    "title": "Top TypeScript Senior Interview Questions (Architecture & Theory)",
+    "path": "03-typescript/interview-questions/coding_custom_utility_types.md",
+    "title": "Machine Coding: Hard TypeScript Custom Utility Types",
     "track": "03-typescript"
   },
   {
-    "path": "03-typescript/README.md",
-    "title": "\ud83d\udfe6 TypeScript Master Curriculum & Index",
+    "path": "03-typescript/interview-questions/top_typescript_interview_questions.md",
+    "title": "Top TypeScript Senior Interview Questions (Architecture & Theory)",
     "track": "03-typescript"
   },
   {
@@ -395,6 +400,11 @@
     "track": "04-react"
   },
   {
+    "path": "04-react/README.md",
+    "title": "\u269b\ufe0f React Master Curriculum & Index",
+    "track": "04-react"
+  },
+  {
     "path": "04-react/interview-questions/01_react_foundations_vdom_and_jsx_qna.md",
     "title": "React Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "04-react"
@@ -420,6 +430,11 @@
     "track": "04-react"
   },
   {
+    "path": "04-react/interview-questions/README.md",
+    "title": "\u269b\ufe0f React Senior & Lead Master Interview Question Bank (100 Questions)",
+    "track": "04-react"
+  },
+  {
     "path": "04-react/interview-questions/machine_coding_autocomplete_search.md",
     "title": "Machine Coding: High-Performance Autocomplete Search with Debounce & Cache",
     "track": "04-react"
@@ -430,18 +445,8 @@
     "track": "04-react"
   },
   {
-    "path": "04-react/interview-questions/README.md",
-    "title": "\u269b\ufe0f React Senior & Lead Master Interview Question Bank (100 Questions)",
-    "track": "04-react"
-  },
-  {
     "path": "04-react/interview-questions/top_react_interview_questions.md",
     "title": "Top Senior React Interview Questions (Architecture & Diagnostics)",
-    "track": "04-react"
-  },
-  {
-    "path": "04-react/README.md",
-    "title": "\u269b\ufe0f React Master Curriculum & Index",
     "track": "04-react"
   },
   {
@@ -485,6 +490,11 @@
     "track": "05-angular-21"
   },
   {
+    "path": "05-angular-21/README.md",
+    "title": "\ud83c\udd70\ufe0f 05 - Modern Angular 21 Architecture",
+    "track": "05-angular-21"
+  },
+  {
     "path": "05-angular-21/interview-questions/01_angular_signals_zoneless_and_reactivity_qna.md",
     "title": "Angular 21 Core: Signals, Zoneless, and Modern Reactivity (Q1 - Q25)",
     "track": "05-angular-21"
@@ -495,18 +505,13 @@
     "track": "05-angular-21"
   },
   {
-    "path": "05-angular-21/interview-questions/angular21_top_interview_questions.md",
-    "title": "Angular 21 Interview Master Guide: Zoneless, Signals, @defer & Modern Architecture",
-    "track": "05-angular-21"
-  },
-  {
     "path": "05-angular-21/interview-questions/README.md",
     "title": "\ud83c\udd70\ufe0f Angular 21 Master Interview Questions & Architectural Index",
     "track": "05-angular-21"
   },
   {
-    "path": "05-angular-21/README.md",
-    "title": "\ud83c\udd70\ufe0f 05 - Modern Angular 21 Architecture",
+    "path": "05-angular-21/interview-questions/angular21_top_interview_questions.md",
+    "title": "Angular 21 Interview Master Guide: Zoneless, Signals, @defer & Modern Architecture",
     "track": "05-angular-21"
   },
   {
@@ -540,6 +545,11 @@
     "track": "06-nextjs"
   },
   {
+    "path": "06-nextjs/README.md",
+    "title": "\u25b2 06 - Next.js 15 Fullstack Engineering",
+    "track": "06-nextjs"
+  },
+  {
     "path": "06-nextjs/interview-questions/01_nextjs_app_router_rsc_and_actions_qna.md",
     "title": "Next.js App Router: RSC, Server Actions, and Routing (Q1 - Q25)",
     "track": "06-nextjs"
@@ -550,18 +560,13 @@
     "track": "06-nextjs"
   },
   {
-    "path": "06-nextjs/interview-questions/nextjs_top_interview_questions.md",
-    "title": "Top Next.js Senior Interview Questions (App Router & Production Architecture)",
-    "track": "06-nextjs"
-  },
-  {
     "path": "06-nextjs/interview-questions/README.md",
     "title": "\ud83d\udda4 Next.js Master Interview Questions & Architectural Index",
     "track": "06-nextjs"
   },
   {
-    "path": "06-nextjs/README.md",
-    "title": "\u25b2 06 - Next.js 15 Fullstack Engineering",
+    "path": "06-nextjs/interview-questions/nextjs_top_interview_questions.md",
+    "title": "Top Next.js Senior Interview Questions (App Router & Production Architecture)",
     "track": "06-nextjs"
   },
   {
@@ -587,6 +592,11 @@
   {
     "path": "07-backend-node/04_memory_leaks_and_profiling.md",
     "title": "Diagnosing Production Node.js Memory Leaks and CPU Spikes",
+    "track": "07-backend-node"
+  },
+  {
+    "path": "07-backend-node/README.md",
+    "title": "\ud83d\udfe2 Node.js Master Curriculum & Index",
     "track": "07-backend-node"
   },
   {
@@ -620,23 +630,18 @@
     "track": "07-backend-node"
   },
   {
-    "path": "07-backend-node/interview-questions/coding_custom_readable_writable_stream.md",
-    "title": "Machine Coding: Custom Transform Stream (CSV to JSON Parser)",
-    "track": "07-backend-node"
-  },
-  {
     "path": "07-backend-node/interview-questions/README.md",
     "title": "\ud83d\udfe2 Node.js Interview Questions & System Coding Index",
     "track": "07-backend-node"
   },
   {
-    "path": "07-backend-node/interview-questions/top_node_interview_questions.md",
-    "title": "Top Node.js Senior Interview Questions (Runtime Internals)",
+    "path": "07-backend-node/interview-questions/coding_custom_readable_writable_stream.md",
+    "title": "Machine Coding: Custom Transform Stream (CSV to JSON Parser)",
     "track": "07-backend-node"
   },
   {
-    "path": "07-backend-node/README.md",
-    "title": "\ud83d\udfe2 Node.js Master Curriculum & Index",
+    "path": "07-backend-node/interview-questions/top_node_interview_questions.md",
+    "title": "Top Node.js Senior Interview Questions (Runtime Internals)",
     "track": "07-backend-node"
   },
   {
@@ -700,6 +705,11 @@
     "track": "08-backend-python-fastapi"
   },
   {
+    "path": "08-backend-python-fastapi/README.md",
+    "title": "\ud83d\udc0d Python Core & FastAPI Enterprise Master Curriculum & Index",
+    "track": "08-backend-python-fastapi"
+  },
+  {
     "path": "08-backend-python-fastapi/interview-questions/01_python_core_mutability_memory_and_types_qna.md",
     "title": "Python & FastAPI Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "08-backend-python-fastapi"
@@ -725,23 +735,18 @@
     "track": "08-backend-python-fastapi"
   },
   {
-    "path": "08-backend-python-fastapi/interview-questions/coding_rate_limiting_middleware.md",
-    "title": "Machine Coding: Distributed Sliding Window Rate Limiting Middleware in FastAPI",
-    "track": "08-backend-python-fastapi"
-  },
-  {
     "path": "08-backend-python-fastapi/interview-questions/README.md",
     "title": "\ud83d\udc0d Python Core & FastAPI Senior & Lead Master Interview Question Bank (100 Questions)",
     "track": "08-backend-python-fastapi"
   },
   {
-    "path": "08-backend-python-fastapi/interview-questions/top_fastapi_interview_questions.md",
-    "title": "Top 20+ Senior FastAPI & Async Python Interview Questions & Answers",
+    "path": "08-backend-python-fastapi/interview-questions/coding_rate_limiting_middleware.md",
+    "title": "Machine Coding: Distributed Sliding Window Rate Limiting Middleware in FastAPI",
     "track": "08-backend-python-fastapi"
   },
   {
-    "path": "08-backend-python-fastapi/README.md",
-    "title": "\ud83d\udc0d Python Core & FastAPI Enterprise Master Curriculum & Index",
+    "path": "08-backend-python-fastapi/interview-questions/top_fastapi_interview_questions.md",
+    "title": "Top 20+ Senior FastAPI & Async Python Interview Questions & Answers",
     "track": "08-backend-python-fastapi"
   },
   {
@@ -810,6 +815,11 @@
     "track": "09-backend-java-springboot"
   },
   {
+    "path": "09-backend-java-springboot/README.md",
+    "title": "\u2615 09 - Core Java 21 & Spring Boot 3 Enterprise Master Curriculum",
+    "track": "09-backend-java-springboot"
+  },
+  {
     "path": "09-backend-java-springboot/interview-questions/01_java_core_foundations_jvm_and_memory_qna.md",
     "title": "Java 21 & Spring Boot Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "09-backend-java-springboot"
@@ -845,18 +855,13 @@
     "track": "09-backend-java-springboot"
   },
   {
-    "path": "09-backend-java-springboot/README.md",
-    "title": "\u2615 09 - Core Java 21 & Spring Boot 3 Enterprise Master Curriculum",
-    "track": "09-backend-java-springboot"
+    "path": "10-backend-ruby-and-stacks/README.md",
+    "title": "\ud83d\udc8e 10 - Ruby on Rails & Full-Stack Architectures",
+    "track": "10-backend-ruby-and-stacks"
   },
   {
     "path": "10-backend-ruby-and-stacks/mean-vs-mern/01_mean_vs_mern_stack_architecture.md",
     "title": "MERN Stack vs MEAN Stack: Architecture, Trade-Offs & Selection Guide",
-    "track": "10-backend-ruby-and-stacks"
-  },
-  {
-    "path": "10-backend-ruby-and-stacks/README.md",
-    "title": "\ud83d\udc8e 10 - Ruby on Rails & Full-Stack Architectures",
     "track": "10-backend-ruby-and-stacks"
   },
   {
@@ -868,6 +873,11 @@
     "path": "10-backend-ruby-and-stacks/ruby-on-rails/02_rails_api_and_sidekiq_jobs.md",
     "title": "Ruby on Rails API Mode, ActiveJob, and Sidekiq Concurrency",
     "track": "10-backend-ruby-and-stacks"
+  },
+  {
+    "path": "11-databases-and-caching/README.md",
+    "title": "\ud83d\uddc4\ufe0f 11 - Databases, Relational Storage & Caching",
+    "track": "11-databases-and-caching"
   },
   {
     "path": "11-databases-and-caching/interview-questions/01_sql_postgresql_internals_and_optimization_qna.md",
@@ -885,13 +895,13 @@
     "track": "11-databases-and-caching"
   },
   {
-    "path": "11-databases-and-caching/interview-questions/database_indexing_and_caching_questions.md",
-    "title": "Top Database & Caching Senior Interview Questions",
+    "path": "11-databases-and-caching/interview-questions/README.md",
+    "title": "\ud83d\uddc4\ufe0f Databases & Caching Senior & Staff Master Interview Question Bank (60 Questions)",
     "track": "11-databases-and-caching"
   },
   {
-    "path": "11-databases-and-caching/interview-questions/README.md",
-    "title": "\ud83d\uddc4\ufe0f Databases & Caching Senior & Staff Master Interview Question Bank (60 Questions)",
+    "path": "11-databases-and-caching/interview-questions/database_indexing_and_caching_questions.md",
+    "title": "Top Database & Caching Senior Interview Questions",
     "track": "11-databases-and-caching"
   },
   {
@@ -902,11 +912,6 @@
   {
     "path": "11-databases-and-caching/nosql-mongodb/02_mongodb_aggregation_pipeline_mastery.md",
     "title": "MongoDB Aggregation Pipeline: Multi-Stage Document Processing",
-    "track": "11-databases-and-caching"
-  },
-  {
-    "path": "11-databases-and-caching/README.md",
-    "title": "\ud83d\uddc4\ufe0f 11 - Databases, Relational Storage & Caching",
     "track": "11-databases-and-caching"
   },
   {
@@ -1020,6 +1025,11 @@
     "track": "12-ai-and-genai"
   },
   {
+    "path": "12-ai-and-genai/README.md",
+    "title": "\ud83e\udd16 12 - AI & GenAI Systems Master Curriculum & Index",
+    "track": "12-ai-and-genai"
+  },
+  {
     "path": "12-ai-and-genai/interview-questions/01_foundations_and_transformers_qna.md",
     "title": "AI & GenAI Interview Questions: Part 1 \u2014 Foundations, Transformers & Sampling (Q1 - Q20)",
     "track": "12-ai-and-genai"
@@ -1050,23 +1060,18 @@
     "track": "12-ai-and-genai"
   },
   {
-    "path": "12-ai-and-genai/interview-questions/coding_simple_rag_pipeline_python.md",
-    "title": "Machine Coding: End-to-End RAG Pipeline in Pure Python",
-    "track": "12-ai-and-genai"
-  },
-  {
     "path": "12-ai-and-genai/interview-questions/README.md",
     "title": "\ud83e\udd16 Master 110 GenAI & LLM Interview Questions Catalog & Roadmap",
     "track": "12-ai-and-genai"
   },
   {
-    "path": "12-ai-and-genai/interview-questions/top_ai_genai_interview_questions.md",
-    "title": "Top AI & GenAI Senior Interview Questions (Production Systems)",
+    "path": "12-ai-and-genai/interview-questions/coding_simple_rag_pipeline_python.md",
+    "title": "Machine Coding: End-to-End RAG Pipeline in Pure Python",
     "track": "12-ai-and-genai"
   },
   {
-    "path": "12-ai-and-genai/README.md",
-    "title": "\ud83e\udd16 12 - AI & GenAI Systems Master Curriculum & Index",
+    "path": "12-ai-and-genai/interview-questions/top_ai_genai_interview_questions.md",
+    "title": "Top AI & GenAI Senior Interview Questions (Production Systems)",
     "track": "12-ai-and-genai"
   },
   {
@@ -1130,6 +1135,17 @@
     "track": "13-system-design"
   },
   {
+    "path": "13-system-design/README.md",
+    "title": "\ud83c\udfd7\ufe0f 13 - System Design (High-Level & Low-Level Architecture)",
+    "track": "13-system-design"
+  },
+  {
+    "path": "13-system-design/System_Design_Interview_Questions (1).pdf",
+    "title": "\ud83d\udcd1 [PDF Document] System Design 50 Concepts & Interview Questions",
+    "track": "13-system-design",
+    "type": "pdf"
+  },
+  {
     "path": "13-system-design/interview-questions/01_system_design_fundamentals_scale_and_storage_qna.md",
     "title": "System Design Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "13-system-design"
@@ -1167,11 +1183,6 @@
   {
     "path": "13-system-design/interview-questions/top_system_design_interview_questions_catalog.md",
     "title": "Top System Design High-Frequency Interview Problems Catalog",
-    "track": "13-system-design"
-  },
-  {
-    "path": "13-system-design/README.md",
-    "title": "\ud83c\udfd7\ufe0f 13 - System Design (High-Level & Low-Level Architecture)",
     "track": "13-system-design"
   },
   {
@@ -1550,8 +1561,8 @@
     "track": "14-leetcode-blind-75"
   },
   {
-    "path": "14-leetcode-blind-75/interview-questions/dsa_patterns_cheat_sheet_and_meta_heuristics.md",
-    "title": "DSA Meta-Heuristics and Pattern Recognition Cheat Sheet",
+    "path": "14-leetcode-blind-75/README.md",
+    "title": "\ud83e\uddee Blind 75 Master LeetCode Solutions (6-Pillar Format)",
     "track": "14-leetcode-blind-75"
   },
   {
@@ -1560,9 +1571,14 @@
     "track": "14-leetcode-blind-75"
   },
   {
-    "path": "14-leetcode-blind-75/README.md",
-    "title": "\ud83e\uddee Blind 75 Master LeetCode Solutions (6-Pillar Format)",
+    "path": "14-leetcode-blind-75/interview-questions/dsa_patterns_cheat_sheet_and_meta_heuristics.md",
+    "title": "DSA Meta-Heuristics and Pattern Recognition Cheat Sheet",
     "track": "14-leetcode-blind-75"
+  },
+  {
+    "path": "15-testing-and-devops/README.md",
+    "title": "\ud83e\uddea 15 - Testing, Containerization & Production DevOps",
+    "track": "15-testing-and-devops"
   },
   {
     "path": "15-testing-and-devops/devops-docker-kubernetes-cicd/01_docker_kubernetes_production_setup.md",
@@ -1595,11 +1611,6 @@
     "track": "15-testing-and-devops"
   },
   {
-    "path": "15-testing-and-devops/README.md",
-    "title": "\ud83e\uddea 15 - Testing, Containerization & Production DevOps",
-    "track": "15-testing-and-devops"
-  },
-  {
     "path": "15-testing-and-devops/testing-playwright-jest/01_playwright_e2e_testing_guide.md",
     "title": "Modern E2E Testing with Playwright & Unit Testing with Jest",
     "track": "15-testing-and-devops"
@@ -1620,13 +1631,18 @@
     "track": "16-interview-master-guides"
   },
   {
-    "path": "16-interview-master-guides/interview-questions/behavioral_star_method_master_guide.md",
-    "title": "Behavioral Interview Mastery: The STAR Method for Senior Engineers",
+    "path": "16-interview-master-guides/README.md",
+    "title": "\u26a1 16 - Interview Master Cheatsheets, Behavioral STAR & Company Guides",
     "track": "16-interview-master-guides"
   },
   {
     "path": "16-interview-master-guides/interview-questions/README.md",
     "title": "\u26a1 Senior Tech Lead Interview Scenario Questions & Flash Cards Index",
+    "track": "16-interview-master-guides"
+  },
+  {
+    "path": "16-interview-master-guides/interview-questions/behavioral_star_method_master_guide.md",
+    "title": "Behavioral Interview Mastery: The STAR Method for Senior Engineers",
     "track": "16-interview-master-guides"
   },
   {
@@ -1642,11 +1658,6 @@
   {
     "path": "16-interview-master-guides/mid-tier-and-startups/startup_tech_lead_interview_guide.md",
     "title": "Startup Tech Lead & Staff Engineer Interview Playbook (Series A to Unicorn)",
-    "track": "16-interview-master-guides"
-  },
-  {
-    "path": "16-interview-master-guides/README.md",
-    "title": "\u26a1 16 - Interview Master Cheatsheets, Behavioral STAR & Company Guides",
     "track": "16-interview-master-guides"
   },
   {
@@ -1678,10 +1689,5 @@
     "path": "16-interview-master-guides/service-mnc-tier/wipro_interview_guide.md",
     "title": "Wipro Senior Fullstack Engineer Interview Guide",
     "track": "16-interview-master-guides"
-  },
-  {
-    "path": "README.md",
-    "title": "\ud83e\udde0 The Universal Tech & Senior Interview Knowledge Base",
-    "track": "Root"
   }
 ]

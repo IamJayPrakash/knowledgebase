@@ -1,0 +1,267 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 2222 >>
+stream
+BT
+/F2 18 Tf 50 745 Td (System Design Interview Questions) Tj
+/F1 10 Tf 50 723 Td (Master 50 System Design Concepts & Technical Interview Blueprint) Tj
+/F2 11 Tf 50 701 Td (1. Database) Tj
+/F1 8.5 Tf 65 687 Td (Core persistent storage layer organizing application state. Relational vs) Tj
+/F1 8.5 Tf 65 676 Td (Non-Relational schemas with indexing for low-latency lookups.) Tj
+/F2 11 Tf 50 660 Td (2. SQL vs NoSQL) Tj
+/F1 8.5 Tf 65 646 Td (SQL provides structured tables, ACID transactions, and complex JOINs. NoSQL) Tj
+/F1 8.5 Tf 65 635 Td (provides flexible horizontal scale \(Document, Key-Value, Columnar, Graph\).) Tj
+/F2 11 Tf 50 619 Td (3. Availability) Tj
+/F1 8.5 Tf 65 605 Td (Percentage of uptime a service remains operational and responds to requests.) Tj
+/F1 8.5 Tf 65 594 Td (Measured in nines \(e.g. 99.99% = 52 min downtime/yr\).) Tj
+/F2 11 Tf 50 578 Td (4. Reliability) Tj
+/F1 8.5 Tf 65 564 Td (Probability that a system functions correctly without failure over a given time) Tj
+/F1 8.5 Tf 65 553 Td (window under specified operating conditions.) Tj
+/F2 11 Tf 50 537 Td (5. Latency) Tj
+/F1 8.5 Tf 65 523 Td (Time required to process a request and receive a response, typically measured in) Tj
+/F1 8.5 Tf 65 512 Td (p50, p95, and p99 percentiles.) Tj
+/F2 11 Tf 50 496 Td (6. API Design) Tj
+/F1 8.5 Tf 65 482 Td (Defining contracts, resource endpoints, request/response formats, error codes, and) Tj
+/F1 8.5 Tf 65 471 Td (rate limits for service communication.) Tj
+/F2 11 Tf 50 455 Td (7. REST) Tj
+/F1 8.5 Tf 65 441 Td (Stateless HTTP protocol utilizing standard verbs \(GET, POST, PUT, DELETE\) and JSON) Tj
+/F1 8.5 Tf 65 430 Td (resource representations.) Tj
+/F2 11 Tf 50 414 Td (8. Scalability) Tj
+/F1 8.5 Tf 65 400 Td (Ability of a system to handle increased load by adding hardware resources) Tj
+/F1 8.5 Tf 65 389 Td (horizontally \(more nodes\) or vertically \(bigger nodes\).) Tj
+/F2 11 Tf 50 373 Td (9. Load Balancing) Tj
+/F1 8.5 Tf 65 359 Td (Distributing incoming traffic across multiple servers \(Round Robin, Least) Tj
+/F1 8.5 Tf 65 348 Td (Connections, Consistent Hashing\) using L4/L7 load balancers.) Tj
+/F1 8 Tf 180 30 Td (Page 1 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 2072 >>
+stream
+BT
+/F2 13 Tf 50 745 Td (System Design Interview Questions - Continued) Tj
+/F2 11 Tf 50 723 Td (10. Caching) Tj
+/F1 8.5 Tf 65 709 Td (Temporary high-speed memory layer \(Redis, Memcached\) reducing database load and) Tj
+/F1 8.5 Tf 65 698 Td (providing sub-millisecond read access.) Tj
+/F2 11 Tf 50 682 Td (11. Fault Tolerance) Tj
+/F1 8.5 Tf 65 668 Td (Ability of a system to continue operating properly in the event of hardware or) Tj
+/F1 8.5 Tf 65 657 Td (software component failures.) Tj
+/F2 11 Tf 50 641 Td (12. High Availability \(HA\)) Tj
+/F1 8.5 Tf 65 627 Td (Redundant multi-region architectures with automated failover eliminating single) Tj
+/F1 8.5 Tf 65 616 Td (points of failure \(SPOFs\).) Tj
+/F2 11 Tf 50 600 Td (13. CAP Theorem) Tj
+/F1 8.5 Tf 65 586 Td (A distributed data store can guarantee at most two of three: Consistency,) Tj
+/F1 8.5 Tf 65 575 Td (Availability, and Partition Tolerance.) Tj
+/F2 11 Tf 50 559 Td (14. GraphQL) Tj
+/F1 8.5 Tf 65 545 Td (Query language allowing clients to request exactly the fields needed in a single) Tj
+/F1 8.5 Tf 65 534 Td (round-trip request, eliminating over/under-fetching.) Tj
+/F2 11 Tf 50 518 Td (15. gRPC) Tj
+/F1 8.5 Tf 65 504 Td (High-performance RPC framework built on HTTP/2 and binary Protocol Buffers for) Tj
+/F1 8.5 Tf 65 493 Td (ultra-fast internal microservice communication.) Tj
+/F2 11 Tf 50 477 Td (16. Sharding) Tj
+/F1 8.5 Tf 65 463 Td (Horizontal partitioning splitting large database tables across multiple) Tj
+/F1 8.5 Tf 65 452 Td (independent database servers based on a shard key.) Tj
+/F2 11 Tf 50 436 Td (17. Indexing) Tj
+/F1 8.5 Tf 65 422 Td (B-Tree, Hash, and GIN data structures accelerating search queries at the cost of) Tj
+/F1 8.5 Tf 65 411 Td (write amplification and disk overhead.) Tj
+/F2 11 Tf 50 395 Td (18. Leader Election) Tj
+/F1 8.5 Tf 65 381 Td (Consensus mechanisms \(Raft, Paxos, Zookeeper\) designating one primary coordinator) Tj
+/F1 8.5 Tf 65 370 Td (node among distributed replicas.) Tj
+/F1 8 Tf 180 30 Td (Page 2 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 7 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+9 0 obj
+<< /Length 2085 >>
+stream
+BT
+/F2 13 Tf 50 745 Td (System Design Interview Questions - Continued) Tj
+/F2 11 Tf 50 723 Td (19. Consensus) Tj
+/F1 8.5 Tf 65 709 Td (Algorithmic agreement among distributed nodes on state values despite node crashes) Tj
+/F1 8.5 Tf 65 698 Td (and network partitions.) Tj
+/F2 11 Tf 50 682 Td (20. Consistency Models) Tj
+/F1 8.5 Tf 65 668 Td (Spectrum ranging from Strict/Linearizable consistency to Sequential, Causal, and) Tj
+/F1 8.5 Tf 65 657 Td (Eventual consistency.) Tj
+/F2 11 Tf 50 641 Td (21. Event-Driven Architecture) Tj
+/F1 8.5 Tf 65 627 Td (Decoupled services reacting to state change events asynchronously rather than) Tj
+/F1 8.5 Tf 65 616 Td (direct synchronous RPC calls.) Tj
+/F2 11 Tf 50 600 Td (22. Message Queue) Tj
+/F1 8.5 Tf 65 586 Td (Point-to-point asynchronous buffers \(RabbitMQ, SQS\) guaranteeing message delivery) Tj
+/F1 8.5 Tf 65 575 Td (and worker load leveling.) Tj
+/F2 11 Tf 50 559 Td (23. Pub/Sub) Tj
+/F1 8.5 Tf 65 545 Td (One-to-many publish-subscribe messaging topology \(Kafka, Google Pub/Sub\)) Tj
+/F1 8.5 Tf 65 534 Td (broadcasting messages to multiple subscriber consumer groups.) Tj
+/F2 11 Tf 50 518 Td (24. Denormalization) Tj
+/F1 8.5 Tf 65 504 Td (Intentionally duplicating data across database tables to avoid expensive) Tj
+/F1 8.5 Tf 65 493 Td (relational JOIN operations on heavy read paths.) Tj
+/F2 11 Tf 50 477 Td (25. Secrets Management) Tj
+/F1 8.5 Tf 65 463 Td (Secure vault storage \(HashiCorp Vault, AWS Secrets Manager\) with encrypted) Tj
+/F1 8.5 Tf 65 452 Td (rotation for API keys, passwords, and TLS certificates.) Tj
+/F2 11 Tf 50 436 Td (26. Bulkhead Pattern) Tj
+/F1 8.5 Tf 65 422 Td (Isolating resources \(thread pools, memory, connection pools\) so that failures in) Tj
+/F1 8.5 Tf 65 411 Td (one service component do not crash others.) Tj
+/F2 11 Tf 50 395 Td (27. Retry Logic) Tj
+/F1 8.5 Tf 65 381 Td (Handling transient network and service glitches using exponential backoff combined) Tj
+/F1 8.5 Tf 65 370 Td (with randomized jitter.) Tj
+/F1 8 Tf 180 30 Td (Page 3 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 9 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+11 0 obj
+<< /Length 2103 >>
+stream
+BT
+/F2 13 Tf 50 745 Td (System Design Interview Questions - Continued) Tj
+/F2 11 Tf 50 723 Td (28. Timeout) Tj
+/F1 8.5 Tf 65 709 Td (Defensive deadline limits on network calls preventing hanging threads and) Tj
+/F1 8.5 Tf 65 698 Td (catastrophic thread pool starvation.) Tj
+/F2 11 Tf 50 682 Td (29. Feature Flags) Tj
+/F1 8.5 Tf 65 668 Td (Decoupling code deployment from feature release using dynamic configuration flags) Tj
+/F1 8.5 Tf 65 657 Td (without redeploying code.) Tj
+/F2 11 Tf 50 641 Td (30. ACID Transactions) Tj
+/F1 8.5 Tf 65 627 Td (Atomicity \(all-or-nothing\), Consistency \(rules valid\), Isolation \(concurrency) Tj
+/F1 8.5 Tf 65 616 Td (control\), Durability \(persisted to WAL\).) Tj
+/F2 11 Tf 50 600 Td (31. Blue-Green Deployment) Tj
+/F1 8.5 Tf 65 586 Td (Twin production environments with instant router switching for zero-downtime) Tj
+/F1 8.5 Tf 65 575 Td (releases and instantaneous rollbacks.) Tj
+/F2 11 Tf 50 559 Td (32. Canary Release) Tj
+/F1 8.5 Tf 65 545 Td (Gradual release routing a small percentage \(e.g. 5%\) of live traffic to the new) Tj
+/F1 8.5 Tf 65 534 Td (revision before 100% rollout.) Tj
+/F2 11 Tf 50 518 Td (33. Erasure Coding) Tj
+/F1 8.5 Tf 65 504 Td (Data protection math splitting data into K data chunks + M parity chunks, saving) Tj
+/F1 8.5 Tf 65 493 Td (50% storage overhead vs 3x replication.) Tj
+/F2 11 Tf 50 477 Td (34. Service Discovery) Tj
+/F1 8.5 Tf 65 463 Td (Dynamic service registry \(Consul, Eureka, K8s CoreDNS\) resolving dynamic IP) Tj
+/F1 8.5 Tf 65 452 Td (addresses and health of ephemeral containers.) Tj
+/F2 11 Tf 50 436 Td (35. Sync vs Async Communication) Tj
+/F1 8.5 Tf 65 422 Td (Blocking synchronous request-reply \(REST/gRPC\) vs non-blocking fire-and-forget) Tj
+/F1 8.5 Tf 65 411 Td (asynchronous messaging \(Kafka/SQS\).) Tj
+/F2 11 Tf 50 395 Td (36. Correlation ID) Tj
+/F1 8.5 Tf 65 381 Td (Unique tracing UUID passed in HTTP headers across microservice hops enabling) Tj
+/F1 8.5 Tf 65 370 Td (end-to-end distributed transaction tracing.) Tj
+/F1 8 Tf 180 30 Td (Page 4 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 11 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+13 0 obj
+<< /Length 2129 >>
+stream
+BT
+/F2 13 Tf 50 745 Td (System Design Interview Questions - Continued) Tj
+/F2 11 Tf 50 723 Td (37. Backend-for-Frontend \(BFF\)) Tj
+/F1 8.5 Tf 65 709 Td (Dedicated API gateway layer customized for specific client experiences \(Mobile) Tj
+/F1 8.5 Tf 65 698 Td (iOS, Android, Desktop Web\).) Tj
+/F2 11 Tf 50 682 Td (38. Connection Pooling) Tj
+/F1 8.5 Tf 65 668 Td (Maintaining a pool of active TCP database connections avoiding costly TCP 3-way) Tj
+/F1 8.5 Tf 65 657 Td (handshakes and TLS renegotiation.) Tj
+/F2 11 Tf 50 641 Td (39. Monitoring) Tj
+/F1 8.5 Tf 65 627 Td (Collecting time-series platform and application metrics \(Prometheus, Datadog\)) Tj
+/F1 8.5 Tf 65 616 Td (tracking RED \(Rate, Errors, Duration\) and USE.) Tj
+/F2 11 Tf 50 600 Td (40. Alerting) Tj
+/F1 8.5 Tf 65 586 Td (Rule-based notification triggers \(PagerDuty, Slack\) waking on-call engineers when) Tj
+/F1 8.5 Tf 65 575 Td (SLOs or error budgets are threatened.) Tj
+/F2 11 Tf 50 559 Td (41. Query Optimization) Tj
+/F1 8.5 Tf 65 545 Td (Rewriting SQL, eliminating N+1 queries, creating composite indexes, and analyzing) Tj
+/F1 8.5 Tf 65 534 Td (EXPLAIN ANALYZE execution plans.) Tj
+/F2 11 Tf 50 518 Td (42. WebSockets) Tj
+/F1 8.5 Tf 65 504 Td (Full-duplex persistent bidirectional TCP connection enabling real-time chat,) Tj
+/F1 8.5 Tf 65 493 Td (gaming, and collaborative editing.) Tj
+/F2 11 Tf 50 477 Td (43. Cache Stampede) Tj
+/F1 8.5 Tf 65 463 Td (Thundering herd problem where cache key expiry causes thousands of concurrent) Tj
+/F1 8.5 Tf 65 452 Td (requests to overwhelm the database. Solved via XFetch probabilistic early) Tj
+/F1 8.5 Tf 65 441 Td (recomputation.) Tj
+/F2 11 Tf 50 425 Td (44. MapReduce) Tj
+/F1 8.5 Tf 65 411 Td (Distributed data processing model: Map \(filtering & sorting\) and Reduce) Tj
+/F1 8.5 Tf 65 400 Td (\(aggregating\) across thousands of commodity nodes.) Tj
+/F2 11 Tf 50 384 Td (45. WebRTC) Tj
+/F1 8.5 Tf 65 370 Td (Peer-to-peer real-time audio, video, and data streaming with STUN/TURN NAT) Tj
+/F1 8.5 Tf 65 359 Td (traversal.) Tj
+/F1 8 Tf 180 30 Td (Page 5 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 13 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+15 0 obj
+<< /Length 1310 >>
+stream
+BT
+/F2 13 Tf 50 745 Td (System Design Interview Questions - Continued) Tj
+/F2 11 Tf 50 723 Td (46. Deserialization Safety) Tj
+/F1 8.5 Tf 65 709 Td (Protecting against remote code execution \(RCE\) vulnerabilities by strictly) Tj
+/F1 8.5 Tf 65 698 Td (validating incoming JSON/binary object graphs.) Tj
+/F2 11 Tf 50 682 Td (47. Strangler Fig Pattern) Tj
+/F1 8.5 Tf 65 668 Td (Incrementally replacing legacy monolithic systems with microservices around the) Tj
+/F1 8.5 Tf 65 657 Td (edges until the old monolith is decommissioned.) Tj
+/F2 11 Tf 50 641 Td (48. LSM Trees) Tj
+/F1 8.5 Tf 65 627 Td (Log-Structured Merge-Trees: append-only MemTable in RAM + immutable SSTables on) Tj
+/F1 8.5 Tf 65 616 Td (disk, optimizing write-heavy storage engines \(RocksDB, Cassandra\).) Tj
+/F2 11 Tf 50 600 Td (49. Batch Processing) Tj
+/F1 8.5 Tf 65 586 Td (Periodic high-throughput data processing over large static datasets \(Apache Spark,) Tj
+/F1 8.5 Tf 65 575 Td (Hadoop\) prioritizing throughput over latency.) Tj
+/F2 11 Tf 50 559 Td (50. Stream Processing) Tj
+/F1 8.5 Tf 65 545 Td (Continuous low-latency processing of unbounded event streams \(Apache Flink, Kafka) Tj
+/F1 8.5 Tf 65 534 Td (Streams\) with event-time windowing.) Tj
+/F1 8 Tf 180 30 Td (Page 6 of 6 - The Universal Tech Knowledge Base (Jay Prakash)) Tj
+ET
+
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 15 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000149 00000 n 
+0000000246 00000 n 
+0000000348 00000 n 
+0000002622 00000 n 
+0000002758 00000 n 
+0000004882 00000 n 
+0000005018 00000 n 
+0000007155 00000 n 
+0000007292 00000 n 
+0000009448 00000 n 
+0000009586 00000 n 
+0000011768 00000 n 
+0000011906 00000 n 
+0000013269 00000 n 
+trailer
+<< /Size 17 /Root 1 0 R >>
+startxref
+13407
+%%EOF

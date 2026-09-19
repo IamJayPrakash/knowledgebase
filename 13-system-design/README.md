@@ -6,9 +6,11 @@
 
 ## 🗺️ Master Curriculum & Module Contents
 
-### 1. 🌟 The 50 System Design Concepts Playbook
+### 1. 🌟 The 50 System Design Concepts Playbook & PDF Reference
 * [**`00_master_50_system_design_concepts.md`**](./00_master_50_system_design_concepts.md)
   - Comprehensive guide covering all 50 fundamental concepts itemized: Database, SQL vs NoSQL, Availability, Reliability, Latency, API Design, REST, Scalability, Load Balancing, Caching, Fault Tolerance, High Availability, CAP Theorem, GraphQL, gRPC, Sharding, Indexing, Leader Election, Consensus, Consistency Models, Event-Driven, Message Queue, Pub/Sub, Denormalization, Secrets Management, Bulkhead, Retry Logic, Timeout, Feature Flags, ACID, Blue-Green Deployment, Canary Release, Erasure Coding, Service Discovery, Sync vs Async, Correlation ID, BFF, Connection Pooling, Monitoring, Alerting, Query Optimization, WebSockets, Cache Stampede, MapReduce, WebRTC, Deserialization, Strangler Pattern, LSM Trees, Batch Processing, and Stream Processing.
+* [**`System_Design_Interview_Questions (1).pdf`**](./System_Design_Interview_Questions%20%281%29.pdf)
+  - 📕 **Printable & Offline PDF Reference**: Complete 50 System Design Concepts & Interview Questions document. Viewable directly in the web portal or downloadable offline.
 
 ### 2. Distributed Systems Foundations
 * [**`07_distributed_systems_primitives_consensus_cap_sharding.md`**](./07_distributed_systems_primitives_consensus_cap_sharding.md)

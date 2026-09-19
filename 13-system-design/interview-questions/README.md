@@ -14,8 +14,11 @@
 ├── 04_protocols_resilience_and_sre_patterns_qna.md         ──► Questions 61 to 80
 ├── 05_classic_hld_architectures_and_case_studies_qna.md    ──► Questions 81 to 100
 ├── system_design_interview_framework.md                   ──► 45-Minute Playbook & Heuristics
-└── top_system_design_interview_questions_catalog.md        ──► Quick Catalog & Cheat Sheet
+├── top_system_design_interview_questions_catalog.md        ──► Quick Catalog & Cheat Sheet
+└── [System_Design_Interview_Questions (1).pdf](../System_Design_Interview_Questions%20%281%29.pdf) ──► 📕 Printable Master 50-Concept PDF Guide
 ```
+
+> 📕 **Offline / PDF Version Available**: You can also read, view, or download the companion document: [**`System_Design_Interview_Questions (1).pdf`**](../System_Design_Interview_Questions%20%281%29.pdf).
 
 ---
 

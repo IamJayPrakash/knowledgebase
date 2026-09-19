@@ -1,6 +1,16 @@
 // Auto-generated KnowledgeBase Document Manifest
 window.DOCS_MANIFEST = [
   {
+    "path": "README.md",
+    "title": "🧠 The Universal Tech & Senior Interview Knowledge Base",
+    "track": "Root"
+  },
+  {
+    "path": "01-web-core-and-performance/README.md",
+    "title": "⚡ 01 - Web Core & Performance Engineering",
+    "track": "01-web-core-and-performance"
+  },
+  {
     "path": "01-web-core-and-performance/frontend-performance-optimization/01_critical_rendering_path_and_paint.md",
     "title": "Critical Rendering Path (CRP), CSSOM, and Render-Tree Construction",
     "track": "01-web-core-and-performance"
@@ -52,12 +62,7 @@ window.DOCS_MANIFEST = [
   },
   {
     "path": "01-web-core-and-performance/interview-questions/README.md",
-    "title": "\u26a1 Web Performance & Core Web Vitals Senior & Lead Master Interview Question Bank (60 Questions)",
-    "track": "01-web-core-and-performance"
-  },
-  {
-    "path": "01-web-core-and-performance/README.md",
-    "title": "\u26a1 01 - Web Core & Performance Engineering",
+    "title": "⚡ Web Performance & Core Web Vitals Senior & Lead Master Interview Question Bank (60 Questions)",
     "track": "01-web-core-and-performance"
   },
   {
@@ -181,6 +186,11 @@ window.DOCS_MANIFEST = [
     "track": "02-javascript"
   },
   {
+    "path": "02-javascript/README.md",
+    "title": "🟨 JavaScript Master Curriculum & Index",
+    "track": "02-javascript"
+  },
+  {
     "path": "02-javascript/interview-questions/01_js_foundations_types_and_operators_qna.md",
     "title": "JavaScript Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "02-javascript"
@@ -203,6 +213,11 @@ window.DOCS_MANIFEST = [
   {
     "path": "02-javascript/interview-questions/05_js_v8_memory_dom_and_modern_es_qna.md",
     "title": "JavaScript Master Interview Bank: Part 5 (Q81 - Q100)",
+    "track": "02-javascript"
+  },
+  {
+    "path": "02-javascript/interview-questions/README.md",
+    "title": "🟨 JavaScript Senior & Lead Master Interview Question Bank (100 Questions)",
     "track": "02-javascript"
   },
   {
@@ -241,11 +256,6 @@ window.DOCS_MANIFEST = [
     "track": "02-javascript"
   },
   {
-    "path": "02-javascript/interview-questions/README.md",
-    "title": "\ud83d\udfe8 JavaScript Senior & Lead Master Interview Question Bank (100 Questions)",
-    "track": "02-javascript"
-  },
-  {
     "path": "02-javascript/interview-questions/scenario_memory_leak_debugging.md",
     "title": "Scenario-Based: Debugging JavaScript Memory Leaks in Production",
     "track": "02-javascript"
@@ -253,11 +263,6 @@ window.DOCS_MANIFEST = [
   {
     "path": "02-javascript/interview-questions/short_questions_basics.md",
     "title": "JavaScript Core Interview Questions (Quick Recall & High-Frequency)",
-    "track": "02-javascript"
-  },
-  {
-    "path": "02-javascript/README.md",
-    "title": "\ud83d\udfe8 JavaScript Master Curriculum & Index",
     "track": "02-javascript"
   },
   {
@@ -316,6 +321,11 @@ window.DOCS_MANIFEST = [
     "track": "03-typescript"
   },
   {
+    "path": "03-typescript/README.md",
+    "title": "🟦 TypeScript Master Curriculum & Index",
+    "track": "03-typescript"
+  },
+  {
     "path": "03-typescript/interview-questions/01_typescript_types_generics_and_narrowing_qna.md",
     "title": "TypeScript Foundations: Types, Generics, and Narrowing (Q1 - Q25)",
     "track": "03-typescript"
@@ -326,23 +336,18 @@ window.DOCS_MANIFEST = [
     "track": "03-typescript"
   },
   {
+    "path": "03-typescript/interview-questions/README.md",
+    "title": "🟦 TypeScript Interview Questions & Problem Index",
+    "track": "03-typescript"
+  },
+  {
     "path": "03-typescript/interview-questions/coding_custom_utility_types.md",
     "title": "Machine Coding: Hard TypeScript Custom Utility Types",
     "track": "03-typescript"
   },
   {
-    "path": "03-typescript/interview-questions/README.md",
-    "title": "\ud83d\udfe6 TypeScript Interview Questions & Problem Index",
-    "track": "03-typescript"
-  },
-  {
     "path": "03-typescript/interview-questions/top_typescript_interview_questions.md",
     "title": "Top TypeScript Senior Interview Questions (Architecture & Theory)",
-    "track": "03-typescript"
-  },
-  {
-    "path": "03-typescript/README.md",
-    "title": "\ud83d\udfe6 TypeScript Master Curriculum & Index",
     "track": "03-typescript"
   },
   {
@@ -396,6 +401,11 @@ window.DOCS_MANIFEST = [
     "track": "04-react"
   },
   {
+    "path": "04-react/README.md",
+    "title": "⚛️ React Master Curriculum & Index",
+    "track": "04-react"
+  },
+  {
     "path": "04-react/interview-questions/01_react_foundations_vdom_and_jsx_qna.md",
     "title": "React Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "04-react"
@@ -421,6 +431,11 @@ window.DOCS_MANIFEST = [
     "track": "04-react"
   },
   {
+    "path": "04-react/interview-questions/README.md",
+    "title": "⚛️ React Senior & Lead Master Interview Question Bank (100 Questions)",
+    "track": "04-react"
+  },
+  {
     "path": "04-react/interview-questions/machine_coding_autocomplete_search.md",
     "title": "Machine Coding: High-Performance Autocomplete Search with Debounce & Cache",
     "track": "04-react"
@@ -431,18 +446,8 @@ window.DOCS_MANIFEST = [
     "track": "04-react"
   },
   {
-    "path": "04-react/interview-questions/README.md",
-    "title": "\u269b\ufe0f React Senior & Lead Master Interview Question Bank (100 Questions)",
-    "track": "04-react"
-  },
-  {
     "path": "04-react/interview-questions/top_react_interview_questions.md",
     "title": "Top Senior React Interview Questions (Architecture & Diagnostics)",
-    "track": "04-react"
-  },
-  {
-    "path": "04-react/README.md",
-    "title": "\u269b\ufe0f React Master Curriculum & Index",
     "track": "04-react"
   },
   {
@@ -486,6 +491,11 @@ window.DOCS_MANIFEST = [
     "track": "05-angular-21"
   },
   {
+    "path": "05-angular-21/README.md",
+    "title": "🅰️ 05 - Modern Angular 21 Architecture",
+    "track": "05-angular-21"
+  },
+  {
     "path": "05-angular-21/interview-questions/01_angular_signals_zoneless_and_reactivity_qna.md",
     "title": "Angular 21 Core: Signals, Zoneless, and Modern Reactivity (Q1 - Q25)",
     "track": "05-angular-21"
@@ -496,18 +506,13 @@ window.DOCS_MANIFEST = [
     "track": "05-angular-21"
   },
   {
+    "path": "05-angular-21/interview-questions/README.md",
+    "title": "🅰️ Angular 21 Master Interview Questions & Architectural Index",
+    "track": "05-angular-21"
+  },
+  {
     "path": "05-angular-21/interview-questions/angular21_top_interview_questions.md",
     "title": "Angular 21 Interview Master Guide: Zoneless, Signals, @defer & Modern Architecture",
-    "track": "05-angular-21"
-  },
-  {
-    "path": "05-angular-21/interview-questions/README.md",
-    "title": "\ud83c\udd70\ufe0f Angular 21 Master Interview Questions & Architectural Index",
-    "track": "05-angular-21"
-  },
-  {
-    "path": "05-angular-21/README.md",
-    "title": "\ud83c\udd70\ufe0f 05 - Modern Angular 21 Architecture",
     "track": "05-angular-21"
   },
   {
@@ -541,6 +546,11 @@ window.DOCS_MANIFEST = [
     "track": "06-nextjs"
   },
   {
+    "path": "06-nextjs/README.md",
+    "title": "▲ 06 - Next.js 15 Fullstack Engineering",
+    "track": "06-nextjs"
+  },
+  {
     "path": "06-nextjs/interview-questions/01_nextjs_app_router_rsc_and_actions_qna.md",
     "title": "Next.js App Router: RSC, Server Actions, and Routing (Q1 - Q25)",
     "track": "06-nextjs"
@@ -551,18 +561,13 @@ window.DOCS_MANIFEST = [
     "track": "06-nextjs"
   },
   {
+    "path": "06-nextjs/interview-questions/README.md",
+    "title": "🖤 Next.js Master Interview Questions & Architectural Index",
+    "track": "06-nextjs"
+  },
+  {
     "path": "06-nextjs/interview-questions/nextjs_top_interview_questions.md",
     "title": "Top Next.js Senior Interview Questions (App Router & Production Architecture)",
-    "track": "06-nextjs"
-  },
-  {
-    "path": "06-nextjs/interview-questions/README.md",
-    "title": "\ud83d\udda4 Next.js Master Interview Questions & Architectural Index",
-    "track": "06-nextjs"
-  },
-  {
-    "path": "06-nextjs/README.md",
-    "title": "\u25b2 06 - Next.js 15 Fullstack Engineering",
     "track": "06-nextjs"
   },
   {
@@ -588,6 +593,11 @@ window.DOCS_MANIFEST = [
   {
     "path": "07-backend-node/04_memory_leaks_and_profiling.md",
     "title": "Diagnosing Production Node.js Memory Leaks and CPU Spikes",
+    "track": "07-backend-node"
+  },
+  {
+    "path": "07-backend-node/README.md",
+    "title": "🟢 Node.js Master Curriculum & Index",
     "track": "07-backend-node"
   },
   {
@@ -621,23 +631,18 @@ window.DOCS_MANIFEST = [
     "track": "07-backend-node"
   },
   {
+    "path": "07-backend-node/interview-questions/README.md",
+    "title": "🟢 Node.js Interview Questions & System Coding Index",
+    "track": "07-backend-node"
+  },
+  {
     "path": "07-backend-node/interview-questions/coding_custom_readable_writable_stream.md",
     "title": "Machine Coding: Custom Transform Stream (CSV to JSON Parser)",
     "track": "07-backend-node"
   },
   {
-    "path": "07-backend-node/interview-questions/README.md",
-    "title": "\ud83d\udfe2 Node.js Interview Questions & System Coding Index",
-    "track": "07-backend-node"
-  },
-  {
     "path": "07-backend-node/interview-questions/top_node_interview_questions.md",
     "title": "Top Node.js Senior Interview Questions (Runtime Internals)",
-    "track": "07-backend-node"
-  },
-  {
-    "path": "07-backend-node/README.md",
-    "title": "\ud83d\udfe2 Node.js Master Curriculum & Index",
     "track": "07-backend-node"
   },
   {
@@ -701,6 +706,11 @@ window.DOCS_MANIFEST = [
     "track": "08-backend-python-fastapi"
   },
   {
+    "path": "08-backend-python-fastapi/README.md",
+    "title": "🐍 Python Core & FastAPI Enterprise Master Curriculum & Index",
+    "track": "08-backend-python-fastapi"
+  },
+  {
     "path": "08-backend-python-fastapi/interview-questions/01_python_core_mutability_memory_and_types_qna.md",
     "title": "Python & FastAPI Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "08-backend-python-fastapi"
@@ -726,23 +736,18 @@ window.DOCS_MANIFEST = [
     "track": "08-backend-python-fastapi"
   },
   {
+    "path": "08-backend-python-fastapi/interview-questions/README.md",
+    "title": "🐍 Python Core & FastAPI Senior & Lead Master Interview Question Bank (100 Questions)",
+    "track": "08-backend-python-fastapi"
+  },
+  {
     "path": "08-backend-python-fastapi/interview-questions/coding_rate_limiting_middleware.md",
     "title": "Machine Coding: Distributed Sliding Window Rate Limiting Middleware in FastAPI",
     "track": "08-backend-python-fastapi"
   },
   {
-    "path": "08-backend-python-fastapi/interview-questions/README.md",
-    "title": "\ud83d\udc0d Python Core & FastAPI Senior & Lead Master Interview Question Bank (100 Questions)",
-    "track": "08-backend-python-fastapi"
-  },
-  {
     "path": "08-backend-python-fastapi/interview-questions/top_fastapi_interview_questions.md",
     "title": "Top 20+ Senior FastAPI & Async Python Interview Questions & Answers",
-    "track": "08-backend-python-fastapi"
-  },
-  {
-    "path": "08-backend-python-fastapi/README.md",
-    "title": "\ud83d\udc0d Python Core & FastAPI Enterprise Master Curriculum & Index",
     "track": "08-backend-python-fastapi"
   },
   {
@@ -811,6 +816,11 @@ window.DOCS_MANIFEST = [
     "track": "09-backend-java-springboot"
   },
   {
+    "path": "09-backend-java-springboot/README.md",
+    "title": "☕ 09 - Core Java 21 & Spring Boot 3 Enterprise Master Curriculum",
+    "track": "09-backend-java-springboot"
+  },
+  {
     "path": "09-backend-java-springboot/interview-questions/01_java_core_foundations_jvm_and_memory_qna.md",
     "title": "Java 21 & Spring Boot Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "09-backend-java-springboot"
@@ -837,7 +847,7 @@ window.DOCS_MANIFEST = [
   },
   {
     "path": "09-backend-java-springboot/interview-questions/README.md",
-    "title": "\u2615 Java 21 & Spring Boot 3 Senior & Lead Master Interview Question Bank (100 Questions)",
+    "title": "☕ Java 21 & Spring Boot 3 Senior & Lead Master Interview Question Bank (100 Questions)",
     "track": "09-backend-java-springboot"
   },
   {
@@ -846,18 +856,13 @@ window.DOCS_MANIFEST = [
     "track": "09-backend-java-springboot"
   },
   {
-    "path": "09-backend-java-springboot/README.md",
-    "title": "\u2615 09 - Core Java 21 & Spring Boot 3 Enterprise Master Curriculum",
-    "track": "09-backend-java-springboot"
+    "path": "10-backend-ruby-and-stacks/README.md",
+    "title": "💎 10 - Ruby on Rails & Full-Stack Architectures",
+    "track": "10-backend-ruby-and-stacks"
   },
   {
     "path": "10-backend-ruby-and-stacks/mean-vs-mern/01_mean_vs_mern_stack_architecture.md",
     "title": "MERN Stack vs MEAN Stack: Architecture, Trade-Offs & Selection Guide",
-    "track": "10-backend-ruby-and-stacks"
-  },
-  {
-    "path": "10-backend-ruby-and-stacks/README.md",
-    "title": "\ud83d\udc8e 10 - Ruby on Rails & Full-Stack Architectures",
     "track": "10-backend-ruby-and-stacks"
   },
   {
@@ -869,6 +874,11 @@ window.DOCS_MANIFEST = [
     "path": "10-backend-ruby-and-stacks/ruby-on-rails/02_rails_api_and_sidekiq_jobs.md",
     "title": "Ruby on Rails API Mode, ActiveJob, and Sidekiq Concurrency",
     "track": "10-backend-ruby-and-stacks"
+  },
+  {
+    "path": "11-databases-and-caching/README.md",
+    "title": "🗄️ 11 - Databases, Relational Storage & Caching",
+    "track": "11-databases-and-caching"
   },
   {
     "path": "11-databases-and-caching/interview-questions/01_sql_postgresql_internals_and_optimization_qna.md",
@@ -886,13 +896,13 @@ window.DOCS_MANIFEST = [
     "track": "11-databases-and-caching"
   },
   {
-    "path": "11-databases-and-caching/interview-questions/database_indexing_and_caching_questions.md",
-    "title": "Top Database & Caching Senior Interview Questions",
+    "path": "11-databases-and-caching/interview-questions/README.md",
+    "title": "🗄️ Databases & Caching Senior & Staff Master Interview Question Bank (60 Questions)",
     "track": "11-databases-and-caching"
   },
   {
-    "path": "11-databases-and-caching/interview-questions/README.md",
-    "title": "\ud83d\uddc4\ufe0f Databases & Caching Senior & Staff Master Interview Question Bank (60 Questions)",
+    "path": "11-databases-and-caching/interview-questions/database_indexing_and_caching_questions.md",
+    "title": "Top Database & Caching Senior Interview Questions",
     "track": "11-databases-and-caching"
   },
   {
@@ -903,11 +913,6 @@ window.DOCS_MANIFEST = [
   {
     "path": "11-databases-and-caching/nosql-mongodb/02_mongodb_aggregation_pipeline_mastery.md",
     "title": "MongoDB Aggregation Pipeline: Multi-Stage Document Processing",
-    "track": "11-databases-and-caching"
-  },
-  {
-    "path": "11-databases-and-caching/README.md",
-    "title": "\ud83d\uddc4\ufe0f 11 - Databases, Relational Storage & Caching",
     "track": "11-databases-and-caching"
   },
   {
@@ -1021,33 +1026,43 @@ window.DOCS_MANIFEST = [
     "track": "12-ai-and-genai"
   },
   {
+    "path": "12-ai-and-genai/README.md",
+    "title": "🤖 12 - AI & GenAI Systems Master Curriculum & Index",
+    "track": "12-ai-and-genai"
+  },
+  {
     "path": "12-ai-and-genai/interview-questions/01_foundations_and_transformers_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 1 \u2014 Foundations, Transformers & Sampling (Q1 - Q20)",
+    "title": "AI & GenAI Interview Questions: Part 1 — Foundations, Transformers & Sampling (Q1 - Q20)",
     "track": "12-ai-and-genai"
   },
   {
     "path": "12-ai-and-genai/interview-questions/02_embeddings_and_vectordb_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 2 \u2014 Embeddings & Vector Databases (Q21 - Q40)",
+    "title": "AI & GenAI Interview Questions: Part 2 — Embeddings & Vector Databases (Q21 - Q40)",
     "track": "12-ai-and-genai"
   },
   {
     "path": "12-ai-and-genai/interview-questions/03_rag_and_retrieval_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 3 \u2014 RAG & Retrieval Pipelines (Q41 - Q60)",
+    "title": "AI & GenAI Interview Questions: Part 3 — RAG & Retrieval Pipelines (Q41 - Q60)",
     "track": "12-ai-and-genai"
   },
   {
     "path": "12-ai-and-genai/interview-questions/04_langchain_langflow_langgraph_agents_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 4 \u2014 LangChain, LangFlow, LangGraph & Agents (Q61 - Q80)",
+    "title": "AI & GenAI Interview Questions: Part 4 — LangChain, LangFlow, LangGraph & Agents (Q61 - Q80)",
     "track": "12-ai-and-genai"
   },
   {
     "path": "12-ai-and-genai/interview-questions/05_finetuning_serving_and_ops_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 5 \u2014 Fine-Tuning, Serving & Production Ops (Q81 - Q100)",
+    "title": "AI & GenAI Interview Questions: Part 5 — Fine-Tuning, Serving & Production Ops (Q81 - Q100)",
     "track": "12-ai-and-genai"
   },
   {
     "path": "12-ai-and-genai/interview-questions/06_scenario_based_system_design_ai_qna.md",
-    "title": "AI & GenAI Interview Questions: Part 6 \u2014 Scenario-Based AI System Design (Q101 - Q110)",
+    "title": "AI & GenAI Interview Questions: Part 6 — Scenario-Based AI System Design (Q101 - Q110)",
+    "track": "12-ai-and-genai"
+  },
+  {
+    "path": "12-ai-and-genai/interview-questions/README.md",
+    "title": "🤖 Master 110 GenAI & LLM Interview Questions Catalog & Roadmap",
     "track": "12-ai-and-genai"
   },
   {
@@ -1056,18 +1071,8 @@ window.DOCS_MANIFEST = [
     "track": "12-ai-and-genai"
   },
   {
-    "path": "12-ai-and-genai/interview-questions/README.md",
-    "title": "\ud83e\udd16 Master 110 GenAI & LLM Interview Questions Catalog & Roadmap",
-    "track": "12-ai-and-genai"
-  },
-  {
     "path": "12-ai-and-genai/interview-questions/top_ai_genai_interview_questions.md",
     "title": "Top AI & GenAI Senior Interview Questions (Production Systems)",
-    "track": "12-ai-and-genai"
-  },
-  {
-    "path": "12-ai-and-genai/README.md",
-    "title": "\ud83e\udd16 12 - AI & GenAI Systems Master Curriculum & Index",
     "track": "12-ai-and-genai"
   },
   {
@@ -1131,6 +1136,17 @@ window.DOCS_MANIFEST = [
     "track": "13-system-design"
   },
   {
+    "path": "13-system-design/README.md",
+    "title": "🏗️ 13 - System Design (High-Level & Low-Level Architecture)",
+    "track": "13-system-design"
+  },
+  {
+    "path": "13-system-design/System_Design_Interview_Questions (1).pdf",
+    "title": "📑 [PDF Document] System Design 50 Concepts & Interview Questions",
+    "track": "13-system-design",
+    "type": "pdf"
+  },
+  {
     "path": "13-system-design/interview-questions/01_system_design_fundamentals_scale_and_storage_qna.md",
     "title": "System Design Master Interview Bank: Part 1 (Q1 - Q20)",
     "track": "13-system-design"
@@ -1157,7 +1173,7 @@ window.DOCS_MANIFEST = [
   },
   {
     "path": "13-system-design/interview-questions/README.md",
-    "title": "\ud83c\udfd7\ufe0f System Design Senior & Staff Master Interview Question Bank (100 Questions)",
+    "title": "🏗️ System Design Senior & Staff Master Interview Question Bank (100 Questions)",
     "track": "13-system-design"
   },
   {
@@ -1171,383 +1187,388 @@ window.DOCS_MANIFEST = [
     "track": "13-system-design"
   },
   {
-    "path": "13-system-design/README.md",
-    "title": "\ud83c\udfd7\ufe0f 13 - System Design (High-Level & Low-Level Architecture)",
-    "track": "13-system-design"
-  },
-  {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/01_two_sum.md",
-    "title": "01. Two Sum (LeetCode 1) \u2014 Comprehensive Deep Dive",
+    "title": "01. Two Sum (LeetCode 1) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/02_contains_duplicate.md",
-    "title": "02. Contains Duplicate (LeetCode 217) \u2014 Comprehensive Deep Dive",
+    "title": "02. Contains Duplicate (LeetCode 217) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/03_valid_anagram.md",
-    "title": "03. Valid Anagram (LeetCode 242) \u2014 Comprehensive Deep Dive",
+    "title": "03. Valid Anagram (LeetCode 242) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/04_group_anagrams.md",
-    "title": "04. Group Anagrams (LeetCode 49) \u2014 Medium",
+    "title": "04. Group Anagrams (LeetCode 49) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/05_top_k_frequent_elements.md",
-    "title": "05. Top K Frequent Elements (LeetCode 347) \u2014 Medium",
+    "title": "05. Top K Frequent Elements (LeetCode 347) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/06_product_of_array_except_self.md",
-    "title": "06. Product of Array Except Self (LeetCode 238) \u2014 Medium",
+    "title": "06. Product of Array Except Self (LeetCode 238) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/07_longest_consecutive_sequence.md",
-    "title": "07. Longest Consecutive Sequence (LeetCode 128) \u2014 Medium",
+    "title": "07. Longest Consecutive Sequence (LeetCode 128) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/01-arrays-and-hashing/08_encode_and_decode_strings.md",
-    "title": "08. Encode and Decode Strings (LeetCode 271) \u2014 Medium",
+    "title": "08. Encode and Decode Strings (LeetCode 271) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/02-two-pointers/09_valid_palindrome.md",
-    "title": "09. Valid Palindrome (LeetCode 125) \u2014 Comprehensive Deep Dive",
+    "title": "09. Valid Palindrome (LeetCode 125) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/02-two-pointers/10_3sum.md",
-    "title": "10. 3Sum (LeetCode 15) \u2014 Medium",
+    "title": "10. 3Sum (LeetCode 15) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/02-two-pointers/11_container_with_most_water.md",
-    "title": "11. Container With Most Water (LeetCode 11) \u2014 Medium",
+    "title": "11. Container With Most Water (LeetCode 11) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/03-sliding-window/12_best_time_to_buy_and_sell_stock.md",
-    "title": "12. Best Time to Buy and Sell Stock (LeetCode 121) \u2014 Comprehensive Deep Dive",
+    "title": "12. Best Time to Buy and Sell Stock (LeetCode 121) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/03-sliding-window/13_longest_substring_without_repeating_characters.md",
-    "title": "13. Longest Substring Without Repeating Characters (LeetCode 3) \u2014 Medium",
+    "title": "13. Longest Substring Without Repeating Characters (LeetCode 3) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/03-sliding-window/14_longest_repeating_character_replacement.md",
-    "title": "14. Longest Repeating Character Replacement (LeetCode 424) \u2014 Medium",
+    "title": "14. Longest Repeating Character Replacement (LeetCode 424) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/03-sliding-window/15_minimum_window_substring.md",
-    "title": "15. Minimum Window Substring (LeetCode 76) \u2014 Hard",
+    "title": "15. Minimum Window Substring (LeetCode 76) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/04-stack/16_valid_parentheses.md",
-    "title": "16. Valid Parentheses (LeetCode 20) \u2014 Comprehensive Deep Dive",
+    "title": "16. Valid Parentheses (LeetCode 20) — Comprehensive Deep Dive",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/05-binary-search/17_find_minimum_in_rotated_sorted_array.md",
-    "title": "17. Find Minimum in Rotated Sorted Array (LeetCode 153) \u2014 Medium",
+    "title": "17. Find Minimum in Rotated Sorted Array (LeetCode 153) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/05-binary-search/18_search_in_rotated_sorted_array.md",
-    "title": "18. Search in Rotated Sorted Array (LeetCode 33) \u2014 Medium",
+    "title": "18. Search in Rotated Sorted Array (LeetCode 33) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/19_reverse_linked_list.md",
-    "title": "19. Reverse Linked List (LeetCode 206) \u2014 Easy",
+    "title": "19. Reverse Linked List (LeetCode 206) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/20_merge_two_sorted_lists.md",
-    "title": "20. Merge Two Sorted Lists (LeetCode 21) \u2014 Easy",
+    "title": "20. Merge Two Sorted Lists (LeetCode 21) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/21_reorder_list.md",
-    "title": "21. Reorder List (LeetCode 143) \u2014 Medium",
+    "title": "21. Reorder List (LeetCode 143) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/22_remove_nth_node_from_end_of_list.md",
-    "title": "22. Remove Nth Node From End of List (LeetCode 19) \u2014 Medium",
+    "title": "22. Remove Nth Node From End of List (LeetCode 19) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/23_linked_list_cycle.md",
-    "title": "23. Linked List Cycle (LeetCode 141) \u2014 Easy",
+    "title": "23. Linked List Cycle (LeetCode 141) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/06-linked-list/24_merge_k_sorted_lists.md",
-    "title": "24. Merge k Sorted Lists (LeetCode 23) \u2014 Hard",
+    "title": "24. Merge k Sorted Lists (LeetCode 23) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/25_invert_binary_tree.md",
-    "title": "25. Invert Binary Tree (LeetCode 226) \u2014 Easy",
+    "title": "25. Invert Binary Tree (LeetCode 226) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/26_maximum_depth_of_binary_tree.md",
-    "title": "26. Maximum Depth of Binary Tree (LeetCode 104) \u2014 Easy",
+    "title": "26. Maximum Depth of Binary Tree (LeetCode 104) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/27_same_tree.md",
-    "title": "27. Same Tree (LeetCode 100) \u2014 Easy",
+    "title": "27. Same Tree (LeetCode 100) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/28_subtree_of_another_tree.md",
-    "title": "28. Subtree of Another Tree (LeetCode 572) \u2014 Easy",
+    "title": "28. Subtree of Another Tree (LeetCode 572) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/29_lowest_common_ancestor_of_a_bst.md",
-    "title": "29. Lowest Common Ancestor of a BST (LeetCode 235) \u2014 Medium",
+    "title": "29. Lowest Common Ancestor of a BST (LeetCode 235) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/30_binary_tree_level_order_traversal.md",
-    "title": "30. Binary Tree Level Order Traversal (LeetCode 102) \u2014 Medium",
+    "title": "30. Binary Tree Level Order Traversal (LeetCode 102) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/31_validate_binary_search_tree.md",
-    "title": "31. Validate Binary Search Tree (LeetCode 98) \u2014 Medium",
+    "title": "31. Validate Binary Search Tree (LeetCode 98) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/32_kth_smallest_element_in_a_bst.md",
-    "title": "32. Kth Smallest Element in a BST (LeetCode 230) \u2014 Medium",
+    "title": "32. Kth Smallest Element in a BST (LeetCode 230) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/33_construct_binary_tree_from_preorder_and_inorder_traversal.md",
-    "title": "33. Construct Binary Tree from Preorder and Inorder Traversal (LeetCode 105) \u2014 Medium",
+    "title": "33. Construct Binary Tree from Preorder and Inorder Traversal (LeetCode 105) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/34_binary_tree_maximum_path_sum.md",
-    "title": "34. Binary Tree Maximum Path Sum (LeetCode 124) \u2014 Hard",
+    "title": "34. Binary Tree Maximum Path Sum (LeetCode 124) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/07-trees/35_serialize_and_deserialize_binary_tree.md",
-    "title": "35. Serialize and Deserialize Binary Tree (LeetCode 297) \u2014 Hard",
+    "title": "35. Serialize and Deserialize Binary Tree (LeetCode 297) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/08-tries/36_implement_trie_prefix_tree.md",
-    "title": "36. Implement Trie (Prefix Tree) (LeetCode 208) \u2014 Medium",
+    "title": "36. Implement Trie (Prefix Tree) (LeetCode 208) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/08-tries/37_design_add_and_search_words_data_structure.md",
-    "title": "37. Design Add and Search Words Data Structure (LeetCode 211) \u2014 Medium",
+    "title": "37. Design Add and Search Words Data Structure (LeetCode 211) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/08-tries/38_word_search_ii.md",
-    "title": "38. Word Search II (LeetCode 212) \u2014 Hard",
+    "title": "38. Word Search II (LeetCode 212) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/09-heap-priority-queue/39_merge_k_sorted_lists_heap.md",
-    "title": "39. Merge k Sorted Lists (Heap) (LeetCode 23) \u2014 Hard",
+    "title": "39. Merge k Sorted Lists (Heap) (LeetCode 23) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/09-heap-priority-queue/40_top_k_frequent_elements_heap.md",
-    "title": "40. Top K Frequent Elements (Heap) (LeetCode 347) \u2014 Medium",
+    "title": "40. Top K Frequent Elements (Heap) (LeetCode 347) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/09-heap-priority-queue/41_find_median_from_data_stream.md",
-    "title": "41. Find Median from Data Stream (LeetCode 295) \u2014 Hard",
+    "title": "41. Find Median from Data Stream (LeetCode 295) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/10-backtracking/42_combination_sum.md",
-    "title": "42. Combination Sum (LeetCode 39) \u2014 Medium",
+    "title": "42. Combination Sum (LeetCode 39) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/10-backtracking/43_word_search.md",
-    "title": "43. Word Search (LeetCode 79) \u2014 Medium",
+    "title": "43. Word Search (LeetCode 79) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/44_number_of_islands.md",
-    "title": "44. Number of Islands (LeetCode 200) \u2014 Medium",
+    "title": "44. Number of Islands (LeetCode 200) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/45_clone_graph.md",
-    "title": "45. Clone Graph (LeetCode 133) \u2014 Medium",
+    "title": "45. Clone Graph (LeetCode 133) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/46_pacific_atlantic_water_flow.md",
-    "title": "46. Pacific Atlantic Water Flow (LeetCode 417) \u2014 Medium",
+    "title": "46. Pacific Atlantic Water Flow (LeetCode 417) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/47_course_schedule.md",
-    "title": "47. Course Schedule (LeetCode 207) \u2014 Medium",
+    "title": "47. Course Schedule (LeetCode 207) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/48_graph_valid_tree.md",
-    "title": "48. Graph Valid Tree (LeetCode 261) \u2014 Medium",
+    "title": "48. Graph Valid Tree (LeetCode 261) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/11-graphs/49_number_of_connected_components_in_an_undirected_graph.md",
-    "title": "49. Number of Connected Components in an Undirected Graph (LeetCode 323) \u2014 Medium",
+    "title": "49. Number of Connected Components in an Undirected Graph (LeetCode 323) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/12-advanced-graphs/50_alien_dictionary.md",
-    "title": "50. Alien Dictionary (LeetCode 269) \u2014 Hard",
+    "title": "50. Alien Dictionary (LeetCode 269) — Hard",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/51_climbing_stairs.md",
-    "title": "51. Climbing Stairs (LeetCode 70) \u2014 Easy",
+    "title": "51. Climbing Stairs (LeetCode 70) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/52_coin_change.md",
-    "title": "52. Coin Change (LeetCode 322) \u2014 Medium",
+    "title": "52. Coin Change (LeetCode 322) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/53_longest_increasing_subsequence.md",
-    "title": "53. Longest Increasing Subsequence (LeetCode 300) \u2014 Medium",
+    "title": "53. Longest Increasing Subsequence (LeetCode 300) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/54_word_break.md",
-    "title": "54. Word Break (LeetCode 139) \u2014 Medium",
+    "title": "54. Word Break (LeetCode 139) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/55_combination_sum_iv.md",
-    "title": "55. Combination Sum IV (LeetCode 377) \u2014 Medium",
+    "title": "55. Combination Sum IV (LeetCode 377) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/56_house_robber.md",
-    "title": "56. House Robber (LeetCode 198) \u2014 Medium",
+    "title": "56. House Robber (LeetCode 198) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/57_house_robber_ii.md",
-    "title": "57. House Robber II (LeetCode 213) \u2014 Medium",
+    "title": "57. House Robber II (LeetCode 213) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/13-1d-dynamic-programming/58_decode_ways.md",
-    "title": "58. Decode Ways (LeetCode 91) \u2014 Medium",
+    "title": "58. Decode Ways (LeetCode 91) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/14-2d-dynamic-programming/59_unique_paths.md",
-    "title": "59. Unique Paths (LeetCode 62) \u2014 Medium",
+    "title": "59. Unique Paths (LeetCode 62) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/14-2d-dynamic-programming/60_longest_common_subsequence.md",
-    "title": "60. Longest Common Subsequence (LeetCode 1143) \u2014 Medium",
+    "title": "60. Longest Common Subsequence (LeetCode 1143) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/15-greedy/61_maximum_subarray.md",
-    "title": "61. Maximum Subarray (LeetCode 53) \u2014 Medium",
+    "title": "61. Maximum Subarray (LeetCode 53) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/15-greedy/62_jump_game.md",
-    "title": "62. Jump Game (LeetCode 55) \u2014 Medium",
+    "title": "62. Jump Game (LeetCode 55) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/16-intervals/63_insert_interval.md",
-    "title": "63. Insert Interval (LeetCode 57) \u2014 Medium",
+    "title": "63. Insert Interval (LeetCode 57) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/16-intervals/64_merge_intervals.md",
-    "title": "64. Merge Intervals (LeetCode 56) \u2014 Medium",
+    "title": "64. Merge Intervals (LeetCode 56) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/16-intervals/65_non_overlapping_intervals.md",
-    "title": "65. Non-overlapping Intervals (LeetCode 435) \u2014 Medium",
+    "title": "65. Non-overlapping Intervals (LeetCode 435) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/16-intervals/66_meeting_rooms.md",
-    "title": "66. Meeting Rooms (LeetCode 252) \u2014 Easy",
+    "title": "66. Meeting Rooms (LeetCode 252) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/16-intervals/67_meeting_rooms_ii.md",
-    "title": "67. Meeting Rooms II (LeetCode 253) \u2014 Medium",
+    "title": "67. Meeting Rooms II (LeetCode 253) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/17-math-and-geometry/68_rotate_image.md",
-    "title": "68. Rotate Image (LeetCode 48) \u2014 Medium",
+    "title": "68. Rotate Image (LeetCode 48) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/17-math-and-geometry/69_spiral_matrix.md",
-    "title": "69. Spiral Matrix (LeetCode 54) \u2014 Medium",
+    "title": "69. Spiral Matrix (LeetCode 54) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/70_number_of_1_bits.md",
-    "title": "70. Number of 1 Bits (LeetCode 191) \u2014 Easy",
+    "title": "70. Number of 1 Bits (LeetCode 191) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/71_counting_bits.md",
-    "title": "71. Counting Bits (LeetCode 338) \u2014 Easy",
+    "title": "71. Counting Bits (LeetCode 338) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/72_reverse_bits.md",
-    "title": "72. Reverse Bits (LeetCode 190) \u2014 Easy",
+    "title": "72. Reverse Bits (LeetCode 190) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/73_missing_number.md",
-    "title": "73. Missing Number (LeetCode 268) \u2014 Easy",
+    "title": "73. Missing Number (LeetCode 268) — Easy",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/74_sum_of_two_integers.md",
-    "title": "74. Sum of Two Integers (LeetCode 371) \u2014 Medium",
+    "title": "74. Sum of Two Integers (LeetCode 371) — Medium",
     "track": "14-leetcode-blind-75"
   },
   {
     "path": "14-leetcode-blind-75/18-bit-manipulation/75_reverse_integer.md",
-    "title": "75. Reverse Integer (LeetCode 7) \u2014 Medium",
+    "title": "75. Reverse Integer (LeetCode 7) — Medium",
+    "track": "14-leetcode-blind-75"
+  },
+  {
+    "path": "14-leetcode-blind-75/README.md",
+    "title": "🧮 Blind 75 Master LeetCode Solutions (6-Pillar Format)",
+    "track": "14-leetcode-blind-75"
+  },
+  {
+    "path": "14-leetcode-blind-75/interview-questions/README.md",
+    "title": "🧮 Data Structures & Algorithms Interview Questions Index",
     "track": "14-leetcode-blind-75"
   },
   {
@@ -1556,14 +1577,9 @@ window.DOCS_MANIFEST = [
     "track": "14-leetcode-blind-75"
   },
   {
-    "path": "14-leetcode-blind-75/interview-questions/README.md",
-    "title": "\ud83e\uddee Data Structures & Algorithms Interview Questions Index",
-    "track": "14-leetcode-blind-75"
-  },
-  {
-    "path": "14-leetcode-blind-75/README.md",
-    "title": "\ud83e\uddee Blind 75 Master LeetCode Solutions (6-Pillar Format)",
-    "track": "14-leetcode-blind-75"
+    "path": "15-testing-and-devops/README.md",
+    "title": "🧪 15 - Testing, Containerization & Production DevOps",
+    "track": "15-testing-and-devops"
   },
   {
     "path": "15-testing-and-devops/devops-docker-kubernetes-cicd/01_docker_kubernetes_production_setup.md",
@@ -1592,12 +1608,7 @@ window.DOCS_MANIFEST = [
   },
   {
     "path": "15-testing-and-devops/interview-questions/README.md",
-    "title": "\ud83e\uddea Testing & DevOps Master Interview Questions & Architectural Index",
-    "track": "15-testing-and-devops"
-  },
-  {
-    "path": "15-testing-and-devops/README.md",
-    "title": "\ud83e\uddea 15 - Testing, Containerization & Production DevOps",
+    "title": "🧪 Testing & DevOps Master Interview Questions & Architectural Index",
     "track": "15-testing-and-devops"
   },
   {
@@ -1621,13 +1632,18 @@ window.DOCS_MANIFEST = [
     "track": "16-interview-master-guides"
   },
   {
-    "path": "16-interview-master-guides/interview-questions/behavioral_star_method_master_guide.md",
-    "title": "Behavioral Interview Mastery: The STAR Method for Senior Engineers",
+    "path": "16-interview-master-guides/README.md",
+    "title": "⚡ 16 - Interview Master Cheatsheets, Behavioral STAR & Company Guides",
     "track": "16-interview-master-guides"
   },
   {
     "path": "16-interview-master-guides/interview-questions/README.md",
-    "title": "\u26a1 Senior Tech Lead Interview Scenario Questions & Flash Cards Index",
+    "title": "⚡ Senior Tech Lead Interview Scenario Questions & Flash Cards Index",
+    "track": "16-interview-master-guides"
+  },
+  {
+    "path": "16-interview-master-guides/interview-questions/behavioral_star_method_master_guide.md",
+    "title": "Behavioral Interview Mastery: The STAR Method for Senior Engineers",
     "track": "16-interview-master-guides"
   },
   {
@@ -1643,11 +1659,6 @@ window.DOCS_MANIFEST = [
   {
     "path": "16-interview-master-guides/mid-tier-and-startups/startup_tech_lead_interview_guide.md",
     "title": "Startup Tech Lead & Staff Engineer Interview Playbook (Series A to Unicorn)",
-    "track": "16-interview-master-guides"
-  },
-  {
-    "path": "16-interview-master-guides/README.md",
-    "title": "\u26a1 16 - Interview Master Cheatsheets, Behavioral STAR & Company Guides",
     "track": "16-interview-master-guides"
   },
   {
@@ -1679,10 +1690,5 @@ window.DOCS_MANIFEST = [
     "path": "16-interview-master-guides/service-mnc-tier/wipro_interview_guide.md",
     "title": "Wipro Senior Fullstack Engineer Interview Guide",
     "track": "16-interview-master-guides"
-  },
-  {
-    "path": "README.md",
-    "title": "\ud83e\udde0 The Universal Tech & Senior Interview Knowledge Base",
-    "track": "Root"
   }
 ];

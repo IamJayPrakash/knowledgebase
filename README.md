@@ -109,6 +109,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 | **RAG Triad Evaluation** | Context Precision, Faithfulness, Answer Relevance (Ragas)| [`12-ai-and-genai/07-guardrails-security-and-evaluation/02_llm_evaluation_ragas_and_benchmarking.md`](./12-ai-and-genai/07-guardrails-security-and-evaluation/02_llm_evaluation_ragas_and_benchmarking.md) |
 | **110 GenAI Interview Qs** | Master 110 questions bank & System Design Scenarios | [`12-ai-and-genai/interview-questions/README.md`](./12-ai-and-genai/interview-questions/README.md) |
 | **50 System Design Concepts** | Complete 50 concepts catalog (Scalability, Consensus, Caching, Resilience) | [`13-system-design/00_master_50_system_design_concepts.md`](./13-system-design/00_master_50_system_design_concepts.md) |
+| **System Design PDF Guide** | Printable 50-concept interview questions & architecture PDF | [`13-system-design/System_Design_Interview_Questions (1).pdf`](./13-system-design/System_Design_Interview_Questions%20%281%29.pdf) |
 | **Consistent Hashing** | Virtual nodes, hash ring distribution, rehashing minimization | [`13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md`](./13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md) |
 | **Resilience Patterns** | Circuit Breaker, Bulkhead, Jittered Backoff, XFetch Cache Stampede | [`13-system-design/08_resilience_and_stability_patterns.md`](./13-system-design/08_resilience_and_stability_patterns.md) |
 | **Twitter Snowflake** | 64-bit distributed time-sortable unique ID generator | [`13-system-design/interview-questions/top_system_design_interview_questions_catalog.md`](./13-system-design/interview-questions/top_system_design_interview_questions_catalog.md) |
@@ -304,6 +305,7 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 ### 13. 🏗️ System Design (HLD & LLD) ([`13-system-design/`](./13-system-design/))
 * **Core Foundations & 50 Concepts Playbook:**
   * [`00_master_50_system_design_concepts.md`](./13-system-design/00_master_50_system_design_concepts.md) — Complete 50 concepts encyclopedia across Scalability, Consensus, Caching, Protocols, and Resilience.
+  * [`System_Design_Interview_Questions (1).pdf`](./13-system-design/System_Design_Interview_Questions%20%281%29.pdf) — 📕 **Printable PDF Document**: 50 System Design Concepts & High-Frequency Interview Questions guide.
   * [`07_distributed_systems_primitives_consensus_cap_sharding.md`](./13-system-design/07_distributed_systems_primitives_consensus_cap_sharding.md) — CAP Theorem, Raft Consensus (Leader Election & Log Replication), Consistent Hashing with Virtual Nodes.
   * [`08_resilience_and_stability_patterns.md`](./13-system-design/08_resilience_and_stability_patterns.md) — Circuit Breaker state machine, Bulkhead isolation, Exponential Backoff + Jitter, XFetch Cache Stampede avoidance.
   * [`09_communication_protocols_rest_graphql_grpc_webrtc_websockets.md`](./13-system-design/09_communication_protocols_rest_graphql_grpc_webrtc_websockets.md) — REST vs GraphQL vs gRPC (HTTP/2) vs WebSockets vs WebRTC.

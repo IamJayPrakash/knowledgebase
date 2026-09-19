@@ -1,26 +1,21 @@
-# 🤖 AI & GenAI Systems Interview Questions Index
+# 🤖 Master 110 GenAI & LLM Interview Questions Catalog & Roadmap
 
-> A categorized index of **Transformer Architecture Questions, RAG Pipeline Optimization, Vector DB Indexing, and Agentic Workflow Design Questions** for Senior AI Engineer Interviews.
-
----
-
-## 📌 How to Use This Directory
-- Add individual markdown files for specific AI/GenAI interview questions in this folder (e.g., `01_vector_index_hnsw_tradeoffs.md`, `02_agent_react_loop.md`).
-- Use this `README.md` as your index and checklist.
+> An exhaustive, production-grade interview repository containing **110 high-yield interview questions and system design scenarios** across foundational transformers, vector search, RAG, orchestration frameworks (**LangChain**, **LangFlow**, **LangGraph**), multi-agent systems, fine-tuning, vLLM serving, and enterprise security.
 
 ---
 
-## 📑 Interview Questions Index
+## 🗺️ Categorized Question Index
 
-### 1. Rapid-Fire / Short Questions
-- [ ] `short_questions_llm_basics.md` — Temperature, Top-P vs Top-K, Tokenization (BPE), Context Window limits.
-- [ ] `short_questions_vector_dbs.md` — Cosine similarity vs Dot Product vs Euclidean distance, HNSW vs IVF-PQ.
+| Module | Focus Area | Question Range | Topics Covered | Link |
+| :--- | :--- | :---: | :--- | :--- |
+| **Part 1** | **Foundations, Transformers & Sampling** | Q1 – Q20 | Next-token prediction, BPE, Softmax Temperature, Top-P, Top-K, Scaled Dot-Product, Decoder-only, KV-Cache, GQA, RoPE, FlashAttention, SwiGLU, RMSNorm. | [**`01_foundations_and_transformers_qna.md`**](./01_foundations_and_transformers_qna.md) |
+| **Part 2** | **Embeddings & Vector Databases** | Q21 – Q40 | Dense vectors, Cosine vs Euclidean vs Dot Product, $L_2$ normalization, HNSW graph mechanics ($M$, $efConstruction$, $efSearch$), IVF-PQ, Matryoshka embeddings, Pre vs Post filtering, Chroma, Qdrant, Pinecone, Milvus. | [**`02_embeddings_and_vectordb_qna.md`**](./02_embeddings_and_vectordb_qna.md) |
+| **Part 3** | **RAG & Retrieval Pipelines** | Q41 – Q60 | Naive vs Advanced RAG, Hybrid Search (BM25 + Dense), RRF, Bi-Encoders vs Cross-Encoders, Parent-Document chunking, HyDE, Sub-query decomposition, ColPali Multimodal RAG, Citation grounding, Semantic Caching. | [**`03_rag_and_retrieval_qna.md`**](./03_rag_and_retrieval_qna.md) |
+| **Part 4** | **LangChain, LangFlow, LangGraph & Agents** | Q61 – Q80 | LCEL pipe operator, Runnables, LangFlow low-code canvas & Python export, LangGraph StateGraph, Cycles vs DAGs, Reducers, Checkpointing, Human-in-the-Loop, ReAct pattern, Tool calling, Supervisor multi-agent. | [**`04_langchain_langflow_langgraph_agents_qna.md`**](./04_langchain_langflow_langgraph_agents_qna.md) |
+| **Part 5** | **Fine-Tuning, Serving & Ops** | Q81 – Q100 | LoRA math, QLoRA NF4, SFT vs DPO, vLLM PagedAttention, Continuous Batching, VRAM sizing formulas, AWQ vs GPTQ vs GGUF, Speculative Decoding, Guardrails AI, Ragas RAG Triad, Prefix Caching. | [**`05_finetuning_serving_and_ops_qna.md`**](./05_finetuning_serving_and_ops_qna.md) |
+| **Part 6** | **Scenario-Based AI System Design** | Q101 – Q110 | Enterprise Multi-Tenant RAG, Autonomous Customer Support Multi-Agent, Low-Latency Code Copilot, Financial PDF Extractor, High-Volume Guardrail Gateway, Self-Healing Text-to-SQL, Cost/Latency Optimizer. | [**`06_scenario_based_system_design_ai_qna.md`**](./06_scenario_based_system_design_ai_qna.md) |
 
-### 2. Algorithmic & RAG Coding Challenges
-- [ ] `coding_custom_rag_pipeline.md` — Build an Advanced RAG pipeline from scratch with Hybrid Search (BM25 + Dense Vectors) and Re-ranking.
-- [ ] `coding_langgraph_agent.md` — Build a stateful multi-agent system with LangGraph for SQL query generation and tool execution.
-- [ ] `coding_semantic_chunking.md` — Implement a semantic text chunker based on embedding similarity threshold between adjacent sentences.
+---
 
-### 3. Senior AI Lead & System Architecture Scenarios
-- [ ] `scenario_rag_hallucination_reduction.md` — How to measure and eliminate hallucinations in production enterprise RAG systems.
-- [ ] `scenario_llm_cost_and_latency_optimization.md` — Reducing streaming response latency by 70% using prompt caching, speculative decoding, and vLLM.
+## 🎯 Coding Exercises
+* [**`coding_simple_rag_pipeline_python.md`**](./coding_simple_rag_pipeline_python.md) — Live coding implementation of an in-memory RAG pipeline in pure Python.

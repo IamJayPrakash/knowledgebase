@@ -6,11 +6,11 @@
 
 ## 🌟 The "6-Pillar" Learning Standard
 
-Every concept and LeetCode problem in this repository is crafted using the **6-Pillar Educational Framework**:
+Every single concept and LeetCode problem in this repository is crafted using the **6-Pillar Educational Framework**:
 1. 🐣 **Layman's Analogy (Hinglish & Real-World):** Crystal-clear everyday intuition so complete beginners grasp concepts effortlessly.
 2. 📌 **Point-Wise Core Mechanics:** Concise breakdown of what happens under the hood without confusing jargon.
 3. 📊 **Visual ASCII & Mermaid Diagrams:** Direct visual mapping of data structures, execution loops, and distributed architectures.
-4. 💻 **Practical Code Implementations:** Comparing naive/brute-force vs optimal solutions with time/space complexities in JavaScript & Python.
+4. 💻 **Practical Code Implementations:** Comparing naive/brute-force vs optimal solutions with **line-by-line comments** in JavaScript, TypeScript, and Python.
 5. 🎯 **The "Interview Pitch":** Exact, natural English phrasing to explain the concept confidently to an interviewer.
 6. 💼 **Production War Story (STAR Method):** Real-world project scenarios detailing the Situation, Task, Action, and Business/System Metrics ($ \downarrow $ Latency, $ \uparrow $ Throughput).
 
@@ -21,16 +21,17 @@ Every concept and LeetCode problem in this repository is crafted using the **6-P
 ```text
 knowledgebase/
 ├── 01-core-web-and-performance/      # Web Core Vitals (LCP, INP, CLS), Bundle Splitting, CSS3, HTML5
-├── 01-javascript/                    # V8 Engine, Event Loop, Closures, Prototypes, Memory Leaks
+├── 01-javascript/                    # V8 Engine, Event Loop, Closures, Prototypes, this Binding, Polyfills
 ├── 02-typescript/                    # Generics, infer, Conditional Types, Utility Types, Mapped Types
 ├── 03-react/                         # Fiber Reconciler, Hooks Deep Dive, Concurrent Mode, Virtualization
 ├── 04-frontend-frameworks/           # Next.js App Router (RSC, SSR, ISR), Angular (Signals, DI, RxJS)
 ├── 04-node/                          # Libuv Event Loop (6 phases), Streams, Backpressure, Worker Threads
 ├── 05-fastapi/                       # Python Asyncio, Pydantic V2, ASGI/Starlette, Dependency Injection
-├── 05-backend-and-runtimes/          # Java Spring Boot (IoC, JVM Generational GC, JPA/Hibernate)
+├── 05-backend-and-runtimes/          # Ruby on Rails (MVC, Active Record), MEAN vs MERN, Java Spring Boot
+├── 06-databases-and-caching/         # MongoDB (WiredTiger, ESR Indexing, Sharding), Redis Caching
 ├── 06-ai-genai/                      # Transformers, Vector DBs (HNSW), RAG Pipelines, LangGraph Agents
 ├── 07-system-design/                 # HLD (TinyURL, WhatsApp, Rate Limiter), LLD, Streaming RAG Architecture
-├── 08-leetcode-dsa/                  # 🧮 Complete Blind 75 Solutions with Diagrams, Code & War Stories!
+├── 08-leetcode-dsa/                  # 🧮 Complete Blind 75 Solutions with Diagrams, Line-by-Line Code & War Stories!
 ├── 10-testing-and-devops/            # Playwright E2E, Jest Unit Testing, Docker Multi-Stage, Kubernetes (K8s)
 └── 11-interview-master-cheatsheets/  # TCS, Infosys, Accenture, Capgemini, JLL, Nagarro & Senior Lead STAR
 ```
@@ -46,6 +47,9 @@ knowledgebase/
 ### 2. 🟨 JavaScript Core Engine & Asynchronous Internals
 * [`README.md (JavaScript Index)`](./01-javascript/README.md) — Complete roadmap of Execution Contexts, V8 Engine, Mark-and-Sweep GC, Prototypes, and Microtask queues.
 * [`01_v8_event_loop_and_microtasks.md`](./01-javascript/01_v8_event_loop_and_microtasks.md) — Call Stack, Microtask queue, Macrotask queue, Rendering steps, and Event Loop starvation.
+* [`02_closures_lexical_scope_memory.md`](./01-javascript/02_closures_lexical_scope_memory.md) — Lexical Scope, V8 Heap allocation, Private variables, Memoization, and Memory leaks.
+* [`03_prototypes_and_prototypal_inheritance.md`](./01-javascript/03_prototypes_and_prototypal_inheritance.md) — Prototype Chain, `__proto__` vs `prototype`, Memory sharing, ES6 Class transpilation.
+* [`04_this_keyword_call_apply_bind.md`](./01-javascript/04_this_keyword_call_apply_bind.md) — The 5 Rules of `this` binding, `call`/`apply`/`bind` polyfills, Lexical arrow functions.
 * [`interview-questions/README.md`](./01-javascript/interview-questions/README.md) — Polyfills (`Promise.all`, `debounce`, `deepClone`), Output-based snippets, Memory leak debugging.
 
 ### 3. 🟦 TypeScript Engineering & Type Systems
@@ -59,29 +63,37 @@ knowledgebase/
 * [`01_app_router_and_react_server_components.md`](./04-frontend-frameworks/nextjs/01_app_router_and_react_server_components.md) — Next.js App Router, Server Components vs Client Components, Streaming SSR.
 * [`01_angular_architecture_and_signals.md`](./04-frontend-frameworks/angular/01_angular_architecture_and_signals.md) — Angular Signals, Fine-grained reactivity, Dependency Injection, Standalone components.
 
-### 5. 🟢 Backend Runtimes (Node.js, FastAPI, Java Spring Boot)
+### 5. 🟢 Backend Runtimes & Full-Stack Architectures (MERN, MEAN, Rails, Spring Boot, Node, FastAPI)
+* [`01_mean_vs_mern_stack_architecture.md`](./05-backend-and-runtimes/mean-vs-mern/01_mean_vs_mern_stack_architecture.md) — Complete comparison between MERN and MEAN stacks, data-binding, and enterprise tradeoffs.
+* [`01_ruby_on_rails_mvc_active_record.md`](./05-backend-and-runtimes/ruby-on-rails/01_ruby_on_rails_mvc_active_record.md) — Ruby on Rails MVC, Convention over Configuration, Active Record ORM, Migrations.
+* [`02_express_middleware_architecture_and_pipeline.md`](./05-backend-and-runtimes/node-express/02_express_middleware_architecture_and_pipeline.md) — Express middleware pipeline, Async wrappers, Centralized error handling, Rate limiting.
 * [`README.md (Node.js Index)`](./04-node/README.md) — Node architecture, Libuv 6 phases, Streams, Buffers, Worker Threads, Clustering.
 * [`01_libuv_event_loop_phases.md`](./04-node/01_libuv_event_loop_phases.md) — Detailed breakdown of Timers, Pending, Poll, Check, and Close phases.
 * [`README.md (FastAPI Index)`](./05-fastapi/README.md) — Asyncio Event Loop, `async def` vs `def`, Pydantic V2 Rust core, ASGI/Starlette.
 * [`01_springboot_architecture_and_jvm.md`](./05-backend-and-runtimes/java-springboot/01_springboot_architecture_and_jvm.md) — Spring Boot Inversion of Control (IoC), JVM Generational GC, JPA/Hibernate.
 
-### 6. 🤖 AI & GenAI Systems Engineering
+### 6. 🗄️ Databases & Caching (MongoDB, Redis, SQL)
+* [`01_mongodb_architecture_indexing_sharding.md`](./06-databases-and-caching/nosql-mongodb/01_mongodb_architecture_indexing_sharding.md) — WiredTiger storage engine, Compound ESR Indexing, Sharding architecture, Aggregation pipeline.
+
+### 7. 🤖 AI & GenAI Systems Engineering
 * [`README.md (AI & GenAI Index)`](./06-ai-genai/README.md) — Transformers, Vector DBs (HNSW vs IVF-PQ), RAG pipelines, Agentic AI, vLLM serving.
 * [`interview-questions/README.md`](./06-ai-genai/interview-questions/README.md) — Multi-agent LangGraph workflows, Hybrid Search (BM25 + Dense Vectors), Hallucination reduction.
 
-### 7. 🏗️ System Design (HLD & LLD)
+### 8. 🏗️ System Design (HLD & LLD)
+* [`01_hld_url_shortener_tinyurl.md`](./07-system-design/01_hld_url_shortener_tinyurl.md) — Scalable TinyURL design (Base62 encoding, Key Generation Service, Redis Cache-Aside, Partitioning).
 * [`README.md (System Design Index)`](./07-system-design/README.md) — High-Level Design (Load Balancers, Caching, Kafka, Sharding), Low-Level Design (SOLID, GoF Patterns).
-* [`interview-questions/README.md`](./07-system-design/interview-questions/README.md) — TinyURL, WhatsApp, Distributed Rate Limiter, Notification Service, Streaming RAG System.
 
-### 8. 🧮 Complete Blind 75 LeetCode Problem Set
-* **[`08-leetcode-dsa/README.md`](./08-leetcode-dsa/README.md)** — **All 75 curated Blind 75 problems solved** across 18 pattern directories with Hinglish intuition, Layman analogies, Visual ASCII diagrams, Python & JS solutions, and Production War Stories!
+### 9. 🧮 Complete Blind 75 LeetCode Problem Set
+* **[`08-leetcode-dsa/README.md`](./08-leetcode-dsa/README.md)** — **All 75 curated Blind 75 problems solved** across 18 pattern directories with Hinglish intuition, Layman analogies, Visual ASCII diagrams, Line-by-line commented code (Python & JS), and Production War Stories!
 
-### 9. 🧪 Testing & DevOps
+### 10. 🧪 Testing & DevOps
 * [`01_playwright_e2e_testing_guide.md`](./10-testing-and-devops/testing-playwright-jest/01_playwright_e2e_testing_guide.md) — Playwright cross-browser automation, Auto-waiting, Network mocking, Jest unit testing.
 * [`01_docker_kubernetes_production_setup.md`](./10-testing-and-devops/devops-docker-kubernetes-cicd/01_docker_kubernetes_production_setup.md) — Multi-stage Docker builds, Kubernetes Pods/Services, Ingress, Horizontal Pod Autoscaling (HPA).
 
-### 10. 🎯 MNC & Senior Technical Lead Cheatsheets
+### 11. 🎯 MNC & Startup Interview Guides
+* [`tcs_interview_guide.md`](./11-interview-master-cheatsheets/service-mnc-tier/tcs_interview_guide.md) — High-frequency TCS technical questions, OOPs fundamentals, SQL queries, and basic algorithms.
 * [`01_top_mnc_interview_questions_tcs_accenture.md`](./11-interview-master-cheatsheets/service-mnc-tier/01_top_mnc_interview_questions_tcs_accenture.md) — High-frequency questions and simple, confident answers for TCS, Infosys, Accenture, and Capgemini.
+* [`jll_interview_guide.md`](./11-interview-master-cheatsheets/mid-tier-and-startups/jll_interview_guide.md) — JLL & Startup scenario-based interview rounds, production debugging, and refresh token security.
 * [`09-interview-cheatsheet/README.md`](./09-interview-cheatsheet/README.md) — 5-minute refresher cards, Architecture comparison matrices, Senior Lead STAR behavioral scenarios.
 
 ---

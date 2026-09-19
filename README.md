@@ -46,28 +46,38 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 
 | Topic / Keyword | Core Concept Covered | Direct File Link |
 | :--- | :--- | :--- |
-| **Angular Signals** | `signal()`, `computed()`, `effect()`, signal inputs | [`05-angular-21/01_angular21_signals_and_reactivity.md`](./05-angular-21/01_angular21_signals_and_reactivity.md) |
-| **Angular Zoneless** | Angular 21 default zoneless, removing `zone.js` | [`05-angular-21/02_angular21_zoneless_architecture.md`](./05-angular-21/02_angular21_zoneless_architecture.md) |
-| **Angular Defer** | `@defer`, `@placeholder`, `@loading`, `@error` | [`05-angular-21/03_angular21_defer_block_and_lazy_loading.md`](./05-angular-21/03_angular21_defer_block_and_lazy_loading.md) |
-| **Angular Inject** | Standalone components, `inject()` API, functional guards | [`05-angular-21/04_angular21_standalone_components_and_inject.md`](./05-angular-21/04_angular21_standalone_components_and_inject.md) |
-| **Angular RxJS Interop** | `toSignal()`, `toObservable()`, stream bridging | [`05-angular-21/05_angular21_rxjs_interop_to_signal.md`](./05-angular-21/05_angular21_rxjs_interop_to_signal.md) |
-| **Java Virtual Threads** | Project Loom, $M:N$ mapping, carrier threads, unmounting | [`09-backend-java-springboot/04_java21_virtual_threads_and_structured_concurrency.md`](./09-backend-java-springboot/04_java21_virtual_threads_and_structured_concurrency.md) |
-| **Java JVM & ZGC** | Eden/Tenured heap, Generational ZGC ($< 1\text{ms}$ pauses) | [`09-backend-java-springboot/05_jvm_garbage_collectors_zgc_g1_tuning.md`](./09-backend-java-springboot/05_jvm_garbage_collectors_zgc_g1_tuning.md) |
-| **ConcurrentHashMap** | Bucket treeification (Red-Black Tree), CAS & synchronized node | [`09-backend-java-springboot/06_concurrenthashmap_and_thread_safe_collections.md`](./09-backend-java-springboot/06_concurrenthashmap_and_thread_safe_collections.md) |
-| **Spring Security JWT** | `SecurityFilterChain`, stateless sessions, `@PreAuthorize` | [`09-backend-java-springboot/02_springboot_security_jwt_oauth2.md`](./09-backend-java-springboot/02_springboot_security_jwt_oauth2.md) |
-| **Spring Resilience4j** | Circuit breaker states (Closed, Open, Half-Open), Retries | [`09-backend-java-springboot/03_springboot_microservices_and_resilience4j.md`](./09-backend-java-springboot/03_springboot_microservices_and_resilience4j.md) |
-| **React Fiber** | Work loop, double buffering, render vs commit | [`04-react/01_fiber_reconciler_and_concurrent_mode.md`](./04-react/01_fiber_reconciler_and_concurrent_mode.md) |
-| **React 19 Actions** | `useActionState`, `useOptimistic`, React Compiler | [`04-react/10_react19_actions_use_hook_compiler.md`](./04-react/10_react19_actions_use_hook_compiler.md) |
-| **React Memoization** | `React.memo`, `useMemo`, `useCallback`, referential equality | [`04-react/06_memoization_usememo_usecallback_react_memo.md`](./04-react/06_memoization_usememo_usecallback_react_memo.md) |
-| **Next.js Server Actions** | `"use server"`, RPC mutations, Zod validation | [`06-nextjs/02_server_actions_and_mutations.md`](./06-nextjs/02_server_actions_and_mutations.md) |
-| **Next.js 4-Tier Cache** | Request Memoization, Data Cache, Full Route, Router Cache | [`06-nextjs/03_caching_and_revalidation_deep_dive.md`](./06-nextjs/03_caching_and_revalidation_deep_dive.md) |
-| **Event Loop (JS)** | Microtask checkpoints, macrotasks, UI render ticks | [`02-javascript/10_event_loop_microtasks_macrotasks.md`](./02-javascript/10_event_loop_microtasks_macrotasks.md) |
-| **Deep Clone** | Handling cycles with WeakMap, Date, RegExp, Map/Set | [`02-javascript/interview-questions/coding_deep_clone.md`](./02-javascript/interview-questions/coding_deep_clone.md) |
+| **JavaScript Data Types** | 7 Primitives vs Heap references, implicit coercion, `NaN` | [`02-javascript/01_data_types_and_type_coercion.md`](./02-javascript/01_data_types_and_type_coercion.md) |
+| **JS Operators & Control Flow** | Strict equality (`===`), Nullish Coalescing (`??`), `for...of` | [`02-javascript/03_operators_control_flow_and_loops.md`](./02-javascript/03_operators_control_flow_and_loops.md) |
+| **JS Arrays In-Depth** | Mutating vs Non-mutating methods, custom `reduce` polyfill | [`02-javascript/04_arrays_in_depth_methods_and_iteration.md`](./02-javascript/04_arrays_in_depth_methods_and_iteration.md) |
+| **JS Objects & Cloning** | Destructuring, rest/spread, shallow vs deep clone, `structuredClone` | [`02-javascript/05_objects_destructuring_rest_spread_and_cloning.md`](./02-javascript/05_objects_destructuring_rest_spread_and_cloning.md) |
+| **Event Loop (JS)** | Microtask checkpoints, macrotasks, UI render ticks | [`02-javascript/13_event_loop_microtasks_macrotasks.md`](./02-javascript/13_event_loop_microtasks_macrotasks.md) |
+| **Deep Clone (JS)** | Handling cycles with WeakMap, Date, RegExp, Map/Set | [`02-javascript/interview-questions/coding_deep_clone.md`](./02-javascript/interview-questions/coding_deep_clone.md) |
 | **TypeScript Generics** | `extends` constraints, `keyof` lookup | [`03-typescript/04_generics_and_constraints.md`](./03-typescript/04_generics_and_constraints.md) |
 | **TypeScript infer** | Pattern extraction, recursive `DeepAwaited` | [`03-typescript/05_conditional_types_and_infer.md`](./03-typescript/05_conditional_types_and_infer.md) |
+| **React Fiber** | Work loop, double buffering, render vs commit | [`04-react/01_fiber_reconciler_and_concurrent_mode.md`](./04-react/01_fiber_reconciler_and_concurrent_mode.md) |
+| **React 19 Actions** | `useActionState`, `useOptimistic`, React Compiler | [`04-react/10_react19_actions_use_hook_compiler.md`](./04-react/10_react19_actions_use_hook_compiler.md) |
+| **Angular Signals** | `signal()`, `computed()`, `effect()`, signal inputs | [`05-angular-21/01_angular21_signals_and_reactivity.md`](./05-angular-21/01_angular21_signals_and_reactivity.md) |
+| **Angular Zoneless** | Angular 21 default zoneless, removing `zone.js` | [`05-angular-21/02_angular21_zoneless_architecture.md`](./05-angular-21/02_angular21_zoneless_architecture.md) |
+| **Next.js Server Actions** | `"use server"`, RPC mutations, Zod validation | [`06-nextjs/02_server_actions_and_mutations.md`](./06-nextjs/02_server_actions_and_mutations.md) |
 | **Node.js Streams** | 64KB buffers, `highWaterMark`, backpressure `pipeline` | [`07-backend-node/02_streams_buffers_and_backpressure.md`](./07-backend-node/02_streams_buffers_and_backpressure.md) |
-| **Node Worker Threads** | Cluster multi-process vs `worker_threads` shared memory | [`07-backend-node/03_worker_threads_cluster_and_scaling.md`](./07-backend-node/03_worker_threads_cluster_and_scaling.md) |
-| **FastAPI Pydantic V2** | Rust core validation, field and model validators | [`08-backend-python-fastapi/02_pydantic_v2_validation_and_serialization.md`](./08-backend-python-fastapi/02_pydantic_v2_validation_and_serialization.md) |
+| **Python Fundamentals** | Dynamic typing, name tags, mutability vs immutability, `id()` | [`08-backend-python-fastapi/01_python_fundamentals_syntax_types_and_mutability.md`](./08-backend-python-fastapi/01_python_fundamentals_syntax_types_and_mutability.md) |
+| **Python Collections** | List over-allocation, compact dict hash table, comprehensions | [`08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md`](./08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md) |
+| **Python Decorators** | LEGB rule, `*args`/`**kwargs`, closures, `@functools.wraps` | [`08-backend-python-fastapi/03_python_functions_scopes_args_kwargs_and_decorators.md`](./08-backend-python-fastapi/03_python_functions_scopes_args_kwargs_and_decorators.md) |
+| **Python OOP & MRO** | Dunder methods, C3 Linearization MRO, cooperative `super()` | [`08-backend-python-fastapi/04_python_oop_classes_dunder_methods_and_mro.md`](./08-backend-python-fastapi/04_python_oop_classes_dunder_methods_and_mro.md) |
+| **Python Generators & with**| `yield` state suspension, context managers `__enter__`/`__exit__` | [`08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md`](./08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md) |
+| **Python GC & GIL** | Reference counting, Cyclic GC generations, GIL & multiprocessing | [`08-backend-python-fastapi/06_python_memory_gc_gil_and_concurrency.md`](./08-backend-python-fastapi/06_python_memory_gc_gil_and_concurrency.md) |
+| **FastAPI Pydantic V2** | Rust core validation, field and model validators | [`08-backend-python-fastapi/09_pydantic_v2_validation_and_serialization.md`](./08-backend-python-fastapi/09_pydantic_v2_validation_and_serialization.md) |
+| **Java Pass-by-Value** | JDK/JVM architecture, 8 primitives, Integer Cache, Pass-by-value | [`09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md`](./09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md) |
+| **Java Strings & SCP** | String Constant Pool, immutability, `StringBuilder`, `equals` | [`09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md`](./09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md) |
+| **Java OOP & Polymorphism**| 4 pillars, dynamic dispatch via vtable, abstract vs interfaces | [`09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md`](./09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md) |
+| **Java Collections** | `ArrayList` vs `LinkedList`, `HashMap` treeification to Red-Black | [`09-backend-java-springboot/04_java_collections_framework_list_set_queue_map.md`](./09-backend-java-springboot/04_java_collections_framework_list_set_queue_map.md) |
+| **Java Generics & PECS** | Producer Extends Consumer Super, Type Erasure, Bridge methods | [`09-backend-java-springboot/05_java_generics_wildcards_and_type_erasure.md`](./09-backend-java-springboot/05_java_generics_wildcards_and_type_erasure.md) |
+| **Java Modern Features** | Lambdas, Stream pipelines, Records, Sealed classes, Java 21 switch | [`09-backend-java-springboot/07_java_modern_features_streams_lambdas_records_sealed.md`](./09-backend-java-springboot/07_java_modern_features_streams_lambdas_records_sealed.md) |
+| **ConcurrentHashMap** | Bucket treeification (Red-Black Tree), CAS & synchronized node | [`09-backend-java-springboot/08_concurrenthashmap_and_thread_safe_collections.md`](./09-backend-java-springboot/08_concurrenthashmap_and_thread_safe_collections.md) |
+| **Java JVM & ZGC** | Eden/Tenured heap, Generational ZGC ($< 1\text{ms}$ pauses) | [`09-backend-java-springboot/09_jvm_garbage_collectors_zgc_g1_tuning.md`](./09-backend-java-springboot/09_jvm_garbage_collectors_zgc_g1_tuning.md) |
+| **Java Virtual Threads** | Project Loom, $M:N$ mapping, carrier threads, unmounting | [`09-backend-java-springboot/10_java21_virtual_threads_and_structured_concurrency.md`](./09-backend-java-springboot/10_java21_virtual_threads_and_structured_concurrency.md) |
+| **Spring Security JWT** | `SecurityFilterChain`, stateless sessions, `@PreAuthorize` | [`09-backend-java-springboot/12_springboot_security_jwt_oauth2.md`](./09-backend-java-springboot/12_springboot_security_jwt_oauth2.md) |
+| **Spring Resilience4j** | Circuit breaker states (Closed, Open, Half-Open), Retries | [`09-backend-java-springboot/13_springboot_microservices_and_resilience4j.md`](./09-backend-java-springboot/13_springboot_microservices_and_resilience4j.md) |
 | **PostgreSQL MVCC** | `xmin`/`xmax` headers, Autovacuum, Partial Indexes | [`11-databases-and-caching/sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md`](./11-databases-and-caching/sql-postgresql/01_postgresql_mvcc_indexing_query_tuning.md) |
 | **PostgreSQL Partitioning**| Range/List/Hash declarative partitions, partition pruning | [`11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md`](./11-databases-and-caching/sql-postgresql/02_postgresql_partitioning_and_replication.md) |
 | **Redis Distributed Lock** | Atomic Redlock (`SET NX PX`), Lua script release | [`11-databases-and-caching/redis-caching/02_redis_distributed_locking_and_pubsub.md`](./11-databases-and-caching/redis-caching/02_redis_distributed_locking_and_pubsub.md) |
@@ -100,8 +110,27 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * [`frontend-performance-optimization/03_image_and_font_optimization.md`](./01-web-core-and-performance/frontend-performance-optimization/03_image_and_font_optimization.md)
 
 ### 02. 🟨 JavaScript Core Engine & Asynchronous Internals ([`02-javascript/`](./02-javascript/))
-* **Core Topics:** Data types, Execution contexts, Closures, V8 Garbage Collection, Prototypes, `this` binding, ES6 Classes desugared, Event Loop, Promises, Async/Await, CommonJS vs ESM, Proxy & Reflect, DOM Event Delegation.
-* **Coding Challenges:** Deep clone with circular references, Currying, EventEmitter, Debounce/Throttle, Promise.all polyfill, Memory leak diagnostics.
+* **Beginner Foundations:**
+  * [`01_data_types_and_type_coercion.md`](./02-javascript/01_data_types_and_type_coercion.md) — 7 Primitive types vs Heap references, implicit type coercion, `typeof` quirks.
+  * [`02_var_let_const_hoisting_tdz.md`](./02-javascript/02_var_let_const_hoisting_tdz.md) — Function vs Block scope, Variable/Function Hoisting, Temporal Dead Zone.
+  * [`03_operators_control_flow_and_loops.md`](./02-javascript/03_operators_control_flow_and_loops.md) — Strict equality (`===`), Nullish Coalescing (`??`), `for...of` vs `for...in`.
+  * [`04_arrays_in_depth_methods_and_iteration.md`](./02-javascript/04_arrays_in_depth_methods_and_iteration.md) — Mutating vs Non-mutating methods, custom `reduce` polyfill.
+  * [`05_objects_destructuring_rest_spread_and_cloning.md`](./02-javascript/05_objects_destructuring_rest_spread_and_cloning.md) — Destructuring, rest/spread, shallow vs deep cloning, `structuredClone`.
+  * [`06_functions_first_class_higher_order.md`](./02-javascript/06_functions_first_class_higher_order.md) — First-class functions, pure functions, higher-order functions.
+* **Intermediate Engine & OOP:**
+  * [`07_execution_context_call_stack.md`](./02-javascript/07_execution_context_call_stack.md) — Global vs Function execution contexts, Call Stack, stack overflow.
+  * [`08_closures_and_lexical_scope.md`](./02-javascript/08_closures_and_lexical_scope.md) — Lexical scope, closure heap cells, data privacy, memoization.
+  * [`09_this_keyword_and_binding.md`](./02-javascript/09_this_keyword_and_binding.md) — Implicit, explicit (`call`/`apply`/`bind`), `new` binding, arrow functions.
+  * [`10_prototypes_and_inheritance.md`](./02-javascript/10_prototypes_and_inheritance.md) — Prototype chain, `__proto__` vs `prototype`, prototypal inheritance.
+  * [`11_es6_classes_under_the_hood.md`](./02-javascript/11_es6_classes_under_the_hood.md) — ES6 `class` syntactic sugar desugared to constructor functions, private fields.
+* **Advanced Engine Internals & Web APIs:**
+  * [`12_v8_memory_garbage_collection.md`](./02-javascript/12_v8_memory_garbage_collection.md) — V8 Heap & Stack, Generational Scavenger & Mark-Sweep-Compact GC.
+  * [`13_event_loop_microtasks_macrotasks.md`](./02-javascript/13_event_loop_microtasks_macrotasks.md) — Single-threaded execution model, Microtask vs Macrotask queues, UI render ticks.
+  * [`14_promises_deep_dive.md`](./02-javascript/14_promises_deep_dive.md) — Promise lifecycle states, hand-coded `Promise.all` & `Promise.allSettled`.
+  * [`15_async_await_generators_iterators.md`](./02-javascript/15_async_await_generators_iterators.md) — `async/await` desugared into Generators + Promises, `Symbol.iterator`.
+  * [`16_modules_cjs_vs_esm.md`](./02-javascript/16_modules_cjs_vs_esm.md) — CommonJS (`require`) vs ES Modules (`import`), dynamic imports, tree-shaking.
+  * [`17_proxy_and_reflect_api.md`](./02-javascript/17_proxy_and_reflect_api.md) — Metaprogramming, interception traps (`get`/`set`), and `Reflect` API.
+  * [`18_dom_events_delegation_bubbling.md`](./02-javascript/18_dom_events_delegation_bubbling.md) — Event Capturing vs Bubbling phases, Event Delegation pattern.
 
 ### 03. 🟦 TypeScript Engineering & Type Systems ([`03-typescript/`](./03-typescript/))
 * **Core Topics:** Basic types, Unions & Intersections, Interfaces vs Type Aliases, Generics & Constraints, Conditional Types & `infer`, Mapped Types & Template Literals, Utility Types from scratch, Function Utility Types, Nominal Branding, `.d.ts` Ambient declarations, `tsconfig.json` architecture.
@@ -133,22 +162,41 @@ Use this index or `CTRL+F` to jump directly to any concept across the knowledge 
 * [`express/01_express_architecture_and_routing.md`](./07-backend-node/express/01_express_architecture_and_routing.md) — Express middleware pipeline and modular routers.
 * [`express/03_express_error_handling_and_logging.md`](./07-backend-node/express/03_express_error_handling_and_logging.md) — Centralized error middleware and SIGTERM graceful shutdown.
 
-### 08. 🐍 Python FastAPI & Concurrency ([`08-backend-python-fastapi/`](./08-backend-python-fastapi/))
-* [`01_asyncio_event_loop_and_concurrency.md`](./08-backend-python-fastapi/01_asyncio_event_loop_and_concurrency.md) — Python coroutines and async I/O.
-* [`02_pydantic_v2_validation_and_serialization.md`](./08-backend-python-fastapi/02_pydantic_v2_validation_and_serialization.md) — Rust-powered validation core and model serialization.
-* [`03_dependency_injection_system.md`](./08-backend-python-fastapi/03_dependency_injection_system.md) — `Depends()` DAG and `yield` resource teardown.
-* [`04_background_tasks_and_celery.md`](./08-backend-python-fastapi/04_background_tasks_and_celery.md) — In-process tasks vs distributed Celery queues.
-* [`05_high_performance_asgi_starlette_uvicorn.md`](./08-backend-python-fastapi/05_high_performance_asgi_starlette_uvicorn.md) — ASGI architecture, Uvicorn, and `def` vs `async def` threadpools.
-* [`interview-questions/coding_rate_limiting_middleware.md`](./08-backend-python-fastapi/interview-questions/coding_rate_limiting_middleware.md) — Distributed sliding window rate limiting.
+### 08. 🐍 Python Core & FastAPI Enterprise ([`08-backend-python-fastapi/`](./08-backend-python-fastapi/))
+* **Python Core Foundations:**
+  * [`01_python_fundamentals_syntax_types_and_mutability.md`](./08-backend-python-fastapi/01_python_fundamentals_syntax_types_and_mutability.md) — CPython execution model, dynamic typing, variables as name bindings, memory mutability vs immutability, `id()`, `is` vs `==`, small integer caching.
+  * [`02_python_collections_lists_tuples_dicts_sets.md`](./08-backend-python-fastapi/02_python_collections_lists_tuples_dicts_sets.md) — `list` over-allocation resizing formula, `tuple` immutability & hashability, `set` hash table operations, Python 3.7+ Compact Dict split-table architecture.
+  * [`03_python_functions_scopes_args_kwargs_and_decorators.md`](./08-backend-python-fastapi/03_python_functions_scopes_args_kwargs_and_decorators.md) — First-class functions, `*args`/`**kwargs`, LEGB rule, closures (`__closure__`), decorator factories with arguments, `@functools.wraps`.
+  * [`04_python_oop_classes_dunder_methods_and_mro.md`](./08-backend-python-fastapi/04_python_oop_classes_dunder_methods_and_mro.md) — `__init__` vs `__new__`, `@classmethod`, `@staticmethod`, `@property`, dunder methods, C3 Linearization (MRO), cooperative `super()`.
+  * [`05_python_generators_iterators_and_context_managers.md`](./08-backend-python-fastapi/05_python_generators_iterators_and_context_managers.md) — Iteration protocol (`__iter__`, `__next__`), `yield` state suspension, generator expressions, `with` statement, `__enter__`/`__exit__`.
+  * [`06_python_memory_gc_gil_and_concurrency.md`](./08-backend-python-fastapi/06_python_memory_gc_gil_and_concurrency.md) — Reference counting (`ob_refcnt`), Cyclic GC generations, Global Interpreter Lock (GIL) internals, and concurrency matrix (`multiprocessing` vs `threading` vs `asyncio`).
+  * [`07_python_exceptions_typing_and_modern_features.md`](./08-backend-python-fastapi/07_python_exceptions_typing_and_modern_features.md) — Exception hierarchy, `try-except-else-finally`, explicit exception chaining (`raise ... from`), Static typing with `typing.Protocol`, Walrus operator (`:=`), Structural Pattern Matching (`match-case`).
+* **Advanced Asyncio & FastAPI Framework:**
+  * [`08_asyncio_event_loop_and_concurrency.md`](./08-backend-python-fastapi/08_asyncio_event_loop_and_concurrency.md) — Python `asyncio` cooperative multitasking, Coroutines, Tasks, and worker threading.
+  * [`09_pydantic_v2_validation_and_serialization.md`](./08-backend-python-fastapi/09_pydantic_v2_validation_and_serialization.md) — Rust-powered validation core, field and model validators, and high-throughput serialization.
+  * [`10_dependency_injection_system.md`](./08-backend-python-fastapi/10_dependency_injection_system.md) — FastAPI `Depends()` DAG and `yield` resource teardown.
+  * [`11_background_tasks_and_celery.md`](./08-backend-python-fastapi/11_background_tasks_and_celery.md) — In-process tasks vs distributed Celery queues.
+  * [`12_high_performance_asgi_starlette_uvicorn.md`](./08-backend-python-fastapi/12_high_performance_asgi_starlette_uvicorn.md) — ASGI architecture, Uvicorn, and `def` vs `async def` threadpools.
+  * [`interview-questions/coding_rate_limiting_middleware.md`](./08-backend-python-fastapi/interview-questions/coding_rate_limiting_middleware.md) — Distributed sliding window rate limiting.
 
 ### 09. ☕ Core Java 21 & Spring Boot 3 ([`09-backend-java-springboot/`](./09-backend-java-springboot/))
-* [`01_springboot_architecture_and_jvm.md`](./09-backend-java-springboot/01_springboot_architecture_and_jvm.md) — IoC container, JVM memory spaces, and GC collectors.
-* [`02_springboot_security_jwt_oauth2.md`](./09-backend-java-springboot/02_springboot_security_jwt_oauth2.md) — `SecurityFilterChain`, stateless sessions, and `@PreAuthorize`.
-* [`03_springboot_microservices_and_resilience4j.md`](./09-backend-java-springboot/03_springboot_microservices_and_resilience4j.md) — Resilience4j Circuit Breakers, Retry policies, and tracing.
-* [`04_java21_virtual_threads_and_structured_concurrency.md`](./09-backend-java-springboot/04_java21_virtual_threads_and_structured_concurrency.md) — Project Loom Virtual Threads vs Platform OS Threads, carrier unmounting.
-* [`05_jvm_garbage_collectors_zgc_g1_tuning.md`](./09-backend-java-springboot/05_jvm_garbage_collectors_zgc_g1_tuning.md) — Generational ZGC ($< 1\text{ms}$ pauses) vs G1 GC tuning.
-* [`06_concurrenthashmap_and_thread_safe_collections.md`](./09-backend-java-springboot/06_concurrenthashmap_and_thread_safe_collections.md) — HashMap bucket treeification, `ConcurrentHashMap` CAS and node locking.
-* [`interview-questions/top_java_springboot_interview_questions.md`](./09-backend-java-springboot/interview-questions/top_java_springboot_interview_questions.md) — Core Java & Spring Boot senior interview questions.
+* **Core Java Foundations (Newbie to Experienced):**
+  * [`01_java_fundamentals_jvm_primitives_and_pass_by_value.md`](./09-backend-java-springboot/01_java_fundamentals_jvm_primitives_and_pass_by_value.md) — Bytecode compilation (`javac`), JVM ClassLoader, Tiered JIT (C1/C2), 8 Primitive types vs Wrapper classes, Integer Cache (`[-128, 127]`), and Pass-by-value proof.
+  * [`02_java_strings_memory_string_pool_stringbuilder.md`](./09-backend-java-springboot/02_java_strings_memory_string_pool_stringbuilder.md) — String immutability rationale, String Constant Pool (SCP) in Heap, `String.intern()`, `StringBuilder` vs `StringBuffer`, and `equals()` & `hashCode()` contract.
+  * [`03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md`](./09-backend-java-springboot/03_java_oop_encapsulation_inheritance_polymorphism_abstraction.md) — 4 OOP Pillars, dynamic dispatch via Metaspace vtable, Abstract Classes vs Interfaces, Java 8/9 default/private methods, and `final` mechanics.
+  * [`04_java_collections_framework_list_set_queue_map.md`](./09-backend-java-springboot/04_java_collections_framework_list_set_queue_map.md) — JCF architecture: `ArrayList` ($1.5\times$ resizing) vs `LinkedList`, `HashSet` vs `TreeSet`, `HashMap` bucket treeification (Red-Black Tree after 8 elements), Fail-Fast vs Fail-Safe.
+  * [`05_java_generics_wildcards_and_type_erasure.md`](./09-backend-java-springboot/05_java_generics_wildcards_and_type_erasure.md) — Type parameters, Bounded types, PECS Principle (**Producer Extends, Consumer Super**), and Type Erasure under the hood.
+  * [`06_java_exception_handling_and_try_with_resources.md`](./09-backend-java-springboot/06_java_exception_handling_and_try_with_resources.md) — `Throwable` hierarchy (`Error` vs `Exception`), Checked vs Unchecked, `try-catch-finally`, Java 7+ `try-with-resources` with `AutoCloseable`.
+  * [`07_java_modern_features_streams_lambdas_records_sealed.md`](./09-backend-java-springboot/07_java_modern_features_streams_lambdas_records_sealed.md) — Functional Interfaces (`Predicate`, `Function`), Stream API lazy pipelines, immutable `record` types, `sealed` classes, and Java 21 `switch` pattern matching.
+* **Advanced Java 21 High-Concurrency Internals:**
+  * [`08_concurrenthashmap_and_thread_safe_collections.md`](./09-backend-java-springboot/08_concurrenthashmap_and_thread_safe_collections.md) — HashMap bucket treeification, `ConcurrentHashMap` CAS and synchronized bucket head locking.
+  * [`09_jvm_garbage_collectors_zgc_g1_tuning.md`](./09-backend-java-springboot/09_jvm_garbage_collectors_zgc_g1_tuning.md) — Generational ZGC ($< 1\text{ms}$ pauses) vs G1 GC tuning.
+  * [`10_java21_virtual_threads_and_structured_concurrency.md`](./09-backend-java-springboot/10_java21_virtual_threads_and_structured_concurrency.md) — Project Loom Virtual Threads vs Platform OS Threads, carrier unmounting.
+* **Enterprise Spring Boot 3 Microservices:**
+  * [`11_springboot_architecture_and_jvm.md`](./09-backend-java-springboot/11_springboot_architecture_and_jvm.md) — IoC container, JVM memory spaces, and GC collectors.
+  * [`12_springboot_security_jwt_oauth2.md`](./09-backend-java-springboot/12_springboot_security_jwt_oauth2.md) — `SecurityFilterChain`, stateless sessions, and `@PreAuthorize`.
+  * [`13_springboot_microservices_and_resilience4j.md`](./09-backend-java-springboot/13_springboot_microservices_and_resilience4j.md) — Resilience4j Circuit Breakers, Retry policies, and tracing.
+  * [`interview-questions/top_java_springboot_interview_questions.md`](./09-backend-java-springboot/interview-questions/top_java_springboot_interview_questions.md) — Core Java & Spring Boot senior interview questions.
 
 ### 10. 💎 Ruby on Rails & Fullstack Stacks ([`10-backend-ruby-and-stacks/`](./10-backend-ruby-and-stacks/))
 * [`ruby-on-rails/01_ruby_on_rails_mvc_active_record.md`](./10-backend-ruby-and-stacks/ruby-on-rails/01_ruby_on_rails_mvc_active_record.md) — Rails convention over configuration, Active Record, migrations.
